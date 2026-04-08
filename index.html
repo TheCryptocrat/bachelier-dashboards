@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Bachelier Mission Control — Login</title>
+<style>
+:root { --bg:#0d1117; --surface:#161b22; --border:#30363d; --text:#e6edf3; --dim:#8b949e; --blue:#58a6ff; --red:#f85149; --green:#3fb950; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'SF Mono','Cascadia Code','JetBrains Mono',monospace; background:var(--bg); color:var(--text);
+  display:flex; align-items:center; justify-content:center; min-height:100vh; }
+.login-box { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:40px; width:380px; text-align:center; }
+.login-box h1 { font-size:1.2rem; margin-bottom:6px; letter-spacing:-0.5px; }
+.login-box .sub { font-size:0.75rem; color:var(--dim); margin-bottom:28px; }
+.field { margin-bottom:16px; text-align:left; }
+.field label { font-size:0.65rem; text-transform:uppercase; letter-spacing:1px; color:var(--dim); display:block; margin-bottom:4px; }
+.field input { width:100%; background:var(--bg); border:1px solid var(--border); color:var(--text); padding:10px 12px;
+  border-radius:6px; font-family:inherit; font-size:0.85rem; outline:none; }
+.field input:focus { border-color:var(--blue); }
+.error { color:var(--red); font-size:0.75rem; margin-bottom:12px; display:none; min-height:18px; }
+.btn { width:100%; padding:10px; background:var(--blue); color:var(--bg); border:none; border-radius:6px;
+  font-family:inherit; font-size:0.85rem; font-weight:600; cursor:pointer; letter-spacing:0.3px; }
+.btn:hover { opacity:0.9; }
+.lock { font-size:2rem; margin-bottom:16px; }
+</style></head><body>
+
+<div class="login-box">
+  <div class="lock">&#128274;</div>
+  <h1>BACHELIER MISSION CONTROL</h1>
+  <div class="sub">Authorized access only</div>
+  <form id="loginForm" onsubmit="return doLogin(event)">
+    <div class="field">
+      <label>Email</label>
+      <input type="email" id="email" placeholder="you@moreorless.info" autocomplete="email" required>
+    </div>
+    <div class="field">
+      <label>Password</label>
+      <input type="password" id="password" placeholder="Enter password" autocomplete="current-password" required>
+    </div>
+    <div class="error" id="errorMsg">Invalid email or password</div>
+    <button type="submit" class="btn">Sign In</button>
+  </form>
+</div>
+
+<script>
+const VALID_USERS = ["info@moreorless.info", "diego@moreorless.info"];
+const PW_HASH = "63e39dfce6e285c44b24f4a15e1123d8d4082ddf159622c0639a6dccf0bae9b9";
+
+async function sha256(str){
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+
+async function doLogin(e){
+  e.preventDefault();
+  const email = document.getElementById('email').value.toLowerCase().trim();
+  const pw = document.getElementById('password').value;
+  const errEl = document.getElementById('errorMsg');
+
+  if(!VALID_USERS.includes(email)){
+    errEl.style.display='block'; errEl.textContent='Email not authorized'; return false;
+  }
+
+  const hash = await sha256(pw);
+  if(hash !== PW_HASH){
+    errEl.style.display='block'; errEl.textContent='Invalid password'; return false;
+  }
+
+  sessionStorage.setItem('bachelier_auth','authenticated');
+  sessionStorage.setItem('bachelier_user', email);
+  window.location.href = 'demo_dashboard.html';
+  return false;
+}
+</script></body></html>
