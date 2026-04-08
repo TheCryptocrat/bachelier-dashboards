@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Bachelier Data Explorer — Guia de Uso</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#0d1117; color:#e6edf3; font-family:'Segoe UI',system-ui,-apple-system,sans-serif; padding:24px; max-width:900px; margin:0 auto; line-height:1.7; }
+  h1 { color:#58a6ff; font-size:1.8rem; margin-bottom:6px; }
+  h2 { color:#3fb950; font-size:1.2rem; margin:28px 0 12px; border-bottom:1px solid #21262d; padding-bottom:6px; }
+  h3 { color:#d2a8ff; font-size:1rem; margin:16px 0 8px; }
+  .subtitle { color:#8b949e; font-size:0.95rem; margin-bottom:28px; }
+  .section { background:#161b22; border:1px solid #21262d; border-radius:10px; padding:20px; margin-bottom:16px; }
+  .badge-ok { background:#238636; color:#fff; padding:2px 10px; border-radius:12px; font-size:0.75rem; font-weight:600; }
+  .badge-warn { background:#b36b00; color:#fff; padding:2px 10px; border-radius:12px; font-size:0.75rem; font-weight:600; }
+  .badge-no { background:#b62324; color:#fff; padding:2px 10px; border-radius:12px; font-size:0.75rem; font-weight:600; }
+  table { width:100%; border-collapse:collapse; margin:10px 0; }
+  th { text-align:left; color:#8b949e; font-weight:600; font-size:0.8rem; padding:8px 12px; border-bottom:2px solid #21262d; }
+  td { padding:8px 12px; border-bottom:1px solid #21262d; font-size:0.85rem; }
+  .query { font-family:'SF Mono',monospace; background:#1c2128; padding:3px 8px; border-radius:4px; color:#79c0ff; font-size:0.82rem; }
+  .tip { background:#1c2128; border-left:3px solid #58a6ff; padding:12px 16px; margin:12px 0; border-radius:0 6px 6px 0; font-size:0.85rem; }
+  .tip strong { color:#58a6ff; }
+  .warn { background:#1c2128; border-left:3px solid #f0883e; padding:12px 16px; margin:12px 0; border-radius:0 6px 6px 0; font-size:0.85rem; }
+  .warn strong { color:#f0883e; }
+  ul { margin:8px 0 8px 20px; }
+  li { margin:4px 0; font-size:0.85rem; }
+  .footer { text-align:center; color:#484f58; font-size:0.75rem; margin-top:40px; padding-top:16px; border-top:1px solid #21262d; }
+  a { color:#58a6ff; text-decoration:none; }
+  a:hover { text-decoration:underline; }
+</style></head><body>
+
+<h1>📊 Bachelier Data Explorer</h1>
+<div class="subtitle">Guia completo de funcionalidades — O que o Explorer pode e não pode fazer</div>
+
+<h2>✅ O Que o Explorer Faz</h2>
+
+<div class="section">
+<h3>🔍 Consultas por Conta</h3>
+<p>Digite o número de login de qualquer conta para ver um relatório completo.</p>
+<table>
+  <tr><th>Consulta</th><th>O Que Mostra</th><th>Status</th></tr>
+  <tr><td><span class="query">42818</span></td><td>P&L total, Win Rate, Max DD, gráfico de equity e tabela por par</td><td><span class="badge-ok">Funciona</span></td></tr>
+  <tr><td><span class="query">How is account 32983 doing?</span></td><td>Mesmo resultado — detecta o login no texto</td><td><span class="badge-ok">Funciona</span></td></tr>
+  <tr><td><span class="query">52441850</span></td><td>Qualquer login de 4 a 8 dígitos é reconhecido</td><td><span class="badge-ok">Funciona</span></td></tr>
+</table>
+</div>
+
+<div class="section">
+<h3>📈 Consultas por Estratégia</h3>
+<p>Use o nome exato da estratégia ou palavras-chave próximas.</p>
+<table>
+  <tr><th>Consulta</th><th>O Que Mostra</th><th>Status</th></tr>
+  <tr><td><span class="query">T&D Low Drawdown</span></td><td>Todas as combos dessa estratégia com gráfico de equity por par</td><td><span class="badge-ok">Funciona</span></td></tr>
+  <tr><td><span class="query">Axis Rotation</span></td><td>Encontra por correspondência parcial</td><td><span class="badge-ok">Funciona</span></td></tr>
+  <tr><td><span class="query">Orbgasmatron PropBots</span></td><td>Nome completo sempre funciona</td><td><span class="badge-ok">Funciona</span></td></tr>
+</table>
+</div>
+
+<div class="section">
+<h3>💱 Consultas por Par de Moedas</h3>
+<table>
+  <tr><th>Consulta</th><th>O Que Mostra</th><th>Status</th></tr>
+  <tr><td><span class="query">USDJPY</span></td><td>Todas as estratégias que operam USDJPY, ordenadas por P&L</td><td><span class="badge-ok">Funciona</span></td></tr>
+  <tr><td><span class="query">EURUSD</span></td><td>Idem para EURUSD</td><td><span class="badge-ok">Funciona</span></td></tr>
+  <tr><td><span class="query">best pairs</span></td><td>Ranking de pares por lucro total</td><td><span class="badge-ok">Funciona</span></td></tr>
+  <tr><td><span class="query">worst pairs</span></td><td>Ranking de pares com mais prejuízo</td><td><span class="badge-ok">Funciona</span></td></tr>
+</table>
+</div>
+
+<div class="section">
+<h3>🟢🔴 Análise Long vs Short (NOVO!)</h3>
+<p>Compara posições compradas (long) e vendidas (short) lado a lado, com detalhamento mensal.</p>
+<table>
+  <tr><th>Consulta</th><th>O Que Mostra</th><th>Status</th></tr>
+  <tr><td><span class="query">long vs short USDJPY</span></td><td>Long vs Short em USDJPY para todas as estratégias</td><td><span class="badge-ok">Funciona</span></td></tr>
+  <tr><td><span class="query">long vs short all pairs</span></td><td>Long vs Short geral, todos os pares</td><td><span class="badge-ok">Funciona</span></td></tr>
+  <tr><td><span class="query">long vs short T&D Low Drawdown</span></td><td>Long vs Short filtrado por estratégia específica</td><td><span class="badge-ok">Funciona</span></td></tr>
+  <tr><td><span class="query">long vs short 42818</span></td><td>Long vs Short filtrado por conta</td><td><span class="badge-ok">Funciona</span></td></tr>
+</table>
+<div class="tip"><strong>Dica:</strong> Quando ambas as direções existem, o Explorer mostra uma tabela mensal com P&L, Win%, Trades e Profit Factor para LONG e SHORT lado a lado.</div>
+</div>
+
+<div class="section">
+<h3>📅 Filtros de Tempo</h3>
+<table>
+  <tr><th>Consulta</th><th>Período</th><th>Status</th></tr>
+  <tr><td><span class="query">last 7 days</span></td><td>Últimos 7 dias</td><td><span class="badge-ok">Funciona</span></td></tr>
+  <tr><td><span class="query">last 30 days</span></td><td>Últimos 30 dias</td><td><span class="badge-ok">Funciona</span></td></tr>
+  <tr><td><span class="query">last 90 days</span></td><td>Últimos 90 dias</td><td><span class="badge-ok">Funciona</span></td></tr>
+  <tr><td><span class="query">this month</span></td><td>Mês atual</td><td><span class="badge-ok">Funciona</span></td></tr>
+  <tr><td><span class="query">this year</span> ou <span class="query">YTD</span></td><td>Ano atual</td><td><span class="badge-ok">Funciona</span></td></tr>
+  <tr><td><span class="query">March</span> ou <span class="query">January</span></td><td>Mês específico (nomes em inglês)</td><td><span class="badge-ok">Funciona</span></td></tr>
+</table>
+<div class="tip"><strong>Combine filtros:</strong> <span class="query">live last 30 days</span> — filtra por tipo de conta E período.</div>
+</div>
+
+<div class="section">
+<h3>📊 Relatórios e Rankings</h3>
+<table>
+  <tr><th>Consulta</th><th>O Que Mostra</th><th>Status</th></tr>
+  <tr><td><span class="query">live P&L summary</span></td><td>Resumo de P&L apenas para contas live</td><td><span class="badge-ok">Funciona</span></td></tr>
+  <tr><td><span class="query">demo P&L summary</span></td><td>Resumo apenas para contas demo</td><td><span class="badge-ok">Funciona</span></td></tr>
+  <tr><td><span class="query">account overview</span></td><td>Visão geral de todas as contas com gráfico de equity</td><td><span class="badge-ok">Funciona</span></td></tr>
+  <tr><td><span class="query">monthly breakdown</span></td><td>P&L mensal com gráfico de barras</td><td><span class="badge-ok">Funciona</span></td></tr>
+  <tr><td><span class="query">strategy comparison</span></td><td>Comparação de todas as estratégias</td><td><span class="badge-ok">Funciona</span></td></tr>
+  <tr><td><span class="query">best strategies</span></td><td>Top 15 combos por lucro</td><td><span class="badge-ok">Funciona</span></td></tr>
+  <tr><td><span class="query">worst</span></td><td>15 piores combos por prejuízo</td><td><span class="badge-ok">Funciona</span></td></tr>
+  <tr><td><span class="query">win rate</span></td><td>Ranking por taxa de acerto (mín. 10 trades)</td><td><span class="badge-ok">Funciona</span></td></tr>
+  <tr><td><span class="query">trade count</span></td><td>Ranking por volume de trades</td><td><span class="badge-ok">Funciona</span></td></tr>
+</table>
+</div>
+
+<h2>⚠️ Limitações Conhecidas</h2>
+
+<div class="section">
+<h3>🚫 O Que NÃO Funciona</h3>
+<table>
+  <tr><th>Tipo de Consulta</th><th>Exemplo</th><th>Status</th></tr>
+  <tr><td>Perguntas complexas em linguagem natural</td><td><span class="query">Qual estratégia T&D19 é melhor — a que faz long ou short?</span></td><td><span class="badge-no">Não funciona</span></td></tr>
+  <tr><td>Português</td><td><span class="query">Mostre o melhor par</span></td><td><span class="badge-no">Não funciona</span></td></tr>
+  <tr><td>Análise por horário de entrada</td><td><span class="query">trades at 1:13 PM</span></td><td><span class="badge-no">Não funciona</span></td></tr>
+  <tr><td>Comparações entre contas específicas</td><td><span class="query">compare 42818 vs 41650</span></td><td><span class="badge-no">Não funciona</span></td></tr>
+  <tr><td>Projeções / previsões</td><td><span class="query">how much will I make next month?</span></td><td><span class="badge-no">Não funciona</span></td></tr>
+  <tr><td>Datas em formato brasileiro</td><td><span class="query">março 2026</span></td><td><span class="badge-no">Usar: March</span></td></tr>
+</table>
+
+<div class="warn"><strong>Importante:</strong> O Explorer usa reconhecimento de padrões no lado do cliente (JavaScript), não inteligência artificial. Consultas muito longas ou com gramática complexa geralmente não serão interpretadas. Use frases curtas e diretas em inglês.</div>
+</div>
+
+<h2>💡 Dicas Para Melhores Resultados</h2>
+
+<div class="section">
+<ul>
+  <li><strong>Use palavras-chave curtas</strong> — <span class="query">USDJPY</span> funciona melhor que "show me all USDJPY trades"</li>
+  <li><strong>Nomes de estratégia em inglês</strong> — copie exatamente como aparece na tabela</li>
+  <li><strong>Para Long vs Short</strong> — sempre inclua "long" e "short" na consulta</li>
+  <li><strong>Combine filtros</strong> — <span class="query">live last 30 days</span> ou <span class="query">demo March</span></li>
+  <li><strong>Botões rápidos</strong> — use os botões no topo da página como ponto de partida</li>
+  <li><strong>Tabela completa</strong> — a tabela na parte inferior permite ordenar por qualquer coluna (clique no cabeçalho) e filtrar por texto</li>
+  <li><strong>Quando a consulta não funcionar</strong> — o Explorer mostrará sugestões de formato e possíveis correspondências</li>
+</ul>
+</div>
+
+<h2>🗺️ Navegação do Dashboard</h2>
+
+<div class="section">
+<table>
+  <tr><th>Página</th><th>O Que Contém</th></tr>
+  <tr><td><strong>Demo Bots</strong></td><td>Prop Bots e MOL Bots — estratégias demo com curvas de equity, heatmap, leaderboard</td></tr>
+  <tr><td><strong>Live Trading</strong></td><td>Contas reais — equity curves por conta, P&L semanal, breakdown por par</td></tr>
+  <tr><td><strong>Explorer</strong></td><td>Consultas interativas — busca por conta, estratégia, par, long/short, período</td></tr>
+</table>
+<div class="tip"><strong>Todas as páginas</strong> têm filtro de data no canto superior direito (7D, 30D, 90D, YTD, ALL) e os gráficos de linha agora têm um menu dropdown para selecionar uma linha individual.</div>
+</div>
+
+<div class="footer">
+  Bachelier Data Explorer — Guia de Uso v1.0<br>
+  Atualizado: Abril 2026 &middot; <a href="explorer.html">Abrir o Explorer →</a>
+</div>
+
+</body></html>
