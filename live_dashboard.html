@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Bachelier Live Mission Control</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root { --bg:#0d1117; --surface:#161b22; --border:#30363d; --border2:#21262d;
+  --text:#e6edf3; --dim:#8b949e; --dim2:#484f58;
+  --green:#3fb950; --green-bg:#196c2e; --red:#f85149; --red-bg:#b62324;
+  --blue:#58a6ff; --orange:#f0883e; --yellow:#d29922; --purple:#d2a8ff; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'SF Mono','Cascadia Code','JetBrains Mono',monospace; background:var(--bg); color:var(--text); padding:20px; font-size:13px; }
+.header { display:flex; align-items:center; justify-content:space-between; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+.header h1 { font-size:1.4rem; letter-spacing:-0.5px; }
+.header .meta { color:var(--dim); font-size:0.75rem; text-align:right; }
+.kpi-grid { display:grid; gap:12px; margin-bottom:24px; }
+.kpi-grid-6 { grid-template-columns:repeat(6,1fr); }
+.kpi-grid-5 { grid-template-columns:repeat(5,1fr); }
+.kpi-grid-4 { grid-template-columns:repeat(4,1fr); }
+.kpi { background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:14px 16px; }
+.kpi .label { font-size:0.65rem; text-transform:uppercase; letter-spacing:1px; color:var(--dim); margin-bottom:4px; }
+.kpi .value { font-size:1.5rem; font-weight:700; }
+.kpi .sub { font-size:0.7rem; color:var(--dim); margin-top:2px; }
+.pos { color:var(--green); } .neg { color:var(--red); }
+.section { margin-bottom:28px; }
+.section-title { font-size:1rem; font-weight:600; margin-bottom:4px; display:flex; align-items:center; gap:8px; }
+.badge { font-size:0.65rem; padding:2px 8px; border-radius:4px; font-weight:500; }
+.badge-green { background:var(--green-bg); color:var(--green); }
+.badge-orange { background:#3d2200; color:var(--orange); }
+.badge-blue { background:#0d2240; color:var(--blue); }
+.section-desc { font-size:0.75rem; color:var(--dim); margin-bottom:10px; }
+.chart-box { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:16px; }
+.row2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:24px; }
+table { width:100%; border-collapse:collapse; font-size:0.78rem; }
+th { text-align:left; color:var(--dim); padding:6px 8px; border-bottom:1px solid var(--border); font-weight:500; font-size:0.65rem; text-transform:uppercase; letter-spacing:0.5px; }
+td { padding:5px 8px; border-bottom:1px solid var(--border2); }
+.num { text-align:right; font-variant-numeric:tabular-nums; }
+.dim { color:var(--dim); } .warn { color:var(--yellow); }
+.dot { width:10px; height:10px; border-radius:2px; display:inline-block; }
+.strat-name { font-weight:500; white-space:nowrap; }
+.heatmap-scroll { overflow-x:auto; }
+.heatmap { border-collapse:collapse; font-size:0.7rem; }
+.heatmap th, .heatmap td { padding:4px 6px; text-align:center; min-width:50px; border:1px solid var(--bg); }
+.hm-sym { font-size:0.6rem; color:var(--dim); writing-mode:vertical-lr; transform:rotate(180deg); height:60px; }
+.hm-strat { text-align:right !important; font-weight:500; white-space:nowrap; padding-right:10px !important; font-size:0.7rem; }
+.hm-empty { background:var(--surface); }
+.footer { text-align:center; font-size:0.7rem; color:var(--dim2); margin-top:32px; padding-top:16px; border-top:1px solid var(--border2); }
+.nav { display:flex; gap:12px; margin-bottom:20px; }
+.nav a { color:var(--blue); font-size:0.8rem; padding:6px 14px; border:1px solid var(--border); border-radius:6px; text-decoration:none; }
+.nav a.active { background:var(--blue); color:var(--bg); border-color:var(--blue); }
+@media(max-width:900px) { .row2{grid-template-columns:1fr;} .kpi-grid{grid-template-columns:repeat(2,1fr);} }
+</style></head><body>
+
+<div class="nav">
+  <a href="demo_dashboard.html">Demo Bots</a>
+  <a class="active" href="live_dashboard.html">Live Trading</a>
+</div>
+
+<div class="header">
+  <h1 style="color:var(--green)">LIVE MISSION CONTROL</h1>
+  <div class="meta">Live Accounts &middot; 2026-01-02 → 2026-03-11<br>Updated 2026-04-08 09:35</div>
+</div>
+
+<div class="kpi-grid kpi-grid-5">
+  <div class="kpi"><div class="label">Total P&L (Live)</div>
+    <div class="value neg">$-3,014.72</div>
+    <div class="sub">557 trades over 40 days</div></div>
+  <div class="kpi"><div class="label">Live Accounts</div>
+    <div class="value" style="color:var(--blue)">2</div>
+    <div class="sub">10 strategy×pair combos</div></div>
+  <div class="kpi"><div class="label">Win Rate</div>
+    <div class="value" style="color:var(--purple)">25.3%</div>
+    <div class="sub">141 wins</div></div>
+  <div class="kpi"><div class="label">Best Day</div>
+    <div class="value pos" style="font-size:1.1rem">$+757</div>
+    <div class="sub">single day</div></div>
+  <div class="kpi"><div class="label">Worst Day</div>
+    <div class="value neg" style="font-size:1.1rem">$-958</div>
+    <div class="sub">single day</div></div>
+</div>
+
+<div class="row2">
+  <div class="section">
+    <div class="section-title" style="color:var(--green)">Account Equity Curves <span class="badge badge-blue">Live $</span></div>
+    <div class="section-desc">Cumulative P&L per live account</div>
+    <div class="chart-box"><canvas id="liveChart" height="280"></canvas></div>
+    <table style="margin-top:8px">
+      <tr><th></th><th>Account</th><th>P&L</th><th>Trades</th></tr>
+      <tr>
+          <td><span class="dot" style="background:#58a6ff"></span></td>
+          <td class="strat-name">Axis Rotation V1 (45215)</td>
+          <td class="num neg">$-1,066.41</td>
+          <td class="num">141</td>
+        </tr><tr>
+          <td><span class="dot" style="background:#3fb950"></span></td>
+          <td class="strat-name">Axis Rotation AUDUSD (32983)</td>
+          <td class="num neg">$-1,948.31</td>
+          <td class="num">416</td>
+        </tr>
+    </table>
+  </div>
+  <div class="section">
+    <div class="section-title" style="color:var(--blue)">Weekly P&L</div>
+    <div class="section-desc">Net P&L per week across all live accounts</div>
+    <div class="chart-box"><canvas id="weeklyChart" height="280"></canvas></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title" style="color:var(--blue)">Strategy × Pair Breakdown</div>
+  <div class="chart-box"><table>
+    <tr><th>#</th><th>Strategy</th><th>Pair</th><th>Login</th><th>P&L</th><th>Max DD</th><th>Win%</th><th>PF</th><th>Trades</th></tr>
+    <tr>
+          <td class="num dim">1</td>
+          <td class="strat-name">Axis Rotation AUDUSD</td>
+          <td>AUDUSD</td>
+          <td class="num">32983</td>
+          <td class="num pos">$+1,004.22</td>
+          <td class="num">7.6%</td>
+          <td class="num">33%</td>
+          <td class="num">1.5</td>
+          <td class="num">110</td>
+        </tr><tr>
+          <td class="num dim">2</td>
+          <td class="strat-name">Axis Rotation AUDUSD</td>
+          <td>USDCHF</td>
+          <td class="num">32983</td>
+          <td class="num pos">$+275.78</td>
+          <td class="num">0.0%</td>
+          <td class="num">50%</td>
+          <td class="num">99.0</td>
+          <td class="num">24</td>
+        </tr><tr>
+          <td class="num dim">3</td>
+          <td class="strat-name">Axis Rotation V1</td>
+          <td>GBPUSD</td>
+          <td class="num">45215</td>
+          <td class="num pos">$+265.68</td>
+          <td class="num">1.9%</td>
+          <td class="num">29%</td>
+          <td class="num">1.5</td>
+          <td class="num">72</td>
+        </tr><tr>
+          <td class="num dim">4</td>
+          <td class="strat-name">Axis Rotation AUDUSD</td>
+          <td>GBPUSD</td>
+          <td class="num">32983</td>
+          <td class="num pos">$+83.00</td>
+          <td class="num">0.0%</td>
+          <td class="num">50%</td>
+          <td class="num">99.0</td>
+          <td class="num">2</td>
+        </tr><tr>
+          <td class="num dim">5</td>
+          <td class="strat-name">Axis Rotation AUDUSD</td>
+          <td>USDJPY</td>
+          <td class="num">32983</td>
+          <td class="num pos">$+62.45</td>
+          <td class="num">7.7%</td>
+          <td class="num">28%</td>
+          <td class="num">1.1</td>
+          <td class="num">144</td>
+        </tr><tr>
+          <td class="num dim">6</td>
+          <td class="strat-name">Axis Rotation V1</td>
+          <td>USDCAD</td>
+          <td class="num">45215</td>
+          <td class="num neg">$-296.52</td>
+          <td class="num">3.6%</td>
+          <td class="num">18%</td>
+          <td class="num">0.5</td>
+          <td class="num">17</td>
+        </tr><tr>
+          <td class="num dim">7</td>
+          <td class="strat-name">Axis Rotation V1</td>
+          <td>EURUSD</td>
+          <td class="num">45215</td>
+          <td class="num neg">$-483.90</td>
+          <td class="num">4.9%</td>
+          <td class="num">23%</td>
+          <td class="num">0.6</td>
+          <td class="num">44</td>
+        </tr><tr>
+          <td class="num dim">8</td>
+          <td class="strat-name">Axis Rotation V1</td>
+          <td>USDCHF</td>
+          <td class="num">45215</td>
+          <td class="num neg">$-551.67</td>
+          <td class="num">11.0%</td>
+          <td class="num">25%</td>
+          <td class="num">0.6</td>
+          <td class="num">8</td>
+        </tr><tr>
+          <td class="num dim">9</td>
+          <td class="strat-name">Axis Rotation AUDUSD</td>
+          <td>EURUSD</td>
+          <td class="num">32983</td>
+          <td class="num neg">$-1,240.20</td>
+          <td class="num">12.4%</td>
+          <td class="num">0%</td>
+          <td class="num">0.0</td>
+          <td class="num">2</td>
+        </tr><tr>
+          <td class="num dim">10</td>
+          <td class="strat-name">Axis Rotation AUDUSD</td>
+          <td>USDCAD</td>
+          <td class="num">32983</td>
+          <td class="num neg">$-2,133.56</td>
+          <td class="num">21.6%</td>
+          <td class="num">12%</td>
+          <td class="num">0.2</td>
+          <td class="num">134</td>
+        </tr>
+  </table></div>
+</div>
+
+<div class="footer">Bachelier Live Mission Control &middot; 2026-04-08 09:35 &middot; 2026-01-02 → 2026-03-11</div>
+
+<script>
+const liveOpts = {
+  responsive:true, interaction:{mode:'index',intersect:false},
+  plugins:{legend:{display:false},tooltip:{backgroundColor:'#161b22',borderColor:'#30363d',borderWidth:1,titleColor:'#e6edf3',bodyColor:'#e6edf3',
+    callbacks:{label:ctx=>ctx.dataset.label+': $'+(ctx.parsed.y!==null?ctx.parsed.y.toLocaleString():'N/A')}}},
+  scales:{
+    x:{ticks:{color:'#8b949e',maxTicksLimit:10,font:{size:9}},grid:{color:'#21262d'}},
+    y:{title:{display:true,text:'Cumulative P&L ($)',color:'#8b949e'},ticks:{color:'#8b949e',callback:v=>'$'+v.toLocaleString()},grid:{color:'#21262d'}}
+  }
+};
+new Chart(document.getElementById('liveChart'),{type:'line',data:{labels:["2026-01-02", "2026-01-05", "2026-01-07", "2026-01-08", "2026-01-09", "2026-01-12", "2026-01-13", "2026-01-14", "2026-01-15", "2026-01-16", "2026-01-20", "2026-01-23", "2026-01-27", "2026-01-28", "2026-02-02", "2026-02-03", "2026-02-04", "2026-02-05", "2026-02-06", "2026-02-09", "2026-02-10", "2026-02-11", "2026-02-12", "2026-02-13", "2026-02-17", "2026-02-18", "2026-02-19", "2026-02-20", "2026-02-23", "2026-02-24", "2026-02-25", "2026-02-26", "2026-02-27", "2026-03-02", "2026-03-04", "2026-03-05", "2026-03-06", "2026-03-09", "2026-03-10", "2026-03-11"],datasets:[{"label": "Axis Rotation V1 (45215)", "data": [null, -125.97, -126.27, -75.51, -179.0, -180.7, -300.73, -24.54, -25.54, null, 110.08, -848.19, null, null, null, null, null, null, null, null, -849.03, -886.57, -887.17, -888.01, -966.39, -1116.79, -1084.47, -1085.07, -788.01, -789.01, -730.37, -899.41, -802.89, -776.13, -719.87, -812.15, -812.67, -914.57, -955.49, -1066.41], "borderColor": "#58a6ff", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "Axis Rotation AUDUSD (32983)", "data": [0.0, -352.28, -351.12, -382.86, -892.55, -627.03, -1363.02, -1020.36, null, -999.92, null, null, -1102.4, -991.12, -991.12, -807.12, -807.12, -576.12, -688.4, 68.51, 68.51, -322.79, -322.79, -1073.76, -1065.26, -1065.26, -1285.58, -1193.08, null, -1193.08, -1337.14, -1712.74, -1500.03, -1258.29, -1025.53, -1320.09, -1219.41, -1939.51, -2132.71, -1948.31], "borderColor": "#3fb950", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}]},options:liveOpts});
+new Chart(document.getElementById('weeklyChart'),{type:'bar',data:{labels:["2026-W00", "2026-W01", "2026-W02", "2026-W03", "2026-W04", "2026-W05", "2026-W06", "2026-W07", "2026-W08", "2026-W09", "2026-W10"],datasets:[{data:[0.0, -1071.55, 46.09, -822.65, 8.8, 302.72, -425.18, -316.38, -24.77, 270.84, -982.64],backgroundColor:["#3fb950", "#f85149", "#3fb950", "#f85149", "#3fb950", "#3fb950", "#f85149", "#f85149", "#f85149", "#3fb950", "#f85149"],borderRadius:4}]},options:{responsive:true,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>'$'+ctx.parsed.y.toLocaleString()}}},scales:{x:{ticks:{color:'#8b949e',font:{size:9}},grid:{display:false}},y:{ticks:{color:'#8b949e',callback:v=>'$'+v.toLocaleString()},grid:{color:'#21262d'}}}}});
+</script></body></html>

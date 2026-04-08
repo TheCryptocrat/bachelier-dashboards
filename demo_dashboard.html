@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Bachelier Demo Mission Control</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root { --bg:#0d1117; --surface:#161b22; --border:#30363d; --border2:#21262d;
+  --text:#e6edf3; --dim:#8b949e; --dim2:#484f58;
+  --green:#3fb950; --green-bg:#196c2e; --red:#f85149; --red-bg:#b62324;
+  --blue:#58a6ff; --orange:#f0883e; --yellow:#d29922; --purple:#d2a8ff; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'SF Mono','Cascadia Code','JetBrains Mono',monospace; background:var(--bg); color:var(--text); padding:20px; font-size:13px; }
+.header { display:flex; align-items:center; justify-content:space-between; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+.header h1 { font-size:1.4rem; letter-spacing:-0.5px; }
+.header .meta { color:var(--dim); font-size:0.75rem; text-align:right; }
+.kpi-grid { display:grid; gap:12px; margin-bottom:24px; }
+.kpi-grid-6 { grid-template-columns:repeat(6,1fr); }
+.kpi-grid-5 { grid-template-columns:repeat(5,1fr); }
+.kpi-grid-4 { grid-template-columns:repeat(4,1fr); }
+.kpi { background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:14px 16px; }
+.kpi .label { font-size:0.65rem; text-transform:uppercase; letter-spacing:1px; color:var(--dim); margin-bottom:4px; }
+.kpi .value { font-size:1.5rem; font-weight:700; }
+.kpi .sub { font-size:0.7rem; color:var(--dim); margin-top:2px; }
+.pos { color:var(--green); } .neg { color:var(--red); }
+.section { margin-bottom:28px; }
+.section-title { font-size:1rem; font-weight:600; margin-bottom:4px; display:flex; align-items:center; gap:8px; }
+.badge { font-size:0.65rem; padding:2px 8px; border-radius:4px; font-weight:500; }
+.badge-green { background:var(--green-bg); color:var(--green); }
+.badge-orange { background:#3d2200; color:var(--orange); }
+.badge-blue { background:#0d2240; color:var(--blue); }
+.section-desc { font-size:0.75rem; color:var(--dim); margin-bottom:10px; }
+.chart-box { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:16px; }
+.row2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:24px; }
+table { width:100%; border-collapse:collapse; font-size:0.78rem; }
+th { text-align:left; color:var(--dim); padding:6px 8px; border-bottom:1px solid var(--border); font-weight:500; font-size:0.65rem; text-transform:uppercase; letter-spacing:0.5px; }
+td { padding:5px 8px; border-bottom:1px solid var(--border2); }
+.num { text-align:right; font-variant-numeric:tabular-nums; }
+.dim { color:var(--dim); } .warn { color:var(--yellow); }
+.dot { width:10px; height:10px; border-radius:2px; display:inline-block; }
+.strat-name { font-weight:500; white-space:nowrap; }
+.heatmap-scroll { overflow-x:auto; }
+.heatmap { border-collapse:collapse; font-size:0.7rem; }
+.heatmap th, .heatmap td { padding:4px 6px; text-align:center; min-width:50px; border:1px solid var(--bg); }
+.hm-sym { font-size:0.6rem; color:var(--dim); writing-mode:vertical-lr; transform:rotate(180deg); height:60px; }
+.hm-strat { text-align:right !important; font-weight:500; white-space:nowrap; padding-right:10px !important; font-size:0.7rem; }
+.hm-empty { background:var(--surface); }
+.footer { text-align:center; font-size:0.7rem; color:var(--dim2); margin-top:32px; padding-top:16px; border-top:1px solid var(--border2); }
+.nav { display:flex; gap:12px; margin-bottom:20px; }
+.nav a { color:var(--blue); font-size:0.8rem; padding:6px 14px; border:1px solid var(--border); border-radius:6px; text-decoration:none; }
+.nav a.active { background:var(--blue); color:var(--bg); border-color:var(--blue); }
+@media(max-width:900px) { .row2{grid-template-columns:1fr;} .kpi-grid{grid-template-columns:repeat(2,1fr);} }
+</style></head><body>
+
+<div class="nav">
+  <a class="active" href="demo_dashboard.html">Demo Bots</a>
+  <a href="live_dashboard.html">Live Trading</a>
+</div>
+
+<div class="header">
+  <h1 style="color:var(--blue)">DEMO MISSION CONTROL</h1>
+  <div class="meta">Demo Strategy Pool &middot; 2026-01-01 → 2026-03-15<br>$10K starting equity per bot &middot; Updated 2026-04-08 09:35</div>
+</div>
+
+<div class="kpi-grid kpi-grid-5">
+  <div class="kpi"><div class="label">PROP Portfolio P&L</div>
+    <div class="value pos">$+2,830</div>
+    <div class="sub">Top 10 &middot; ≤5% max DD</div></div>
+  <div class="kpi"><div class="label">MOL Portfolio P&L</div>
+    <div class="value pos">$+4,508</div>
+    <div class="sub">Top 10 &middot; ≤15% max DD</div></div>
+  <div class="kpi"><div class="label">Strategy Pool</div>
+    <div class="value" style="color:var(--blue)">17</div>
+    <div class="sub">99 strategy×pair combos</div></div>
+  <div class="kpi"><div class="label">Win Rate</div>
+    <div class="value" style="color:var(--purple)">28.0%</div>
+    <div class="sub">6,524 trades over 63 days</div></div>
+  <div class="kpi"><div class="label">Best / Worst Day</div>
+    <div class="value pos" style="font-size:1.1rem">$+4,434</div>
+    <div class="sub neg">$-11,944</div></div>
+</div>
+
+<div class="row2">
+  <div class="section">
+    <div class="section-title" style="color:var(--green)">PROP Orchestra <span class="badge badge-green">≤ 5% DD</span></div>
+    <div class="section-desc">Top 10 strategy-pair combos by return, max 5% drawdown</div>
+    <div class="chart-box"><canvas id="propChart" height="260"></canvas></div>
+    <table style="margin-top:8px">
+      <tr><th></th><th>Strategy</th><th>Pair</th><th>Login</th><th>Return</th><th>P&L</th><th>Max DD</th><th>Win%</th><th>PF</th><th>Sharpe</th><th>Trades</th><th>Since</th></tr>
+      <tr>
+          <td><span class="dot" style="background:#3fb950"></span></td>
+          <td class="strat-name">T&D1 High Returns</td>
+          <td>USDJPY</td>
+          <td class="num">41653</td>
+          <td class="num pos">+6.33%</td>
+          <td class="num pos">$+633</td>
+          <td class="num">4.3%</td>
+          <td class="num">46%</td>
+          <td class="num">2.2</td>
+          <td class="num">2.0</td>
+          <td class="num">98</td>
+          <td class="num dim">01-02</td>
+        </tr><tr>
+          <td><span class="dot" style="background:#58a6ff"></span></td>
+          <td class="strat-name">Aggressive cV2</td>
+          <td>GBPJPY</td>
+          <td class="num">38766</td>
+          <td class="num pos">+6.20%</td>
+          <td class="num pos">$+620</td>
+          <td class="num">0.0%</td>
+          <td class="num">60%</td>
+          <td class="num">99.0</td>
+          <td class="num">17.4</td>
+          <td class="num">5</td>
+          <td class="num dim">01-02</td>
+        </tr><tr>
+          <td><span class="dot" style="background:#a5d6ff"></span></td>
+          <td class="strat-name">T&D1 Prop Firm</td>
+          <td>USDJPY</td>
+          <td class="num">41654</td>
+          <td class="num pos">+5.72%</td>
+          <td class="num pos">$+572</td>
+          <td class="num">0.8%</td>
+          <td class="num">47%</td>
+          <td class="num">7.5</td>
+          <td class="num">5.7</td>
+          <td class="num">100</td>
+          <td class="num dim">01-02</td>
+        </tr><tr>
+          <td><span class="dot" style="background:#7ee787"></span></td>
+          <td class="strat-name">Adaptive Regime Trader</td>
+          <td>GBPUSD</td>
+          <td class="num">47774</td>
+          <td class="num pos">+3.24%</td>
+          <td class="num pos">$+324</td>
+          <td class="num">1.0%</td>
+          <td class="num">72%</td>
+          <td class="num">4.3</td>
+          <td class="num">5.8</td>
+          <td class="num">29</td>
+          <td class="num dim">02-09</td>
+        </tr><tr>
+          <td><span class="dot" style="background:#56d364"></span></td>
+          <td class="strat-name">T&D Low Drawdown</td>
+          <td>USDJPY</td>
+          <td class="num">41650</td>
+          <td class="num pos">+3.15%</td>
+          <td class="num pos">$+315</td>
+          <td class="num">0.5%</td>
+          <td class="num">49%</td>
+          <td class="num">6.8</td>
+          <td class="num">5.7</td>
+          <td class="num">80</td>
+          <td class="num dim">01-05</td>
+        </tr><tr>
+          <td><span class="dot" style="background:#2ea043"></span></td>
+          <td class="strat-name">T&D V3</td>
+          <td>USDCAD</td>
+          <td class="num">41652</td>
+          <td class="num pos">+1.09%</td>
+          <td class="num pos">$+109</td>
+          <td class="num">0.0%</td>
+          <td class="num">50%</td>
+          <td class="num">99.0</td>
+          <td class="num">11.6</td>
+          <td class="num">8</td>
+          <td class="num dim">01-20</td>
+        </tr><tr>
+          <td><span class="dot" style="background:#388bfd"></span></td>
+          <td class="strat-name">T&D Low Drawdown</td>
+          <td>NZDUSD</td>
+          <td class="num">41650</td>
+          <td class="num pos">+0.80%</td>
+          <td class="num pos">$+80</td>
+          <td class="num">0.0%</td>
+          <td class="num">44%</td>
+          <td class="num">99.0</td>
+          <td class="num">11.4</td>
+          <td class="num">18</td>
+          <td class="num dim">01-05</td>
+        </tr><tr>
+          <td><span class="dot" style="background:#79c0ff"></span></td>
+          <td class="strat-name">Adaptive Regime Trader</td>
+          <td>USDJPY</td>
+          <td class="num">47774</td>
+          <td class="num pos">+0.72%</td>
+          <td class="num pos">$+72</td>
+          <td class="num">0.0%</td>
+          <td class="num">80%</td>
+          <td class="num">99.0</td>
+          <td class="num">18.3</td>
+          <td class="num">5</td>
+          <td class="num dim">02-27</td>
+        </tr><tr>
+          <td><span class="dot" style="background:#9ecbff"></span></td>
+          <td class="strat-name">Momentum Master ML 2</td>
+          <td>USDJPY</td>
+          <td class="num">49058</td>
+          <td class="num pos">+0.53%</td>
+          <td class="num pos">$+53</td>
+          <td class="num">0.5%</td>
+          <td class="num">29%</td>
+          <td class="num">1.4</td>
+          <td class="num">1.6</td>
+          <td class="num">14</td>
+          <td class="num dim">02-24</td>
+        </tr><tr>
+          <td><span class="dot" style="background:#aff5b4"></span></td>
+          <td class="strat-name">Momentum Master ML 2</td>
+          <td>GBPJPY</td>
+          <td class="num">49058</td>
+          <td class="num pos">+0.52%</td>
+          <td class="num pos">$+52</td>
+          <td class="num">0.5%</td>
+          <td class="num">33%</td>
+          <td class="num">2.0</td>
+          <td class="num">3.6</td>
+          <td class="num">6</td>
+          <td class="num dim">02-25</td>
+        </tr>
+    </table>
+  </div>
+  <div class="section">
+    <div class="section-title" style="color:var(--orange)">MOL Orchestra <span class="badge badge-orange">≤ 15% DD</span></div>
+    <div class="section-desc">Top 10 strategy-pair combos by return, max 15% drawdown</div>
+    <div class="chart-box"><canvas id="molChart" height="260"></canvas></div>
+    <table style="margin-top:8px">
+      <tr><th></th><th>Strategy</th><th>Pair</th><th>Login</th><th>Return</th><th>P&L</th><th>Max DD</th><th>Win%</th><th>PF</th><th>Sharpe</th><th>Trades</th><th>Since</th></tr>
+      <tr>
+          <td><span class="dot" style="background:#f0883e"></span></td>
+          <td class="strat-name">Axis Rotation V2</td>
+          <td>USDCAD</td>
+          <td class="num">41655</td>
+          <td class="num pos">+8.53%</td>
+          <td class="num pos">$+853</td>
+          <td class="num">6.2%</td>
+          <td class="num">27%</td>
+          <td class="num">1.4</td>
+          <td class="num">1.8</td>
+          <td class="num">70</td>
+          <td class="num dim">01-13</td>
+        </tr><tr>
+          <td><span class="dot" style="background:#d29922"></span></td>
+          <td class="strat-name">Axis Rotation V1</td>
+          <td>GBPUSD</td>
+          <td class="num">41657</td>
+          <td class="num pos">+7.46%</td>
+          <td class="num pos">$+746</td>
+          <td class="num">5.1%</td>
+          <td class="num">28%</td>
+          <td class="num">1.4</td>
+          <td class="num">1.9</td>
+          <td class="num">94</td>
+          <td class="num dim">01-08</td>
+        </tr><tr>
+          <td><span class="dot" style="background:#e3b341"></span></td>
+          <td class="strat-name">T&D1 High Returns</td>
+          <td>USDJPY</td>
+          <td class="num">41653</td>
+          <td class="num pos">+6.33%</td>
+          <td class="num pos">$+633</td>
+          <td class="num">4.3%</td>
+          <td class="num">46%</td>
+          <td class="num">2.2</td>
+          <td class="num">2.0</td>
+          <td class="num">98</td>
+          <td class="num dim">01-02</td>
+        </tr><tr>
+          <td><span class="dot" style="background:#f85149"></span></td>
+          <td class="strat-name">Aggressive cV2</td>
+          <td>GBPJPY</td>
+          <td class="num">38766</td>
+          <td class="num pos">+6.20%</td>
+          <td class="num pos">$+620</td>
+          <td class="num">0.0%</td>
+          <td class="num">60%</td>
+          <td class="num">99.0</td>
+          <td class="num">17.4</td>
+          <td class="num">5</td>
+          <td class="num dim">01-02</td>
+        </tr><tr>
+          <td><span class="dot" style="background:#ff7b72"></span></td>
+          <td class="strat-name">T&D1 Prop Firm</td>
+          <td>USDJPY</td>
+          <td class="num">41654</td>
+          <td class="num pos">+5.72%</td>
+          <td class="num pos">$+572</td>
+          <td class="num">0.8%</td>
+          <td class="num">47%</td>
+          <td class="num">7.5</td>
+          <td class="num">5.7</td>
+          <td class="num">100</td>
+          <td class="num dim">01-02</td>
+        </tr><tr>
+          <td><span class="dot" style="background:#ffa657"></span></td>
+          <td class="strat-name">Adaptive Regime Trader</td>
+          <td>GBPUSD</td>
+          <td class="num">47774</td>
+          <td class="num pos">+3.24%</td>
+          <td class="num pos">$+324</td>
+          <td class="num">1.0%</td>
+          <td class="num">72%</td>
+          <td class="num">4.3</td>
+          <td class="num">5.8</td>
+          <td class="num">29</td>
+          <td class="num dim">02-09</td>
+        </tr><tr>
+          <td><span class="dot" style="background:#db6d28"></span></td>
+          <td class="strat-name">T&D Low Drawdown</td>
+          <td>USDJPY</td>
+          <td class="num">41650</td>
+          <td class="num pos">+3.15%</td>
+          <td class="num pos">$+315</td>
+          <td class="num">0.5%</td>
+          <td class="num">49%</td>
+          <td class="num">6.8</td>
+          <td class="num">5.7</td>
+          <td class="num">80</td>
+          <td class="num dim">01-05</td>
+        </tr><tr>
+          <td><span class="dot" style="background:#f78166"></span></td>
+          <td class="strat-name">Axis Rotation V2</td>
+          <td>GBPUSD</td>
+          <td class="num">41655</td>
+          <td class="num pos">+2.05%</td>
+          <td class="num pos">$+205</td>
+          <td class="num">7.8%</td>
+          <td class="num">24%</td>
+          <td class="num">1.1</td>
+          <td class="num">0.5</td>
+          <td class="num">96</td>
+          <td class="num dim">01-13</td>
+        </tr><tr>
+          <td><span class="dot" style="background:#da3633"></span></td>
+          <td class="strat-name">Axis Rotation V1</td>
+          <td>EURUSD</td>
+          <td class="num">41657</td>
+          <td class="num pos">+1.31%</td>
+          <td class="num pos">$+131</td>
+          <td class="num">11.3%</td>
+          <td class="num">21%</td>
+          <td class="num">1.1</td>
+          <td class="num">0.2</td>
+          <td class="num">52</td>
+          <td class="num dim">01-20</td>
+        </tr><tr>
+          <td><span class="dot" style="background:#d2a8ff"></span></td>
+          <td class="strat-name">Fx RSI Low DD Prop Firms</td>
+          <td>USDCHF</td>
+          <td class="num">52441853</td>
+          <td class="num pos">+1.10%</td>
+          <td class="num pos">$+110</td>
+          <td class="num">9.5%</td>
+          <td class="num">24%</td>
+          <td class="num">1.1</td>
+          <td class="num">0.3</td>
+          <td class="num">203</td>
+          <td class="num dim">01-07</td>
+        </tr>
+    </table>
+  </div>
+</div>
+
+<div class="row2">
+  <div class="section">
+    <div class="section-title" style="color:var(--blue)">Weekly P&L (All Demo Bots)</div>
+    <div class="chart-box"><canvas id="weeklyChart" height="220"></canvas></div>
+  </div>
+  <div class="section">
+    <div class="section-title" style="color:var(--blue)">Strategy P&L Leaderboard</div>
+    <div class="chart-box"><canvas id="stratChart" height="220"></canvas></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title" style="color:var(--blue)">Strategy × Pair Return Heatmap (%)</div>
+  <div class="section-desc">Cumulative return % per combo (min 5 trades). Hover for details.</div>
+  <div class="chart-box"><div class="heatmap-scroll"><table class="heatmap"><tr><th></th><th class="hm-sym">AUDCHF</th><th class="hm-sym">AUDSGD</th><th class="hm-sym">AUDUSD</th><th class="hm-sym">AUDUSD</th><th class="hm-sym">BTCUSD</th><th class="hm-sym">CADCHF</th><th class="hm-sym">CHFJPY</th><th class="hm-sym">ETHEUR</th><th class="hm-sym">ETHUSD</th><th class="hm-sym">EURAUD</th><th class="hm-sym">EURCHF</th><th class="hm-sym">EURGBP</th><th class="hm-sym">EURGBP</th><th class="hm-sym">EURJPY</th><th class="hm-sym">EURNZD</th><th class="hm-sym">EURUSD</th><th class="hm-sym">EURUSD</th><th class="hm-sym">GBPJPY</th><th class="hm-sym">GBPJPY</th><th class="hm-sym">GBPUSD</th><th class="hm-sym">GBPUSD</th><th class="hm-sym">NZDCHF</th><th class="hm-sym">NZDJPY</th><th class="hm-sym">NZDUSD</th><th class="hm-sym">SGDJPY</th><th class="hm-sym">SOLUSD</th><th class="hm-sym">US500</th><th class="hm-sym">USDCAD</th><th class="hm-sym">USDCAD</th><th class="hm-sym">USDCHF</th><th class="hm-sym">USDCHF</th><th class="hm-sym">USDJPY</th><th class="hm-sym">USDJPY</th><th class="hm-sym">XAGUSD</th><th class="hm-sym">XAUUSD</th></tr><tr><td class="hm-strat">Adaptive Regime Trader</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#da3633;color:#fff" title="Adaptive Regime Trader | BTCUSD: -3.3% (48 trades)">-3.3</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#da3633;color:#fff" title="Adaptive Regime Trader | EURUSD.pro: -3.2% (14 trades)">-3.2</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#2ea043;color:#fff" title="Adaptive Regime Trader | GBPUSD.pro: +3.2% (29 trades)">+3.2</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#da3633;color:#fff" title="Adaptive Regime Trader | USDCHF.pro: -2.7% (10 trades)">-2.7</td><td class="hm-empty"></td><td style="background:#3fb950;color:#fff" title="Adaptive Regime Trader | USDJPY.pro: +0.7% (5 trades)">+0.7</td><td class="hm-empty"></td><td style="background:#f85149;color:#fff" title="Adaptive Regime Trader | XAUUSD: -0.8% (31 trades)">-0.8</td></tr><tr><td class="hm-strat">Aggressive All Symbols</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#196c2e;color:#fff" title="Aggressive All Symbols | AUDUSD.pro: +70.4% (48 trades)">+70.4</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#b62324;color:#fff" title="Aggressive All Symbols | ETHEUR: -5.6% (308 trades)">-5.6</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#b62324;color:#fff" title="Aggressive All Symbols | EURUSD.pro: -43.8% (14 trades)">-43.8</td><td class="hm-empty"></td><td style="background:#b62324;color:#fff" title="Aggressive All Symbols | GBPJPY.pro: -13.1% (14 trades)">-13.1</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#196c2e;color:#fff" title="Aggressive All Symbols | NZDJPY.pro: +12.8% (32 trades)">+12.8</td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#f85149;color:#fff" title="Aggressive All Symbols | SOLUSD: -1.5% (292 trades)">-1.5</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#b62324;color:#fff" title="Aggressive All Symbols | USDCHF.pro: -13.9% (20 trades)">-13.9</td><td class="hm-empty"></td><td style="background:#b62324;color:#fff" title="Aggressive All Symbols | USDJPY.pro: -6.4% (16 trades)">-6.4</td><td class="hm-empty"></td><td style="background:#196c2e;color:#fff" title="Aggressive All Symbols | XAUUSD: +16.3% (202 trades)">+16.3</td></tr><tr><td class="hm-strat">Aggressive V1.2</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#da3633;color:#fff" title="Aggressive V1.2 | GBPUSD.pro: -2.4% (28 trades)">-2.4</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#b62324;color:#fff" title="Aggressive V1.2 | USDCAD.pro: -17.8% (12 trades)">-17.8</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#f85149;color:#fff" title="Aggressive V1.2 | USDJPY.pro: -0.1% (26 trades)">-0.1</td><td class="hm-empty"></td><td class="hm-empty"></td></tr><tr><td class="hm-strat">Aggressive cV2</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#da3633;color:#fff" title="Aggressive cV2 | AUDUSD.pro: -3.2% (24 trades)">-3.2</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#238636;color:#fff" title="Aggressive cV2 | GBPJPY.pro: +6.2% (5 trades)">+6.2</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#f85149;color:#fff" title="Aggressive cV2 | USDJPY.pro: -0.8% (13 trades)">-0.8</td><td class="hm-empty"></td><td class="hm-empty"></td></tr><tr><td class="hm-strat">Aggressive with Log</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#3fb950;color:#fff" title="Aggressive with Log | GBPUSD.pro: +0.4% (116 trades)">+0.4</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#b62324;color:#fff" title="Aggressive with Log | USDCHF.pro: -10.0% (54 trades)">-10.0</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td></tr><tr><td class="hm-strat">Axis Rotation V1</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#3fb950;color:#fff" title="Axis Rotation V1 | EURUSD.pro: +1.3% (52 trades)">+1.3</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#238636;color:#fff" title="Axis Rotation V1 | GBPUSD.pro: +7.5% (94 trades)">+7.5</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td></tr><tr><td class="hm-strat">Axis Rotation V2</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#b62324;color:#fff" title="Axis Rotation V2 | AUDUSD.pro: -6.9% (112 trades)">-6.9</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#3fb950;color:#fff" title="Axis Rotation V2 | EURUSD.pro: +0.7% (58 trades)">+0.7</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#2ea043;color:#fff" title="Axis Rotation V2 | GBPUSD.pro: +2.0% (96 trades)">+2.0</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#238636;color:#fff" title="Axis Rotation V2 | USDCAD.pro: +8.5% (70 trades)">+8.5</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#b62324;color:#fff" title="Axis Rotation V2 | USDJPY.pro: -10.0% (54 trades)">-10.0</td><td class="hm-empty"></td><td class="hm-empty"></td></tr><tr><td class="hm-strat">Donchain Breakout ML</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#f85149;color:#fff" title="Donchain Breakout ML | BTCUSD: -0.0% (6 trades)">-0.0</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#f85149;color:#fff" title="Donchain Breakout ML | ETHUSD: -1.6% (13 trades)">-1.6</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#f85149;color:#fff" title="Donchain Breakout ML | EURJPY.pro: -1.9% (130 trades)">-1.9</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#b62324;color:#fff" title="Donchain Breakout ML | GBPJPY.pro: -22.8% (64 trades)">-22.8</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#f85149;color:#fff" title="Donchain Breakout ML | SOLUSD: -0.1% (10 trades)">-0.1</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#b62324;color:#fff" title="Donchain Breakout ML | USDJPY.pro: -18.0% (10 trades)">-18.0</td><td style="background:#b62324;color:#fff" title="Donchain Breakout ML | XAGUSD: -125.1% (8 trades)">-125.1</td><td class="hm-empty"></td></tr><tr><td class="hm-strat">Donchain Mean Reversion ML</td><td style="background:#f85149;color:#fff" title="Donchain Mean Reversion ML | AUDCHF.pro: -0.1% (12 trades)">-0.1</td><td style="background:#3fb950;color:#fff" title="Donchain Mean Reversion ML | AUDSGD.pro: +0.1% (30 trades)">+0.1</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#f85149;color:#fff" title="Donchain Mean Reversion ML | CADCHF.pro: -0.0% (8 trades)">-0.0</td><td style="background:#f85149;color:#fff" title="Donchain Mean Reversion ML | CHFJPY.pro: -0.1% (12 trades)">-0.1</td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#f85149;color:#fff" title="Donchain Mean Reversion ML | EURAUD.pro: -0.0% (8 trades)">-0.0</td><td style="background:#f85149;color:#fff" title="Donchain Mean Reversion ML | EURCHF.pro: -0.1% (6 trades)">-0.1</td><td class="hm-empty"></td><td style="background:#f85149;color:#fff" title="Donchain Mean Reversion ML | EURGBP.pro: -0.0% (6 trades)">-0.0</td><td class="hm-empty"></td><td style="background:#f85149;color:#fff" title="Donchain Mean Reversion ML | EURNZD.pro: -0.0% (10 trades)">-0.0</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#f85149;color:#fff" title="Donchain Mean Reversion ML | NZDCHF.pro: -0.0% (16 trades)">-0.0</td><td style="background:#3fb950;color:#fff" title="Donchain Mean Reversion ML | NZDJPY.pro: +0.1% (8 trades)">+0.1</td><td class="hm-empty"></td><td style="background:#3fb950;color:#fff" title="Donchain Mean Reversion ML | SGDJPY.pro: +0.0% (6 trades)">+0.0</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#f85149;color:#fff" title="Donchain Mean Reversion ML | XAUUSD: -1.4% (10 trades)">-1.4</td></tr><tr><td class="hm-strat">EA Fx RSI MOL</td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#b62324;color:#fff" title="EA Fx RSI MOL | AUDUSD: -22.7% (115 trades)">-22.7</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#f85149;color:#fff" title="EA Fx RSI MOL | USDCAD: -1.0% (289 trades)">-1.0</td><td class="hm-empty"></td><td style="background:#196c2e;color:#fff" title="EA Fx RSI MOL | USDCHF: +17.4% (196 trades)">+17.4</td><td class="hm-empty"></td><td style="background:#b62324;color:#fff" title="EA Fx RSI MOL | USDJPY: -13.7% (417 trades)">-13.7</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td></tr><tr><td class="hm-strat">Fx RSI Low DD Prop Firms</td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#b62324;color:#fff" title="Fx RSI Low DD Prop Firms | AUDUSD: -20.8% (690 trades)">-20.8</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#b62324;color:#fff" title="Fx RSI Low DD Prop Firms | GBPJPY: -8.2% (252 trades)">-8.2</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#3fb950;color:#fff" title="Fx RSI Low DD Prop Firms | USDCHF: +1.1% (203 trades)">+1.1</td><td class="hm-empty"></td><td style="background:#da3633;color:#fff" title="Fx RSI Low DD Prop Firms | USDJPY: -3.1% (355 trades)">-3.1</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td></tr><tr><td class="hm-strat">Momentum Master ML 2</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#f85149;color:#fff" title="Momentum Master ML 2 | EURJPY.pro: -1.4% (14 trades)">-1.4</td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#f85149;color:#fff" title="Momentum Master ML 2 | EURUSD.pro: -0.5% (10 trades)">-0.5</td><td class="hm-empty"></td><td style="background:#3fb950;color:#fff" title="Momentum Master ML 2 | GBPJPY.pro: +0.5% (6 trades)">+0.5</td><td class="hm-empty"></td><td style="background:#f85149;color:#fff" title="Momentum Master ML 2 | GBPUSD.pro: -1.0% (8 trades)">-1.0</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#f85149;color:#fff" title="Momentum Master ML 2 | USDCHF.pro: -1.5% (14 trades)">-1.5</td><td class="hm-empty"></td><td style="background:#3fb950;color:#fff" title="Momentum Master ML 2 | USDJPY.pro: +0.5% (14 trades)">+0.5</td><td class="hm-empty"></td><td style="background:#f85149;color:#fff" title="Momentum Master ML 2 | XAUUSD: -0.4% (16 trades)">-0.4</td></tr><tr><td class="hm-strat">PropFirm DD Fx RSI</td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#b62324;color:#fff" title="PropFirm DD Fx RSI | AUDUSD: -10.2% (36 trades)">-10.2</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#3fb950;color:#fff" title="PropFirm DD Fx RSI | EURGBP: +0.5% (50 trades)">+0.5</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#da3633;color:#fff" title="PropFirm DD Fx RSI | EURUSD: -2.0% (49 trades)">-2.0</td><td class="hm-empty"></td><td style="background:#3fb950;color:#fff" title="PropFirm DD Fx RSI | GBPJPY: +0.0% (115 trades)">+0.0</td><td class="hm-empty"></td><td style="background:#3fb950;color:#fff" title="PropFirm DD Fx RSI | GBPUSD: +0.4% (53 trades)">+0.4</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#f85149;color:#fff" title="PropFirm DD Fx RSI | US500: -1.1% (42 trades)">-1.1</td><td style="background:#b62324;color:#fff" title="PropFirm DD Fx RSI | USDCAD: -14.8% (60 trades)">-14.8</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#da3633;color:#fff" title="PropFirm DD Fx RSI | USDJPY: -2.3% (40 trades)">-2.3</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td></tr><tr><td class="hm-strat">T&D Low Drawdown</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#f85149;color:#fff" title="T&D Low Drawdown | AUDUSD.pro: -0.8% (84 trades)">-0.8</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#b62324;color:#fff" title="T&D Low Drawdown | EURUSD.pro: -12.5% (94 trades)">-12.5</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#b62324;color:#fff" title="T&D Low Drawdown | GBPUSD.pro: -17.0% (96 trades)">-17.0</td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#3fb950;color:#fff" title="T&D Low Drawdown | NZDUSD.pro: +0.8% (18 trades)">+0.8</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#2ea043;color:#fff" title="T&D Low Drawdown | USDJPY.pro: +3.1% (80 trades)">+3.1</td><td class="hm-empty"></td><td class="hm-empty"></td></tr><tr><td class="hm-strat">T&D V3</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#da3633;color:#fff" title="T&D V3 | GBPUSD.pro: -3.6% (50 trades)">-3.6</td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#b62324;color:#fff" title="T&D V3 | NZDUSD.pro: -11.5% (50 trades)">-11.5</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#3fb950;color:#fff" title="T&D V3 | USDCAD.pro: +1.1% (8 trades)">+1.1</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#da3633;color:#fff" title="T&D V3 | USDJPY.pro: -4.9% (24 trades)">-4.9</td><td class="hm-empty"></td><td class="hm-empty"></td></tr><tr><td class="hm-strat">T&D1 High Returns</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#b62324;color:#fff" title="T&D1 High Returns | AUDUSD.pro: -8.6% (108 trades)">-8.6</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#b62324;color:#fff" title="T&D1 High Returns | EURUSD.pro: -44.6% (113 trades)">-44.6</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#b62324;color:#fff" title="T&D1 High Returns | GBPUSD.pro: -35.3% (114 trades)">-35.3</td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#b62324;color:#fff" title="T&D1 High Returns | NZDUSD.pro: -15.9% (30 trades)">-15.9</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#238636;color:#fff" title="T&D1 High Returns | USDJPY.pro: +6.3% (98 trades)">+6.3</td><td class="hm-empty"></td><td class="hm-empty"></td></tr><tr><td class="hm-strat">T&D1 Prop Firm</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#b62324;color:#fff" title="T&D1 Prop Firm | EURUSD.pro: -10.7% (112 trades)">-10.7</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#238636;color:#fff" title="T&D1 Prop Firm | USDJPY.pro: +5.7% (100 trades)">+5.7</td><td class="hm-empty"></td><td class="hm-empty"></td></tr></table></div></div>
+</div>
+
+<div class="section">
+  <div class="section-title" style="color:var(--blue)">Full Combo Leaderboard</div>
+  <div class="chart-box"><table>
+    <tr><th>#</th><th>Strategy</th><th>Pair</th><th>Login</th><th>Return</th><th>P&L</th><th>Max DD</th><th>Win%</th><th>PF</th><th>Sharpe</th><th>Trades</th></tr>
+    <tr>
+          <td class="num dim">1</td>
+          <td class="strat-name">Aggressive All Symbols</td>
+          <td>AUDUSD</td>
+          <td class="num">22663</td>
+          <td class="num pos">+70.39%</td>
+          <td class="num pos">$+7,039</td>
+          <td class="num warn">26.4%</td>
+          <td class="num">46%</td>
+          <td class="num">3.4</td>
+          <td class="num">5.7</td>
+          <td class="num">48</td>
+        </tr><tr>
+          <td class="num dim">2</td>
+          <td class="strat-name">EA Fx RSI MOL</td>
+          <td>USDCHF</td>
+          <td class="num">52441850</td>
+          <td class="num pos">+17.38%</td>
+          <td class="num pos">$+1,738</td>
+          <td class="num warn">16.0%</td>
+          <td class="num">28%</td>
+          <td class="num">1.4</td>
+          <td class="num">1.6</td>
+          <td class="num">196</td>
+        </tr><tr>
+          <td class="num dim">3</td>
+          <td class="strat-name">Aggressive All Symbols</td>
+          <td>XAUUSD</td>
+          <td class="num">22663</td>
+          <td class="num pos">+16.26%</td>
+          <td class="num pos">$+1,626</td>
+          <td class="num warn">71.2%</td>
+          <td class="num">39%</td>
+          <td class="num">1.1</td>
+          <td class="num">0.3</td>
+          <td class="num">202</td>
+        </tr><tr>
+          <td class="num dim">4</td>
+          <td class="strat-name">Aggressive All Symbols</td>
+          <td>NZDJPY</td>
+          <td class="num">22663</td>
+          <td class="num pos">+12.82%</td>
+          <td class="num pos">$+1,282</td>
+          <td class="num warn">17.1%</td>
+          <td class="num">41%</td>
+          <td class="num">1.3</td>
+          <td class="num">1.4</td>
+          <td class="num">32</td>
+        </tr><tr>
+          <td class="num dim">5</td>
+          <td class="strat-name">Axis Rotation V2</td>
+          <td>USDCAD</td>
+          <td class="num">41655</td>
+          <td class="num pos">+8.53%</td>
+          <td class="num pos">$+853</td>
+          <td class="num">6.2%</td>
+          <td class="num">27%</td>
+          <td class="num">1.4</td>
+          <td class="num">1.8</td>
+          <td class="num">70</td>
+        </tr><tr>
+          <td class="num dim">6</td>
+          <td class="strat-name">Axis Rotation V1</td>
+          <td>GBPUSD</td>
+          <td class="num">41657</td>
+          <td class="num pos">+7.46%</td>
+          <td class="num pos">$+746</td>
+          <td class="num">5.1%</td>
+          <td class="num">28%</td>
+          <td class="num">1.4</td>
+          <td class="num">1.9</td>
+          <td class="num">94</td>
+        </tr><tr>
+          <td class="num dim">7</td>
+          <td class="strat-name">T&D1 High Returns</td>
+          <td>USDJPY</td>
+          <td class="num">41653</td>
+          <td class="num pos">+6.33%</td>
+          <td class="num pos">$+633</td>
+          <td class="num">4.3%</td>
+          <td class="num">46%</td>
+          <td class="num">2.2</td>
+          <td class="num">2.0</td>
+          <td class="num">98</td>
+        </tr><tr>
+          <td class="num dim">8</td>
+          <td class="strat-name">Aggressive cV2</td>
+          <td>GBPJPY</td>
+          <td class="num">38766</td>
+          <td class="num pos">+6.20%</td>
+          <td class="num pos">$+620</td>
+          <td class="num">0.0%</td>
+          <td class="num">60%</td>
+          <td class="num">99.0</td>
+          <td class="num">17.4</td>
+          <td class="num">5</td>
+        </tr><tr>
+          <td class="num dim">9</td>
+          <td class="strat-name">T&D1 Prop Firm</td>
+          <td>USDJPY</td>
+          <td class="num">41654</td>
+          <td class="num pos">+5.72%</td>
+          <td class="num pos">$+572</td>
+          <td class="num">0.8%</td>
+          <td class="num">47%</td>
+          <td class="num">7.5</td>
+          <td class="num">5.7</td>
+          <td class="num">100</td>
+        </tr><tr>
+          <td class="num dim">10</td>
+          <td class="strat-name">Adaptive Regime Trader</td>
+          <td>GBPUSD</td>
+          <td class="num">47774</td>
+          <td class="num pos">+3.24%</td>
+          <td class="num pos">$+324</td>
+          <td class="num">1.0%</td>
+          <td class="num">72%</td>
+          <td class="num">4.3</td>
+          <td class="num">5.8</td>
+          <td class="num">29</td>
+        </tr><tr>
+          <td class="num dim">11</td>
+          <td class="strat-name">T&D Low Drawdown</td>
+          <td>USDJPY</td>
+          <td class="num">41650</td>
+          <td class="num pos">+3.15%</td>
+          <td class="num pos">$+315</td>
+          <td class="num">0.5%</td>
+          <td class="num">49%</td>
+          <td class="num">6.8</td>
+          <td class="num">5.7</td>
+          <td class="num">80</td>
+        </tr><tr>
+          <td class="num dim">12</td>
+          <td class="strat-name">Axis Rotation V2</td>
+          <td>GBPUSD</td>
+          <td class="num">41655</td>
+          <td class="num pos">+2.05%</td>
+          <td class="num pos">$+205</td>
+          <td class="num">7.8%</td>
+          <td class="num">24%</td>
+          <td class="num">1.1</td>
+          <td class="num">0.5</td>
+          <td class="num">96</td>
+        </tr><tr>
+          <td class="num dim">13</td>
+          <td class="strat-name">Axis Rotation V1</td>
+          <td>EURUSD</td>
+          <td class="num">41657</td>
+          <td class="num pos">+1.31%</td>
+          <td class="num pos">$+131</td>
+          <td class="num warn">11.3%</td>
+          <td class="num">21%</td>
+          <td class="num">1.1</td>
+          <td class="num">0.2</td>
+          <td class="num">52</td>
+        </tr><tr>
+          <td class="num dim">14</td>
+          <td class="strat-name">Fx RSI Low DD Prop Firms</td>
+          <td>USDCHF</td>
+          <td class="num">52441853</td>
+          <td class="num pos">+1.10%</td>
+          <td class="num pos">$+110</td>
+          <td class="num">9.5%</td>
+          <td class="num">24%</td>
+          <td class="num">1.1</td>
+          <td class="num">0.3</td>
+          <td class="num">203</td>
+        </tr><tr>
+          <td class="num dim">15</td>
+          <td class="strat-name">T&D V3</td>
+          <td>USDCAD</td>
+          <td class="num">41652</td>
+          <td class="num pos">+1.09%</td>
+          <td class="num pos">$+109</td>
+          <td class="num">0.0%</td>
+          <td class="num">50%</td>
+          <td class="num">99.0</td>
+          <td class="num">11.6</td>
+          <td class="num">8</td>
+        </tr><tr>
+          <td class="num dim">16</td>
+          <td class="strat-name">T&D Low Drawdown</td>
+          <td>NZDUSD</td>
+          <td class="num">41650</td>
+          <td class="num pos">+0.80%</td>
+          <td class="num pos">$+80</td>
+          <td class="num">0.0%</td>
+          <td class="num">44%</td>
+          <td class="num">99.0</td>
+          <td class="num">11.4</td>
+          <td class="num">18</td>
+        </tr><tr>
+          <td class="num dim">17</td>
+          <td class="strat-name">Adaptive Regime Trader</td>
+          <td>USDJPY</td>
+          <td class="num">47774</td>
+          <td class="num pos">+0.72%</td>
+          <td class="num pos">$+72</td>
+          <td class="num">0.0%</td>
+          <td class="num">80%</td>
+          <td class="num">99.0</td>
+          <td class="num">18.3</td>
+          <td class="num">5</td>
+        </tr><tr>
+          <td class="num dim">18</td>
+          <td class="strat-name">Axis Rotation V2</td>
+          <td>EURUSD</td>
+          <td class="num">41655</td>
+          <td class="num pos">+0.72%</td>
+          <td class="num pos">$+72</td>
+          <td class="num">8.1%</td>
+          <td class="num">21%</td>
+          <td class="num">1.0</td>
+          <td class="num">0.2</td>
+          <td class="num">58</td>
+        </tr><tr>
+          <td class="num dim">19</td>
+          <td class="strat-name">Momentum Master ML 2</td>
+          <td>USDJPY</td>
+          <td class="num">49058</td>
+          <td class="num pos">+0.53%</td>
+          <td class="num pos">$+53</td>
+          <td class="num">0.5%</td>
+          <td class="num">29%</td>
+          <td class="num">1.4</td>
+          <td class="num">1.6</td>
+          <td class="num">14</td>
+        </tr><tr>
+          <td class="num dim">20</td>
+          <td class="strat-name">Momentum Master ML 2</td>
+          <td>GBPJPY</td>
+          <td class="num">49058</td>
+          <td class="num pos">+0.52%</td>
+          <td class="num pos">$+52</td>
+          <td class="num">0.5%</td>
+          <td class="num">33%</td>
+          <td class="num">2.0</td>
+          <td class="num">3.6</td>
+          <td class="num">6</td>
+        </tr><tr>
+          <td class="num dim">21</td>
+          <td class="strat-name">PropFirm DD Fx RSI</td>
+          <td>EURGBP</td>
+          <td class="num">38767</td>
+          <td class="num pos">+0.49%</td>
+          <td class="num pos">$+49</td>
+          <td class="num">2.9%</td>
+          <td class="num">40%</td>
+          <td class="num">1.1</td>
+          <td class="num">0.3</td>
+          <td class="num">50</td>
+        </tr><tr>
+          <td class="num dim">22</td>
+          <td class="strat-name">PropFirm DD Fx RSI</td>
+          <td>GBPUSD</td>
+          <td class="num">38767</td>
+          <td class="num pos">+0.43%</td>
+          <td class="num pos">$+43</td>
+          <td class="num">3.4%</td>
+          <td class="num">32%</td>
+          <td class="num">1.1</td>
+          <td class="num">0.2</td>
+          <td class="num">53</td>
+        </tr><tr>
+          <td class="num dim">23</td>
+          <td class="strat-name">Aggressive with Log</td>
+          <td>GBPUSD</td>
+          <td class="num">46540</td>
+          <td class="num pos">+0.40%</td>
+          <td class="num pos">$+40</td>
+          <td class="num">9.2%</td>
+          <td class="num">34%</td>
+          <td class="num">1.0</td>
+          <td class="num">0.1</td>
+          <td class="num">116</td>
+        </tr><tr>
+          <td class="num dim">24</td>
+          <td class="strat-name">Donchain Mean Reversion ML</td>
+          <td>AUDSGD</td>
+          <td class="num">47771</td>
+          <td class="num pos">+0.12%</td>
+          <td class="num pos">$+12</td>
+          <td class="num">0.0%</td>
+          <td class="num">43%</td>
+          <td class="num">3.9</td>
+          <td class="num">5.9</td>
+          <td class="num">30</td>
+        </tr><tr>
+          <td class="num dim">25</td>
+          <td class="strat-name">Donchain Mean Reversion ML</td>
+          <td>NZDJPY</td>
+          <td class="num">47771</td>
+          <td class="num pos">+0.07%</td>
+          <td class="num pos">$+7</td>
+          <td class="num">0.0%</td>
+          <td class="num">50%</td>
+          <td class="num">99.0</td>
+          <td class="num">11.4</td>
+          <td class="num">8</td>
+        </tr><tr>
+          <td class="num dim">26</td>
+          <td class="strat-name">PropFirm DD Fx RSI</td>
+          <td>GBPJPY</td>
+          <td class="num">38767</td>
+          <td class="num pos">+0.04%</td>
+          <td class="num pos">$+4</td>
+          <td class="num">6.1%</td>
+          <td class="num">39%</td>
+          <td class="num">1.0</td>
+          <td class="num">0.0</td>
+          <td class="num">115</td>
+        </tr><tr>
+          <td class="num dim">27</td>
+          <td class="strat-name">Donchain Mean Reversion ML</td>
+          <td>SGDJPY</td>
+          <td class="num">47771</td>
+          <td class="num pos">+0.03%</td>
+          <td class="num pos">$+3</td>
+          <td class="num">0.0%</td>
+          <td class="num">50%</td>
+          <td class="num">99.0</td>
+          <td class="num">13.9</td>
+          <td class="num">6</td>
+        </tr><tr>
+          <td class="num dim">28</td>
+          <td class="strat-name">Donchain Mean Reversion ML</td>
+          <td>EURAUD</td>
+          <td class="num">47771</td>
+          <td class="num pos">-0.00%</td>
+          <td class="num neg">$-0</td>
+          <td class="num">0.0%</td>
+          <td class="num">38%</td>
+          <td class="num">1.0</td>
+          <td class="num">-0.0</td>
+          <td class="num">8</td>
+        </tr><tr>
+          <td class="num dim">29</td>
+          <td class="strat-name">Donchain Mean Reversion ML</td>
+          <td>CADCHF</td>
+          <td class="num">47771</td>
+          <td class="num neg">-0.01%</td>
+          <td class="num neg">$-1</td>
+          <td class="num">0.0%</td>
+          <td class="num">25%</td>
+          <td class="num">0.5</td>
+          <td class="num">-2.3</td>
+          <td class="num">8</td>
+        </tr><tr>
+          <td class="num dim">30</td>
+          <td class="strat-name">Donchain Breakout ML</td>
+          <td>BTCUSD</td>
+          <td class="num">47369</td>
+          <td class="num neg">-0.02%</td>
+          <td class="num neg">$-2</td>
+          <td class="num">0.0%</td>
+          <td class="num">17%</td>
+          <td class="num">0.2</td>
+          <td class="num">-7.4</td>
+          <td class="num">6</td>
+        </tr>
+  </table></div>
+</div>
+
+<div class="footer">Bachelier Demo Mission Control &middot; 2026-04-08 09:35 &middot; 2026-01-01 → 2026-03-15</div>
+
+<script>
+const chartOpts = (ylabel) => ({
+  responsive:true, interaction:{mode:'index',intersect:false},
+  plugins:{legend:{display:false},
+    tooltip:{backgroundColor:'#161b22',borderColor:'#30363d',borderWidth:1,titleColor:'#e6edf3',bodyColor:'#e6edf3',
+      callbacks:{label:ctx=>ctx.dataset.label+': '+(ctx.parsed.y!==null?ctx.parsed.y.toFixed(2)+'%':'N/A')}
+    }},
+  scales:{
+    x:{ticks:{color:'#8b949e',maxTicksLimit:10,font:{size:9}},grid:{color:'#21262d'}},
+    y:{title:{display:true,text:ylabel,color:'#8b949e',font:{size:10}},ticks:{color:'#8b949e',callback:v=>v.toFixed(1)+'%'},grid:{color:'#21262d'}}
+  }
+});
+new Chart(document.getElementById('propChart'),{type:'line',data:{labels:["2026-01-02", "2026-01-05", "2026-01-06", "2026-01-07", "2026-01-08", "2026-01-09", "2026-01-12", "2026-01-13", "2026-01-14", "2026-01-15", "2026-01-16", "2026-01-19", "2026-01-20", "2026-01-21", "2026-01-22", "2026-01-23", "2026-01-26", "2026-01-27", "2026-01-28", "2026-01-29", "2026-01-30", "2026-02-02", "2026-02-03", "2026-02-04", "2026-02-05", "2026-02-06", "2026-02-09", "2026-02-10", "2026-02-11", "2026-02-12", "2026-02-13", "2026-02-16", "2026-02-17", "2026-02-18", "2026-02-19", "2026-02-20", "2026-02-23", "2026-02-24", "2026-02-25", "2026-02-26", "2026-02-27", "2026-03-02", "2026-03-03", "2026-03-04", "2026-03-05", "2026-03-06", "2026-03-09", "2026-03-10", "2026-03-11", "2026-03-12", "2026-03-13"],datasets:[{"label": "T&D1 High Returns | USDJPY.pro", "data": [-4.29, -4.16, -4.02, -3.82, -3.6, -3.36, -3.22, -2.94, -2.11, -1.95, -1.59, null, -1.27, -0.91, -0.79, 0.32, 0.29, 0.47, 0.45, 0.47, 0.6, 1.32, 1.59, 1.71, 1.83, null, 1.96, 2.54, 2.63, 2.74, 3.69, 3.81, 4.05, 4.08, 4.17, 4.32, 4.54, 4.62, 5.78, 6.36, 6.45, 6.52, 6.6, 6.69, 6.99, 5.87, 5.96, 6.06, 6.16, 6.23, 6.33], "borderColor": "#3fb950", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "Aggressive cV2 | GBPJPY.pro", "data": [2.17, null, null, null, 2.17, 4.17, null, null, null, null, 4.17, 6.2, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], "borderColor": "#58a6ff", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "T&D1 Prop Firm | USDJPY.pro", "data": [0.08, 0.13, 0.19, 0.27, 0.35, 0.45, 0.51, 0.62, 0.94, 1.01, 1.17, null, 1.25, 1.4, 1.46, 1.95, 1.94, 2.01, 2.01, 2.01, 2.09, 2.6, 2.75, 2.82, 2.89, 2.93, 3.01, 3.4, 3.46, 3.53, 4.13, 4.2, 4.34, 4.37, 4.42, 4.51, 4.65, 4.7, 5.42, 5.77, 5.82, 5.87, 5.93, 5.99, 6.23, 5.38, 5.45, 5.52, 5.59, 5.64, 5.72], "borderColor": "#a5d6ff", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "Adaptive Regime Trader | GBPUSD.pro", "data": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.0, 0.02, null, null, null, null, null, null, null, null, null, null, null, null, 2.03, 3.24, null, null, null, null, null, null, null, null, null], "borderColor": "#7ee787", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "T&D Low Drawdown | USDJPY.pro", "data": [null, 0.03, 0.07, 0.13, 0.19, 0.25, 0.29, 0.37, 0.59, 0.64, 0.75, null, null, null, null, null, null, null, null, null, null, 1.09, 1.19, 1.23, 1.28, 1.31, 1.36, 1.61, 1.65, 1.7, 2.09, 2.14, 2.23, 2.25, 2.29, 2.34, 2.44, 2.47, 2.95, 3.19, 3.22, 3.26, 3.3, 3.34, 3.48, 2.94, 2.98, 3.03, 3.08, 3.11, 3.15], "borderColor": "#56d364", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "T&D V3 | USDCAD.pro", "data": [null, null, null, null, null, null, null, null, null, null, null, null, 0.11, null, null, null, 0.6, null, 0.74, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 1.09, null, null, null, null, null, null, null, null, null], "borderColor": "#2ea043", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "T&D Low Drawdown | NZDUSD.pro", "data": [null, 0.11, null, null, null, null, 0.19, null, null, 0.28, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.35, 0.58, 0.58, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.66, 0.73, 0.8, null], "borderColor": "#388bfd", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "Adaptive Regime Trader | USDJPY.pro", "data": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.0, 0.72, null, null, null, null, null, null, null, null, null], "borderColor": "#79c0ff", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "Momentum Master ML 2 | USDJPY.pro", "data": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.02, 0.53, null, null, null, null, null, null, null, null, null, null, null, null], "borderColor": "#9ecbff", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "Momentum Master ML 2 | GBPJPY.pro", "data": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.52, null, null, null, null, null, null, null, null, null, null, null, null], "borderColor": "#aff5b4", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}]},options:chartOpts('Cumulative Return (%)')});
+new Chart(document.getElementById('molChart'),{type:'line',data:{labels:["2026-01-02", "2026-01-05", "2026-01-06", "2026-01-07", "2026-01-08", "2026-01-09", "2026-01-12", "2026-01-13", "2026-01-14", "2026-01-15", "2026-01-16", "2026-01-19", "2026-01-20", "2026-01-21", "2026-01-22", "2026-01-23", "2026-01-26", "2026-01-27", "2026-01-28", "2026-01-29", "2026-01-30", "2026-02-02", "2026-02-03", "2026-02-04", "2026-02-05", "2026-02-06", "2026-02-09", "2026-02-10", "2026-02-11", "2026-02-12", "2026-02-13", "2026-02-16", "2026-02-17", "2026-02-18", "2026-02-19", "2026-02-20", "2026-02-23", "2026-02-24", "2026-02-25", "2026-02-26", "2026-02-27", "2026-03-02", "2026-03-03", "2026-03-04", "2026-03-05", "2026-03-06", "2026-03-09", "2026-03-10", "2026-03-11", "2026-03-12", "2026-03-13"],datasets:[{"label": "Axis Rotation V2 | USDCAD.pro", "data": [null, null, null, null, null, null, null, 0.0, 0.0, 0.0, null, null, 0.68, null, null, 2.57, 2.57, 6.84, 5.35, 4.88, 6.74, null, null, 6.74, 6.74, 6.43, 11.71, 11.71, 13.79, 11.66, 11.66, null, 8.86, 8.86, 7.87, 7.87, null, 8.53, null, null, null, null, null, null, null, null, null, null, null, null, null], "borderColor": "#f0883e", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "Axis Rotation V1 | GBPUSD.pro", "data": [null, null, null, null, 0.0, 0.0, null, null, null, null, null, 1.99, 1.39, 1.39, null, 2.37, 4.05, 3.19, 3.19, 3.19, 3.18, 6.28, 6.28, 8.35, 10.03, 10.03, 10.01, null, 8.47, null, null, null, 4.98, 4.38, 6.69, 6.69, null, 7.46, null, null, null, null, null, null, null, null, null, null, null, null, null], "borderColor": "#d29922", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "T&D1 High Returns | USDJPY.pro", "data": [-4.29, -4.16, -4.02, -3.82, -3.6, -3.36, -3.22, -2.94, -2.11, -1.95, -1.59, null, -1.27, -0.91, -0.79, 0.32, 0.29, 0.47, 0.45, 0.47, 0.6, 1.32, 1.59, 1.71, 1.83, null, 1.96, 2.54, 2.63, 2.74, 3.69, 3.81, 4.05, 4.08, 4.17, 4.32, 4.54, 4.62, 5.78, 6.36, 6.45, 6.52, 6.6, 6.69, 6.99, 5.87, 5.96, 6.06, 6.16, 6.23, 6.33], "borderColor": "#e3b341", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "Aggressive cV2 | GBPJPY.pro", "data": [2.17, null, null, null, 2.17, 4.17, null, null, null, null, 4.17, 6.2, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], "borderColor": "#f85149", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "T&D1 Prop Firm | USDJPY.pro", "data": [0.08, 0.13, 0.19, 0.27, 0.35, 0.45, 0.51, 0.62, 0.94, 1.01, 1.17, null, 1.25, 1.4, 1.46, 1.95, 1.94, 2.01, 2.01, 2.01, 2.09, 2.6, 2.75, 2.82, 2.89, 2.93, 3.01, 3.4, 3.46, 3.53, 4.13, 4.2, 4.34, 4.37, 4.42, 4.51, 4.65, 4.7, 5.42, 5.77, 5.82, 5.87, 5.93, 5.99, 6.23, 5.38, 5.45, 5.52, 5.59, 5.64, 5.72], "borderColor": "#ff7b72", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "Adaptive Regime Trader | GBPUSD.pro", "data": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.0, 0.02, null, null, null, null, null, null, null, null, null, null, null, null, 2.03, 3.24, null, null, null, null, null, null, null, null, null], "borderColor": "#ffa657", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "T&D Low Drawdown | USDJPY.pro", "data": [null, 0.03, 0.07, 0.13, 0.19, 0.25, 0.29, 0.37, 0.59, 0.64, 0.75, null, null, null, null, null, null, null, null, null, null, 1.09, 1.19, 1.23, 1.28, 1.31, 1.36, 1.61, 1.65, 1.7, 2.09, 2.14, 2.23, 2.25, 2.29, 2.34, 2.44, 2.47, 2.95, 3.19, 3.22, 3.26, 3.3, 3.34, 3.48, 2.94, 2.98, 3.03, 3.08, 3.11, 3.15], "borderColor": "#db6d28", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "Axis Rotation V2 | GBPUSD.pro", "data": [null, null, null, null, null, null, null, -0.0, -0.0, 1.46, 1.46, 0.84, 2.3, 2.3, null, 2.97, 4.51, 3.76, 3.76, 3.76, 3.74, 7.5, null, 5.73, 4.59, 4.59, 4.57, null, 3.1, null, null, null, -0.28, -0.83, 1.37, 1.37, null, 2.05, null, null, null, null, null, null, null, null, null, null, null, null, null], "borderColor": "#f78166", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "Axis Rotation V1 | EURUSD.pro", "data": [null, null, null, null, null, null, null, null, null, null, null, null, 0.0, -1.67, 0.25, -2.04, -3.7, -1.76, -1.76, 2.03, 5.9, 8.06, 8.06, 8.06, 9.02, 9.02, 4.19, 4.19, 6.25, 6.25, 6.25, null, 0.73, -1.04, -2.69, -2.69, -0.73, 1.31, null, null, null, null, null, null, null, null, null, null, null, null, null], "borderColor": "#da3633", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "Fx RSI Low DD Prop Firms | USDCHF", "data": [null, null, null, 0.0, 1.91, 2.14, 1.32, null, 1.47, 0.63, null, null, 6.79, 6.79, null, 10.1, 9.68, 7.06, null, null, 7.52, 7.99, null, null, null, null, 8.84, 10.11, null, null, null, null, null, null, 10.11, 11.06, null, null, null, null, null, 11.55, 5.32, null, null, null, null, 5.75, null, 5.75, 1.1], "borderColor": "#d2a8ff", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}]},options:chartOpts('Cumulative Return (%)')});
+new Chart(document.getElementById('weeklyChart'),{type:'bar',data:{labels:["2026-W00", "2026-W01", "2026-W02", "2026-W03", "2026-W04", "2026-W05", "2026-W06", "2026-W07", "2026-W08", "2026-W09", "2026-W10", "2026-W11"],datasets:[{data:[-1682.13, 3889.77, -5062.64, -367.97, -24581.71, 6807.38, -3338.04, -2411.57, 2300.89, -11761.25, -6057.92, 28.11],backgroundColor:["#f85149", "#3fb950", "#f85149", "#f85149", "#f85149", "#3fb950", "#f85149", "#f85149", "#3fb950", "#f85149", "#f85149", "#3fb950"],borderRadius:4}]},options:{responsive:true,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>'$'+ctx.parsed.y.toLocaleString()}}},scales:{x:{ticks:{color:'#8b949e',font:{size:9}},grid:{display:false}},y:{ticks:{color:'#8b949e',callback:v=>'$'+v.toLocaleString()},grid:{color:'#21262d'}}}}});
+new Chart(document.getElementById('stratChart'),{type:'bar',data:{labels:["Aggressive All Symbo", "Axis Rotation V1", "Aggressive cV2", "Donchain Mean Revers", "Momentum Master ML 2", "T&D1 Prop Firm", "Axis Rotation V2", "Adaptive Regime Trad", "Aggressive with Log", "EA Fx RSI MOL", "Aggressive V1.2", "T&D V3", "T&D Low Drawdown", "PropFirm DD Fx RSI", "Fx RSI Low DD Prop F", "T&D1 High Returns", "Donchain Breakout ML"],datasets:[{data:[1511.55, 876.93, 345.46, -274.16, -385.87, -497.45, -555.17, -601.73, -958.79, -2002.74, -2029.74, -2280.19, -2627.2, -2901.33, -3099.52, -9816.56, -16940.57],backgroundColor:["#3fb950", "#3fb950", "#3fb950", "#f85149", "#f85149", "#f85149", "#f85149", "#f85149", "#f85149", "#f85149", "#f85149", "#f85149", "#f85149", "#f85149", "#f85149", "#f85149", "#f85149"],borderRadius:3}]},options:{indexAxis:'y',responsive:true,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>'$'+ctx.parsed.x.toLocaleString()}}},scales:{y:{ticks:{color:'#8b949e',font:{size:8}},grid:{display:false}},x:{ticks:{color:'#8b949e',callback:v=>'$'+v.toLocaleString()},grid:{color:'#21262d'}}}}});
+</script></body></html>
