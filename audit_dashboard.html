@@ -101,8 +101,8 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
 </div>
 
 <div class="kpi-grid kpi-grid-4">
-  <div class="kpi"><div class="label">In scope</div><div class="value pos">30</div><div class="sub">MFB ∩ Bachelier with trades on both sides</div></div>
-  <div class="kpi"><div class="label">Data gap (Bach)</div><div class="value neg">20</div><div class="sub">In MFB + config but zero Bach trades</div></div>
+  <div class="kpi"><div class="label">In scope</div><div class="value pos">31</div><div class="sub">MFB ∩ Bachelier with trades on both sides</div></div>
+  <div class="kpi"><div class="label">Data gap (Bach)</div><div class="value neg">19</div><div class="sub">In MFB + config but zero Bach trades</div></div>
   <div class="kpi"><div class="label">Coverage gap (MFB)</div><div class="value warn">22</div><div class="sub">In config but not in MFB</div></div>
   <div class="kpi"><div class="label">MFB legacy</div><div class="value dim">30</div><div class="sub">In MFB but not in config (do not import)</div></div>
 </div>
@@ -410,23 +410,6 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>DATA GAP - Bach missing</td>
           </tr>
           <tr class="audit-data-gap">
-            <td class="strat-name">39479</td>
-            <td>live</td>
-            <td>T&D19 V2 USDJPY PROP</td>
-            <td class="dim">VPS153</td>
-            <td class="dim">10/03/2025 00:48</td>
-            <td class="num">34,219.50</td>
-            <td class="num">0.89</td>
-            <td class="num">12.87</td>
-            <td class="num">77.5</td>
-            <td class="num">2.57</td>
-            <td class="num">0.16</td>
-            <td class="num">0</td>
-            <td class="num">0.00</td>
-            <td class="num"><span class="dim">—</span></td>
-            <td>DATA GAP - Bach missing</td>
-          </tr>
-          <tr class="audit-data-gap">
             <td class="strat-name">52370</td>
             <td>demo</td>
             <td>TBD</td>
@@ -597,6 +580,23 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>RECONCILE</td>
           </tr>
           <tr class="audit-ok">
+            <td class="strat-name">32983</td>
+            <td>live</td>
+            <td>Axis AUDUSD</td>
+            <td class="dim">VPS92t2</td>
+            <td class="dim">06/02/2026 01:35</td>
+            <td class="num">25,000.04</td>
+            <td class="num">1.07</td>
+            <td class="num">12.39</td>
+            <td class="num">65.0</td>
+            <td class="num">0.24</td>
+            <td class="num">65.82</td>
+            <td class="num">865</td>
+            <td class="num">4,781.91</td>
+            <td class="num">63.0</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
             <td class="strat-name">45215</td>
             <td>live</td>
             <td>Axis GBPUSD</td>
@@ -628,23 +628,6 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td class="num">324</td>
             <td class="num">-6,193.83</td>
             <td class="num">14.2</td>
-            <td>RECONCILE</td>
-          </tr>
-          <tr class="audit-ok">
-            <td class="strat-name">32983</td>
-            <td>live</td>
-            <td>Axis AUDUSD</td>
-            <td class="dim">VPS92t2</td>
-            <td class="dim">06/01/2026 01:53</td>
-            <td class="num">31,858.34</td>
-            <td class="num">1.07</td>
-            <td class="num">12.39</td>
-            <td class="num">67.5</td>
-            <td class="num">1.38</td>
-            <td class="num">7.18</td>
-            <td class="num">865</td>
-            <td class="num">4,781.91</td>
-            <td class="num">63.0</td>
             <td>RECONCILE</td>
           </tr>
           <tr class="audit-ok">
@@ -920,6 +903,23 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>OK (small account, full sample)</td>
           </tr>
           <tr class="audit-ok">
+            <td class="strat-name">39479</td>
+            <td>live</td>
+            <td>T&D19 V2 USDJPY PROP</td>
+            <td class="dim">VPS153</td>
+            <td class="dim">10/03/2025 00:48</td>
+            <td class="num">34,219.50</td>
+            <td class="num">0.89</td>
+            <td class="num">12.87</td>
+            <td class="num">77.5</td>
+            <td class="num">2.57</td>
+            <td class="num">0.16</td>
+            <td class="num">2</td>
+            <td class="num">8.69</td>
+            <td class="num">100.0</td>
+            <td>OK (small account, full sample)</td>
+          </tr>
+          <tr class="audit-ok">
             <td class="strat-name">42818</td>
             <td>live</td>
             <td>T&D60</td>
@@ -975,7 +975,7 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
 </div>
 
 <details open>
-  <summary>Data gap — 20 active accounts in MFB + config but with ZERO Bach trades</summary>
+  <summary>Data gap — 19 active accounts in MFB + config but with ZERO Bach trades</summary>
   <div class="section-desc">Likely upstream pipeline breakage on these logins: VPS pull failure, missing entry in the VPS-side <code>accounts.json</code>, strategy-label mismatch, or deal/position rollup dropping rows. The fix is on the Bachelier side, not the MFB side.</div>
   <table>
     <thead><tr><th>Login</th><th>Type</th><th>Strategy</th><th>Broker</th><th>VPS</th><th>MFB upd</th><th class="num">MFB Bal $</th><th class="num">MFB gain %</th></tr></thead>
@@ -1019,16 +1019,6 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td class="dim">05/31/2026 19:47</td>
             <td class="num">18,825.91</td>
             <td class="num">-5.87</td>
-          </tr>
-          <tr>
-            <td class="strat-name">39479</td>
-            <td>live</td>
-            <td>T&D19 V2 USDJPY PROP</td>
-            <td>TradeSmart</td>
-            <td class="dim">VPS153</td>
-            <td class="dim">10/03/2025 00:48</td>
-            <td class="num">34,219.50</td>
-            <td class="num">0.03</td>
           </tr>
           <tr>
             <td class="strat-name">41660</td>
@@ -1565,6 +1555,6 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
   </table>
 </details>
 
-<div class="footer">Generated 2026-06-01 21:24 • Source: <code>MFB_Bachelier_Reconciliation_2026-06-01.xlsx</code></div>
+<div class="footer">Generated 2026-06-01 21:45 • Source: <code>MFB_Bachelier_Reconciliation_2026-06-01.xlsx</code></div>
 
 </body></html>
