@@ -93,7 +93,7 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
 <div class="header">
   <div>
     <h1 style="color:var(--blue)">MFB ↔ BACHELIER AUDIT</h1>
-    <div class="dim" style="margin-top:4px;font-size:0.75rem">Snapshot: 2026-06-01 • 80 MFB accounts, 72 config logins</div>
+    <div class="dim" style="margin-top:4px;font-size:0.75rem">Snapshot: 2026-06-01 • 80 MFB accounts, 79 config logins</div>
   </div>
   <div>
     <a class="download-btn" href="MFB_Bachelier_Reconciliation_latest.xlsx" download>⬇ Download full xlsx</a>
@@ -101,14 +101,14 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
 </div>
 
 <div class="kpi-grid kpi-grid-4">
-  <div class="kpi"><div class="label">In scope</div><div class="value pos">31</div><div class="sub">MFB ∩ Bachelier with trades on both sides</div></div>
-  <div class="kpi"><div class="label">Data gap (Bach)</div><div class="value neg">19</div><div class="sub">In MFB + config but zero Bach trades</div></div>
-  <div class="kpi"><div class="label">Coverage gap (MFB)</div><div class="value warn">22</div><div class="sub">In config but not in MFB</div></div>
-  <div class="kpi"><div class="label">MFB legacy</div><div class="value dim">30</div><div class="sub">In MFB but not in config (do not import)</div></div>
+  <div class="kpi"><div class="label">In scope</div><div class="value pos">39</div><div class="sub">MFB ∩ Bachelier with trades on both sides</div></div>
+  <div class="kpi"><div class="label">Data gap (Bach)</div><div class="value neg">17</div><div class="sub">In MFB + config but zero Bach trades</div></div>
+  <div class="kpi"><div class="label">Coverage gap (MFB)</div><div class="value warn">23</div><div class="sub">In config but not in MFB</div></div>
+  <div class="kpi"><div class="label">MFB legacy</div><div class="value dim">24</div><div class="sub">In MFB but not in config (do not import)</div></div>
 </div>
 
 <div class="section">
-  <div class="section-title">Reconciliation <span class="badge badge-blue">50 rows</span></div>
+  <div class="section-title">Reconciliation <span class="badge badge-blue">56 rows</span></div>
   <div class="section-desc">Data-gap rows highlighted in red and sorted to the top. "Bach formula on MFB sample" applies Bachelier's existing PF/DD formulas to MFB's last-40-trade sample so the divergence is apples-to-apples instead of confounded by different trade sets.</div>
   <div class="scroll-wrap">
     <table>
@@ -155,23 +155,6 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>DATA GAP - Bach missing</td>
           </tr>
           <tr class="audit-data-gap">
-            <td class="strat-name">52369</td>
-            <td>demo</td>
-            <td>TBD</td>
-            <td class="dim">VPS242</td>
-            <td class="dim">05/31/2026 08:43</td>
-            <td class="num">20,282.75</td>
-            <td class="num">6.79</td>
-            <td class="num">0.24</td>
-            <td class="num">87.5</td>
-            <td class="num">416.29</td>
-            <td class="num">0.16</td>
-            <td class="num">0</td>
-            <td class="num">0.00</td>
-            <td class="num"><span class="dim">—</span></td>
-            <td>DATA GAP - Bach missing</td>
-          </tr>
-          <tr class="audit-data-gap">
             <td class="strat-name">52365</td>
             <td>demo</td>
             <td>Hive 9 Demo Prop</td>
@@ -208,8 +191,8 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
           <tr class="audit-data-gap">
             <td class="strat-name">52366</td>
             <td>demo</td>
-            <td>TBD</td>
-            <td class="dim">VPS242</td>
+            <td>Claude Asian Sweep + NY Killzone</td>
+            <td class="dim">VPS242t2</td>
             <td class="dim">06/01/2026 22:41</td>
             <td class="num">19,452.07</td>
             <td class="num">0.24</td>
@@ -410,23 +393,6 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>DATA GAP - Bach missing</td>
           </tr>
           <tr class="audit-data-gap">
-            <td class="strat-name">52370</td>
-            <td>demo</td>
-            <td>TBD</td>
-            <td class="dim">VPS242</td>
-            <td class="dim">05/31/2026 06:22</td>
-            <td class="num">21,897.59</td>
-            <td class="num">1.10</td>
-            <td class="num">7.91</td>
-            <td class="num">50.0</td>
-            <td class="num">0.99</td>
-            <td class="num">5.72</td>
-            <td class="num">0</td>
-            <td class="num">0.00</td>
-            <td class="num"><span class="dim">—</span></td>
-            <td>DATA GAP - Bach missing</td>
-          </tr>
-          <tr class="audit-data-gap">
             <td class="strat-name">658071</td>
             <td>live</td>
             <td>T&D V1</td>
@@ -455,8 +421,8 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td class="num">60.0</td>
             <td class="num">0.91</td>
             <td class="num">9.74</td>
-            <td class="num">3,664</td>
-            <td class="num">-34,589.11</td>
+            <td class="num">3,665</td>
+            <td class="num">-34,543.06</td>
             <td class="num">54.3</td>
             <td>RECONCILE</td>
           </tr>
@@ -495,6 +461,23 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>OK (small account, full sample)</td>
           </tr>
           <tr class="audit-ok">
+            <td class="strat-name">52369</td>
+            <td>demo</td>
+            <td>Codex NYKZ_CombinedPortfolio_v0_4_Demo</td>
+            <td class="dim">VPS242t2</td>
+            <td class="dim">05/31/2026 08:43</td>
+            <td class="num">20,282.75</td>
+            <td class="num">6.79</td>
+            <td class="num">0.24</td>
+            <td class="num">87.5</td>
+            <td class="num">416.29</td>
+            <td class="num">0.16</td>
+            <td class="num">8</td>
+            <td class="num">253.36</td>
+            <td class="num">75.0</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
             <td class="strat-name">52364</td>
             <td>demo</td>
             <td>LVF-ZFade MOL</td>
@@ -509,6 +492,23 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td class="num">34</td>
             <td class="num">891.84</td>
             <td class="num">26.5</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">53899</td>
+            <td>demo</td>
+            <td>Claude Axis GBPUSD and AUDUSD Opt V3</td>
+            <td class="dim">VPS242t2</td>
+            <td class="dim">06/01/2026 08:16</td>
+            <td class="num">19,997.36</td>
+            <td class="num">0.00</td>
+            <td class="num">0.69</td>
+            <td class="num">100.0</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">0.00</td>
+            <td class="num">3</td>
+            <td class="num">-2.64</td>
+            <td class="num">0.0</td>
             <td>RECONCILE</td>
           </tr>
           <tr class="audit-ok">
@@ -529,6 +529,23 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>RECONCILE</td>
           </tr>
           <tr class="audit-ok">
+            <td class="strat-name">53895</td>
+            <td>demo</td>
+            <td>Codex Agg V1 Pro XAUUSD Filter60</td>
+            <td class="dim">VPS242t2</td>
+            <td class="dim">06/01/2026 17:59</td>
+            <td class="num">20,614.46</td>
+            <td class="num">4.12</td>
+            <td class="num">0.49</td>
+            <td class="num">81.8</td>
+            <td class="num">105.58</td>
+            <td class="num">0.33</td>
+            <td class="num">11</td>
+            <td class="num">614.46</td>
+            <td class="num">72.7</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
             <td class="strat-name">51724</td>
             <td>demo</td>
             <td>Bar Reversal MOL Bots</td>
@@ -544,6 +561,74 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td class="num">-227.47</td>
             <td class="num">33.3</td>
             <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">53898</td>
+            <td>demo</td>
+            <td>Codex Axis V3 Optimization AUDUSD and GBPUSD</td>
+            <td class="dim">VPS242t2</td>
+            <td class="dim">06/01/2026 08:17</td>
+            <td class="num">19,565.40</td>
+            <td class="num">0.00</td>
+            <td class="num">2.17</td>
+            <td class="num">10.0</td>
+            <td class="num">46.16</td>
+            <td class="num">1.44</td>
+            <td class="num">11</td>
+            <td class="num">-434.60</td>
+            <td class="num">0.0</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">53897</td>
+            <td>demo</td>
+            <td>Claude Code Sweep Suite Portfolio</td>
+            <td class="dim">VPS242t2</td>
+            <td class="dim">06/02/2026 00:57</td>
+            <td class="num">19,967.02</td>
+            <td class="num">0.94</td>
+            <td class="num">1.78</td>
+            <td class="num">42.9</td>
+            <td class="num">35.75</td>
+            <td class="num">1.19</td>
+            <td class="num">6</td>
+            <td class="num">-32.98</td>
+            <td class="num">33.3</td>
+            <td>OK (small account, full sample)</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">53900</td>
+            <td>demo</td>
+            <td>Codex Axis Rotation V4.1</td>
+            <td class="dim">VPS242t2</td>
+            <td class="dim">06/01/2026 15:15</td>
+            <td class="num">19,851.22</td>
+            <td class="num">0.48</td>
+            <td class="num">1.44</td>
+            <td class="num">28.6</td>
+            <td class="num">70.27</td>
+            <td class="num">0.96</td>
+            <td class="num">6</td>
+            <td class="num">-148.78</td>
+            <td class="num">16.7</td>
+            <td>OK (small account, full sample)</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">53901</td>
+            <td>demo</td>
+            <td>Demo Codex Axis Rotation 4.2</td>
+            <td class="dim">VPS242t2</td>
+            <td class="dim">06/01/2026 18:46</td>
+            <td class="num">19,716.66</td>
+            <td class="num">0.37</td>
+            <td class="num">2.05</td>
+            <td class="num">18.8</td>
+            <td class="num">45.05</td>
+            <td class="num">1.37</td>
+            <td class="num">15</td>
+            <td class="num">-283.34</td>
+            <td class="num">13.3</td>
+            <td>OK (small account, full sample)</td>
           </tr>
           <tr class="audit-ok">
             <td class="strat-name">657902</td>
@@ -567,13 +652,13 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>demo</td>
             <td>T&D1 High Returns</td>
             <td class="dim">VPS92</td>
-            <td class="dim">06/01/2026 03:52</td>
-            <td class="num">7,844.03</td>
+            <td class="dim">06/02/2026 01:55</td>
+            <td class="num">7,909.77</td>
             <td class="num">0.72</td>
             <td class="num">68.69</td>
             <td class="num">80.0</td>
             <td class="num">0.45</td>
-            <td class="num">11.65</td>
+            <td class="num">11.73</td>
             <td class="num">668</td>
             <td class="num">-12,090.23</td>
             <td class="num">84.3</td>
@@ -699,11 +784,28 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>RECONCILE</td>
           </tr>
           <tr class="audit-ok">
+            <td class="strat-name">52370</td>
+            <td>demo</td>
+            <td>Agg V1 Pro XAUUSD May 19</td>
+            <td class="dim">VPS242t2</td>
+            <td class="dim">06/02/2026 01:54</td>
+            <td class="num">21,477.93</td>
+            <td class="num">1.07</td>
+            <td class="num">8.39</td>
+            <td class="num">47.5</td>
+            <td class="num">0.91</td>
+            <td class="num">7.94</td>
+            <td class="num">401</td>
+            <td class="num">1,704.05</td>
+            <td class="num">51.9</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
             <td class="strat-name">41655</td>
             <td>demo</td>
             <td>Axis Rotation V2</td>
             <td class="dim">VPS242</td>
-            <td class="dim">06/01/2026 04:56</td>
+            <td class="dim">06/02/2026 02:28</td>
             <td class="num">18,415.42</td>
             <td class="num">0.96</td>
             <td class="num">23.63</td>
@@ -975,7 +1077,7 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
 </div>
 
 <details open>
-  <summary>Data gap — 19 active accounts in MFB + config but with ZERO Bach trades</summary>
+  <summary>Data gap — 17 active accounts in MFB + config but with ZERO Bach trades</summary>
   <div class="section-desc">Likely upstream pipeline breakage on these logins: VPS pull failure, missing entry in the VPS-side <code>accounts.json</code>, strategy-label mismatch, or deal/position rollup dropping rows. The fix is on the Bachelier side, not the MFB side.</div>
   <table>
     <thead><tr><th>Login</th><th>Type</th><th>Strategy</th><th>Broker</th><th>VPS</th><th>MFB upd</th><th class="num">MFB Bal $</th><th class="num">MFB gain %</th></tr></thead>
@@ -1083,9 +1185,9 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
           <tr>
             <td class="strat-name">52366</td>
             <td>demo</td>
-            <td>TBD</td>
+            <td>Claude Asian Sweep + NY Killzone</td>
             <td>TradeSmart</td>
-            <td class="dim">VPS242</td>
+            <td class="dim">VPS242t2</td>
             <td class="dim">06/01/2026 22:41</td>
             <td class="num">19,452.07</td>
             <td class="num">-2.74</td>
@@ -1109,26 +1211,6 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td class="dim">05/31/2026 21:56</td>
             <td class="num">19,764.02</td>
             <td class="num">-1.18</td>
-          </tr>
-          <tr>
-            <td class="strat-name">52369</td>
-            <td>demo</td>
-            <td>TBD</td>
-            <td>TradeSmart</td>
-            <td class="dim">VPS242</td>
-            <td class="dim">05/31/2026 08:43</td>
-            <td class="num">20,282.75</td>
-            <td class="num">1.42</td>
-          </tr>
-          <tr>
-            <td class="strat-name">52370</td>
-            <td>demo</td>
-            <td>TBD</td>
-            <td>TradeSmart</td>
-            <td class="dim">VPS242</td>
-            <td class="dim">05/31/2026 06:22</td>
-            <td class="num">21,897.59</td>
-            <td class="num">9.49</td>
           </tr>
           <tr>
             <td class="strat-name">639884</td>
@@ -1174,7 +1256,7 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
 </details>
 
 <details>
-  <summary>Coverage gap — 22 Bachelier accounts not tracked in MFB</summary>
+  <summary>Coverage gap — 23 Bachelier accounts not tracked in MFB</summary>
   <div class="section-desc">Add these to the MFB portfolio if you want the audit loop closed for them. Inactive ones can stay un-added.</div>
   <table>
     <thead><tr><th>Login</th><th>Type</th><th>Strategy</th><th>Active</th><th>VPS</th></tr></thead>
@@ -1299,6 +1381,13 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td class="dim">VPS242</td>
           </tr>
           <tr>
+            <td class="strat-name">53896</td>
+            <td>demo</td>
+            <td>Codex AggressiveV2_DemoScout</td>
+            <td class="dim">True</td>
+            <td class="dim">VPS242t2</td>
+          </tr>
+          <tr>
             <td class="strat-name">54284</td>
             <td>live</td>
             <td>Agg V1 AUDUSD</td>
@@ -1337,7 +1426,7 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
 </details>
 
 <details>
-  <summary>MFB legacy — 30 MFB accounts not in vps_config (do NOT import)</summary>
+  <summary>MFB legacy — 24 MFB accounts not in vps_config (do NOT import)</summary>
   <div class="section-desc">These exist in your MFB portfolio but aren't in <code>vps_config.yaml</code>. Per Cree's rule, these stay flagged but do NOT get pulled into Bachelier. Some are stale legacy accounts (Revenge / King Robot / pre-2026 Demo); others are recently-active MOL demo accounts (Hive, Demo Bots) intentionally kept off the pipeline.</div>
   <table>
     <thead><tr><th>Login</th><th>MFB name</th><th>Demo</th><th>Last update</th><th class="num">Balance</th></tr></thead>
@@ -1469,48 +1558,6 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td class="num">0.37</td>
           </tr>
           <tr>
-            <td class="strat-name">53895</td>
-            <td>Codex Agg V1 Pro XAUUSD Filter60</td>
-            <td class="dim">True</td>
-            <td class="dim">06/01/2026 17:59</td>
-            <td class="num">20,614.46</td>
-          </tr>
-          <tr>
-            <td class="strat-name">53897</td>
-            <td>Claude Code Sweep Suite Portfolio</td>
-            <td class="dim">True</td>
-            <td class="dim">06/02/2026 00:57</td>
-            <td class="num">19,967.02</td>
-          </tr>
-          <tr>
-            <td class="strat-name">53898</td>
-            <td>DEMO Codex Axis V3 Optmization AUDUSD GBPUSD</td>
-            <td class="dim">True</td>
-            <td class="dim">06/01/2026 08:17</td>
-            <td class="num">19,565.40</td>
-          </tr>
-          <tr>
-            <td class="strat-name">53899</td>
-            <td>DEMO Claude Axis GBPUSD and AUDUSD Opt V3</td>
-            <td class="dim">True</td>
-            <td class="dim">06/01/2026 08:16</td>
-            <td class="num">19,997.36</td>
-          </tr>
-          <tr>
-            <td class="strat-name">53900</td>
-            <td>Codex Axis Rotation V4.1</td>
-            <td class="dim">True</td>
-            <td class="dim">06/01/2026 15:15</td>
-            <td class="num">19,851.22</td>
-          </tr>
-          <tr>
-            <td class="strat-name">53901</td>
-            <td>DEMO Axis Rotation 4.2</td>
-            <td class="dim">True</td>
-            <td class="dim">06/01/2026 18:46</td>
-            <td class="num">19,716.66</td>
-          </tr>
-          <tr>
             <td class="strat-name">647831</td>
             <td>A MOL Argos</td>
             <td class="dim"></td>
@@ -1555,6 +1602,6 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
   </table>
 </details>
 
-<div class="footer">Generated 2026-06-01 21:45 • Source: <code>MFB_Bachelier_Reconciliation_2026-06-01.xlsx</code></div>
+<div class="footer">Generated 2026-06-01 22:40 • Source: <code>MFB_Bachelier_Reconciliation_2026-06-01.xlsx</code></div>
 
 </body></html>
