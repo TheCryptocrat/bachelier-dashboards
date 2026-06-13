@@ -101,8 +101,8 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
 </div>
 
 <div class="kpi-grid kpi-grid-4">
-  <div class="kpi"><div class="label">In scope</div><div class="value pos">40</div><div class="sub">MFB ∩ Bachelier with trades on both sides</div></div>
-  <div class="kpi"><div class="label">Data gap (Bach)</div><div class="value neg">16</div><div class="sub">In MFB + config but zero Bach trades</div></div>
+  <div class="kpi"><div class="label">In scope</div><div class="value pos">42</div><div class="sub">MFB ∩ Bachelier with trades on both sides</div></div>
+  <div class="kpi"><div class="label">Data gap (Bach)</div><div class="value neg">14</div><div class="sub">In MFB + config but zero Bach trades</div></div>
   <div class="kpi"><div class="label">Coverage gap (MFB)</div><div class="value warn">33</div><div class="sub">In config but not in MFB</div></div>
   <div class="kpi"><div class="label">MFB legacy</div><div class="value dim">26</div><div class="sub">In MFB but not in config (do not import)</div></div>
 </div>
@@ -336,40 +336,6 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td class="num">12.5</td>
             <td class="num">0.10</td>
             <td class="num">0.89</td>
-            <td class="num">0</td>
-            <td class="num">0.00</td>
-            <td class="num"><span class="dim">—</span></td>
-            <td>DATA GAP - Bach missing</td>
-          </tr>
-          <tr class="audit-data-gap">
-            <td class="strat-name">52368</td>
-            <td>demo</td>
-            <td>TBD</td>
-            <td class="dim">VPS242</td>
-            <td class="dim">06/11/2026 18:51</td>
-            <td class="num">19,710.40</td>
-            <td class="num">0.63</td>
-            <td class="num">1.49</td>
-            <td class="num">12.5</td>
-            <td class="num">0.10</td>
-            <td class="num">0.89</td>
-            <td class="num">0</td>
-            <td class="num">0.00</td>
-            <td class="num"><span class="dim">—</span></td>
-            <td>DATA GAP - Bach missing</td>
-          </tr>
-          <tr class="audit-data-gap">
-            <td class="strat-name">47779</td>
-            <td>demo</td>
-            <td>Aggressive V3 + V4</td>
-            <td class="dim">VPS92</td>
-            <td class="dim">06/12/2026 12:45</td>
-            <td class="num">1,201.05</td>
-            <td class="num">0.68</td>
-            <td class="num">97.10</td>
-            <td class="num">32.5</td>
-            <td class="num">0.97</td>
-            <td class="num">3.33</td>
             <td class="num">0</td>
             <td class="num">0.00</td>
             <td class="num"><span class="dim">—</span></td>
@@ -645,6 +611,23 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td class="num">42</td>
             <td class="num">-39.88</td>
             <td class="num">40.5</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">47779</td>
+            <td>demo</td>
+            <td>Aggressive V3 + V4</td>
+            <td class="dim">VPS92</td>
+            <td class="dim">06/12/2026 12:45</td>
+            <td class="num">1,201.05</td>
+            <td class="num">0.68</td>
+            <td class="num">97.10</td>
+            <td class="num">32.5</td>
+            <td class="num">0.97</td>
+            <td class="num">3.33</td>
+            <td class="num">1,206</td>
+            <td class="num">-15,199.46</td>
+            <td class="num">32.0</td>
             <td>RECONCILE</td>
           </tr>
           <tr class="audit-ok">
@@ -1039,6 +1022,23 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>OK (small account, full sample)</td>
           </tr>
           <tr class="audit-ok">
+            <td class="strat-name">52368</td>
+            <td>demo</td>
+            <td>T&D19L5 Second Scalps - Prop</td>
+            <td class="dim">VPS242</td>
+            <td class="dim">06/11/2026 18:51</td>
+            <td class="num">19,710.40</td>
+            <td class="num">0.63</td>
+            <td class="num">1.49</td>
+            <td class="num">12.5</td>
+            <td class="num">0.10</td>
+            <td class="num">0.89</td>
+            <td class="num">683</td>
+            <td class="num">-289.60</td>
+            <td class="num">42.8</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
             <td class="strat-name">52362</td>
             <td>demo</td>
             <td>BB Fade Prop</td>
@@ -1077,7 +1077,7 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
 </div>
 
 <details open>
-  <summary>Data gap — 16 active accounts in MFB + config but with ZERO Bach trades</summary>
+  <summary>Data gap — 14 active accounts in MFB + config but with ZERO Bach trades</summary>
   <div class="section-desc">Likely upstream pipeline breakage on these logins: VPS pull failure, missing entry in the VPS-side <code>accounts.json</code>, strategy-label mismatch, or deal/position rollup dropping rows. The fix is on the Bachelier side, not the MFB side.</div>
   <table>
     <thead><tr><th>Login</th><th>Type</th><th>Strategy</th><th>Broker</th><th>VPS</th><th>MFB upd</th><th class="num">MFB Bal $</th><th class="num">MFB gain %</th></tr></thead>
@@ -1133,16 +1133,6 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td class="num">-14.35</td>
           </tr>
           <tr>
-            <td class="strat-name">47779</td>
-            <td>demo</td>
-            <td>Aggressive V3 + V4</td>
-            <td>TradeSmart</td>
-            <td class="dim">VPS92</td>
-            <td class="dim">06/12/2026 12:45</td>
-            <td class="num">1,201.05</td>
-            <td class="num">-94.13</td>
-          </tr>
-          <tr>
             <td class="strat-name">51719</td>
             <td>demo</td>
             <td>Hive V5 LTF (prop)</td>
@@ -1190,16 +1180,6 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td class="dim">VPS242</td>
             <td class="dim">06/12/2026 05:14</td>
             <td class="num">19,711.43</td>
-            <td class="num">-1.45</td>
-          </tr>
-          <tr>
-            <td class="strat-name">52368</td>
-            <td>demo</td>
-            <td>TBD</td>
-            <td>TradeSmart</td>
-            <td class="dim">VPS242</td>
-            <td class="dim">06/11/2026 18:51</td>
-            <td class="num">19,710.40</td>
             <td class="num">-1.45</td>
           </tr>
           <tr>
@@ -1676,6 +1656,6 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
   </table>
 </details>
 
-<div class="footer">Generated 2026-06-13 18:38 • Source: <code>MFB_Bachelier_Reconciliation_2026-06-13.xlsx</code></div>
+<div class="footer">Generated 2026-06-13 18:57 • Source: <code>MFB_Bachelier_Reconciliation_2026-06-13.xlsx</code></div>
 
 </body></html>
