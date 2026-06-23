@@ -70,8 +70,8 @@ td { padding:5px 8px; border-bottom:1px solid var(--border2); }
   }
 })();
 </script>
-<div style="background:#b30000;color:#fff;padding:14px 20px;text-align:center;font-weight:bold;font-size:1.1rem;border-bottom:3px solid #ff4444;">WARNING: Last pipeline pull was 2.8 days ago (2026-06-19 21:45 UTC). Data may be stale.</div>
 
+<div style="background:#b30000;color:#fff;padding:14px 20px;text-align:center;font-weight:bold;font-size:1.0rem;border-bottom:3px solid #ff4444;">TERMINAL HEALTH CRITICAL: 16 account(s) failing. VPS204 (89.222.114.204): 16/16 accounts failed. Last checked: 2026-06-23T14:04:20Z</div>
 
 <div class="nav">
   <a href="demo_dashboard.html">Demo Bots</a>
@@ -90,7 +90,7 @@ td { padding:5px 8px; border-bottom:1px solid var(--border2); }
     <button class="preset-btn active" onclick="setPreset('ytd')">YTD</button>
     <button class="preset-btn" onclick="setPreset('all')">ALL</button>
     <label>From</label><input type="date" id="dateStart" value="2026-01-05" onchange="applyFilter()">
-    <label>To</label><input type="date" id="dateEnd" value="2026-06-19" onchange="applyFilter()">
+    <label>To</label><input type="date" id="dateEnd" value="2026-06-23" onchange="applyFilter()">
   </div>
 </div>
 
@@ -98,19 +98,19 @@ td { padding:5px 8px; border-bottom:1px solid var(--border2); }
 
 <div class="kpi-grid kpi-grid-5" id="kpiGrid">
   <div class="kpi"><div class="label">Total P&L (Live)</div>
-    <div class="value neg" id="kpiTotalPnl">$-606.12</div>
-    <div class="sub" id="kpiTotalSub">799 trades over 109 days</div></div>
+    <div class="value neg" id="kpiTotalPnl">$-9,172.02</div>
+    <div class="sub" id="kpiTotalSub">1,013 trades over 113 days</div></div>
   <div class="kpi"><div class="label">Live Accounts</div>
-    <div class="value" style="color:var(--blue)" id="kpiAccounts">8</div>
-    <div class="sub" id="kpiAccountsSub">32 strategy&times;pair combos</div></div>
+    <div class="value" style="color:var(--blue)" id="kpiAccounts">10</div>
+    <div class="sub" id="kpiAccountsSub">45 strategy&times;pair combos</div></div>
   <div class="kpi"><div class="label">Win Rate</div>
-    <div class="value" style="color:var(--purple)" id="kpiWinRate">58.9%</div>
-    <div class="sub" id="kpiWinsSub">471 wins</div></div>
+    <div class="value" style="color:var(--purple)" id="kpiWinRate">56.9%</div>
+    <div class="sub" id="kpiWinsSub">576 wins</div></div>
   <div class="kpi"><div class="label">Best Day</div>
-    <div class="value pos" style="font-size:1.1rem" id="kpiBestDay">$+668</div>
+    <div class="value pos" style="font-size:1.1rem" id="kpiBestDay">$+674</div>
     <div class="sub">single day</div></div>
   <div class="kpi"><div class="label">Worst Day</div>
-    <div class="value neg" style="font-size:1.1rem" id="kpiWorstDay">$-1,134</div>
+    <div class="value neg" style="font-size:1.1rem" id="kpiWorstDay">$-3,870</div>
     <div class="sub">single day</div></div>
 </div>
 
@@ -125,8 +125,8 @@ td { padding:5px 8px; border-bottom:1px solid var(--border2); }
       <tbody><tr>
           <td><span class="dot" style="background:#58a6ff"></span></td>
           <td class="strat-name">Axis Rotation + Fx RSI (multi-symbol) (32983)</td>
-          <td class="num pos">$+1,487.51</td>
-          <td class="num">242</td>
+          <td class="num pos">$+987.61</td>
+          <td class="num">204</td>
         </tr><tr>
           <td><span class="dot" style="background:#3fb950"></span></td>
           <td class="strat-name">T&D19 V2 USDJPY MOL (42817)</td>
@@ -135,33 +135,53 @@ td { padding:5px 8px; border-bottom:1px solid var(--border2); }
         </tr><tr>
           <td><span class="dot" style="background:#f0883e"></span></td>
           <td class="strat-name">Axis Rotation (multi-symbol) (45215)</td>
-          <td class="num pos">$+210.70</td>
-          <td class="num">127</td>
+          <td class="num pos">$+255.11</td>
+          <td class="num">102</td>
         </tr><tr>
           <td><span class="dot" style="background:#d2a8ff"></span></td>
           <td class="strat-name">Gold Talon (662437)</td>
-          <td class="num pos">$+162.89</td>
-          <td class="num">49</td>
+          <td class="num pos">$+139.16</td>
+          <td class="num">52</td>
         </tr><tr>
           <td><span class="dot" style="background:#ff7b72"></span></td>
-          <td class="strat-name">Manual Trading (Diego) (639884)</td>
-          <td class="num pos">$+7.24</td>
-          <td class="num">3</td>
+          <td class="strat-name">T&D19 V2 USDJPY PROP (39479)</td>
+          <td class="num neg">$-40.19</td>
+          <td class="num">5</td>
         </tr><tr>
           <td><span class="dot" style="background:#79c0ff"></span></td>
-          <td class="strat-name">T&D19 V2 USDJPY PROP (39479)</td>
-          <td class="num neg">$-14.96</td>
-          <td class="num">7</td>
+          <td class="strat-name">Agg V1 Pro XAUUSD (662435)</td>
+          <td class="num neg">$-129.77</td>
+          <td class="num">17</td>
         </tr><tr>
           <td><span class="dot" style="background:#7ee787"></span></td>
           <td class="strat-name">T&D60 (42818)</td>
-          <td class="num neg">$-370.63</td>
-          <td class="num">139</td>
+          <td class="num neg">$-273.87</td>
+          <td class="num">219</td>
         </tr><tr>
           <td><span class="dot" style="background:#e3b341"></span></td>
+          <td class="strat-name">Axis GBPUSD (45215)</td>
+          <td class="num neg">$-1,120.83</td>
+          <td class="num">47</td>
+        </tr><tr>
+          <td><span class="dot" style="background:#da3633"></span></td>
+          <td class="strat-name">Agg V1 NZDJPY (54285)</td>
+          <td class="num neg">$-1,196.35</td>
+          <td class="num">6</td>
+        </tr><tr>
+          <td><span class="dot" style="background:#56d364"></span></td>
+          <td class="strat-name">Agg V1 AUDUSD (54284)</td>
+          <td class="num neg">$-1,381.68</td>
+          <td class="num">8</td>
+        </tr><tr>
+          <td><span class="dot" style="background:#58a6ff"></span></td>
           <td class="strat-name">Cree Manual Trading (657902)</td>
           <td class="num neg">$-2,548.62</td>
           <td class="num">207</td>
+        </tr><tr>
+          <td><span class="dot" style="background:#3fb950"></span></td>
+          <td class="strat-name">Axis AUDUSD (32983)</td>
+          <td class="num neg">$-4,322.34</td>
+          <td class="num">121</td>
         </tr></tbody>
     </table>
   </div>
@@ -178,76 +198,86 @@ td { padding:5px 8px; border-bottom:1px solid var(--border2); }
     <thead><tr><th>#</th><th>Strategy</th><th>Pair</th><th>Login</th><th>P&L</th><th>Max DD</th><th>Win%</th><th>PF</th><th>Trades</th></tr></thead>
     <tbody><tr>
           <td class="num dim">1</td>
-          <td class="strat-name">Axis Rotation + Fx RSI (multi-symbol)</td>
-          <td>AUDUSD</td>
-          <td class="num">32983</td>
-          <td class="num pos">$+951.72</td>
-          <td class="num">13.0%</td>
-          <td class="num">59%</td>
-          <td class="num">1.2</td>
-          <td class="num">129</td>
-        </tr><tr>
-          <td class="num dim">2</td>
           <td class="strat-name">Axis Rotation (multi-symbol)</td>
           <td>GBPUSD</td>
           <td class="num">45215</td>
-          <td class="num pos">$+531.51</td>
-          <td class="num">3.3%</td>
-          <td class="num">60%</td>
-          <td class="num">1.4</td>
-          <td class="num">91</td>
+          <td class="num pos">$+575.92</td>
+          <td class="num">1.0%</td>
+          <td class="num">62%</td>
+          <td class="num">1.8</td>
+          <td class="num">66</td>
+        </tr><tr>
+          <td class="num dim">2</td>
+          <td class="strat-name">T&D60</td>
+          <td>GBPUSD</td>
+          <td class="num">42818</td>
+          <td class="num pos">$+135.12</td>
+          <td class="num">1.4%</td>
+          <td class="num">89%</td>
+          <td class="num">2.3</td>
+          <td class="num">27</td>
         </tr><tr>
           <td class="num dim">3</td>
+          <td class="strat-name">Gold Talon</td>
+          <td>XAUUSD.PRO</td>
+          <td class="num">662437</td>
+          <td class="num pos">$+246.87</td>
+          <td class="num">6.1%</td>
+          <td class="num">47%</td>
+          <td class="num">1.2</td>
+          <td class="num">47</td>
+        </tr><tr>
+          <td class="num dim">4</td>
           <td class="strat-name">T&D19 V2 USDJPY MOL</td>
           <td>USDJPY</td>
           <td class="num">42817</td>
           <td class="num pos">$+459.75</td>
-          <td class="num">4.1%</td>
+          <td class="num">2.1%</td>
           <td class="num">88%</td>
           <td class="num">1.9</td>
           <td class="num">25</td>
         </tr><tr>
-          <td class="num dim">4</td>
+          <td class="num dim">5</td>
+          <td class="strat-name">Axis Rotation + Fx RSI (multi-symbol)</td>
+          <td>AUDUSD</td>
+          <td class="num">32983</td>
+          <td class="num pos">$+451.82</td>
+          <td class="num">6.6%</td>
+          <td class="num">56%</td>
+          <td class="num">1.1</td>
+          <td class="num">91</td>
+        </tr><tr>
+          <td class="num dim">6</td>
           <td class="strat-name">Axis Rotation + Fx RSI (multi-symbol)</td>
           <td>USDCHF</td>
           <td class="num">32983</td>
           <td class="num pos">$+390.34</td>
-          <td class="num">0.6%</td>
+          <td class="num">0.3%</td>
           <td class="num">72%</td>
           <td class="num">6.8</td>
           <td class="num">40</td>
         </tr><tr>
-          <td class="num dim">5</td>
-          <td class="strat-name">Gold Talon</td>
-          <td>XAUUSD.PRO</td>
-          <td class="num">662437</td>
-          <td class="num pos">$+270.60</td>
-          <td class="num">6.1%</td>
-          <td class="num">48%</td>
-          <td class="num">1.2</td>
-          <td class="num">44</td>
-        </tr><tr>
-          <td class="num dim">6</td>
+          <td class="num dim">7</td>
           <td class="strat-name">Cree Manual Trading</td>
           <td>US30</td>
           <td class="num">657902</td>
           <td class="num pos">$+234.07</td>
-          <td class="num">0.4%</td>
+          <td class="num">0.2%</td>
           <td class="num">58%</td>
           <td class="num">4.4</td>
           <td class="num">12</td>
         </tr><tr>
-          <td class="num dim">7</td>
-          <td class="strat-name">T&D60</td>
-          <td>GBPUSD</td>
-          <td class="num">42818</td>
-          <td class="num pos">$+172.90</td>
-          <td class="num">0.3%</td>
-          <td class="num">90%</td>
-          <td class="num">5.7</td>
-          <td class="num">20</td>
-        </tr><tr>
           <td class="num dim">8</td>
+          <td class="strat-name">T&D60</td>
+          <td>EURUSD</td>
+          <td class="num">42818</td>
+          <td class="num pos">$+44.72</td>
+          <td class="num">5.4%</td>
+          <td class="num">91%</td>
+          <td class="num">1.1</td>
+          <td class="num">67</td>
+        </tr><tr>
+          <td class="num dim">9</td>
           <td class="strat-name">Axis Rotation + Fx RSI (multi-symbol)</td>
           <td>GBPUSD</td>
           <td class="num">32983</td>
@@ -257,17 +287,17 @@ td { padding:5px 8px; border-bottom:1px solid var(--border2); }
           <td class="num">99.0</td>
           <td class="num">1</td>
         </tr><tr>
-          <td class="num dim">9</td>
+          <td class="num dim">10</td>
           <td class="strat-name">Axis Rotation + Fx RSI (multi-symbol)</td>
           <td>USDJPY</td>
           <td class="num">32983</td>
           <td class="num pos">$+62.45</td>
-          <td class="num">7.7%</td>
+          <td class="num">3.9%</td>
           <td class="num">56%</td>
           <td class="num">1.1</td>
           <td class="num">72</td>
         </tr><tr>
-          <td class="num dim">10</td>
+          <td class="num dim">11</td>
           <td class="strat-name">Cree Manual Trading</td>
           <td>USTEC100</td>
           <td class="num">657902</td>
@@ -277,37 +307,17 @@ td { padding:5px 8px; border-bottom:1px solid var(--border2); }
           <td class="num">49.5</td>
           <td class="num">2</td>
         </tr><tr>
-          <td class="num dim">11</td>
-          <td class="strat-name">T&D60</td>
-          <td>USDCAD</td>
-          <td class="num">42818</td>
-          <td class="num pos">$+25.23</td>
-          <td class="num">1.2%</td>
-          <td class="num">88%</td>
-          <td class="num">1.1</td>
-          <td class="num">25</td>
-        </tr><tr>
           <td class="num dim">12</td>
-          <td class="strat-name">T&D60</td>
-          <td>USDJPY</td>
-          <td class="num">42818</td>
-          <td class="num pos">$+10.79</td>
-          <td class="num">1.5%</td>
-          <td class="num">76%</td>
-          <td class="num">1.0</td>
-          <td class="num">33</td>
+          <td class="strat-name">Agg V1 AUDUSD</td>
+          <td>XAUUSD</td>
+          <td class="num">54284</td>
+          <td class="num pos">$+10.51</td>
+          <td class="num">0.0%</td>
+          <td class="num">100%</td>
+          <td class="num">99.0</td>
+          <td class="num">1</td>
         </tr><tr>
           <td class="num dim">13</td>
-          <td class="strat-name">Manual Trading (Diego)</td>
-          <td>EURUSD.PRO</td>
-          <td class="num">639884</td>
-          <td class="num pos">$+7.24</td>
-          <td class="num">0.5%</td>
-          <td class="num">33%</td>
-          <td class="num">1.1</td>
-          <td class="num">3</td>
-        </tr><tr>
-          <td class="num dim">14</td>
           <td class="strat-name">Cree Manual Trading</td>
           <td>ETHUSD</td>
           <td class="num">657902</td>
@@ -317,7 +327,7 @@ td { padding:5px 8px; border-bottom:1px solid var(--border2); }
           <td class="num">1.6</td>
           <td class="num">5</td>
         </tr><tr>
-          <td class="num dim">15</td>
+          <td class="num dim">14</td>
           <td class="strat-name">Cree Manual Trading</td>
           <td>US500</td>
           <td class="num">657902</td>
@@ -327,27 +337,57 @@ td { padding:5px 8px; border-bottom:1px solid var(--border2); }
           <td class="num">8.6</td>
           <td class="num">3</td>
         </tr><tr>
+          <td class="num dim">15</td>
+          <td class="strat-name">Agg V1 NZDJPY</td>
+          <td>USDCAD</td>
+          <td class="num">54285</td>
+          <td class="num pos">$+0.32</td>
+          <td class="num">0.0%</td>
+          <td class="num">100%</td>
+          <td class="num">99.0</td>
+          <td class="num">1</td>
+        </tr><tr>
           <td class="num dim">16</td>
           <td class="strat-name">Cree Manual Trading</td>
           <td>SOLUSD</td>
           <td class="num">657902</td>
           <td class="num neg">$-5.04</td>
-          <td class="num">0.1%</td>
+          <td class="num">0.0%</td>
           <td class="num">0%</td>
           <td class="num">0.0</td>
           <td class="num">3</td>
         </tr><tr>
           <td class="num dim">17</td>
-          <td class="strat-name">T&D19 V2 USDJPY PROP</td>
-          <td>USDJPY</td>
-          <td class="num">39479</td>
-          <td class="num neg">$-14.96</td>
-          <td class="num">0.6%</td>
-          <td class="num">86%</td>
-          <td class="num">0.7</td>
-          <td class="num">7</td>
+          <td class="strat-name">Agg V1 AUDUSD</td>
+          <td>EURUSD</td>
+          <td class="num">54284</td>
+          <td class="num neg">$-8.58</td>
+          <td class="num">0.0%</td>
+          <td class="num">0%</td>
+          <td class="num">0.0</td>
+          <td class="num">1</td>
         </tr><tr>
           <td class="num dim">18</td>
+          <td class="strat-name">Agg V1 AUDUSD</td>
+          <td>USDCHF</td>
+          <td class="num">54284</td>
+          <td class="num neg">$-8.37</td>
+          <td class="num">0.0%</td>
+          <td class="num">0%</td>
+          <td class="num">0.0</td>
+          <td class="num">1</td>
+        </tr><tr>
+          <td class="num dim">19</td>
+          <td class="strat-name">Agg V1 AUDUSD</td>
+          <td>US500</td>
+          <td class="num">54284</td>
+          <td class="num neg">$-9.47</td>
+          <td class="num">0.0%</td>
+          <td class="num">0%</td>
+          <td class="num">0.0</td>
+          <td class="num">1</td>
+        </tr><tr>
+          <td class="num dim">20</td>
           <td class="strat-name">Cree Manual Trading</td>
           <td>EURJPY.PRO</td>
           <td class="num">657902</td>
@@ -357,17 +397,27 @@ td { padding:5px 8px; border-bottom:1px solid var(--border2); }
           <td class="num">0.0</td>
           <td class="num">1</td>
         </tr><tr>
-          <td class="num dim">19</td>
+          <td class="num dim">21</td>
           <td class="strat-name">Cree Manual Trading</td>
           <td>EURGBP.PRO</td>
           <td class="num">657902</td>
           <td class="num neg">$-39.55</td>
-          <td class="num">0.4%</td>
+          <td class="num">0.2%</td>
           <td class="num">0%</td>
           <td class="num">0.0</td>
           <td class="num">2</td>
         </tr><tr>
-          <td class="num dim">20</td>
+          <td class="num dim">22</td>
+          <td class="strat-name">T&D19 V2 USDJPY PROP</td>
+          <td>USDJPY</td>
+          <td class="num">39479</td>
+          <td class="num neg">$-40.19</td>
+          <td class="num">0.3%</td>
+          <td class="num">80%</td>
+          <td class="num">0.3</td>
+          <td class="num">5</td>
+        </tr><tr>
+          <td class="num dim">23</td>
           <td class="strat-name">Cree Manual Trading</td>
           <td>USDCAD.PRO</td>
           <td class="num">657902</td>
@@ -377,17 +427,47 @@ td { padding:5px 8px; border-bottom:1px solid var(--border2); }
           <td class="num">0.0</td>
           <td class="num">1</td>
         </tr><tr>
-          <td class="num dim">21</td>
+          <td class="num dim">24</td>
           <td class="strat-name">Cree Manual Trading</td>
           <td>XAGUSD.PRO</td>
           <td class="num">657902</td>
           <td class="num neg">$-55.31</td>
-          <td class="num">8.5%</td>
+          <td class="num">4.4%</td>
           <td class="num">40%</td>
           <td class="num">0.9</td>
           <td class="num">10</td>
         </tr><tr>
-          <td class="num dim">22</td>
+          <td class="num dim">25</td>
+          <td class="strat-name">Agg V1 Pro XAUUSD</td>
+          <td>XAUUSD.PRO</td>
+          <td class="num">662435</td>
+          <td class="num neg">$-129.77</td>
+          <td class="num">0.7%</td>
+          <td class="num">41%</td>
+          <td class="num">0.7</td>
+          <td class="num">17</td>
+        </tr><tr>
+          <td class="num dim">26</td>
+          <td class="strat-name">T&D60</td>
+          <td>USDCAD</td>
+          <td class="num">42818</td>
+          <td class="num neg">$-33.83</td>
+          <td class="num">2.6%</td>
+          <td class="num">83%</td>
+          <td class="num">0.9</td>
+          <td class="num">42</td>
+        </tr><tr>
+          <td class="num dim">27</td>
+          <td class="strat-name">Cree Manual Trading</td>
+          <td>USDJPY.PRO</td>
+          <td class="num">657902</td>
+          <td class="num neg">$-142.10</td>
+          <td class="num">1.0%</td>
+          <td class="num">44%</td>
+          <td class="num">0.6</td>
+          <td class="num">23</td>
+        </tr><tr>
+          <td class="num dim">28</td>
           <td class="strat-name">Gold Talon</td>
           <td>EURUSD.PRO</td>
           <td class="num">662437</td>
@@ -397,113 +477,183 @@ td { padding:5px 8px; border-bottom:1px solid var(--border2); }
           <td class="num">0.0</td>
           <td class="num">5</td>
         </tr><tr>
-          <td class="num dim">23</td>
-          <td class="strat-name">Cree Manual Trading</td>
-          <td>USDJPY.PRO</td>
-          <td class="num">657902</td>
-          <td class="num neg">$-142.10</td>
-          <td class="num">1.9%</td>
-          <td class="num">44%</td>
+          <td class="num dim">29</td>
+          <td class="strat-name">Axis GBPUSD</td>
+          <td>GBPUSD</td>
+          <td class="num">45215</td>
+          <td class="num neg">$-271.58</td>
+          <td class="num">2.4%</td>
+          <td class="num">52%</td>
           <td class="num">0.6</td>
-          <td class="num">23</td>
+          <td class="num">33</td>
         </tr><tr>
-          <td class="num dim">24</td>
-          <td class="strat-name">T&D60</td>
-          <td>EURUSD</td>
-          <td class="num">42818</td>
-          <td class="num neg">$-273.19</td>
-          <td class="num">5.1%</td>
-          <td class="num">88%</td>
+          <td class="num dim">30</td>
+          <td class="strat-name">Axis GBPUSD</td>
+          <td>USDCAD</td>
+          <td class="num">45215</td>
+          <td class="num neg">$-297.58</td>
+          <td class="num">1.8%</td>
+          <td class="num">30%</td>
           <td class="num">0.5</td>
-          <td class="num">41</td>
+          <td class="num">10</td>
         </tr><tr>
-          <td class="num dim">25</td>
+          <td class="num dim">31</td>
           <td class="strat-name">Cree Manual Trading</td>
           <td>OILUSD.PRO</td>
           <td class="num">657902</td>
           <td class="num neg">$-303.00</td>
-          <td class="num">0.2%</td>
+          <td class="num">0.1%</td>
           <td class="num">0%</td>
           <td class="num">0.0</td>
           <td class="num">2</td>
         </tr><tr>
-          <td class="num dim">26</td>
-          <td class="strat-name">T&D60</td>
-          <td>AUDUSD</td>
-          <td class="num">42818</td>
-          <td class="num neg">$-306.36</td>
-          <td class="num">3.2%</td>
-          <td class="num">70%</td>
-          <td class="num">0.1</td>
-          <td class="num">20</td>
-        </tr><tr>
-          <td class="num dim">27</td>
+          <td class="num dim">32</td>
           <td class="strat-name">Axis Rotation (multi-symbol)</td>
           <td>EURUSD</td>
           <td class="num">45215</td>
           <td class="num neg">$-320.81</td>
-          <td class="num">4.9%</td>
+          <td class="num">2.4%</td>
           <td class="num">53%</td>
           <td class="num">0.8</td>
           <td class="num">36</td>
         </tr><tr>
-          <td class="num dim">28</td>
+          <td class="num dim">33</td>
           <td class="strat-name">Cree Manual Trading</td>
           <td>USDCHF.PRO</td>
           <td class="num">657902</td>
           <td class="num neg">$-337.83</td>
-          <td class="num">1.9%</td>
+          <td class="num">0.9%</td>
           <td class="num">29%</td>
           <td class="num">0.1</td>
           <td class="num">7</td>
         </tr><tr>
-          <td class="num dim">29</td>
+          <td class="num dim">34</td>
           <td class="strat-name">Cree Manual Trading</td>
           <td>XAUUSD.PRO</td>
           <td class="num">657902</td>
           <td class="num neg">$-344.54</td>
-          <td class="num">6.8%</td>
+          <td class="num">3.4%</td>
           <td class="num">64%</td>
           <td class="num">0.7</td>
           <td class="num">14</td>
         </tr><tr>
-          <td class="num dim">30</td>
+          <td class="num dim">35</td>
+          <td class="strat-name">T&D60</td>
+          <td>USDJPY</td>
+          <td class="num">42818</td>
+          <td class="num neg">$-94.72</td>
+          <td class="num">5.0%</td>
+          <td class="num">71%</td>
+          <td class="num">0.8</td>
+          <td class="num">55</td>
+        </tr><tr>
+          <td class="num dim">36</td>
           <td class="strat-name">Cree Manual Trading</td>
           <td>GBPUSD.PRO</td>
           <td class="num">657902</td>
           <td class="num neg">$-435.00</td>
-          <td class="num">6.4%</td>
+          <td class="num">3.2%</td>
           <td class="num">34%</td>
           <td class="num">0.4</td>
           <td class="num">29</td>
         </tr><tr>
-          <td class="num dim">31</td>
+          <td class="num dim">37</td>
           <td class="strat-name">Cree Manual Trading</td>
           <td>AUDJPY.PRO</td>
           <td class="num">657902</td>
           <td class="num neg">$-500.78</td>
-          <td class="num">4.8%</td>
+          <td class="num">2.4%</td>
           <td class="num">17%</td>
           <td class="num">0.0</td>
           <td class="num">6</td>
         </tr><tr>
-          <td class="num dim">32</td>
+          <td class="num dim">38</td>
+          <td class="strat-name">Axis GBPUSD</td>
+          <td>USDCHF</td>
+          <td class="num">45215</td>
+          <td class="num neg">$-551.67</td>
+          <td class="num">5.7%</td>
+          <td class="num">50%</td>
+          <td class="num">0.6</td>
+          <td class="num">4</td>
+        </tr><tr>
+          <td class="num dim">39</td>
           <td class="strat-name">Cree Manual Trading</td>
           <td>EURUSD.PRO</td>
           <td class="num">657902</td>
           <td class="num neg">$-615.60</td>
-          <td class="num">9.1%</td>
+          <td class="num">4.6%</td>
           <td class="num">42%</td>
           <td class="num">0.7</td>
           <td class="num">87</td>
+        </tr><tr>
+          <td class="num dim">40</td>
+          <td class="strat-name">Axis AUDUSD</td>
+          <td>AUDUSD</td>
+          <td class="num">32983</td>
+          <td class="num neg">$-834.86</td>
+          <td class="num">6.5%</td>
+          <td class="num">55%</td>
+          <td class="num">0.7</td>
+          <td class="num">51</td>
+        </tr><tr>
+          <td class="num dim">41</td>
+          <td class="strat-name">Agg V1 NZDJPY</td>
+          <td>NZDJPY</td>
+          <td class="num">54285</td>
+          <td class="num neg">$-1,196.67</td>
+          <td class="num">6.3%</td>
+          <td class="num">40%</td>
+          <td class="num">0.2</td>
+          <td class="num">5</td>
+        </tr><tr>
+          <td class="num dim">42</td>
+          <td class="strat-name">Axis AUDUSD</td>
+          <td>EURUSD</td>
+          <td class="num">32983</td>
+          <td class="num neg">$-1,240.20</td>
+          <td class="num">0.0%</td>
+          <td class="num">0%</td>
+          <td class="num">0.0</td>
+          <td class="num">1</td>
+        </tr><tr>
+          <td class="num dim">43</td>
+          <td class="strat-name">T&D60</td>
+          <td>AUDUSD</td>
+          <td class="num">42818</td>
+          <td class="num neg">$-325.16</td>
+          <td class="num">6.3%</td>
+          <td class="num">75%</td>
+          <td class="num">0.1</td>
+          <td class="num">28</td>
+        </tr><tr>
+          <td class="num dim">44</td>
+          <td class="strat-name">Agg V1 AUDUSD</td>
+          <td>AUDUSD</td>
+          <td class="num">54284</td>
+          <td class="num neg">$-1,365.77</td>
+          <td class="num">7.5%</td>
+          <td class="num">75%</td>
+          <td class="num">0.1</td>
+          <td class="num">4</td>
+        </tr><tr>
+          <td class="num dim">45</td>
+          <td class="strat-name">Axis AUDUSD</td>
+          <td>USDCAD</td>
+          <td class="num">32983</td>
+          <td class="num neg">$-2,247.28</td>
+          <td class="num">11.6%</td>
+          <td class="num">25%</td>
+          <td class="num">0.2</td>
+          <td class="num">69</td>
         </tr></tbody>
   </table></div>
 </div>
 
-<div class="footer">Bachelier Live Mission Control &middot; 2026-06-22 17:45 &middot; <span id="footerDates">2026-01-05 &rarr; 2026-06-19</span></div>
+<div class="footer">Bachelier Live Mission Control &middot; 2026-06-23 10:07 &middot; <span id="footerDates">2026-01-05 &rarr; 2026-06-23</span></div>
 
 <script>
-const DAILY_DATA = [{"strategy": "Axis Rotation (multi-symbol)", "symbol": "EURUSD", "login": 45215, "daily": [{"d": "2026-02-11", "p": 2.58, "t": 3, "w": 1}, {"d": "2026-02-17", "p": -221.98, "t": 2, "w": 0}, {"d": "2026-02-18", "p": -110.2, "t": 1, "w": 0}, {"d": "2026-02-19", "p": -110.88, "t": 1, "w": 0}, {"d": "2026-02-23", "p": 215.38, "t": 2, "w": 2}, {"d": "2026-02-25", "p": 59.4, "t": 1, "w": 1}, {"d": "2026-02-27", "p": 23.08, "t": 3, "w": 2}, {"d": "2026-03-02", "p": -101.0, "t": 3, "w": 1}, {"d": "2026-03-04", "p": 30.58, "t": 1, "w": 1}, {"d": "2026-03-05", "p": -51.08, "t": 2, "w": 1}, {"d": "2026-03-09", "p": -108.9, "t": 2, "w": 1}, {"d": "2026-03-11", "p": -110.88, "t": 1, "w": 0}, {"d": "2026-03-16", "p": 190.94, "t": 2, "w": 2}, {"d": "2026-03-17", "p": 110.42, "t": 2, "w": 2}, {"d": "2026-03-18", "p": 20.42, "t": 2, "w": 1}, {"d": "2026-03-25", "p": -110.88, "t": 1, "w": 0}, {"d": "2026-03-27", "p": 61.16, "t": 1, "w": 1}, {"d": "2026-03-30", "p": 66.0, "t": 1, "w": 1}, {"d": "2026-03-31", "p": 73.26, "t": 1, "w": 1}, {"d": "2026-04-01", "p": -87.36, "t": 2, "w": 1}, {"d": "2026-04-02", "p": -117.07, "t": 1, "w": 0}, {"d": "2026-04-03", "p": -43.8, "t": 1, "w": 0}]}, {"strategy": "Axis Rotation (multi-symbol)", "symbol": "GBPUSD", "login": 45215, "daily": [{"d": "2026-02-11", "p": -40.56, "t": 1, "w": 0}, {"d": "2026-02-17", "p": 142.56, "t": 4, "w": 3}, {"d": "2026-02-18", "p": -40.16, "t": 1, "w": 0}, {"d": "2026-02-19", "p": 143.12, "t": 4, "w": 3}, {"d": "2026-02-23", "p": 80.64, "t": 5, "w": 3}, {"d": "2026-02-26", "p": -169.52, "t": 5, "w": 1}, {"d": "2026-02-27", "p": 72.16, "t": 3, "w": 3}, {"d": "2026-03-02", "p": 127.44, "t": 2, "w": 2}, {"d": "2026-03-04", "p": 25.68, "t": 3, "w": 3}, {"d": "2026-03-05", "p": -40.88, "t": 1, "w": 0}, {"d": "2026-03-09", "p": 6.16, "t": 4, "w": 2}, {"d": "2026-03-10", "p": -40.16, "t": 1, "w": 0}, {"d": "2026-03-11", "p": -0.8, "t": 2, "w": 1}, {"d": "2026-03-16", "p": 71.6, "t": 3, "w": 3}, {"d": "2026-03-17", "p": 13.52, "t": 3, "w": 2}, {"d": "2026-03-18", "p": -25.4, "t": 7, "w": 2}, {"d": "2026-03-26", "p": -168.88, "t": 3, "w": 0}, {"d": "2026-03-27", "p": 145.24, "t": 4, "w": 4}, {"d": "2026-03-30", "p": 110.12, "t": 5, "w": 5}, {"d": "2026-03-31", "p": 27.36, "t": 1, "w": 1}, {"d": "2026-04-01", "p": 140.4, "t": 3, "w": 3}, {"d": "2026-04-03", "p": -3.72, "t": 1, "w": 0}, {"d": "2026-04-10", "p": 36.72, "t": 3, "w": 3}, {"d": "2026-04-13", "p": 145.92, "t": 3, "w": 3}, {"d": "2026-04-20", "p": -1.35, "t": 2, "w": 1}, {"d": "2026-04-23", "p": -201.68, "t": 2, "w": 0}, {"d": "2026-04-30", "p": 45.58, "t": 4, "w": 3}, {"d": "2026-05-05", "p": -0.56, "t": 2, "w": 0}, {"d": "2026-05-06", "p": -0.16, "t": 1, "w": 0}, {"d": "2026-05-07", "p": -40.32, "t": 1, "w": 0}, {"d": "2026-05-08", "p": -156.96, "t": 3, "w": 0}, {"d": "2026-05-21", "p": 44.56, "t": 2, "w": 2}, {"d": "2026-05-25", "p": 83.84, "t": 2, "w": 2}]}, {"strategy": "Axis Rotation + Fx RSI (multi-symbol)", "symbol": "AUDUSD.pro", "login": 32983, "daily": [{"d": "2026-02-03", "p": 184.0, "t": 1, "w": 1}, {"d": "2026-02-05", "p": 275.25, "t": 6, "w": 5}, {"d": "2026-02-06", "p": -112.28, "t": 2, "w": 0}, {"d": "2026-02-09", "p": 579.88, "t": 5, "w": 5}, {"d": "2026-02-13", "p": -658.18, "t": 4, "w": 0}, {"d": "2026-02-17", "p": 252.0, "t": 2, "w": 2}, {"d": "2026-02-25", "p": -144.06, "t": 1, "w": 0}, {"d": "2026-02-26", "p": -186.61, "t": 3, "w": 1}, {"d": "2026-02-27", "p": 105.3, "t": 10, "w": 7}, {"d": "2026-03-02", "p": 241.74, "t": 3, "w": 3}, {"d": "2026-03-04", "p": 232.76, "t": 4, "w": 4}, {"d": "2026-03-05", "p": -294.56, "t": 3, "w": 0}, {"d": "2026-03-06", "p": 100.68, "t": 4, "w": 3}, {"d": "2026-03-09", "p": 437.1, "t": 4, "w": 4}, {"d": "2026-03-10", "p": -193.2, "t": 2, "w": 0}, {"d": "2026-03-11", "p": 184.4, "t": 1, "w": 1}, {"d": "2026-03-16", "p": 111.6, "t": 1, "w": 1}, {"d": "2026-03-18", "p": 10.12, "t": 10, "w": 2}, {"d": "2026-03-23", "p": 543.68, "t": 4, "w": 3}, {"d": "2026-03-26", "p": -785.88, "t": 3, "w": 0}, {"d": "2026-03-27", "p": 481.52, "t": 5, "w": 5}, {"d": "2026-03-31", "p": -213.84, "t": 5, "w": 1}, {"d": "2026-04-01", "p": -429.28, "t": 3, "w": 0}, {"d": "2026-04-02", "p": -165.27, "t": 2, "w": 1}, {"d": "2026-04-06", "p": -105.05, "t": 3, "w": 2}, {"d": "2026-04-10", "p": 112.58, "t": 4, "w": 3}, {"d": "2026-04-13", "p": -184.23, "t": 2, "w": 0}, {"d": "2026-04-14", "p": 6.12, "t": 4, "w": 3}, {"d": "2026-04-16", "p": -91.02, "t": 6, "w": 3}, {"d": "2026-04-20", "p": 264.39, "t": 4, "w": 4}, {"d": "2026-05-01", "p": 7.37, "t": 4, "w": 3}, {"d": "2026-05-08", "p": 252.94, "t": 6, "w": 5}, {"d": "2026-05-12", "p": -27.1, "t": 3, "w": 0}, {"d": "2026-05-20", "p": 158.85, "t": 4, "w": 4}, {"d": "2026-05-22", "p": 0.0, "t": 1, "w": 0}]}, {"strategy": "Axis Rotation + Fx RSI (multi-symbol)", "symbol": "GBPUSD.pro", "login": 32983, "daily": [{"d": "2026-03-09", "p": 83.0, "t": 1, "w": 1}]}, {"strategy": "Axis Rotation + Fx RSI (multi-symbol)", "symbol": "USDCHF.pro", "login": 32983, "daily": [{"d": "2026-02-20", "p": 92.5, "t": 2, "w": 2}, {"d": "2026-02-26", "p": 51.78, "t": 4, "w": 4}, {"d": "2026-02-27", "p": 131.5, "t": 6, "w": 6}, {"d": "2026-03-16", "p": 27.23, "t": 3, "w": 3}, {"d": "2026-03-23", "p": 118.92, "t": 5, "w": 5}, {"d": "2026-03-27", "p": -59.81, "t": 14, "w": 3}, {"d": "2026-03-31", "p": 28.22, "t": 6, "w": 6}]}, {"strategy": "Axis Rotation + Fx RSI (multi-symbol)", "symbol": "USDJPY.pro", "login": 32983, "daily": [{"d": "2026-01-05", "p": 226.52, "t": 5, "w": 4}, {"d": "2026-01-07", "p": 65.23, "t": 3, "w": 3}, {"d": "2026-01-12", "p": 145.66, "t": 8, "w": 7}, {"d": "2026-01-13", "p": -735.99, "t": 18, "w": 0}, {"d": "2026-01-14", "p": 331.79, "t": 23, "w": 19}, {"d": "2026-01-16", "p": 20.44, "t": 1, "w": 1}, {"d": "2026-01-27", "p": -102.48, "t": 7, "w": 0}, {"d": "2026-01-28", "p": 111.28, "t": 7, "w": 6}]}, {"strategy": "Cree Manual Trading", "symbol": "AUDJPY.PRO", "login": 657902, "daily": [{"d": "2026-06-15", "p": -43.87, "t": 2, "w": 0}, {"d": "2026-06-16", "p": -456.91, "t": 4, "w": 1}]}, {"strategy": "Cree Manual Trading", "symbol": "ETHUSD", "login": 657902, "daily": [{"d": "2026-05-18", "p": -5.84, "t": 2, "w": 0}, {"d": "2026-06-15", "p": 12.9, "t": 2, "w": 2}, {"d": "2026-06-18", "p": -2.16, "t": 1, "w": 0}]}, {"strategy": "Cree Manual Trading", "symbol": "EURGBP.PRO", "login": 657902, "daily": [{"d": "2026-06-18", "p": -39.55, "t": 2, "w": 0}]}, {"strategy": "Cree Manual Trading", "symbol": "EURJPY.PRO", "login": 657902, "daily": [{"d": "2026-06-17", "p": -22.55, "t": 1, "w": 0}]}, {"strategy": "Cree Manual Trading", "symbol": "EURUSD.PRO", "login": 657902, "daily": [{"d": "2026-03-02", "p": 14.4, "t": 1, "w": 1}, {"d": "2026-03-05", "p": 18.0, "t": 1, "w": 1}, {"d": "2026-03-13", "p": -408.99, "t": 1, "w": 0}, {"d": "2026-03-26", "p": 24.4, "t": 1, "w": 1}, {"d": "2026-03-27", "p": -2.2, "t": 1, "w": 0}, {"d": "2026-04-01", "p": 15.62, "t": 1, "w": 1}, {"d": "2026-04-06", "p": 61.84, "t": 2, "w": 1}, {"d": "2026-04-08", "p": 447.57, "t": 2, "w": 2}, {"d": "2026-04-09", "p": -3.6, "t": 1, "w": 0}, {"d": "2026-04-13", "p": 146.12, "t": 1, "w": 1}, {"d": "2026-04-14", "p": -34.0, "t": 1, "w": 0}, {"d": "2026-04-15", "p": -268.69, "t": 2, "w": 1}, {"d": "2026-04-16", "p": -18.0, "t": 1, "w": 0}, {"d": "2026-04-17", "p": 98.4, "t": 4, "w": 3}, {"d": "2026-04-21", "p": 11.0, "t": 1, "w": 1}, {"d": "2026-04-22", "p": -24.0, "t": 2, "w": 0}, {"d": "2026-04-29", "p": -44.0, "t": 2, "w": 1}, {"d": "2026-05-01", "p": -6.0, "t": 1, "w": 0}, {"d": "2026-05-05", "p": 65.0, "t": 1, "w": 1}, {"d": "2026-05-06", "p": -48.0, "t": 1, "w": 0}, {"d": "2026-05-07", "p": 12.0, "t": 1, "w": 1}, {"d": "2026-05-08", "p": -31.0, "t": 1, "w": 0}, {"d": "2026-05-11", "p": 3.0, "t": 2, "w": 1}, {"d": "2026-05-13", "p": -29.0, "t": 2, "w": 0}, {"d": "2026-05-14", "p": -26.0, "t": 1, "w": 0}, {"d": "2026-05-15", "p": 15.0, "t": 1, "w": 1}, {"d": "2026-05-18", "p": -44.0, "t": 1, "w": 0}, {"d": "2026-05-19", "p": 52.0, "t": 2, "w": 2}, {"d": "2026-05-20", "p": -28.0, "t": 2, "w": 0}, {"d": "2026-05-21", "p": -49.0, "t": 4, "w": 0}, {"d": "2026-05-22", "p": -88.0, "t": 2, "w": 0}, {"d": "2026-05-25", "p": 25.0, "t": 1, "w": 1}, {"d": "2026-05-26", "p": -54.0, "t": 3, "w": 0}, {"d": "2026-05-27", "p": -77.0, "t": 2, "w": 0}, {"d": "2026-05-28", "p": -89.0, "t": 1, "w": 0}, {"d": "2026-05-29", "p": 7.0, "t": 3, "w": 2}, {"d": "2026-06-01", "p": -64.0, "t": 2, "w": 0}, {"d": "2026-06-02", "p": -11.5, "t": 1, "w": 0}, {"d": "2026-06-03", "p": -14.0, "t": 2, "w": 0}, {"d": "2026-06-04", "p": -5.5, "t": 2, "w": 1}, {"d": "2026-06-05", "p": 44.0, "t": 2, "w": 2}, {"d": "2026-06-08", "p": 2.0, "t": 2, "w": 1}, {"d": "2026-06-09", "p": -26.0, "t": 1, "w": 0}, {"d": "2026-06-11", "p": -21.0, "t": 1, "w": 0}, {"d": "2026-06-12", "p": 29.0, "t": 1, "w": 1}, {"d": "2026-06-15", "p": 99.0, "t": 7, "w": 6}, {"d": "2026-06-16", "p": -173.0, "t": 6, "w": 2}, {"d": "2026-06-17", "p": -126.47, "t": 2, "w": 0}, {"d": "2026-06-18", "p": 8.0, "t": 1, "w": 1}]}, {"strategy": "Cree Manual Trading", "symbol": "GBPUSD.PRO", "login": 657902, "daily": [{"d": "2026-05-20", "p": 85.0, "t": 1, "w": 1}, {"d": "2026-05-21", "p": -160.0, "t": 3, "w": 0}, {"d": "2026-05-22", "p": -217.0, "t": 2, "w": 0}, {"d": "2026-05-25", "p": -75.0, "t": 1, "w": 0}, {"d": "2026-05-26", "p": -75.0, "t": 4, "w": 0}, {"d": "2026-05-27", "p": 5.0, "t": 1, "w": 1}, {"d": "2026-05-28", "p": -74.0, "t": 1, "w": 0}, {"d": "2026-05-29", "p": 44.0, "t": 1, "w": 1}, {"d": "2026-06-01", "p": -45.0, "t": 1, "w": 0}, {"d": "2026-06-02", "p": -8.5, "t": 1, "w": 0}, {"d": "2026-06-03", "p": -22.5, "t": 1, "w": 0}, {"d": "2026-06-04", "p": -18.0, "t": 1, "w": 0}, {"d": "2026-06-05", "p": 33.0, "t": 1, "w": 1}, {"d": "2026-06-08", "p": 36.0, "t": 2, "w": 1}, {"d": "2026-06-09", "p": -37.0, "t": 1, "w": 0}, {"d": "2026-06-11", "p": -2.0, "t": 1, "w": 0}, {"d": "2026-06-15", "p": 6.0, "t": 2, "w": 1}, {"d": "2026-06-16", "p": 40.0, "t": 3, "w": 3}, {"d": "2026-06-17", "p": 50.0, "t": 1, "w": 1}]}, {"strategy": "Cree Manual Trading", "symbol": "OILUSD.PRO", "login": 657902, "daily": [{"d": "2026-06-16", "p": -303.0, "t": 2, "w": 0}]}, {"strategy": "Cree Manual Trading", "symbol": "SOLUSD", "login": 657902, "daily": [{"d": "2026-06-17", "p": -2.54, "t": 2, "w": 0}, {"d": "2026-06-18", "p": -2.5, "t": 1, "w": 0}]}, {"strategy": "Cree Manual Trading", "symbol": "US30", "login": 657902, "daily": [{"d": "2026-06-15", "p": 55.74, "t": 3, "w": 3}, {"d": "2026-06-16", "p": 199.9, "t": 6, "w": 3}, {"d": "2026-06-17", "p": -18.92, "t": 2, "w": 1}, {"d": "2026-06-18", "p": -2.65, "t": 1, "w": 0}]}, {"strategy": "Cree Manual Trading", "symbol": "US500", "login": 657902, "daily": [{"d": "2026-06-11", "p": -0.43, "t": 1, "w": 0}, {"d": "2026-06-17", "p": 2.97, "t": 1, "w": 1}, {"d": "2026-06-18", "p": 0.74, "t": 1, "w": 1}]}, {"strategy": "Cree Manual Trading", "symbol": "USDCAD.PRO", "login": 657902, "daily": [{"d": "2026-06-18", "p": -45.31, "t": 1, "w": 0}]}, {"strategy": "Cree Manual Trading", "symbol": "USDCHF.PRO", "login": 657902, "daily": [{"d": "2026-03-26", "p": -195.57, "t": 1, "w": 0}, {"d": "2026-05-20", "p": -7.66, "t": 2, "w": 1}, {"d": "2026-05-21", "p": -48.82, "t": 1, "w": 0}, {"d": "2026-06-08", "p": -20.26, "t": 2, "w": 1}, {"d": "2026-06-18", "p": -65.52, "t": 1, "w": 0}]}, {"strategy": "Cree Manual Trading", "symbol": "USDJPY.PRO", "login": 657902, "daily": [{"d": "2026-05-19", "p": 16.26, "t": 1, "w": 1}, {"d": "2026-05-20", "p": -16.52, "t": 1, "w": 0}, {"d": "2026-05-21", "p": 54.57, "t": 2, "w": 2}, {"d": "2026-05-22", "p": -11.49, "t": 1, "w": 0}, {"d": "2026-05-26", "p": -31.36, "t": 2, "w": 0}, {"d": "2026-05-27", "p": -52.34, "t": 2, "w": 0}, {"d": "2026-05-28", "p": -11.49, "t": 1, "w": 0}, {"d": "2026-05-29", "p": 13.63, "t": 1, "w": 1}, {"d": "2026-06-01", "p": -67.86, "t": 1, "w": 0}, {"d": "2026-06-05", "p": 13.46, "t": 1, "w": 1}, {"d": "2026-06-10", "p": 5.93, "t": 1, "w": 1}, {"d": "2026-06-12", "p": -4.5, "t": 1, "w": 0}, {"d": "2026-06-15", "p": -6.32, "t": 2, "w": 1}, {"d": "2026-06-16", "p": 7.59, "t": 2, "w": 1}, {"d": "2026-06-17", "p": -51.66, "t": 4, "w": 2}]}, {"strategy": "Cree Manual Trading", "symbol": "USTEC100", "login": 657902, "daily": [{"d": "2026-06-15", "p": -1.15, "t": 1, "w": 0}, {"d": "2026-06-17", "p": 56.89, "t": 1, "w": 1}]}, {"strategy": "Cree Manual Trading", "symbol": "XAGUSD.PRO", "login": 657902, "daily": [{"d": "2026-05-28", "p": -55.31, "t": 10, "w": 4}]}, {"strategy": "Cree Manual Trading", "symbol": "XAUUSD.PRO", "login": 657902, "daily": [{"d": "2026-04-17", "p": 119.3, "t": 1, "w": 1}, {"d": "2026-05-25", "p": 69.8, "t": 1, "w": 1}, {"d": "2026-05-26", "p": -112.9, "t": 2, "w": 1}, {"d": "2026-05-27", "p": -96.2, "t": 3, "w": 1}, {"d": "2026-05-28", "p": 53.0, "t": 1, "w": 1}, {"d": "2026-06-16", "p": 1.86, "t": 1, "w": 1}, {"d": "2026-06-18", "p": 178.2, "t": 2, "w": 2}, {"d": "2026-06-19", "p": -557.6, "t": 3, "w": 1}]}, {"strategy": "Gold Talon", "symbol": "EURUSD.PRO", "login": 662437, "daily": [{"d": "2026-04-28", "p": -28.0, "t": 1, "w": 0}, {"d": "2026-05-01", "p": 4.95, "t": 1, "w": 1}, {"d": "2026-05-04", "p": -16.83, "t": 1, "w": 0}, {"d": "2026-05-05", "p": -2.83, "t": 1, "w": 0}, {"d": "2026-05-12", "p": -65.0, "t": 1, "w": 0}]}, {"strategy": "Gold Talon", "symbol": "XAUUSD.PRO", "login": 662437, "daily": [{"d": "2026-04-09", "p": -3.72, "t": 2, "w": 1}, {"d": "2026-04-10", "p": 166.5, "t": 2, "w": 2}, {"d": "2026-04-13", "p": 80.82, "t": 1, "w": 1}, {"d": "2026-04-14", "p": -166.31, "t": 2, "w": 0}, {"d": "2026-04-15", "p": -5.6, "t": 2, "w": 1}, {"d": "2026-04-16", "p": 80.61, "t": 3, "w": 2}, {"d": "2026-04-17", "p": -252.51, "t": 3, "w": 0}, {"d": "2026-04-20", "p": -85.2, "t": 1, "w": 0}, {"d": "2026-04-21", "p": -48.7, "t": 1, "w": 0}, {"d": "2026-04-22", "p": -84.0, "t": 1, "w": 0}, {"d": "2026-04-27", "p": -67.17, "t": 1, "w": 0}, {"d": "2026-05-07", "p": 180.36, "t": 1, "w": 1}, {"d": "2026-05-12", "p": -2.96, "t": 1, "w": 0}, {"d": "2026-05-15", "p": 167.46, "t": 2, "w": 2}, {"d": "2026-05-19", "p": 82.65, "t": 1, "w": 1}, {"d": "2026-05-26", "p": -54.72, "t": 1, "w": 0}, {"d": "2026-05-27", "p": -23.46, "t": 3, "w": 1}, {"d": "2026-05-28", "p": 27.99, "t": 2, "w": 1}, {"d": "2026-05-29", "p": 203.86, "t": 1, "w": 1}, {"d": "2026-06-01", "p": -54.9, "t": 1, "w": 0}, {"d": "2026-06-02", "p": 0.12, "t": 1, "w": 1}, {"d": "2026-06-03", "p": -47.34, "t": 1, "w": 0}, {"d": "2026-06-09", "p": -25.95, "t": 3, "w": 1}, {"d": "2026-06-15", "p": 72.03, "t": 1, "w": 1}, {"d": "2026-06-16", "p": 1.68, "t": 1, "w": 1}, {"d": "2026-06-18", "p": 25.68, "t": 2, "w": 1}, {"d": "2026-06-19", "p": 103.38, "t": 3, "w": 2}]}, {"strategy": "Manual Trading (Diego)", "symbol": "EURUSD.PRO", "login": 639884, "daily": [{"d": "2026-01-08", "p": 58.92, "t": 1, "w": 1}, {"d": "2026-01-14", "p": -29.72, "t": 1, "w": 0}, {"d": "2026-01-15", "p": -21.96, "t": 1, "w": 0}]}, {"strategy": "T&D19 V2 USDJPY MOL", "symbol": "USDJPY", "login": 42817, "daily": [{"d": "2026-05-14", "p": 350.78, "t": 1, "w": 1}, {"d": "2026-05-15", "p": 33.69, "t": 1, "w": 1}, {"d": "2026-05-18", "p": 6.07, "t": 1, "w": 1}, {"d": "2026-05-19", "p": 52.1, "t": 1, "w": 1}, {"d": "2026-05-20", "p": 34.11, "t": 1, "w": 1}, {"d": "2026-05-21", "p": 21.82, "t": 1, "w": 1}, {"d": "2026-05-22", "p": 8.36, "t": 1, "w": 1}, {"d": "2026-05-27", "p": 8.09, "t": 1, "w": 1}, {"d": "2026-05-28", "p": 7.51, "t": 1, "w": 1}, {"d": "2026-05-29", "p": 6.86, "t": 1, "w": 1}, {"d": "2026-06-01", "p": 8.82, "t": 1, "w": 1}, {"d": "2026-06-02", "p": 6.25, "t": 1, "w": 1}, {"d": "2026-06-03", "p": 28.7, "t": 1, "w": 1}, {"d": "2026-06-04", "p": 256.64, "t": 1, "w": 1}, {"d": "2026-06-05", "p": 8.15, "t": 1, "w": 1}, {"d": "2026-06-08", "p": 45.33, "t": 1, "w": 1}, {"d": "2026-06-09", "p": 16.35, "t": 1, "w": 1}, {"d": "2026-06-10", "p": 7.44, "t": 1, "w": 1}, {"d": "2026-06-11", "p": -99.23, "t": 1, "w": 0}, {"d": "2026-06-12", "p": -187.13, "t": 1, "w": 0}, {"d": "2026-06-15", "p": 16.67, "t": 1, "w": 1}, {"d": "2026-06-16", "p": 7.84, "t": 1, "w": 1}, {"d": "2026-06-17", "p": 17.1, "t": 1, "w": 1}, {"d": "2026-06-18", "p": 6.0, "t": 1, "w": 1}, {"d": "2026-06-19", "p": -208.57, "t": 1, "w": 0}]}, {"strategy": "T&D19 V2 USDJPY PROP", "symbol": "USDJPY", "login": 39479, "daily": [{"d": "2026-05-19", "p": 15.26, "t": 1, "w": 1}, {"d": "2026-05-20", "p": 9.97, "t": 1, "w": 1}, {"d": "2026-05-21", "p": 6.25, "t": 1, "w": 1}, {"d": "2026-05-22", "p": 2.44, "t": 1, "w": 1}, {"d": "2026-06-12", "p": -56.6, "t": 1, "w": 0}, {"d": "2026-06-16", "p": 2.39, "t": 1, "w": 1}, {"d": "2026-06-17", "p": 5.33, "t": 1, "w": 1}]}, {"strategy": "T&D60", "symbol": "AUDUSD.pro", "login": 42818, "daily": [{"d": "2026-01-12", "p": -18.81, "t": 1, "w": 0}, {"d": "2026-01-21", "p": -12.54, "t": 2, "w": 0}, {"d": "2026-01-22", "p": -67.07, "t": 1, "w": 0}, {"d": "2026-02-04", "p": 3.8, "t": 1, "w": 1}, {"d": "2026-02-09", "p": -98.61, "t": 1, "w": 0}, {"d": "2026-02-10", "p": 1.52, "t": 1, "w": 1}, {"d": "2026-02-11", "p": 1.71, "t": 1, "w": 1}, {"d": "2026-02-12", "p": 1.52, "t": 1, "w": 1}, {"d": "2026-03-09", "p": 1.71, "t": 1, "w": 1}, {"d": "2026-03-17", "p": -146.76, "t": 2, "w": 1}, {"d": "2026-03-18", "p": 5.32, "t": 1, "w": 1}, {"d": "2026-03-24", "p": 4.56, "t": 1, "w": 1}, {"d": "2026-03-25", "p": 6.84, "t": 1, "w": 1}, {"d": "2026-03-31", "p": 5.13, "t": 2, "w": 2}, {"d": "2026-04-01", "p": 2.28, "t": 1, "w": 1}, {"d": "2026-04-02", "p": 1.52, "t": 1, "w": 1}, {"d": "2026-04-13", "p": 1.52, "t": 1, "w": 1}]}, {"strategy": "T&D60", "symbol": "EURUSD.pro", "login": 42818, "daily": [{"d": "2026-01-08", "p": 8.16, "t": 1, "w": 1}, {"d": "2026-01-09", "p": 4.32, "t": 1, "w": 1}, {"d": "2026-01-13", "p": 7.68, "t": 1, "w": 1}, {"d": "2026-01-14", "p": 12.0, "t": 2, "w": 2}, {"d": "2026-01-15", "p": 3.84, "t": 1, "w": 1}, {"d": "2026-01-19", "p": 25.97, "t": 2, "w": 2}, {"d": "2026-01-20", "p": 4.41, "t": 1, "w": 1}, {"d": "2026-01-21", "p": 7.2, "t": 1, "w": 1}, {"d": "2026-01-22", "p": 3.76, "t": 1, "w": 1}, {"d": "2026-02-04", "p": 4.23, "t": 1, "w": 1}, {"d": "2026-02-05", "p": 4.32, "t": 1, "w": 1}, {"d": "2026-02-06", "p": 7.2, "t": 1, "w": 1}, {"d": "2026-02-09", "p": 15.51, "t": 1, "w": 1}, {"d": "2026-02-10", "p": 8.93, "t": 1, "w": 1}, {"d": "2026-02-11", "p": 7.68, "t": 1, "w": 1}, {"d": "2026-03-16", "p": 4.32, "t": 1, "w": 1}, {"d": "2026-03-17", "p": 7.52, "t": 1, "w": 1}, {"d": "2026-03-18", "p": 3.84, "t": 1, "w": 1}, {"d": "2026-03-19", "p": 8.64, "t": 1, "w": 1}, {"d": "2026-03-20", "p": 10.56, "t": 1, "w": 1}, {"d": "2026-03-23", "p": 5.32, "t": 2, "w": 2}, {"d": "2026-03-24", "p": 43.2, "t": 1, "w": 1}, {"d": "2026-03-25", "p": -15.19, "t": 1, "w": 0}, {"d": "2026-03-26", "p": 3.92, "t": 1, "w": 1}, {"d": "2026-03-27", "p": 4.9, "t": 1, "w": 1}, {"d": "2026-03-30", "p": 5.39, "t": 1, "w": 1}, {"d": "2026-03-31", "p": 4.41, "t": 1, "w": 1}, {"d": "2026-04-01", "p": 5.5, "t": 1, "w": 1}, {"d": "2026-04-02", "p": 3.92, "t": 1, "w": 1}, {"d": "2026-04-03", "p": 26.4, "t": 1, "w": 1}, {"d": "2026-04-13", "p": -250.88, "t": 1, "w": 0}, {"d": "2026-05-14", "p": 5.94, "t": 1, "w": 1}, {"d": "2026-05-15", "p": 5.28, "t": 1, "w": 1}, {"d": "2026-05-18", "p": 5.36, "t": 1, "w": 1}, {"d": "2026-05-19", "p": -57.62, "t": 1, "w": 0}, {"d": "2026-05-20", "p": 9.52, "t": 1, "w": 1}, {"d": "2026-05-21", "p": -238.0, "t": 1, "w": 0}, {"d": "2026-05-22", "p": -0.65, "t": 1, "w": 0}]}, {"strategy": "T&D60", "symbol": "GBPUSD.pro", "login": 42818, "daily": [{"d": "2026-01-16", "p": 0.39, "t": 2, "w": 1}, {"d": "2026-01-19", "p": 6.63, "t": 1, "w": 1}, {"d": "2026-02-04", "p": 4.56, "t": 1, "w": 1}, {"d": "2026-03-09", "p": 17.55, "t": 1, "w": 1}, {"d": "2026-03-16", "p": 4.29, "t": 1, "w": 1}, {"d": "2026-03-18", "p": 10.26, "t": 1, "w": 1}, {"d": "2026-03-19", "p": 3.51, "t": 1, "w": 1}, {"d": "2026-03-20", "p": 4.29, "t": 1, "w": 1}, {"d": "2026-03-25", "p": 9.36, "t": 1, "w": 1}, {"d": "2026-03-26", "p": 4.29, "t": 1, "w": 1}, {"d": "2026-03-27", "p": 5.07, "t": 1, "w": 1}, {"d": "2026-03-30", "p": 3.51, "t": 1, "w": 1}, {"d": "2026-04-01", "p": 6.8, "t": 1, "w": 1}, {"d": "2026-04-02", "p": 11.31, "t": 1, "w": 1}, {"d": "2026-04-03", "p": -28.86, "t": 1, "w": 0}, {"d": "2026-04-06", "p": 21.06, "t": 1, "w": 1}, {"d": "2026-04-13", "p": 6.8, "t": 1, "w": 1}, {"d": "2026-05-18", "p": 31.92, "t": 1, "w": 1}, {"d": "2026-05-20", "p": 50.16, "t": 1, "w": 1}]}, {"strategy": "T&D60", "symbol": "USDCAD.pro", "login": 42818, "daily": [{"d": "2026-01-08", "p": -57.36, "t": 1, "w": 0}, {"d": "2026-01-13", "p": 6.06, "t": 1, "w": 1}, {"d": "2026-01-14", "p": -30.93, "t": 1, "w": 0}, {"d": "2026-01-15", "p": 8.55, "t": 1, "w": 1}, {"d": "2026-01-20", "p": 6.5, "t": 1, "w": 1}, {"d": "2026-01-21", "p": -103.56, "t": 1, "w": 0}, {"d": "2026-01-22", "p": 11.54, "t": 1, "w": 1}, {"d": "2026-02-04", "p": 7.17, "t": 1, "w": 1}, {"d": "2026-02-05", "p": 5.93, "t": 1, "w": 1}, {"d": "2026-02-10", "p": 9.7, "t": 1, "w": 1}, {"d": "2026-02-11", "p": 31.86, "t": 1, "w": 1}, {"d": "2026-02-12", "p": 9.08, "t": 1, "w": 1}, {"d": "2026-03-17", "p": 6.14, "t": 1, "w": 1}, {"d": "2026-03-18", "p": 15.11, "t": 1, "w": 1}, {"d": "2026-03-19", "p": 12.67, "t": 1, "w": 1}, {"d": "2026-03-24", "p": 5.27, "t": 1, "w": 1}, {"d": "2026-03-25", "p": 4.42, "t": 1, "w": 1}, {"d": "2026-03-26", "p": 8.6, "t": 1, "w": 1}, {"d": "2026-03-31", "p": 6.46, "t": 1, "w": 1}, {"d": "2026-04-01", "p": 8.85, "t": 1, "w": 1}, {"d": "2026-04-02", "p": 7.71, "t": 1, "w": 1}, {"d": "2026-05-14", "p": 8.58, "t": 1, "w": 1}, {"d": "2026-05-19", "p": 20.66, "t": 1, "w": 1}, {"d": "2026-05-20", "p": 5.48, "t": 1, "w": 1}, {"d": "2026-05-21", "p": 10.74, "t": 1, "w": 1}]}, {"strategy": "T&D60", "symbol": "USDJPY.pro", "login": 42818, "daily": [{"d": "2026-01-08", "p": -6.64, "t": 1, "w": 0}, {"d": "2026-01-09", "p": -18.85, "t": 1, "w": 0}, {"d": "2026-01-13", "p": 4.26, "t": 1, "w": 1}, {"d": "2026-01-14", "p": 15.36, "t": 1, "w": 1}, {"d": "2026-01-15", "p": 7.87, "t": 1, "w": 1}, {"d": "2026-01-16", "p": 10.19, "t": 1, "w": 1}, {"d": "2026-01-20", "p": 7.72, "t": 1, "w": 1}, {"d": "2026-01-21", "p": 7.71, "t": 1, "w": 1}, {"d": "2026-01-22", "p": -79.31, "t": 1, "w": 0}, {"d": "2026-01-23", "p": 32.16, "t": 1, "w": 1}, {"d": "2026-02-05", "p": 29.98, "t": 1, "w": 1}, {"d": "2026-02-06", "p": 9.11, "t": 1, "w": 1}, {"d": "2026-02-10", "p": 15.46, "t": 1, "w": 1}, {"d": "2026-02-11", "p": 15.3, "t": 1, "w": 1}, {"d": "2026-02-12", "p": 6.56, "t": 1, "w": 1}, {"d": "2026-03-17", "p": 9.46, "t": 1, "w": 1}, {"d": "2026-03-18", "p": 13.15, "t": 1, "w": 1}, {"d": "2026-03-19", "p": 18.57, "t": 1, "w": 1}, {"d": "2026-03-20", "p": 7.58, "t": 1, "w": 1}, {"d": "2026-03-24", "p": -22.3, "t": 1, "w": 0}, {"d": "2026-03-25", "p": 7.35, "t": 1, "w": 1}, {"d": "2026-03-26", "p": -24.59, "t": 1, "w": 0}, {"d": "2026-03-27", "p": 17.94, "t": 1, "w": 1}, {"d": "2026-03-31", "p": 9.29, "t": 1, "w": 1}, {"d": "2026-04-01", "p": 8.35, "t": 1, "w": 1}, {"d": "2026-04-02", "p": -102.7, "t": 1, "w": 0}, {"d": "2026-04-03", "p": -29.87, "t": 1, "w": 0}, {"d": "2026-05-14", "p": -14.85, "t": 1, "w": 0}, {"d": "2026-05-15", "p": 9.33, "t": 1, "w": 1}, {"d": "2026-05-19", "p": 10.14, "t": 1, "w": 1}, {"d": "2026-05-20", "p": 16.68, "t": 1, "w": 1}, {"d": "2026-05-21", "p": 6.55, "t": 1, "w": 1}, {"d": "2026-05-22", "p": 13.83, "t": 1, "w": 1}]}];
+const DAILY_DATA = [{"strategy": "Agg V1 AUDUSD", "symbol": "AUDUSD", "login": 54284, "daily": [{"d": "2026-06-02", "p": 150.42, "t": 3, "w": 3}, {"d": "2026-06-05", "p": -1516.19, "t": 1, "w": 0}]}, {"strategy": "Agg V1 AUDUSD", "symbol": "EURUSD", "login": 54284, "daily": [{"d": "2026-06-19", "p": -8.58, "t": 1, "w": 0}]}, {"strategy": "Agg V1 AUDUSD", "symbol": "US500", "login": 54284, "daily": [{"d": "2026-06-22", "p": -9.47, "t": 1, "w": 0}]}, {"strategy": "Agg V1 AUDUSD", "symbol": "USDCHF", "login": 54284, "daily": [{"d": "2026-06-16", "p": -8.37, "t": 1, "w": 0}]}, {"strategy": "Agg V1 AUDUSD", "symbol": "XAUUSD", "login": 54284, "daily": [{"d": "2026-06-17", "p": 10.51, "t": 1, "w": 1}]}, {"strategy": "Agg V1 NZDJPY", "symbol": "NZDJPY", "login": 54285, "daily": [{"d": "2026-06-01", "p": 72.78, "t": 1, "w": 1}, {"d": "2026-06-02", "p": -53.34, "t": 3, "w": 1}, {"d": "2026-06-05", "p": -1216.11, "t": 1, "w": 0}]}, {"strategy": "Agg V1 NZDJPY", "symbol": "USDCAD", "login": 54285, "daily": [{"d": "2026-06-22", "p": 0.32, "t": 1, "w": 1}]}, {"strategy": "Agg V1 Pro XAUUSD", "symbol": "XAUUSD.PRO", "login": 662435, "daily": [{"d": "2026-06-01", "p": -121.77, "t": 2, "w": 0}, {"d": "2026-06-02", "p": -2.75, "t": 3, "w": 1}, {"d": "2026-06-03", "p": -60.35, "t": 1, "w": 0}, {"d": "2026-06-08", "p": -1.7, "t": 2, "w": 1}, {"d": "2026-06-11", "p": 101.4, "t": 2, "w": 2}, {"d": "2026-06-16", "p": 0.15, "t": 2, "w": 1}, {"d": "2026-06-18", "p": -88.0, "t": 2, "w": 0}, {"d": "2026-06-22", "p": -42.2, "t": 1, "w": 0}, {"d": "2026-06-23", "p": 85.45, "t": 2, "w": 2}]}, {"strategy": "Axis AUDUSD", "symbol": "AUDUSD.pro", "login": 32983, "daily": [{"d": "2026-04-10", "p": 112.58, "t": 4, "w": 3}, {"d": "2026-04-13", "p": -184.23, "t": 2, "w": 0}, {"d": "2026-04-14", "p": 6.12, "t": 4, "w": 3}, {"d": "2026-04-16", "p": -91.02, "t": 6, "w": 3}, {"d": "2026-04-20", "p": 264.39, "t": 4, "w": 4}, {"d": "2026-05-01", "p": 7.37, "t": 4, "w": 3}, {"d": "2026-05-08", "p": 252.94, "t": 6, "w": 5}, {"d": "2026-05-12", "p": -27.1, "t": 3, "w": 0}, {"d": "2026-05-20", "p": 158.85, "t": 4, "w": 4}, {"d": "2026-05-28", "p": -122.85, "t": 1, "w": 0}, {"d": "2026-06-02", "p": 1.96, "t": 3, "w": 3}, {"d": "2026-06-05", "p": -988.7, "t": 6, "w": 0}, {"d": "2026-06-10", "p": -168.4, "t": 3, "w": 0}, {"d": "2026-06-11", "p": -56.77, "t": 1, "w": 0}]}, {"strategy": "Axis AUDUSD", "symbol": "EURUSD.pro", "login": 32983, "daily": [{"d": "2026-03-09", "p": -1240.2, "t": 1, "w": 0}]}, {"strategy": "Axis AUDUSD", "symbol": "USDCAD.pro", "login": 32983, "daily": [{"d": "2026-01-05", "p": -578.8, "t": 18, "w": 0}, {"d": "2026-01-07", "p": -64.07, "t": 2, "w": 0}, {"d": "2026-01-08", "p": -31.74, "t": 1, "w": 0}, {"d": "2026-01-09", "p": -509.69, "t": 16, "w": 0}, {"d": "2026-01-12", "p": 119.86, "t": 8, "w": 8}, {"d": "2026-01-14", "p": 10.87, "t": 1, "w": 1}, {"d": "2026-02-05", "p": -44.25, "t": 3, "w": 1}, {"d": "2026-02-09", "p": 177.03, "t": 2, "w": 2}, {"d": "2026-02-11", "p": -391.3, "t": 5, "w": 1}, {"d": "2026-02-13", "p": -92.79, "t": 1, "w": 0}, {"d": "2026-02-17", "p": -243.5, "t": 2, "w": 0}, {"d": "2026-02-19", "p": -220.32, "t": 2, "w": 0}, {"d": "2026-02-26", "p": -240.77, "t": 2, "w": 0}, {"d": "2026-02-27", "p": -24.09, "t": 4, "w": 3}, {"d": "2026-04-03", "p": -220.75, "t": 1, "w": 0}, {"d": "2026-04-08", "p": 107.03, "t": 1, "w": 1}]}, {"strategy": "Axis GBPUSD", "symbol": "GBPUSD", "login": 45215, "daily": [{"d": "2026-04-10", "p": 36.72, "t": 3, "w": 3}, {"d": "2026-04-13", "p": 145.92, "t": 3, "w": 3}, {"d": "2026-04-20", "p": -1.35, "t": 2, "w": 1}, {"d": "2026-04-23", "p": -201.68, "t": 2, "w": 0}, {"d": "2026-04-30", "p": 45.58, "t": 4, "w": 3}, {"d": "2026-05-05", "p": -0.56, "t": 2, "w": 0}, {"d": "2026-05-06", "p": -0.16, "t": 1, "w": 0}, {"d": "2026-05-07", "p": -40.32, "t": 1, "w": 0}, {"d": "2026-05-08", "p": -156.96, "t": 3, "w": 0}, {"d": "2026-05-21", "p": 44.56, "t": 2, "w": 2}, {"d": "2026-05-25", "p": 83.84, "t": 2, "w": 2}, {"d": "2026-06-01", "p": -3.96, "t": 3, "w": 1}, {"d": "2026-06-05", "p": -248.05, "t": 3, "w": 0}, {"d": "2026-06-10", "p": 24.84, "t": 2, "w": 2}]}, {"strategy": "Axis GBPUSD", "symbol": "USDCAD", "login": 45215, "daily": [{"d": "2026-01-05", "p": -126.55, "t": 4, "w": 1}, {"d": "2026-01-08", "p": 51.18, "t": 2, "w": 1}, {"d": "2026-01-09", "p": -104.21, "t": 1, "w": 0}, {"d": "2026-01-13", "p": -119.27, "t": 1, "w": 0}, {"d": "2026-01-14", "p": 1.27, "t": 2, "w": 1}]}, {"strategy": "Axis GBPUSD", "symbol": "USDCHF", "login": 45215, "daily": [{"d": "2026-01-14", "p": 271.98, "t": 2, "w": 1}, {"d": "2026-01-20", "p": 135.62, "t": 1, "w": 1}, {"d": "2026-01-23", "p": -959.27, "t": 1, "w": 0}]}, {"strategy": "Axis Rotation (multi-symbol)", "symbol": "EURUSD", "login": 45215, "daily": [{"d": "2026-02-11", "p": 2.58, "t": 3, "w": 1}, {"d": "2026-02-17", "p": -221.98, "t": 2, "w": 0}, {"d": "2026-02-18", "p": -110.2, "t": 1, "w": 0}, {"d": "2026-02-19", "p": -110.88, "t": 1, "w": 0}, {"d": "2026-02-23", "p": 215.38, "t": 2, "w": 2}, {"d": "2026-02-25", "p": 59.4, "t": 1, "w": 1}, {"d": "2026-02-27", "p": 23.08, "t": 3, "w": 2}, {"d": "2026-03-02", "p": -101.0, "t": 3, "w": 1}, {"d": "2026-03-04", "p": 30.58, "t": 1, "w": 1}, {"d": "2026-03-05", "p": -51.08, "t": 2, "w": 1}, {"d": "2026-03-09", "p": -108.9, "t": 2, "w": 1}, {"d": "2026-03-11", "p": -110.88, "t": 1, "w": 0}, {"d": "2026-03-16", "p": 190.94, "t": 2, "w": 2}, {"d": "2026-03-17", "p": 110.42, "t": 2, "w": 2}, {"d": "2026-03-18", "p": 20.42, "t": 2, "w": 1}, {"d": "2026-03-25", "p": -110.88, "t": 1, "w": 0}, {"d": "2026-03-27", "p": 61.16, "t": 1, "w": 1}, {"d": "2026-03-30", "p": 66.0, "t": 1, "w": 1}, {"d": "2026-03-31", "p": 73.26, "t": 1, "w": 1}, {"d": "2026-04-01", "p": -87.36, "t": 2, "w": 1}, {"d": "2026-04-02", "p": -117.07, "t": 1, "w": 0}, {"d": "2026-04-03", "p": -43.8, "t": 1, "w": 0}]}, {"strategy": "Axis Rotation (multi-symbol)", "symbol": "GBPUSD", "login": 45215, "daily": [{"d": "2026-02-11", "p": -40.56, "t": 1, "w": 0}, {"d": "2026-02-17", "p": 142.56, "t": 4, "w": 3}, {"d": "2026-02-18", "p": -40.16, "t": 1, "w": 0}, {"d": "2026-02-19", "p": 143.12, "t": 4, "w": 3}, {"d": "2026-02-23", "p": 80.64, "t": 5, "w": 3}, {"d": "2026-02-26", "p": -169.52, "t": 5, "w": 1}, {"d": "2026-02-27", "p": 72.16, "t": 3, "w": 3}, {"d": "2026-03-02", "p": 127.44, "t": 2, "w": 2}, {"d": "2026-03-04", "p": 25.68, "t": 3, "w": 3}, {"d": "2026-03-05", "p": -40.88, "t": 1, "w": 0}, {"d": "2026-03-09", "p": 6.16, "t": 4, "w": 2}, {"d": "2026-03-10", "p": -40.16, "t": 1, "w": 0}, {"d": "2026-03-11", "p": -0.8, "t": 2, "w": 1}, {"d": "2026-03-16", "p": 71.6, "t": 3, "w": 3}, {"d": "2026-03-17", "p": 13.52, "t": 3, "w": 2}, {"d": "2026-03-18", "p": -25.4, "t": 7, "w": 2}, {"d": "2026-03-26", "p": -168.88, "t": 3, "w": 0}, {"d": "2026-03-27", "p": 145.24, "t": 4, "w": 4}, {"d": "2026-03-30", "p": 110.12, "t": 5, "w": 5}, {"d": "2026-03-31", "p": 27.36, "t": 1, "w": 1}, {"d": "2026-04-01", "p": 140.4, "t": 3, "w": 3}, {"d": "2026-04-03", "p": -3.72, "t": 1, "w": 0}]}, {"strategy": "Axis Rotation + Fx RSI (multi-symbol)", "symbol": "AUDUSD.pro", "login": 32983, "daily": [{"d": "2026-02-03", "p": 184.0, "t": 1, "w": 1}, {"d": "2026-02-05", "p": 275.25, "t": 6, "w": 5}, {"d": "2026-02-06", "p": -112.28, "t": 2, "w": 0}, {"d": "2026-02-09", "p": 579.88, "t": 5, "w": 5}, {"d": "2026-02-13", "p": -658.18, "t": 4, "w": 0}, {"d": "2026-02-17", "p": 252.0, "t": 2, "w": 2}, {"d": "2026-02-25", "p": -144.06, "t": 1, "w": 0}, {"d": "2026-02-26", "p": -186.61, "t": 3, "w": 1}, {"d": "2026-02-27", "p": 105.3, "t": 10, "w": 7}, {"d": "2026-03-02", "p": 241.74, "t": 3, "w": 3}, {"d": "2026-03-04", "p": 232.76, "t": 4, "w": 4}, {"d": "2026-03-05", "p": -294.56, "t": 3, "w": 0}, {"d": "2026-03-06", "p": 100.68, "t": 4, "w": 3}, {"d": "2026-03-09", "p": 437.1, "t": 4, "w": 4}, {"d": "2026-03-10", "p": -193.2, "t": 2, "w": 0}, {"d": "2026-03-11", "p": 184.4, "t": 1, "w": 1}, {"d": "2026-03-16", "p": 111.6, "t": 1, "w": 1}, {"d": "2026-03-18", "p": 10.12, "t": 10, "w": 2}, {"d": "2026-03-23", "p": 543.68, "t": 4, "w": 3}, {"d": "2026-03-26", "p": -785.88, "t": 3, "w": 0}, {"d": "2026-03-27", "p": 481.52, "t": 5, "w": 5}, {"d": "2026-03-31", "p": -213.84, "t": 5, "w": 1}, {"d": "2026-04-01", "p": -429.28, "t": 3, "w": 0}, {"d": "2026-04-02", "p": -165.27, "t": 2, "w": 1}, {"d": "2026-04-06", "p": -105.05, "t": 3, "w": 2}]}, {"strategy": "Axis Rotation + Fx RSI (multi-symbol)", "symbol": "GBPUSD.pro", "login": 32983, "daily": [{"d": "2026-03-09", "p": 83.0, "t": 1, "w": 1}]}, {"strategy": "Axis Rotation + Fx RSI (multi-symbol)", "symbol": "USDCHF.pro", "login": 32983, "daily": [{"d": "2026-02-20", "p": 92.5, "t": 2, "w": 2}, {"d": "2026-02-26", "p": 51.78, "t": 4, "w": 4}, {"d": "2026-02-27", "p": 131.5, "t": 6, "w": 6}, {"d": "2026-03-16", "p": 27.23, "t": 3, "w": 3}, {"d": "2026-03-23", "p": 118.92, "t": 5, "w": 5}, {"d": "2026-03-27", "p": -59.81, "t": 14, "w": 3}, {"d": "2026-03-31", "p": 28.22, "t": 6, "w": 6}]}, {"strategy": "Axis Rotation + Fx RSI (multi-symbol)", "symbol": "USDJPY.pro", "login": 32983, "daily": [{"d": "2026-01-05", "p": 226.52, "t": 5, "w": 4}, {"d": "2026-01-07", "p": 65.23, "t": 3, "w": 3}, {"d": "2026-01-12", "p": 145.66, "t": 8, "w": 7}, {"d": "2026-01-13", "p": -735.99, "t": 18, "w": 0}, {"d": "2026-01-14", "p": 331.79, "t": 23, "w": 19}, {"d": "2026-01-16", "p": 20.44, "t": 1, "w": 1}, {"d": "2026-01-27", "p": -102.48, "t": 7, "w": 0}, {"d": "2026-01-28", "p": 111.28, "t": 7, "w": 6}]}, {"strategy": "Cree Manual Trading", "symbol": "AUDJPY.PRO", "login": 657902, "daily": [{"d": "2026-06-15", "p": -43.87, "t": 2, "w": 0}, {"d": "2026-06-16", "p": -456.91, "t": 4, "w": 1}]}, {"strategy": "Cree Manual Trading", "symbol": "ETHUSD", "login": 657902, "daily": [{"d": "2026-05-18", "p": -5.84, "t": 2, "w": 0}, {"d": "2026-06-15", "p": 12.9, "t": 2, "w": 2}, {"d": "2026-06-18", "p": -2.16, "t": 1, "w": 0}]}, {"strategy": "Cree Manual Trading", "symbol": "EURGBP.PRO", "login": 657902, "daily": [{"d": "2026-06-18", "p": -39.55, "t": 2, "w": 0}]}, {"strategy": "Cree Manual Trading", "symbol": "EURJPY.PRO", "login": 657902, "daily": [{"d": "2026-06-17", "p": -22.55, "t": 1, "w": 0}]}, {"strategy": "Cree Manual Trading", "symbol": "EURUSD.PRO", "login": 657902, "daily": [{"d": "2026-03-02", "p": 14.4, "t": 1, "w": 1}, {"d": "2026-03-05", "p": 18.0, "t": 1, "w": 1}, {"d": "2026-03-13", "p": -408.99, "t": 1, "w": 0}, {"d": "2026-03-26", "p": 24.4, "t": 1, "w": 1}, {"d": "2026-03-27", "p": -2.2, "t": 1, "w": 0}, {"d": "2026-04-01", "p": 15.62, "t": 1, "w": 1}, {"d": "2026-04-06", "p": 61.84, "t": 2, "w": 1}, {"d": "2026-04-08", "p": 447.57, "t": 2, "w": 2}, {"d": "2026-04-09", "p": -3.6, "t": 1, "w": 0}, {"d": "2026-04-13", "p": 146.12, "t": 1, "w": 1}, {"d": "2026-04-14", "p": -34.0, "t": 1, "w": 0}, {"d": "2026-04-15", "p": -268.69, "t": 2, "w": 1}, {"d": "2026-04-16", "p": -18.0, "t": 1, "w": 0}, {"d": "2026-04-17", "p": 98.4, "t": 4, "w": 3}, {"d": "2026-04-21", "p": 11.0, "t": 1, "w": 1}, {"d": "2026-04-22", "p": -24.0, "t": 2, "w": 0}, {"d": "2026-04-29", "p": -44.0, "t": 2, "w": 1}, {"d": "2026-05-01", "p": -6.0, "t": 1, "w": 0}, {"d": "2026-05-05", "p": 65.0, "t": 1, "w": 1}, {"d": "2026-05-06", "p": -48.0, "t": 1, "w": 0}, {"d": "2026-05-07", "p": 12.0, "t": 1, "w": 1}, {"d": "2026-05-08", "p": -31.0, "t": 1, "w": 0}, {"d": "2026-05-11", "p": 3.0, "t": 2, "w": 1}, {"d": "2026-05-13", "p": -29.0, "t": 2, "w": 0}, {"d": "2026-05-14", "p": -26.0, "t": 1, "w": 0}, {"d": "2026-05-15", "p": 15.0, "t": 1, "w": 1}, {"d": "2026-05-18", "p": -44.0, "t": 1, "w": 0}, {"d": "2026-05-19", "p": 52.0, "t": 2, "w": 2}, {"d": "2026-05-20", "p": -28.0, "t": 2, "w": 0}, {"d": "2026-05-21", "p": -49.0, "t": 4, "w": 0}, {"d": "2026-05-22", "p": -88.0, "t": 2, "w": 0}, {"d": "2026-05-25", "p": 25.0, "t": 1, "w": 1}, {"d": "2026-05-26", "p": -54.0, "t": 3, "w": 0}, {"d": "2026-05-27", "p": -77.0, "t": 2, "w": 0}, {"d": "2026-05-28", "p": -89.0, "t": 1, "w": 0}, {"d": "2026-05-29", "p": 7.0, "t": 3, "w": 2}, {"d": "2026-06-01", "p": -64.0, "t": 2, "w": 0}, {"d": "2026-06-02", "p": -11.5, "t": 1, "w": 0}, {"d": "2026-06-03", "p": -14.0, "t": 2, "w": 0}, {"d": "2026-06-04", "p": -5.5, "t": 2, "w": 1}, {"d": "2026-06-05", "p": 44.0, "t": 2, "w": 2}, {"d": "2026-06-08", "p": 2.0, "t": 2, "w": 1}, {"d": "2026-06-09", "p": -26.0, "t": 1, "w": 0}, {"d": "2026-06-11", "p": -21.0, "t": 1, "w": 0}, {"d": "2026-06-12", "p": 29.0, "t": 1, "w": 1}, {"d": "2026-06-15", "p": 99.0, "t": 7, "w": 6}, {"d": "2026-06-16", "p": -173.0, "t": 6, "w": 2}, {"d": "2026-06-17", "p": -126.47, "t": 2, "w": 0}, {"d": "2026-06-18", "p": 8.0, "t": 1, "w": 1}]}, {"strategy": "Cree Manual Trading", "symbol": "GBPUSD.PRO", "login": 657902, "daily": [{"d": "2026-05-20", "p": 85.0, "t": 1, "w": 1}, {"d": "2026-05-21", "p": -160.0, "t": 3, "w": 0}, {"d": "2026-05-22", "p": -217.0, "t": 2, "w": 0}, {"d": "2026-05-25", "p": -75.0, "t": 1, "w": 0}, {"d": "2026-05-26", "p": -75.0, "t": 4, "w": 0}, {"d": "2026-05-27", "p": 5.0, "t": 1, "w": 1}, {"d": "2026-05-28", "p": -74.0, "t": 1, "w": 0}, {"d": "2026-05-29", "p": 44.0, "t": 1, "w": 1}, {"d": "2026-06-01", "p": -45.0, "t": 1, "w": 0}, {"d": "2026-06-02", "p": -8.5, "t": 1, "w": 0}, {"d": "2026-06-03", "p": -22.5, "t": 1, "w": 0}, {"d": "2026-06-04", "p": -18.0, "t": 1, "w": 0}, {"d": "2026-06-05", "p": 33.0, "t": 1, "w": 1}, {"d": "2026-06-08", "p": 36.0, "t": 2, "w": 1}, {"d": "2026-06-09", "p": -37.0, "t": 1, "w": 0}, {"d": "2026-06-11", "p": -2.0, "t": 1, "w": 0}, {"d": "2026-06-15", "p": 6.0, "t": 2, "w": 1}, {"d": "2026-06-16", "p": 40.0, "t": 3, "w": 3}, {"d": "2026-06-17", "p": 50.0, "t": 1, "w": 1}]}, {"strategy": "Cree Manual Trading", "symbol": "OILUSD.PRO", "login": 657902, "daily": [{"d": "2026-06-16", "p": -303.0, "t": 2, "w": 0}]}, {"strategy": "Cree Manual Trading", "symbol": "SOLUSD", "login": 657902, "daily": [{"d": "2026-06-17", "p": -2.54, "t": 2, "w": 0}, {"d": "2026-06-18", "p": -2.5, "t": 1, "w": 0}]}, {"strategy": "Cree Manual Trading", "symbol": "US30", "login": 657902, "daily": [{"d": "2026-06-15", "p": 55.74, "t": 3, "w": 3}, {"d": "2026-06-16", "p": 199.9, "t": 6, "w": 3}, {"d": "2026-06-17", "p": -18.92, "t": 2, "w": 1}, {"d": "2026-06-18", "p": -2.65, "t": 1, "w": 0}]}, {"strategy": "Cree Manual Trading", "symbol": "US500", "login": 657902, "daily": [{"d": "2026-06-11", "p": -0.43, "t": 1, "w": 0}, {"d": "2026-06-17", "p": 2.97, "t": 1, "w": 1}, {"d": "2026-06-18", "p": 0.74, "t": 1, "w": 1}]}, {"strategy": "Cree Manual Trading", "symbol": "USDCAD.PRO", "login": 657902, "daily": [{"d": "2026-06-18", "p": -45.31, "t": 1, "w": 0}]}, {"strategy": "Cree Manual Trading", "symbol": "USDCHF.PRO", "login": 657902, "daily": [{"d": "2026-03-26", "p": -195.57, "t": 1, "w": 0}, {"d": "2026-05-20", "p": -7.66, "t": 2, "w": 1}, {"d": "2026-05-21", "p": -48.82, "t": 1, "w": 0}, {"d": "2026-06-08", "p": -20.26, "t": 2, "w": 1}, {"d": "2026-06-18", "p": -65.52, "t": 1, "w": 0}]}, {"strategy": "Cree Manual Trading", "symbol": "USDJPY.PRO", "login": 657902, "daily": [{"d": "2026-05-19", "p": 16.26, "t": 1, "w": 1}, {"d": "2026-05-20", "p": -16.52, "t": 1, "w": 0}, {"d": "2026-05-21", "p": 54.57, "t": 2, "w": 2}, {"d": "2026-05-22", "p": -11.49, "t": 1, "w": 0}, {"d": "2026-05-26", "p": -31.36, "t": 2, "w": 0}, {"d": "2026-05-27", "p": -52.34, "t": 2, "w": 0}, {"d": "2026-05-28", "p": -11.49, "t": 1, "w": 0}, {"d": "2026-05-29", "p": 13.63, "t": 1, "w": 1}, {"d": "2026-06-01", "p": -67.86, "t": 1, "w": 0}, {"d": "2026-06-05", "p": 13.46, "t": 1, "w": 1}, {"d": "2026-06-10", "p": 5.93, "t": 1, "w": 1}, {"d": "2026-06-12", "p": -4.5, "t": 1, "w": 0}, {"d": "2026-06-15", "p": -6.32, "t": 2, "w": 1}, {"d": "2026-06-16", "p": 7.59, "t": 2, "w": 1}, {"d": "2026-06-17", "p": -51.66, "t": 4, "w": 2}]}, {"strategy": "Cree Manual Trading", "symbol": "USTEC100", "login": 657902, "daily": [{"d": "2026-06-15", "p": -1.15, "t": 1, "w": 0}, {"d": "2026-06-17", "p": 56.89, "t": 1, "w": 1}]}, {"strategy": "Cree Manual Trading", "symbol": "XAGUSD.PRO", "login": 657902, "daily": [{"d": "2026-05-28", "p": -55.31, "t": 10, "w": 4}]}, {"strategy": "Cree Manual Trading", "symbol": "XAUUSD.PRO", "login": 657902, "daily": [{"d": "2026-04-17", "p": 119.3, "t": 1, "w": 1}, {"d": "2026-05-25", "p": 69.8, "t": 1, "w": 1}, {"d": "2026-05-26", "p": -112.9, "t": 2, "w": 1}, {"d": "2026-05-27", "p": -96.2, "t": 3, "w": 1}, {"d": "2026-05-28", "p": 53.0, "t": 1, "w": 1}, {"d": "2026-06-16", "p": 1.86, "t": 1, "w": 1}, {"d": "2026-06-18", "p": 178.2, "t": 2, "w": 2}, {"d": "2026-06-19", "p": -557.6, "t": 3, "w": 1}]}, {"strategy": "Gold Talon", "symbol": "EURUSD.PRO", "login": 662437, "daily": [{"d": "2026-04-28", "p": -28.0, "t": 1, "w": 0}, {"d": "2026-05-01", "p": 4.95, "t": 1, "w": 1}, {"d": "2026-05-04", "p": -16.83, "t": 1, "w": 0}, {"d": "2026-05-05", "p": -2.83, "t": 1, "w": 0}, {"d": "2026-05-12", "p": -65.0, "t": 1, "w": 0}]}, {"strategy": "Gold Talon", "symbol": "XAUUSD.PRO", "login": 662437, "daily": [{"d": "2026-04-09", "p": -3.72, "t": 2, "w": 1}, {"d": "2026-04-10", "p": 166.5, "t": 2, "w": 2}, {"d": "2026-04-13", "p": 80.82, "t": 1, "w": 1}, {"d": "2026-04-14", "p": -166.31, "t": 2, "w": 0}, {"d": "2026-04-15", "p": -5.6, "t": 2, "w": 1}, {"d": "2026-04-16", "p": 80.61, "t": 3, "w": 2}, {"d": "2026-04-17", "p": -252.51, "t": 3, "w": 0}, {"d": "2026-04-20", "p": -85.2, "t": 1, "w": 0}, {"d": "2026-04-21", "p": -48.7, "t": 1, "w": 0}, {"d": "2026-04-22", "p": -84.0, "t": 1, "w": 0}, {"d": "2026-04-27", "p": -67.17, "t": 1, "w": 0}, {"d": "2026-05-07", "p": 180.36, "t": 1, "w": 1}, {"d": "2026-05-12", "p": -2.96, "t": 1, "w": 0}, {"d": "2026-05-15", "p": 167.46, "t": 2, "w": 2}, {"d": "2026-05-19", "p": 82.65, "t": 1, "w": 1}, {"d": "2026-05-26", "p": -54.72, "t": 1, "w": 0}, {"d": "2026-05-27", "p": -23.46, "t": 3, "w": 1}, {"d": "2026-05-28", "p": 27.99, "t": 2, "w": 1}, {"d": "2026-05-29", "p": 203.86, "t": 1, "w": 1}, {"d": "2026-06-01", "p": -54.9, "t": 1, "w": 0}, {"d": "2026-06-02", "p": 0.12, "t": 1, "w": 1}, {"d": "2026-06-03", "p": -47.34, "t": 1, "w": 0}, {"d": "2026-06-09", "p": -25.95, "t": 3, "w": 1}, {"d": "2026-06-15", "p": 72.03, "t": 1, "w": 1}, {"d": "2026-06-16", "p": 1.68, "t": 1, "w": 1}, {"d": "2026-06-18", "p": 25.68, "t": 2, "w": 1}, {"d": "2026-06-19", "p": 103.38, "t": 3, "w": 2}, {"d": "2026-06-23", "p": -23.73, "t": 3, "w": 1}]}, {"strategy": "T&D19 V2 USDJPY MOL", "symbol": "USDJPY", "login": 42817, "daily": [{"d": "2026-05-14", "p": 350.78, "t": 1, "w": 1}, {"d": "2026-05-15", "p": 33.69, "t": 1, "w": 1}, {"d": "2026-05-18", "p": 6.07, "t": 1, "w": 1}, {"d": "2026-05-19", "p": 52.1, "t": 1, "w": 1}, {"d": "2026-05-20", "p": 34.11, "t": 1, "w": 1}, {"d": "2026-05-21", "p": 21.82, "t": 1, "w": 1}, {"d": "2026-05-22", "p": 8.36, "t": 1, "w": 1}, {"d": "2026-05-27", "p": 8.09, "t": 1, "w": 1}, {"d": "2026-05-28", "p": 7.51, "t": 1, "w": 1}, {"d": "2026-05-29", "p": 6.86, "t": 1, "w": 1}, {"d": "2026-06-01", "p": 8.82, "t": 1, "w": 1}, {"d": "2026-06-02", "p": 6.25, "t": 1, "w": 1}, {"d": "2026-06-03", "p": 28.7, "t": 1, "w": 1}, {"d": "2026-06-04", "p": 256.64, "t": 1, "w": 1}, {"d": "2026-06-05", "p": 8.15, "t": 1, "w": 1}, {"d": "2026-06-08", "p": 45.33, "t": 1, "w": 1}, {"d": "2026-06-09", "p": 16.35, "t": 1, "w": 1}, {"d": "2026-06-10", "p": 7.44, "t": 1, "w": 1}, {"d": "2026-06-11", "p": -99.23, "t": 1, "w": 0}, {"d": "2026-06-12", "p": -187.13, "t": 1, "w": 0}, {"d": "2026-06-15", "p": 16.67, "t": 1, "w": 1}, {"d": "2026-06-16", "p": 7.84, "t": 1, "w": 1}, {"d": "2026-06-17", "p": 17.1, "t": 1, "w": 1}, {"d": "2026-06-18", "p": 6.0, "t": 1, "w": 1}, {"d": "2026-06-19", "p": -208.57, "t": 1, "w": 0}]}, {"strategy": "T&D19 V2 USDJPY PROP", "symbol": "USDJPY", "login": 39479, "daily": [{"d": "2026-05-21", "p": 6.25, "t": 1, "w": 1}, {"d": "2026-05-22", "p": 2.44, "t": 1, "w": 1}, {"d": "2026-06-12", "p": -56.6, "t": 1, "w": 0}, {"d": "2026-06-16", "p": 2.39, "t": 1, "w": 1}, {"d": "2026-06-17", "p": 5.33, "t": 1, "w": 1}]}, {"strategy": "T&D60", "symbol": "AUDUSD.pro", "login": 42818, "daily": [{"d": "2026-01-12", "p": -18.81, "t": 1, "w": 0}, {"d": "2026-01-21", "p": -12.54, "t": 2, "w": 0}, {"d": "2026-01-22", "p": -67.07, "t": 1, "w": 0}, {"d": "2026-02-04", "p": 3.8, "t": 1, "w": 1}, {"d": "2026-02-09", "p": -98.61, "t": 1, "w": 0}, {"d": "2026-02-10", "p": 1.52, "t": 1, "w": 1}, {"d": "2026-02-11", "p": 1.71, "t": 1, "w": 1}, {"d": "2026-02-12", "p": 1.52, "t": 1, "w": 1}, {"d": "2026-03-09", "p": 1.71, "t": 1, "w": 1}, {"d": "2026-03-17", "p": -146.76, "t": 2, "w": 1}, {"d": "2026-03-18", "p": 5.32, "t": 1, "w": 1}, {"d": "2026-03-24", "p": 4.56, "t": 1, "w": 1}, {"d": "2026-03-25", "p": 6.84, "t": 1, "w": 1}, {"d": "2026-03-31", "p": 5.13, "t": 2, "w": 2}, {"d": "2026-04-01", "p": 2.28, "t": 1, "w": 1}, {"d": "2026-04-02", "p": 1.52, "t": 1, "w": 1}, {"d": "2026-04-08", "p": 3.42, "t": 2, "w": 2}, {"d": "2026-04-09", "p": 1.9, "t": 1, "w": 1}, {"d": "2026-04-13", "p": 1.52, "t": 1, "w": 1}, {"d": "2026-04-14", "p": -30.78, "t": 1, "w": 0}, {"d": "2026-04-15", "p": 1.26, "t": 1, "w": 1}, {"d": "2026-04-16", "p": 1.8, "t": 1, "w": 1}, {"d": "2026-04-20", "p": 0.9, "t": 1, "w": 1}, {"d": "2026-04-21", "p": 2.7, "t": 1, "w": 1}]}, {"strategy": "T&D60", "symbol": "EURUSD.pro", "login": 42818, "daily": [{"d": "2026-01-08", "p": 8.16, "t": 1, "w": 1}, {"d": "2026-01-09", "p": 4.32, "t": 1, "w": 1}, {"d": "2026-01-13", "p": 7.68, "t": 1, "w": 1}, {"d": "2026-01-14", "p": 12.0, "t": 2, "w": 2}, {"d": "2026-01-15", "p": 3.84, "t": 1, "w": 1}, {"d": "2026-01-19", "p": 25.97, "t": 2, "w": 2}, {"d": "2026-01-20", "p": 4.41, "t": 1, "w": 1}, {"d": "2026-01-21", "p": 7.2, "t": 1, "w": 1}, {"d": "2026-01-22", "p": 3.76, "t": 1, "w": 1}, {"d": "2026-02-04", "p": 4.23, "t": 1, "w": 1}, {"d": "2026-02-05", "p": 4.32, "t": 1, "w": 1}, {"d": "2026-02-06", "p": 7.2, "t": 1, "w": 1}, {"d": "2026-02-09", "p": 15.51, "t": 1, "w": 1}, {"d": "2026-02-10", "p": 8.93, "t": 1, "w": 1}, {"d": "2026-02-11", "p": 7.68, "t": 1, "w": 1}, {"d": "2026-03-16", "p": 4.32, "t": 1, "w": 1}, {"d": "2026-03-17", "p": 7.52, "t": 1, "w": 1}, {"d": "2026-03-18", "p": 3.84, "t": 1, "w": 1}, {"d": "2026-03-19", "p": 8.64, "t": 1, "w": 1}, {"d": "2026-03-20", "p": 10.56, "t": 1, "w": 1}, {"d": "2026-03-23", "p": 5.32, "t": 2, "w": 2}, {"d": "2026-03-24", "p": 43.2, "t": 1, "w": 1}, {"d": "2026-03-25", "p": -15.19, "t": 1, "w": 0}, {"d": "2026-03-26", "p": 3.92, "t": 1, "w": 1}, {"d": "2026-03-27", "p": 4.9, "t": 1, "w": 1}, {"d": "2026-03-30", "p": 5.39, "t": 1, "w": 1}, {"d": "2026-03-31", "p": 4.41, "t": 1, "w": 1}, {"d": "2026-04-01", "p": 5.5, "t": 1, "w": 1}, {"d": "2026-04-02", "p": 3.92, "t": 1, "w": 1}, {"d": "2026-04-03", "p": 26.4, "t": 1, "w": 1}, {"d": "2026-04-06", "p": 4.41, "t": 1, "w": 1}, {"d": "2026-04-07", "p": 1.96, "t": 1, "w": 1}, {"d": "2026-04-08", "p": 10.29, "t": 1, "w": 1}, {"d": "2026-04-09", "p": 4.41, "t": 1, "w": 1}, {"d": "2026-04-10", "p": 16.17, "t": 1, "w": 1}, {"d": "2026-04-13", "p": -250.88, "t": 1, "w": 0}, {"d": "2026-04-14", "p": -13.5, "t": 1, "w": 0}, {"d": "2026-04-15", "p": 8.55, "t": 1, "w": 1}, {"d": "2026-04-16", "p": 25.65, "t": 1, "w": 1}, {"d": "2026-04-17", "p": 14.85, "t": 1, "w": 1}, {"d": "2026-04-20", "p": 4.05, "t": 1, "w": 1}, {"d": "2026-04-21", "p": 135.0, "t": 1, "w": 1}, {"d": "2026-04-22", "p": 3.76, "t": 1, "w": 1}, {"d": "2026-04-23", "p": 4.23, "t": 1, "w": 1}, {"d": "2026-04-24", "p": 5.85, "t": 1, "w": 1}, {"d": "2026-04-27", "p": 11.05, "t": 1, "w": 1}, {"d": "2026-04-28", "p": 14.52, "t": 1, "w": 1}, {"d": "2026-04-29", "p": 5.28, "t": 1, "w": 1}, {"d": "2026-04-30", "p": 5.94, "t": 1, "w": 1}, {"d": "2026-05-04", "p": 5.28, "t": 1, "w": 1}, {"d": "2026-05-05", "p": 5.94, "t": 1, "w": 1}, {"d": "2026-05-06", "p": 5.28, "t": 1, "w": 1}, {"d": "2026-05-07", "p": 5.94, "t": 1, "w": 1}, {"d": "2026-05-08", "p": 5.94, "t": 1, "w": 1}, {"d": "2026-05-11", "p": 5.94, "t": 1, "w": 1}, {"d": "2026-05-12", "p": 15.18, "t": 1, "w": 1}, {"d": "2026-05-13", "p": 5.94, "t": 1, "w": 1}, {"d": "2026-05-14", "p": 5.94, "t": 1, "w": 1}, {"d": "2026-05-15", "p": 5.28, "t": 1, "w": 1}, {"d": "2026-05-18", "p": 5.36, "t": 1, "w": 1}, {"d": "2026-05-19", "p": -57.62, "t": 1, "w": 0}, {"d": "2026-05-20", "p": 9.52, "t": 1, "w": 1}, {"d": "2026-05-21", "p": -238.0, "t": 1, "w": 0}, {"d": "2026-05-22", "p": -0.65, "t": 1, "w": 0}]}, {"strategy": "T&D60", "symbol": "GBPUSD.pro", "login": 42818, "daily": [{"d": "2026-01-16", "p": 0.39, "t": 2, "w": 1}, {"d": "2026-01-19", "p": 6.63, "t": 1, "w": 1}, {"d": "2026-02-04", "p": 4.56, "t": 1, "w": 1}, {"d": "2026-03-09", "p": 17.55, "t": 1, "w": 1}, {"d": "2026-03-16", "p": 4.29, "t": 1, "w": 1}, {"d": "2026-03-18", "p": 10.26, "t": 1, "w": 1}, {"d": "2026-03-19", "p": 3.51, "t": 1, "w": 1}, {"d": "2026-03-20", "p": 4.29, "t": 1, "w": 1}, {"d": "2026-03-25", "p": 9.36, "t": 1, "w": 1}, {"d": "2026-03-26", "p": 4.29, "t": 1, "w": 1}, {"d": "2026-03-27", "p": 5.07, "t": 1, "w": 1}, {"d": "2026-03-30", "p": 3.51, "t": 1, "w": 1}, {"d": "2026-04-01", "p": 6.8, "t": 1, "w": 1}, {"d": "2026-04-02", "p": 11.31, "t": 1, "w": 1}, {"d": "2026-04-03", "p": -28.86, "t": 1, "w": 0}, {"d": "2026-04-06", "p": 21.06, "t": 1, "w": 1}, {"d": "2026-04-08", "p": 11.31, "t": 1, "w": 1}, {"d": "2026-04-09", "p": 3.6, "t": 1, "w": 1}, {"d": "2026-04-10", "p": 3.9, "t": 1, "w": 1}, {"d": "2026-04-13", "p": 6.8, "t": 1, "w": 1}, {"d": "2026-04-15", "p": 3.96, "t": 1, "w": 1}, {"d": "2026-04-16", "p": -69.19, "t": 1, "w": 0}, {"d": "2026-04-17", "p": 3.96, "t": 1, "w": 1}, {"d": "2026-04-20", "p": 4.68, "t": 1, "w": 1}, {"d": "2026-05-18", "p": 31.92, "t": 1, "w": 1}, {"d": "2026-05-20", "p": 50.16, "t": 1, "w": 1}]}, {"strategy": "T&D60", "symbol": "USDCAD.pro", "login": 42818, "daily": [{"d": "2026-01-08", "p": -57.36, "t": 1, "w": 0}, {"d": "2026-01-13", "p": 6.06, "t": 1, "w": 1}, {"d": "2026-01-14", "p": -30.93, "t": 1, "w": 0}, {"d": "2026-01-15", "p": 8.55, "t": 1, "w": 1}, {"d": "2026-01-20", "p": 6.5, "t": 1, "w": 1}, {"d": "2026-01-21", "p": -103.56, "t": 1, "w": 0}, {"d": "2026-01-22", "p": 11.54, "t": 1, "w": 1}, {"d": "2026-02-04", "p": 7.17, "t": 1, "w": 1}, {"d": "2026-02-05", "p": 5.93, "t": 1, "w": 1}, {"d": "2026-02-10", "p": 9.7, "t": 1, "w": 1}, {"d": "2026-02-11", "p": 31.86, "t": 1, "w": 1}, {"d": "2026-02-12", "p": 9.08, "t": 1, "w": 1}, {"d": "2026-03-17", "p": 6.14, "t": 1, "w": 1}, {"d": "2026-03-18", "p": 15.11, "t": 1, "w": 1}, {"d": "2026-03-19", "p": 12.67, "t": 1, "w": 1}, {"d": "2026-03-24", "p": 5.27, "t": 1, "w": 1}, {"d": "2026-03-25", "p": 4.42, "t": 1, "w": 1}, {"d": "2026-03-26", "p": 8.6, "t": 1, "w": 1}, {"d": "2026-03-31", "p": 6.46, "t": 1, "w": 1}, {"d": "2026-04-01", "p": 8.85, "t": 1, "w": 1}, {"d": "2026-04-02", "p": 7.71, "t": 1, "w": 1}, {"d": "2026-04-07", "p": -2.92, "t": 1, "w": 0}, {"d": "2026-04-08", "p": 5.23, "t": 1, "w": 1}, {"d": "2026-04-09", "p": -61.84, "t": 1, "w": 0}, {"d": "2026-04-14", "p": -69.09, "t": 1, "w": 0}, {"d": "2026-04-15", "p": 5.68, "t": 1, "w": 1}, {"d": "2026-04-16", "p": 9.64, "t": 1, "w": 1}, {"d": "2026-04-21", "p": 16.02, "t": 1, "w": 1}, {"d": "2026-04-22", "p": 15.99, "t": 1, "w": 1}, {"d": "2026-04-23", "p": 7.17, "t": 1, "w": 1}, {"d": "2026-04-28", "p": 5.95, "t": 1, "w": 1}, {"d": "2026-04-29", "p": 20.03, "t": 1, "w": 1}, {"d": "2026-04-30", "p": -58.67, "t": 1, "w": 0}, {"d": "2026-05-05", "p": 5.96, "t": 1, "w": 1}, {"d": "2026-05-06", "p": 7.21, "t": 1, "w": 1}, {"d": "2026-05-07", "p": 11.9, "t": 1, "w": 1}, {"d": "2026-05-12", "p": 16.76, "t": 1, "w": 1}, {"d": "2026-05-13", "p": 5.92, "t": 1, "w": 1}, {"d": "2026-05-14", "p": 8.58, "t": 1, "w": 1}, {"d": "2026-05-19", "p": 20.66, "t": 1, "w": 1}, {"d": "2026-05-20", "p": 5.48, "t": 1, "w": 1}, {"d": "2026-05-21", "p": 10.74, "t": 1, "w": 1}]}, {"strategy": "T&D60", "symbol": "USDJPY.pro", "login": 42818, "daily": [{"d": "2026-01-08", "p": -6.64, "t": 1, "w": 0}, {"d": "2026-01-09", "p": -18.85, "t": 1, "w": 0}, {"d": "2026-01-13", "p": 4.26, "t": 1, "w": 1}, {"d": "2026-01-14", "p": 15.36, "t": 1, "w": 1}, {"d": "2026-01-15", "p": 7.87, "t": 1, "w": 1}, {"d": "2026-01-16", "p": 10.19, "t": 1, "w": 1}, {"d": "2026-01-20", "p": 7.72, "t": 1, "w": 1}, {"d": "2026-01-21", "p": 7.71, "t": 1, "w": 1}, {"d": "2026-01-22", "p": -79.31, "t": 1, "w": 0}, {"d": "2026-01-23", "p": 32.16, "t": 1, "w": 1}, {"d": "2026-02-05", "p": 29.98, "t": 1, "w": 1}, {"d": "2026-02-06", "p": 9.11, "t": 1, "w": 1}, {"d": "2026-02-10", "p": 15.46, "t": 1, "w": 1}, {"d": "2026-02-11", "p": 15.3, "t": 1, "w": 1}, {"d": "2026-02-12", "p": 6.56, "t": 1, "w": 1}, {"d": "2026-03-17", "p": 9.46, "t": 1, "w": 1}, {"d": "2026-03-18", "p": 13.15, "t": 1, "w": 1}, {"d": "2026-03-19", "p": 18.57, "t": 1, "w": 1}, {"d": "2026-03-20", "p": 7.58, "t": 1, "w": 1}, {"d": "2026-03-24", "p": -22.3, "t": 1, "w": 0}, {"d": "2026-03-25", "p": 7.35, "t": 1, "w": 1}, {"d": "2026-03-26", "p": -24.59, "t": 1, "w": 0}, {"d": "2026-03-27", "p": 17.94, "t": 1, "w": 1}, {"d": "2026-03-31", "p": 9.29, "t": 1, "w": 1}, {"d": "2026-04-01", "p": 8.35, "t": 1, "w": 1}, {"d": "2026-04-02", "p": -102.7, "t": 1, "w": 0}, {"d": "2026-04-03", "p": -29.87, "t": 1, "w": 0}, {"d": "2026-04-07", "p": -19.89, "t": 1, "w": 0}, {"d": "2026-04-08", "p": 17.73, "t": 1, "w": 1}, {"d": "2026-04-09", "p": 24.36, "t": 1, "w": 1}, {"d": "2026-04-10", "p": 9.66, "t": 1, "w": 1}, {"d": "2026-04-14", "p": -48.04, "t": 1, "w": 0}, {"d": "2026-04-15", "p": 12.95, "t": 1, "w": 1}, {"d": "2026-04-16", "p": 5.87, "t": 1, "w": 1}, {"d": "2026-04-17", "p": -19.37, "t": 1, "w": 0}, {"d": "2026-04-21", "p": -18.18, "t": 1, "w": 0}, {"d": "2026-04-22", "p": 6.91, "t": 1, "w": 1}, {"d": "2026-04-23", "p": -39.33, "t": 1, "w": 0}, {"d": "2026-04-24", "p": 2.55, "t": 1, "w": 1}, {"d": "2026-04-28", "p": 7.67, "t": 1, "w": 1}, {"d": "2026-04-29", "p": 10.87, "t": 1, "w": 1}, {"d": "2026-04-30", "p": 7.79, "t": 1, "w": 1}, {"d": "2026-05-01", "p": 14.64, "t": 1, "w": 1}, {"d": "2026-05-05", "p": 6.68, "t": 1, "w": 1}, {"d": "2026-05-06", "p": -52.68, "t": 1, "w": 0}, {"d": "2026-05-07", "p": 18.9, "t": 1, "w": 1}, {"d": "2026-05-08", "p": -25.49, "t": 1, "w": 0}, {"d": "2026-05-12", "p": -37.85, "t": 1, "w": 0}, {"d": "2026-05-13", "p": 8.74, "t": 1, "w": 1}, {"d": "2026-05-14", "p": -14.85, "t": 1, "w": 0}, {"d": "2026-05-15", "p": 9.33, "t": 1, "w": 1}, {"d": "2026-05-19", "p": 10.14, "t": 1, "w": 1}, {"d": "2026-05-20", "p": 16.68, "t": 1, "w": 1}, {"d": "2026-05-21", "p": 6.55, "t": 1, "w": 1}, {"d": "2026-05-22", "p": 13.83, "t": 1, "w": 1}]}];
 const LIVE_COLORS = ["#58a6ff", "#3fb950", "#f0883e", "#d2a8ff", "#ff7b72", "#79c0ff", "#7ee787", "#e3b341", "#da3633", "#56d364"];
 
 
@@ -537,11 +687,13 @@ function computeMetrics(combos){
     const n = c.daily.reduce((s,d) => s + d.t, 0);
     const wins = c.daily.reduce((s,d) => s + d.w, 0);
     const total = pnls.reduce((s,v) => s+v, 0);
-    const retPct = total / STARTING_EQ * 100;
+    // Real per-account starting balance (denominator for DD%/return%).
+    const eqBase = (metaByLogin[c.login] && metaByLogin[c.login].start_bal) || STARTING_EQ;
+    const retPct = total / eqBase * 100;
 
     // Max DD
-    let peak = STARTING_EQ, maxDd = 0;
-    let eq = STARTING_EQ;
+    let peak = eqBase, maxDd = 0;
+    let eq = eqBase;
     for(const p of pnls){ eq += p; if(eq > peak) peak = eq; const dd = (peak-eq)/peak*100; if(dd > maxDd) maxDd = dd; }
 
     // Profit factor
@@ -550,7 +702,7 @@ function computeMetrics(combos){
     const pf = gl > 0 ? gp/gl : 99.0;
 
     // Sharpe
-    const dr = pnls.map(p => p/STARTING_EQ);
+    const dr = pnls.map(p => p/eqBase);
     const mean = dr.reduce((s,v)=>s+v,0)/dr.length;
     const std = Math.sqrt(dr.reduce((s,v)=>s+(v-mean)**2,0)/(dr.length-1||1));
     const sharpe = std > 0 ? (mean/std)*Math.sqrt(252) : 0;
@@ -561,7 +713,7 @@ function computeMetrics(combos){
     for(const d of c.daily){
       cum += d.p;
       dates.push(d.d);
-      cumPct.push(Math.round(((STARTING_EQ+cum)/STARTING_EQ-1)*10000)/100);
+      cumPct.push(Math.round(((eqBase+cum)/eqBase-1)*10000)/100);
     }
 
     return {
@@ -628,7 +780,7 @@ const liveOpts = {
     y:{title:{display:true,text:'Cumulative P&L ($)',color:'#8b949e'},ticks:{color:'#8b949e',callback:v=>'$'+v.toLocaleString()},grid:{color:'#21262d'}}
   }
 };
-let liveChart = new Chart(document.getElementById('liveChart'),{type:'line',data:{labels:["2026-01-05", "2026-01-07", "2026-01-08", "2026-01-09", "2026-01-12", "2026-01-13", "2026-01-14", "2026-01-15", "2026-01-16", "2026-01-19", "2026-01-20", "2026-01-21", "2026-01-22", "2026-01-23", "2026-01-27", "2026-01-28", "2026-02-03", "2026-02-04", "2026-02-05", "2026-02-06", "2026-02-09", "2026-02-10", "2026-02-11", "2026-02-12", "2026-02-13", "2026-02-17", "2026-02-18", "2026-02-19", "2026-02-20", "2026-02-23", "2026-02-25", "2026-02-26", "2026-02-27", "2026-03-02", "2026-03-04", "2026-03-05", "2026-03-06", "2026-03-09", "2026-03-10", "2026-03-11", "2026-03-13", "2026-03-16", "2026-03-17", "2026-03-18", "2026-03-19", "2026-03-20", "2026-03-23", "2026-03-24", "2026-03-25", "2026-03-26", "2026-03-27", "2026-03-30", "2026-03-31", "2026-04-01", "2026-04-02", "2026-04-03", "2026-04-06", "2026-04-08", "2026-04-09", "2026-04-10", "2026-04-13", "2026-04-14", "2026-04-15", "2026-04-16", "2026-04-17", "2026-04-20", "2026-04-21", "2026-04-22", "2026-04-23", "2026-04-27", "2026-04-28", "2026-04-29", "2026-04-30", "2026-05-01", "2026-05-04", "2026-05-05", "2026-05-06", "2026-05-07", "2026-05-08", "2026-05-11", "2026-05-12", "2026-05-13", "2026-05-14", "2026-05-15", "2026-05-18", "2026-05-19", "2026-05-20", "2026-05-21", "2026-05-22", "2026-05-25", "2026-05-26", "2026-05-27", "2026-05-28", "2026-05-29", "2026-06-01", "2026-06-02", "2026-06-03", "2026-06-04", "2026-06-05", "2026-06-08", "2026-06-09", "2026-06-10", "2026-06-11", "2026-06-12", "2026-06-15", "2026-06-16", "2026-06-17", "2026-06-18", "2026-06-19"],datasets:[{"label": "Axis Rotation + Fx RSI (multi-symbol) (32983)", "data": [226.52, 291.75, null, null, 437.41, -298.58, 33.21, null, 53.65, null, null, null, null, null, -48.83, 62.45, 246.45, null, 521.7, 409.42, 989.3, null, null, null, 331.12, 583.12, null, null, 675.62, null, 531.56, 396.73, 633.53, 875.27, 1108.03, 813.47, 914.15, 1434.25, 1241.05, 1425.45, null, 1564.28, null, 1574.4, null, null, 2237.0, null, null, 1451.12, 1872.83, null, 1687.21, 1257.93, 1092.66, null, 987.61, null, null, 1100.19, 915.96, 922.08, null, 831.06, null, 1095.45, null, null, null, null, null, null, null, 1102.82, null, null, null, null, 1355.76, null, 1328.66, null, null, null, null, null, 1487.51, null, 1487.51, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], "borderColor": "#58a6ff", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "T&D19 V2 USDJPY MOL (42817)", "data": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 350.78, 384.47, 390.54, 442.64, 476.75, 498.57, 506.93, null, null, 515.02, 522.53, 529.39, 538.21, 544.46, 573.16, 829.8, 837.95, 883.28, 899.63, 907.07, 807.84, 620.71, 637.38, 645.22, 662.32, 668.32, 459.75], "borderColor": "#3fb950", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "Axis Rotation (multi-symbol) (45215)", "data": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -37.98, null, null, -117.4, -267.76, -235.52, null, 60.5, 119.9, -49.62, 45.62, 72.06, 128.32, 36.36, null, -66.38, -106.54, -218.22, null, 44.32, 168.26, 163.28, null, null, null, null, 52.4, -116.48, 89.92, 266.04, 366.66, 419.7, 302.63, 255.11, null, null, null, 291.83, 437.75, null, null, null, null, 436.4, null, null, 234.72, null, null, null, 280.3, null, null, 279.74, 279.58, 239.26, 82.3, null, null, null, null, null, null, null, null, 126.86, null, 210.7, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], "borderColor": "#f0883e", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "Gold Talon (662437)", "data": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -3.72, 162.78, 243.6, 77.29, 71.69, 152.3, -100.21, -185.41, -234.11, -318.11, null, -385.28, -413.28, null, null, -408.33, -425.16, -427.99, null, -247.63, null, null, -315.59, null, null, -148.13, null, -65.48, null, null, null, null, -120.2, -143.66, -115.67, 88.19, 33.29, 33.41, -13.93, null, null, null, -39.88, null, null, null, 32.15, 33.83, null, 59.51, 162.89], "borderColor": "#d2a8ff", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "Manual Trading (Diego) (639884)", "data": [null, null, 58.92, null, null, null, 29.2, 7.24, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], "borderColor": "#ff7b72", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "T&D19 V2 USDJPY PROP (39479)", "data": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 15.26, 25.23, 31.48, 33.92, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -22.68, null, -20.29, -14.96, null, null], "borderColor": "#79c0ff", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "T&D60 (42818)", "data": [null, null, -55.84, -70.37, -89.18, -71.18, -74.75, -54.49, -43.91, -11.31, 7.32, -93.87, -224.95, -192.79, null, null, null, -173.03, -132.8, -116.49, -199.59, -163.98, -107.43, -90.27, null, null, null, null, null, null, null, null, null, null, null, null, null, -71.01, null, null, null, -62.4, -186.04, -138.36, -94.97, -72.54, -67.22, -36.49, -23.71, -31.49, -3.58, 5.32, 30.61, 62.39, -15.85, -48.18, -27.12, null, null, null, -269.68, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -270.01, -255.4, -218.12, -244.94, -163.1, -383.81, -370.63, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], "borderColor": "#7ee787", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "Cree Manual Trading (657902)", "data": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 14.4, null, 32.4, null, null, null, null, -376.59, null, null, null, null, null, null, null, null, -547.76, -549.96, null, null, -534.34, null, null, -472.5, -24.93, -28.53, null, 117.59, 83.59, -185.1, -203.1, 14.6, null, 25.6, 1.6, null, null, null, -42.4, null, -48.4, null, 16.6, -31.4, -19.4, -50.4, -47.4, null, -76.4, -102.4, -87.4, -137.24, -68.98, -36.16, -239.41, -555.9, -536.1, -809.36, -1029.9, -1206.7, -1142.07, -1318.93, -1338.93, -1375.43, -1398.93, -1308.47, -1290.73, -1353.73, -1347.8, -1371.23, -1346.73, -1224.43, -1907.99, -2020.27, -1991.02, -2548.62], "borderColor": "#e3b341", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}]},options:liveOpts});
+let liveChart = new Chart(document.getElementById('liveChart'),{type:'line',data:{labels:["2026-01-05", "2026-01-07", "2026-01-08", "2026-01-09", "2026-01-12", "2026-01-13", "2026-01-14", "2026-01-15", "2026-01-16", "2026-01-19", "2026-01-20", "2026-01-21", "2026-01-22", "2026-01-23", "2026-01-27", "2026-01-28", "2026-02-03", "2026-02-04", "2026-02-05", "2026-02-06", "2026-02-09", "2026-02-10", "2026-02-11", "2026-02-12", "2026-02-13", "2026-02-17", "2026-02-18", "2026-02-19", "2026-02-20", "2026-02-23", "2026-02-25", "2026-02-26", "2026-02-27", "2026-03-02", "2026-03-04", "2026-03-05", "2026-03-06", "2026-03-09", "2026-03-10", "2026-03-11", "2026-03-13", "2026-03-16", "2026-03-17", "2026-03-18", "2026-03-19", "2026-03-20", "2026-03-23", "2026-03-24", "2026-03-25", "2026-03-26", "2026-03-27", "2026-03-30", "2026-03-31", "2026-04-01", "2026-04-02", "2026-04-03", "2026-04-06", "2026-04-07", "2026-04-08", "2026-04-09", "2026-04-10", "2026-04-13", "2026-04-14", "2026-04-15", "2026-04-16", "2026-04-17", "2026-04-20", "2026-04-21", "2026-04-22", "2026-04-23", "2026-04-24", "2026-04-27", "2026-04-28", "2026-04-29", "2026-04-30", "2026-05-01", "2026-05-04", "2026-05-05", "2026-05-06", "2026-05-07", "2026-05-08", "2026-05-11", "2026-05-12", "2026-05-13", "2026-05-14", "2026-05-15", "2026-05-18", "2026-05-19", "2026-05-20", "2026-05-21", "2026-05-22", "2026-05-25", "2026-05-26", "2026-05-27", "2026-05-28", "2026-05-29", "2026-06-01", "2026-06-02", "2026-06-03", "2026-06-04", "2026-06-05", "2026-06-08", "2026-06-09", "2026-06-10", "2026-06-11", "2026-06-12", "2026-06-15", "2026-06-16", "2026-06-17", "2026-06-18", "2026-06-19", "2026-06-22", "2026-06-23"],datasets:[{"label": "Axis Rotation + Fx RSI (multi-symbol) (32983)", "data": [226.52, 291.75, null, null, 437.41, -298.58, 33.21, null, 53.65, null, null, null, null, null, -48.83, 62.45, 246.45, null, 521.7, 409.42, 989.3, null, null, null, 331.12, 583.12, null, null, 675.62, null, 531.56, 396.73, 633.53, 875.27, 1108.03, 813.47, 914.15, 1434.25, 1241.05, 1425.45, null, 1564.28, null, 1574.4, null, null, 2237.0, null, null, 1451.12, 1872.83, null, 1687.21, 1257.93, 1092.66, null, 987.61, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], "borderColor": "#58a6ff", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "T&D19 V2 USDJPY MOL (42817)", "data": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 350.78, 384.47, 390.54, 442.64, 476.75, 498.57, 506.93, null, null, 515.02, 522.53, 529.39, 538.21, 544.46, 573.16, 829.8, 837.95, 883.28, 899.63, 907.07, 807.84, 620.71, 637.38, 645.22, 662.32, 668.32, 459.75, null, null], "borderColor": "#3fb950", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "Axis Rotation (multi-symbol) (45215)", "data": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -37.98, null, null, -117.4, -267.76, -235.52, null, 60.5, 119.9, -49.62, 45.62, 72.06, 128.32, 36.36, null, -66.38, -106.54, -218.22, null, 44.32, 168.26, 163.28, null, null, null, null, 52.4, -116.48, 89.92, 266.04, 366.66, 419.7, 302.63, 255.11, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], "borderColor": "#f0883e", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "Gold Talon (662437)", "data": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -3.72, 162.78, 243.6, 77.29, 71.69, 152.3, -100.21, -185.41, -234.11, -318.11, null, null, -385.28, -413.28, null, null, -408.33, -425.16, -427.99, null, -247.63, null, null, -315.59, null, null, -148.13, null, -65.48, null, null, null, null, -120.2, -143.66, -115.67, 88.19, 33.29, 33.41, -13.93, null, null, null, -39.88, null, null, null, 32.15, 33.83, null, 59.51, 162.89, null, 139.16], "borderColor": "#d2a8ff", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "T&D19 V2 USDJPY PROP (39479)", "data": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 6.25, 8.69, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -47.91, null, -45.52, -40.19, null, null, null, null], "borderColor": "#ff7b72", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "Agg V1 Pro XAUUSD (662435)", "data": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -121.77, -124.52, -184.87, null, null, -186.57, null, null, -85.17, null, null, -85.02, null, -173.02, null, -215.22, -129.77], "borderColor": "#79c0ff", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "T&D60 (42818)", "data": [null, null, -55.84, -70.37, -89.18, -71.18, -74.75, -54.49, -43.91, -11.31, 7.32, -93.87, -224.95, -192.79, null, null, null, -173.03, -132.8, -116.49, -199.59, -163.98, -107.43, -90.27, null, null, null, null, null, null, null, null, null, null, null, null, null, -71.01, null, null, null, -62.4, -186.04, -138.36, -94.97, -72.54, -67.22, -36.49, -23.71, -31.49, -3.58, 5.32, 30.61, 62.39, -15.85, -48.18, -22.71, -43.56, 4.42, -23.15, 6.58, -235.98, -397.39, -364.99, -391.22, -391.78, -382.15, -246.61, -219.95, -247.88, -239.48, -228.43, -200.29, -164.11, -209.05, -194.41, -189.13, -170.55, -210.74, -174.0, -193.55, -187.61, -193.52, -172.92, -173.25, -158.64, -121.36, -148.18, -66.34, -287.05, -273.87, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], "borderColor": "#7ee787", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "Axis GBPUSD (45215)", "data": [-126.55, null, -75.37, -179.58, null, -298.85, -25.6, null, null, null, 110.02, null, null, -849.25, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -812.53, -666.61, null, null, null, null, -667.96, null, null, -869.64, null, null, null, null, -824.06, null, null, -824.62, -824.78, -865.1, -1022.06, null, null, null, null, null, null, null, null, -977.5, null, -893.66, null, null, null, null, -897.62, null, null, null, -1145.67, null, null, -1120.83, null, null, null, null, null, null, null, null, null], "borderColor": "#e3b341", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "Agg V1 NZDJPY (54285)", "data": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 72.78, 19.44, null, null, -1196.67, null, null, null, null, null, null, null, null, null, null, -1196.35, null], "borderColor": "#da3633", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "Agg V1 AUDUSD (54284)", "data": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 150.42, null, null, -1365.77, null, null, null, null, null, null, -1374.14, -1363.63, null, -1372.21, -1381.68, null], "borderColor": "#56d364", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "Cree Manual Trading (657902)", "data": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 14.4, null, 32.4, null, null, null, null, -376.59, null, null, null, null, null, null, null, null, -547.76, -549.96, null, null, -534.34, null, null, -472.5, null, -24.93, -28.53, null, 117.59, 83.59, -185.1, -203.1, 14.6, null, 25.6, 1.6, null, null, null, null, -42.4, null, -48.4, null, 16.6, -31.4, -19.4, -50.4, -47.4, null, -76.4, -102.4, -87.4, -137.24, -68.98, -36.16, -239.41, -555.9, -536.1, -809.36, -1029.9, -1206.7, -1142.07, -1318.93, -1338.93, -1375.43, -1398.93, -1308.47, -1290.73, -1353.73, -1347.8, -1371.23, -1346.73, -1224.43, -1907.99, -2020.27, -1991.02, -2548.62, null, null], "borderColor": "#58a6ff", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "Axis AUDUSD (32983)", "data": [-578.8, -642.87, -674.61, -1184.3, -1064.44, null, -1053.57, null, null, null, null, null, null, null, null, null, null, null, -1097.82, null, -920.79, null, -1312.09, null, -1404.88, -1648.38, null, -1868.7, null, null, null, -2109.47, -2133.56, null, null, null, null, -3373.76, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -3594.51, null, null, -3487.48, null, -3374.9, -3559.13, -3553.01, null, -3644.03, null, -3379.64, null, null, null, null, null, null, null, null, -3372.27, null, null, null, null, -3119.33, null, -3146.43, null, null, null, null, null, -2987.58, null, null, null, null, null, -3110.43, null, null, -3108.47, null, null, -4097.17, null, null, -4265.57, -4322.34, null, null, null, null, null, null, null, null], "borderColor": "#3fb950", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}]},options:liveOpts});
 
 // Populate live chart dropdown
 let currentLiveItems = [];
@@ -675,13 +827,13 @@ function filterLiveChart() {
 }
 // Build initial live items with PF data
 (function() {
-  const liveItems = [{"label": "Axis Rotation + Fx RSI (multi-symbol) (32983)", "total_pnl": 1487.51, "pf": 1.21}, {"label": "T&D19 V2 USDJPY MOL (42817)", "total_pnl": 459.75, "pf": 1.93}, {"label": "Axis Rotation (multi-symbol) (45215)", "total_pnl": 210.7, "pf": 1.07}, {"label": "Gold Talon (662437)", "total_pnl": 162.89, "pf": 1.1}, {"label": "Manual Trading (Diego) (639884)", "total_pnl": 7.24, "pf": 1.14}, {"label": "T&D19 V2 USDJPY PROP (39479)", "total_pnl": -14.96, "pf": 0.74}, {"label": "T&D60 (42818)", "total_pnl": -370.63, "pf": 0.74}, {"label": "Cree Manual Trading (657902)", "total_pnl": -2548.62, "pf": 0.61}];
+  const liveItems = [{"label": "Axis Rotation + Fx RSI (multi-symbol) (32983)", "total_pnl": 987.61, "pf": 1.18}, {"label": "T&D19 V2 USDJPY MOL (42817)", "total_pnl": 459.75, "pf": 1.93}, {"label": "Axis Rotation (multi-symbol) (45215)", "total_pnl": 255.11, "pf": 1.11}, {"label": "Gold Talon (662437)", "total_pnl": 139.16, "pf": 1.08}, {"label": "T&D19 V2 USDJPY PROP (39479)", "total_pnl": -40.19, "pf": 0.29}, {"label": "Agg V1 Pro XAUUSD (662435)", "total_pnl": -129.77, "pf": 0.71}, {"label": "T&D60 (42818)", "total_pnl": -273.87, "pf": 0.86}, {"label": "Axis GBPUSD (45215)", "total_pnl": -1120.83, "pf": 0.57}, {"label": "Agg V1 NZDJPY (54285)", "total_pnl": -1196.35, "pf": 0.17}, {"label": "Agg V1 AUDUSD (54284)", "total_pnl": -1381.68, "pf": 0.1}, {"label": "Cree Manual Trading (657902)", "total_pnl": -2548.62, "pf": 0.61}, {"label": "Axis AUDUSD (32983)", "total_pnl": -4322.34, "pf": 0.37}];
   populateLiveSelect(liveItems);
   document.getElementById('liveSelect').value = 'top5';
   filterLiveChart();
 })()
 
-let weeklyChart = new Chart(document.getElementById('weeklyChart'),{type:'bar',data:{labels:["2026-W01", "2026-W02", "2026-W03", "2026-W04", "2026-W05", "2026-W06", "2026-W07", "2026-W08", "2026-W09", "2026-W10", "2026-W11", "2026-W12", "2026-W13", "2026-W14", "2026-W15", "2026-W16", "2026-W17", "2026-W18", "2026-W19", "2026-W20", "2026-W21", "2026-W22", "2026-W23", "2026-W24"],datasets:[{data:[280.3, -263.32, -148.88, 8.8, 423.27, -90.06, 146.96, 239.05, 303.76, -133.01, 528.92, 120.66, -643.96, 733.9, -585.63, -169.54, -87.27, 213.64, 434.15, -141.29, -326.2, 40.04, -338.05, -1152.36],backgroundColor:["#3fb950", "#f85149", "#f85149", "#3fb950", "#3fb950", "#f85149", "#3fb950", "#3fb950", "#3fb950", "#f85149", "#3fb950", "#3fb950", "#f85149", "#3fb950", "#f85149", "#f85149", "#f85149", "#3fb950", "#3fb950", "#f85149", "#f85149", "#3fb950", "#f85149", "#f85149"],borderRadius:4}]},options:{responsive:true,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>'$'+ctx.parsed.y.toLocaleString()}}},scales:{x:{ticks:{color:'#8b949e',font:{size:9}},grid:{display:false}},y:{ticks:{color:'#8b949e',callback:v=>'$'+v.toLocaleString()},grid:{color:'#21262d'}}}}});
+let weeklyChart = new Chart(document.getElementById('weeklyChart'),{type:'bar',data:{labels:["2026-W01", "2026-W02", "2026-W03", "2026-W04", "2026-W05", "2026-W06", "2026-W07", "2026-W08", "2026-W09", "2026-W10", "2026-W11", "2026-W12", "2026-W13", "2026-W14", "2026-W15", "2026-W16", "2026-W17", "2026-W18", "2026-W19", "2026-W20", "2026-W21", "2026-W22", "2026-W23", "2026-W24", "2026-W25"],datasets:[{data:[-1142.5, 73.07, -972.53, 8.8, 379.02, -397.12, -316.86, -25.81, 303.76, -1373.21, 528.92, 120.66, -864.71, 874.63, -741.43, -17.24, -42.2, 214.5, 454.78, -166.52, -449.05, -3946.02, -438.68, -1246.65, 10.37],backgroundColor:["#f85149", "#3fb950", "#f85149", "#3fb950", "#3fb950", "#f85149", "#f85149", "#f85149", "#3fb950", "#f85149", "#3fb950", "#3fb950", "#f85149", "#3fb950", "#f85149", "#f85149", "#f85149", "#3fb950", "#3fb950", "#f85149", "#f85149", "#f85149", "#f85149", "#f85149", "#3fb950"],borderRadius:4}]},options:{responsive:true,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>'$'+ctx.parsed.y.toLocaleString()}}},scales:{x:{ticks:{color:'#8b949e',font:{size:9}},grid:{display:false}},y:{ticks:{color:'#8b949e',callback:v=>'$'+v.toLocaleString()},grid:{color:'#21262d'}}}}});
 
 // ── Apply date filter ──
 function applyFilter(){
