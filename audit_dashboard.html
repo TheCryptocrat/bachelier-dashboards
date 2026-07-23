@@ -93,7 +93,7 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
 <div class="header">
   <div>
     <h1 style="color:var(--blue)">MFB ↔ BACHELIER AUDIT</h1>
-    <div class="dim" style="margin-top:4px;font-size:0.75rem">Snapshot: 2026-05-18 • 69 MFB accounts, 69 config logins</div>
+    <div class="dim" style="margin-top:4px;font-size:0.75rem">Snapshot: 2026-07-23 • 142 MFB accounts, 123 config logins</div>
   </div>
   <div>
     <a class="download-btn" href="MFB_Bachelier_Reconciliation_latest.xlsx" download>⬇ Download full xlsx</a>
@@ -101,14 +101,14 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
 </div>
 
 <div class="kpi-grid kpi-grid-4">
-  <div class="kpi"><div class="label">In scope</div><div class="value pos">30</div><div class="sub">MFB ∩ Bachelier with trades on both sides</div></div>
-  <div class="kpi"><div class="label">Data gap (Bach)</div><div class="value neg">16</div><div class="sub">In MFB + config but zero Bach trades</div></div>
-  <div class="kpi"><div class="label">Coverage gap (MFB)</div><div class="value warn">23</div><div class="sub">In config but not in MFB</div></div>
-  <div class="kpi"><div class="label">MFB legacy</div><div class="value dim">23</div><div class="sub">In MFB but not in config (do not import)</div></div>
+  <div class="kpi"><div class="label">In scope</div><div class="value pos">73</div><div class="sub">MFB ∩ Bachelier with trades on both sides</div></div>
+  <div class="kpi"><div class="label">Data gap (Bach)</div><div class="value neg">18</div><div class="sub">In MFB + config but zero Bach trades</div></div>
+  <div class="kpi"><div class="label">Coverage gap (MFB)</div><div class="value warn">32</div><div class="sub">In config but not in MFB</div></div>
+  <div class="kpi"><div class="label">MFB legacy</div><div class="value dim">51</div><div class="sub">In MFB but not in config (do not import)</div></div>
 </div>
 
 <div class="section">
-  <div class="section-title">Reconciliation <span class="badge badge-blue">46 rows</span></div>
+  <div class="section-title">Reconciliation <span class="badge badge-blue">91 rows</span></div>
   <div class="section-desc">Data-gap rows highlighted in red and sorted to the top. "Bach formula on MFB sample" applies Bachelier's existing PF/DD formulas to MFB's last-40-trade sample so the divergence is apples-to-apples instead of confounded by different trade sets.</div>
   <div class="scroll-wrap">
     <table>
@@ -121,68 +121,51 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
       </tr></thead>
       <tbody>
           <tr class="audit-data-gap">
+            <td class="strat-name">639884</td>
+            <td>live</td>
+            <td>Manual Trading (Diego)</td>
+            <td class="dim">VPS149</td>
+            <td class="dim">07/22/2026 16:52</td>
+            <td class="num">5,027.65</td>
+            <td class="num">6.03</td>
+            <td class="num">8.89</td>
+            <td class="num">32.5</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">0</td>
+            <td class="num">0.00</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td>DATA GAP - Bach missing</td>
+          </tr>
+          <tr class="audit-data-gap">
             <td class="strat-name">647832</td>
             <td>live</td>
             <td>Axis Rotation AUDUSD</td>
             <td class="dim">VPS242</td>
-            <td class="dim">05/18/2026 15:09</td>
+            <td class="dim">07/22/2026 16:21</td>
             <td class="num">4,879.61</td>
             <td class="num">0.30</td>
             <td class="num">31.01</td>
             <td class="num">40.0</td>
-            <td class="num">0.11</td>
-            <td class="num">454.11</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
             <td class="num">0</td>
             <td class="num">0.00</td>
             <td class="num"><span class="dim">—</span></td>
             <td>DATA GAP - Bach missing</td>
           </tr>
           <tr class="audit-data-gap">
-            <td class="strat-name">52365</td>
+            <td class="strat-name">52366</td>
             <td>demo</td>
-            <td>Hive 9 Demo Prop</td>
-            <td class="dim">VPS242</td>
-            <td class="dim">05/18/2026 08:31</td>
-            <td class="num">19,951.91</td>
-            <td class="num">0.22</td>
-            <td class="num">0.27</td>
-            <td class="num">23.1</td>
-            <td class="num">325.42</td>
-            <td class="num">0.16</td>
-            <td class="num">0</td>
-            <td class="num">0.00</td>
+            <td>Claude Asian Sweep + NY Killzone</td>
+            <td class="dim">VPS242t2</td>
+            <td class="dim">07/22/2026 15:42</td>
+            <td class="num">19,452.07</td>
+            <td class="num">0.24</td>
+            <td class="num">3.61</td>
+            <td class="num">66.7</td>
             <td class="num"><span class="dim">—</span></td>
-            <td>DATA GAP - Bach missing</td>
-          </tr>
-          <tr class="audit-data-gap">
-            <td class="strat-name">51726</td>
-            <td>demo</td>
-            <td>T&Dv5 Prop Bots</td>
-            <td class="dim">VPS242</td>
-            <td class="dim">05/18/2026 17:26</td>
-            <td class="num">19,920.50</td>
-            <td class="num">0.70</td>
-            <td class="num">0.79</td>
-            <td class="num">37.5</td>
-            <td class="num">77.27</td>
-            <td class="num">0.52</td>
-            <td class="num">0</td>
-            <td class="num">0.00</td>
             <td class="num"><span class="dim">—</span></td>
-            <td>DATA GAP - Bach missing</td>
-          </tr>
-          <tr class="audit-data-gap">
-            <td class="strat-name">662437</td>
-            <td>live</td>
-            <td>Gold Talon</td>
-            <td class="dim">VPS149</td>
-            <td class="dim">05/18/2026 23:16</td>
-            <td class="num">9,851.87</td>
-            <td class="num">0.86</td>
-            <td class="num">6.56</td>
-            <td class="num">41.4</td>
-            <td class="num">10.12</td>
-            <td class="num">3.32</td>
             <td class="num">0</td>
             <td class="num">0.00</td>
             <td class="num"><span class="dim">—</span></td>
@@ -193,13 +176,13 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>demo</td>
             <td>Swing Trade MOL</td>
             <td class="dim">VPS92</td>
-            <td class="dim">05/13/2026 00:17</td>
+            <td class="dim">07/22/2026 18:43</td>
             <td class="num">28,127.10</td>
             <td class="num">1.33</td>
             <td class="num">17.60</td>
             <td class="num">27.5</td>
-            <td class="num">0.18</td>
-            <td class="num">29.85</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
             <td class="num">0</td>
             <td class="num">0.00</td>
             <td class="num"><span class="dim">—</span></td>
@@ -210,13 +193,30 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>demo</td>
             <td>Donchain Gold</td>
             <td class="dim">VPS92</td>
-            <td class="dim">05/17/2026 08:45</td>
+            <td class="dim">07/23/2026 19:48</td>
             <td class="num">20,207.71</td>
             <td class="num">1.06</td>
             <td class="num">5.78</td>
             <td class="num">40.0</td>
-            <td class="num">0.23</td>
-            <td class="num">11.26</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">0</td>
+            <td class="num">0.00</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td>DATA GAP - Bach missing</td>
+          </tr>
+          <tr class="audit-data-gap">
+            <td class="strat-name">52361</td>
+            <td>demo</td>
+            <td>Hive 7 LTF MOL</td>
+            <td class="dim">VPS242</td>
+            <td class="dim">07/23/2026 21:30</td>
+            <td class="num">19,334.33</td>
+            <td class="num">0.92</td>
+            <td class="num">15.80</td>
+            <td class="num">50.0</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
             <td class="num">0</td>
             <td class="num">0.00</td>
             <td class="num"><span class="dim">—</span></td>
@@ -227,30 +227,13 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>demo</td>
             <td>Aggressive CV2 Prop Firm</td>
             <td class="dim">VPS92</td>
-            <td class="dim">05/14/2026 15:32</td>
+            <td class="dim">07/22/2026 12:45</td>
             <td class="num">19,560.47</td>
             <td class="num">0.89</td>
             <td class="num">7.30</td>
             <td class="num">72.5</td>
-            <td class="num">0.73</td>
-            <td class="num">14.37</td>
-            <td class="num">0</td>
-            <td class="num">0.00</td>
             <td class="num"><span class="dim">—</span></td>
-            <td>DATA GAP - Bach missing</td>
-          </tr>
-          <tr class="audit-data-gap">
-            <td class="strat-name">51720</td>
-            <td>demo</td>
-            <td>Hive V3 Forex HTF MOL</td>
-            <td class="dim">VPS242</td>
-            <td class="dim">05/18/2026 17:24</td>
-            <td class="num">17,896.95</td>
-            <td class="num">0.48</td>
-            <td class="num">14.55</td>
-            <td class="num">32.5</td>
-            <td class="num">0.44</td>
-            <td class="num">15.21</td>
+            <td class="num"><span class="dim">—</span></td>
             <td class="num">0</td>
             <td class="num">0.00</td>
             <td class="num"><span class="dim">—</span></td>
@@ -261,30 +244,13 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>demo</td>
             <td>Hive V5 LTF (prop)</td>
             <td class="dim">VPS242</td>
-            <td class="dim">05/18/2026 17:19</td>
+            <td class="dim">07/22/2026 19:36</td>
             <td class="num">18,511.35</td>
             <td class="num">0.70</td>
             <td class="num">7.44</td>
             <td class="num">52.5</td>
-            <td class="num">0.30</td>
-            <td class="num">8.04</td>
-            <td class="num">0</td>
-            <td class="num">0.00</td>
             <td class="num"><span class="dim">—</span></td>
-            <td>DATA GAP - Bach missing</td>
-          </tr>
-          <tr class="audit-data-gap">
-            <td class="strat-name">51721</td>
-            <td>demo</td>
-            <td>Hive V3 Forex</td>
-            <td class="dim">VPS242</td>
-            <td class="dim">05/18/2026 17:28</td>
-            <td class="num">15,078.92</td>
-            <td class="num">0.67</td>
-            <td class="num">37.21</td>
-            <td class="num">42.5</td>
-            <td class="num">0.83</td>
-            <td class="num">21.86</td>
+            <td class="num"><span class="dim">—</span></td>
             <td class="num">0</td>
             <td class="num">0.00</td>
             <td class="num"><span class="dim">—</span></td>
@@ -295,13 +261,30 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>demo</td>
             <td>EA Fx RSI V2 TDS</td>
             <td class="dim">VPS92</td>
-            <td class="dim">05/16/2026 13:51</td>
+            <td class="dim">07/23/2026 00:32</td>
             <td class="num">17,132.50</td>
             <td class="num">0.75</td>
             <td class="num">20.45</td>
             <td class="num">65.0</td>
-            <td class="num">0.75</td>
-            <td class="num">11.00</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">0</td>
+            <td class="num">0.00</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td>DATA GAP - Bach missing</td>
+          </tr>
+          <tr class="audit-data-gap">
+            <td class="strat-name">53903</td>
+            <td>demo</td>
+            <td>T&D19L5 v5.03 Aggressive SuperMax</td>
+            <td class="dim">VPS204</td>
+            <td class="dim">07/23/2026 21:26</td>
+            <td class="num">18,241.97</td>
+            <td class="num">0.29</td>
+            <td class="num">8.82</td>
+            <td class="num">45.0</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
             <td class="num">0</td>
             <td class="num">0.00</td>
             <td class="num"><span class="dim">—</span></td>
@@ -312,30 +295,13 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>demo</td>
             <td>BTC Dual Breakout Scalper</td>
             <td class="dim">VPS92</td>
-            <td class="dim">05/16/2026 11:26</td>
+            <td class="dim">07/22/2026 21:50</td>
             <td class="num">28,300.62</td>
             <td class="num">0.00</td>
             <td class="num">14.22</td>
             <td class="num">85.0</td>
             <td class="num"><span class="dim">—</span></td>
-            <td class="num">0.00</td>
-            <td class="num">0</td>
-            <td class="num">0.00</td>
             <td class="num"><span class="dim">—</span></td>
-            <td>DATA GAP - Bach missing</td>
-          </tr>
-          <tr class="audit-data-gap">
-            <td class="strat-name">47779</td>
-            <td>demo</td>
-            <td>Aggressive V3 + V4</td>
-            <td class="dim">VPS92</td>
-            <td class="dim">05/18/2026 22:58</td>
-            <td class="num">3,695.20</td>
-            <td class="num">0.67</td>
-            <td class="num">82.80</td>
-            <td class="num">37.5</td>
-            <td class="num">0.81</td>
-            <td class="num">4.25</td>
             <td class="num">0</td>
             <td class="num">0.00</td>
             <td class="num"><span class="dim">—</span></td>
@@ -346,30 +312,30 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>demo</td>
             <td>EA Forex RSI V2 +DD</td>
             <td class="dim">VPS92</td>
-            <td class="dim">05/16/2026 19:21</td>
+            <td class="dim">07/23/2026 09:20</td>
             <td class="num">18,825.91</td>
             <td class="num">0.71</td>
             <td class="num">10.84</td>
             <td class="num">55.0</td>
-            <td class="num">1.23</td>
-            <td class="num">4.64</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
             <td class="num">0</td>
             <td class="num">0.00</td>
             <td class="num"><span class="dim">—</span></td>
             <td>DATA GAP - Bach missing</td>
           </tr>
           <tr class="audit-data-gap">
-            <td class="strat-name">39479</td>
-            <td>live</td>
-            <td>T&D19 V2 USDJPY PROP</td>
-            <td class="dim">VPS153</td>
-            <td class="dim">10/03/2025 00:48</td>
-            <td class="num">34,219.50</td>
-            <td class="num">0.89</td>
-            <td class="num">12.87</td>
-            <td class="num">77.5</td>
-            <td class="num">2.57</td>
-            <td class="num">0.16</td>
+            <td class="strat-name">52367</td>
+            <td>demo</td>
+            <td>TBD</td>
+            <td class="dim">VPS242</td>
+            <td class="dim">07/20/2026 10:12</td>
+            <td class="num">19,711.43</td>
+            <td class="num">0.63</td>
+            <td class="num">1.49</td>
+            <td class="num">12.5</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
             <td class="num">0</td>
             <td class="num">0.00</td>
             <td class="num"><span class="dim">—</span></td>
@@ -385,62 +351,96 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td class="num">0.62</td>
             <td class="num">0.37</td>
             <td class="num">20.0</td>
-            <td class="num">0.68</td>
-            <td class="num">0.13</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">0</td>
+            <td class="num">0.00</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td>DATA GAP - Bach missing</td>
+          </tr>
+          <tr class="audit-data-gap">
+            <td class="strat-name">54185</td>
+            <td>demo</td>
+            <td>Ensemble PropBots</td>
+            <td class="dim">VPS204</td>
+            <td class="dim">07/23/2026 14:47</td>
+            <td class="num">19,973.55</td>
+            <td class="num">0.97</td>
+            <td class="num">2.27</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">0</td>
+            <td class="num">0.00</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td>DATA GAP - Bach missing</td>
+          </tr>
+          <tr class="audit-data-gap">
+            <td class="strat-name">54188</td>
+            <td>demo</td>
+            <td>T&D19L7 Aggressive Super Scalps</td>
+            <td class="dim">VPS204</td>
+            <td class="dim">07/23/2026 21:21</td>
+            <td class="num">19,346.20</td>
+            <td class="num">0.95</td>
+            <td class="num">17.39</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">0</td>
+            <td class="num">0.00</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td>DATA GAP - Bach missing</td>
+          </tr>
+          <tr class="audit-data-gap">
+            <td class="strat-name">54190</td>
+            <td>demo</td>
+            <td>T&D19L5 Max Hi Freq</td>
+            <td class="dim">VPS204</td>
+            <td class="dim">07/23/2026 21:18</td>
+            <td class="num">18,823.96</td>
+            <td class="num">0.83</td>
+            <td class="num">23.18</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">0</td>
+            <td class="num">0.00</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td>DATA GAP - Bach missing</td>
+          </tr>
+          <tr class="audit-data-gap">
+            <td class="strat-name">55208</td>
+            <td>demo</td>
+            <td>T&D19L8 V2 Agg</td>
+            <td class="dim">VPS242t3</td>
+            <td class="dim">07/23/2026 21:42</td>
+            <td class="num">19,968.65</td>
+            <td class="num">0.90</td>
+            <td class="num">0.49</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
             <td class="num">0</td>
             <td class="num">0.00</td>
             <td class="num"><span class="dim">—</span></td>
             <td>DATA GAP - Bach missing</td>
           </tr>
           <tr class="audit-ok">
-            <td class="strat-name">639884</td>
-            <td>live</td>
-            <td>Manual Trading (Diego)</td>
-            <td class="dim">VPS149</td>
-            <td class="dim">05/18/2026 11:50</td>
-            <td class="num">5,027.65</td>
-            <td class="num">6.03</td>
-            <td class="num">8.89</td>
-            <td class="num">32.5</td>
-            <td class="num">0.06</td>
-            <td class="num">788.72</td>
-            <td class="num">549</td>
-            <td class="num">34,727.18</td>
-            <td class="num">60.8</td>
-            <td>RECONCILE</td>
-          </tr>
-          <tr class="audit-ok">
-            <td class="strat-name">648289</td>
-            <td>live</td>
-            <td>Dalio</td>
-            <td class="dim">VPS149</td>
-            <td class="dim">05/18/2026 20:44</td>
-            <td class="num">5,052.75</td>
-            <td class="num">1.08</td>
-            <td class="num">71.40</td>
-            <td class="num">20.0</td>
-            <td class="num">0.04</td>
-            <td class="num">486.44</td>
-            <td class="num">38,174</td>
-            <td class="num">17,877.43</td>
-            <td class="num">67.4</td>
-            <td>RECONCILE</td>
-          </tr>
-          <tr class="audit-ok">
             <td class="strat-name">50348</td>
             <td>demo</td>
             <td>Aggressive V1 Pro</td>
             <td class="dim">VPS242</td>
-            <td class="dim">05/18/2026 21:06</td>
-            <td class="num">18,981.27</td>
-            <td class="num">0.76</td>
-            <td class="num">94.45</td>
-            <td class="num">57.5</td>
-            <td class="num">0.88</td>
-            <td class="num">12.35</td>
-            <td class="num">3,138</td>
-            <td class="num">-26,488.95</td>
-            <td class="num">54.5</td>
+            <td class="dim">07/22/2026 11:58</td>
+            <td class="num">10,093.84</td>
+            <td class="num">0.77</td>
+            <td class="num">97.01</td>
+            <td class="num">60.0</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">3,493</td>
+            <td class="num">-30,948.17</td>
+            <td class="num">54.4</td>
             <td>RECONCILE</td>
           </tr>
           <tr class="audit-ok">
@@ -448,33 +448,67 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>demo</td>
             <td>Aggressive All Symbols</td>
             <td class="dim">VPS92</td>
-            <td class="dim">05/19/2026 00:31</td>
-            <td class="num">53,149.33</td>
-            <td class="num">1.09</td>
+            <td class="dim">07/23/2026 20:51</td>
+            <td class="num">50,060.66</td>
+            <td class="num">1.10</td>
             <td class="num">74.43</td>
-            <td class="num">55.0</td>
-            <td class="num">2.78</td>
-            <td class="num">9.05</td>
-            <td class="num">2,574</td>
-            <td class="num">28,135.58</td>
-            <td class="num">64.5</td>
+            <td class="num">62.5</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">3,179</td>
+            <td class="num">25,060.66</td>
+            <td class="num">62.8</td>
             <td>RECONCILE</td>
           </tr>
           <tr class="audit-ok">
-            <td class="strat-name">51724</td>
+            <td class="strat-name">47779</td>
             <td>demo</td>
-            <td>Bar Reversal MOL Bots</td>
-            <td class="dim">VPS242</td>
-            <td class="dim">05/18/2026 17:27</td>
-            <td class="num">19,733.97</td>
-            <td class="num">0.32</td>
-            <td class="num">1.39</td>
-            <td class="num">34.2</td>
-            <td class="num">51.53</td>
-            <td class="num">0.91</td>
-            <td class="num">39</td>
-            <td class="num">-266.03</td>
-            <td class="num">30.8</td>
+            <td>Aggressive V3 + V4</td>
+            <td class="dim">VPS92</td>
+            <td class="dim">07/23/2026 20:00</td>
+            <td class="num">86.66</td>
+            <td class="num">0.70</td>
+            <td class="num">99.58</td>
+            <td class="num">27.5</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">2,190</td>
+            <td class="num">-20,335.74</td>
+            <td class="num">32.0</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">53898</td>
+            <td>demo</td>
+            <td>Codex Axis V3 Optimization AUDUSD and GBPUSD</td>
+            <td class="dim">VPS242t2</td>
+            <td class="dim">07/23/2026 22:39</td>
+            <td class="num">18,933.84</td>
+            <td class="num">0.27</td>
+            <td class="num">5.41</td>
+            <td class="num">18.2</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">21</td>
+            <td class="num">-1,138.42</td>
+            <td class="num">9.5</td>
+            <td>OK (small account, full sample)</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">53899</td>
+            <td>demo</td>
+            <td>Claude Axis GBPUSD and AUDUSD Opt V3</td>
+            <td class="dim">VPS242t2</td>
+            <td class="dim">07/23/2026 22:27</td>
+            <td class="num">20,071.59</td>
+            <td class="num">1.07</td>
+            <td class="num">4.02</td>
+            <td class="num">47.1</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">17</td>
+            <td class="num">-62.98</td>
+            <td class="num">35.3</td>
             <td>RECONCILE</td>
           </tr>
           <tr class="audit-ok">
@@ -482,84 +516,84 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>demo</td>
             <td>Weds Shorts & Window Dressing</td>
             <td class="dim">VPS242</td>
-            <td class="dim">05/17/2026 22:03</td>
-            <td class="num">19,075.68</td>
-            <td class="num">0.04</td>
-            <td class="num">4.80</td>
-            <td class="num">66.7</td>
-            <td class="num">20.85</td>
-            <td class="num">3.20</td>
-            <td class="num">2</td>
-            <td class="num">-924.32</td>
-            <td class="num">50.0</td>
+            <td class="dim">07/23/2026 21:39</td>
+            <td class="num">18,361.60</td>
+            <td class="num">0.76</td>
+            <td class="num">18.80</td>
+            <td class="num">33.3</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">20</td>
+            <td class="num">-1,638.40</td>
+            <td class="num">30.0</td>
             <td>OK (small account, full sample)</td>
           </tr>
           <tr class="audit-ok">
-            <td class="strat-name">52364</td>
+            <td class="strat-name">52365</td>
             <td>demo</td>
-            <td>LVF-ZFade MOL</td>
+            <td>Hive 9 Demo Prop</td>
             <td class="dim">VPS242</td>
-            <td class="dim">05/18/2026 17:30</td>
-            <td class="num">20,799.53</td>
-            <td class="num">5.43</td>
-            <td class="num">0.37</td>
-            <td class="num">22.6</td>
-            <td class="num">116.12</td>
-            <td class="num">0.25</td>
-            <td class="num">30</td>
-            <td class="num">799.53</td>
-            <td class="num">20.0</td>
+            <td class="dim">07/23/2026 21:23</td>
+            <td class="num">20,033.96</td>
+            <td class="num">1.36</td>
+            <td class="num">0.27</td>
+            <td class="num">43.6</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">36</td>
+            <td class="num">12.61</td>
+            <td class="num">38.9</td>
             <td>OK (small account, full sample)</td>
           </tr>
           <tr class="audit-ok">
-            <td class="strat-name">51727</td>
+            <td class="strat-name">51724</td>
             <td>demo</td>
-            <td>FourPlay MOL Bots</td>
+            <td>Bar Reversal MOL Bots</td>
             <td class="dim">VPS242</td>
-            <td class="dim">05/18/2026 17:29</td>
-            <td class="num">19,961.40</td>
-            <td class="num">0.97</td>
-            <td class="num">2.31</td>
-            <td class="num">42.4</td>
-            <td class="num">18.08</td>
-            <td class="num">1.54</td>
-            <td class="num">33</td>
-            <td class="num">-38.60</td>
-            <td class="num">39.4</td>
-            <td>RECONCILE</td>
-          </tr>
-          <tr class="audit-ok">
-            <td class="strat-name">51723</td>
-            <td>demo</td>
-            <td>FourPlay v15 MOL Bots</td>
-            <td class="dim">VPS242</td>
-            <td class="dim">05/18/2026 17:23</td>
-            <td class="num">19,544.15</td>
-            <td class="num">0.75</td>
-            <td class="num">5.42</td>
-            <td class="num">47.2</td>
-            <td class="num">11.57</td>
-            <td class="num">3.64</td>
-            <td class="num">35</td>
-            <td class="num">-455.85</td>
-            <td class="num">48.6</td>
+            <td class="dim">07/22/2026 15:57</td>
+            <td class="num">19,804.87</td>
+            <td class="num">0.41</td>
+            <td class="num">1.41</td>
+            <td class="num">35.0</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">39</td>
+            <td class="num">-195.13</td>
+            <td class="num">35.9</td>
             <td>OK (small account, full sample)</td>
           </tr>
           <tr class="audit-ok">
-            <td class="strat-name">52362</td>
+            <td class="strat-name">53900</td>
             <td>demo</td>
-            <td>BB Fade Prop</td>
-            <td class="dim">VPS242</td>
-            <td class="dim">05/17/2026 22:13</td>
-            <td class="num">20,017.30</td>
-            <td class="num">1.55</td>
-            <td class="num">0.35</td>
-            <td class="num">68.8</td>
-            <td class="num">638.49</td>
-            <td class="num">0.05</td>
-            <td class="num">23</td>
-            <td class="num">589.80</td>
-            <td class="num">52.2</td>
+            <td>Codex Axis Rotation V4.1</td>
+            <td class="dim">VPS242t2</td>
+            <td class="dim">07/23/2026 20:06</td>
+            <td class="num">19,111.41</td>
+            <td class="num">0.50</td>
+            <td class="num">5.09</td>
+            <td class="num">21.1</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">37</td>
+            <td class="num">-888.59</td>
+            <td class="num">18.9</td>
+            <td>OK (small account, full sample)</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">662437</td>
+            <td>live</td>
+            <td>Gold Talon V1.2</td>
+            <td class="dim">VPS92t2</td>
+            <td class="dim">07/23/2026 20:23</td>
+            <td class="num">25,956.55</td>
+            <td class="num">0.98</td>
+            <td class="num">6.56</td>
+            <td class="num">42.5</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">61</td>
+            <td class="num">-43.45</td>
+            <td class="num">41.0</td>
             <td>RECONCILE</td>
           </tr>
           <tr class="audit-ok">
@@ -567,16 +601,33 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>live</td>
             <td>Cree Manual Trading</td>
             <td class="dim">VPS149</td>
-            <td class="dim">05/18/2026 10:15</td>
-            <td class="num">3,612.30</td>
-            <td class="num">0.84</td>
-            <td class="num">99.35</td>
-            <td class="num">47.5</td>
+            <td class="dim">07/23/2026 21:49</td>
+            <td class="num">445.98</td>
+            <td class="num">0.82</td>
+            <td class="num">99.93</td>
+            <td class="num">32.5</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">627</td>
+            <td class="num">-20,557.01</td>
+            <td class="num">41.5</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">22837</td>
+            <td>live</td>
+            <td>T&D19L7 v4.12 Aggressive Live Test</td>
+            <td class="dim">VPS92t2</td>
+            <td class="dim">07/22/2026 14:59</td>
+            <td class="num">0.00</td>
             <td class="num">0.93</td>
-            <td class="num">5.80</td>
-            <td class="num">414</td>
-            <td class="num">-17,387.70</td>
-            <td class="num">43.0</td>
+            <td class="num">14.58</td>
+            <td class="num">32.5</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">619</td>
+            <td class="num">-507.20</td>
+            <td class="num">63.2</td>
             <td>RECONCILE</td>
           </tr>
           <tr class="audit-ok">
@@ -584,84 +635,33 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>demo</td>
             <td>T&D1 High Returns</td>
             <td class="dim">VPS92</td>
-            <td class="dim">05/18/2026 20:18</td>
-            <td class="num">8,763.26</td>
-            <td class="num">0.73</td>
+            <td class="dim">07/23/2026 13:51</td>
+            <td class="num">7,909.77</td>
+            <td class="num">0.72</td>
             <td class="num">68.69</td>
-            <td class="num">92.5</td>
-            <td class="num">1.21</td>
-            <td class="num">7.50</td>
-            <td class="num">627</td>
-            <td class="num">-11,236.74</td>
-            <td class="num">84.5</td>
+            <td class="num">80.0</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">668</td>
+            <td class="num">-12,090.23</td>
+            <td class="num">84.3</td>
             <td>RECONCILE</td>
-          </tr>
-          <tr class="audit-ok">
-            <td class="strat-name">42817</td>
-            <td>live</td>
-            <td>T&D19 V2 USDJPY MOL</td>
-            <td class="dim">VPS153</td>
-            <td class="dim">05/18/2026 08:27</td>
-            <td class="num">10,390.54</td>
-            <td class="num">2.79</td>
-            <td class="num">1.25</td>
-            <td class="num">52.5</td>
-            <td class="num">2.03</td>
-            <td class="num">29.60</td>
-            <td class="num">3</td>
-            <td class="num">390.54</td>
-            <td class="num">100.0</td>
-            <td>OK (small account, full sample)</td>
           </tr>
           <tr class="audit-ok">
             <td class="strat-name">32983</td>
             <td>live</td>
-            <td>Axis Rotation + Fx RSI (multi-symbol)</td>
-            <td class="dim">VPS153</td>
-            <td class="dim">05/18/2026 19:53</td>
-            <td class="num">31,822.34</td>
-            <td class="num">1.06</td>
-            <td class="num">12.39</td>
-            <td class="num">62.5</td>
-            <td class="num">0.98</td>
-            <td class="num">9.07</td>
-            <td class="num">870</td>
-            <td class="num">4,680.38</td>
-            <td class="num">62.9</td>
-            <td>RECONCILE</td>
-          </tr>
-          <tr class="audit-ok">
-            <td class="strat-name">52441850</td>
-            <td>demo</td>
-            <td>EA Fx RSI MOL</td>
-            <td class="dim">VPS92</td>
-            <td class="dim">05/08/2026 14:52</td>
-            <td class="num">44,652.36</td>
-            <td class="num">1.17</td>
-            <td class="num">22.74</td>
-            <td class="num">90.0</td>
-            <td class="num">7.65</td>
-            <td class="num">4.60</td>
-            <td class="num">1,528</td>
-            <td class="num">7,157.36</td>
-            <td class="num">49.3</td>
-            <td>RECONCILE</td>
-          </tr>
-          <tr class="audit-ok">
-            <td class="strat-name">41651</td>
-            <td>demo</td>
-            <td>T&D60</td>
-            <td class="dim">VPS92</td>
-            <td class="dim">05/17/2026 23:02</td>
-            <td class="num">17,703.63</td>
-            <td class="num">0.55</td>
-            <td class="num">60.59</td>
-            <td class="num">87.5</td>
-            <td class="num">1.72</td>
-            <td class="num">1.63</td>
-            <td class="num">559</td>
-            <td class="num">-3,321.31</td>
-            <td class="num">83.9</td>
+            <td>Axis AUDUSD</td>
+            <td class="dim">VPS92t2</td>
+            <td class="dim">07/23/2026 19:07</td>
+            <td class="num">23,788.13</td>
+            <td class="num">1.00</td>
+            <td class="num">13.37</td>
+            <td class="num">52.5</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">1,000</td>
+            <td class="num">101.39</td>
+            <td class="num">60.1</td>
             <td>RECONCILE</td>
           </tr>
           <tr class="audit-ok">
@@ -669,50 +669,33 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>demo</td>
             <td>Hive V5 HTF (prop)</td>
             <td class="dim">VPS242</td>
-            <td class="dim">05/18/2026 17:56</td>
-            <td class="num">15,556.72</td>
-            <td class="num">0.40</td>
-            <td class="num">22.23</td>
-            <td class="num">10.0</td>
-            <td class="num">0.08</td>
-            <td class="num">8.89</td>
-            <td class="num">249</td>
-            <td class="num">-4,443.28</td>
-            <td class="num">17.3</td>
+            <td class="dim">07/22/2026 05:23</td>
+            <td class="num">12,035.54</td>
+            <td class="num">0.29</td>
+            <td class="num">39.83</td>
+            <td class="num">2.5</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">422</td>
+            <td class="num">-7,964.46</td>
+            <td class="num">12.3</td>
             <td>RECONCILE</td>
           </tr>
           <tr class="audit-ok">
-            <td class="strat-name">51725</td>
-            <td>demo</td>
-            <td>Aggv3 MOL Bots</td>
-            <td class="dim">VPS242</td>
-            <td class="dim">05/16/2026 23:20</td>
-            <td class="num">16,933.84</td>
-            <td class="num">0.41</td>
-            <td class="num">16.48</td>
-            <td class="num">37.5</td>
-            <td class="num">0.66</td>
-            <td class="num">4.63</td>
-            <td class="num">196</td>
-            <td class="num">-3,228.34</td>
-            <td class="num">31.1</td>
-            <td>RECONCILE</td>
-          </tr>
-          <tr class="audit-ok">
-            <td class="strat-name">41655</td>
-            <td>demo</td>
-            <td>Axis Rotation V2</td>
-            <td class="dim">VPS242</td>
-            <td class="dim">05/18/2026 20:33</td>
-            <td class="num">18,246.77</td>
-            <td class="num">0.95</td>
-            <td class="num">23.63</td>
-            <td class="num">45.0</td>
-            <td class="num">1.12</td>
-            <td class="num">8.01</td>
-            <td class="num">447</td>
-            <td class="num">-1,753.23</td>
-            <td class="num">45.4</td>
+            <td class="strat-name">45215</td>
+            <td>live</td>
+            <td>Axis GBPUSD</td>
+            <td class="dim">VPS92t2</td>
+            <td class="dim">07/23/2026 21:53</td>
+            <td class="num">19,022.80</td>
+            <td class="num">0.73</td>
+            <td class="num">11.03</td>
+            <td class="num">35.0</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">174</td>
+            <td class="num">-1,752.30</td>
+            <td class="num">51.7</td>
             <td>RECONCILE</td>
           </tr>
           <tr class="audit-ok">
@@ -720,16 +703,169 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>demo</td>
             <td>Fx RSI Low DD Prop Firms</td>
             <td class="dim">VPS92</td>
-            <td class="dim">05/18/2026 14:13</td>
-            <td class="num">32,796.64</td>
+            <td class="dim">07/22/2026 10:51</td>
+            <td class="num">28,164.76</td>
+            <td class="num">0.80</td>
+            <td class="num">32.64</td>
+            <td class="num">90.0</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">3,255</td>
+            <td class="num">-6,102.49</td>
+            <td class="num">60.0</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">52370</td>
+            <td>demo</td>
+            <td>Agg V1 Pro XAUUSD May 19</td>
+            <td class="dim">VPS242t2</td>
+            <td class="dim">07/23/2026 22:18</td>
+            <td class="num">14,290.03</td>
             <td class="num">0.93</td>
-            <td class="num">19.72</td>
+            <td class="num">41.42</td>
+            <td class="num">50.0</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">1,618</td>
+            <td class="num">-5,708.01</td>
+            <td class="num">48.4</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">42817</td>
+            <td>live</td>
+            <td>T&D19 V2 USDJPY MOL</td>
+            <td class="dim">VPS153</td>
+            <td class="dim">07/23/2026 21:20</td>
+            <td class="num">5,459.75</td>
+            <td class="num">1.58</td>
+            <td class="num">4.09</td>
+            <td class="num">75.0</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">57</td>
+            <td class="num">393.25</td>
+            <td class="num">68.4</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">42818</td>
+            <td>live</td>
+            <td>T&D60</td>
+            <td class="dim">VPS153</td>
+            <td class="dim">07/22/2026 16:02</td>
+            <td class="num">0.00</td>
+            <td class="num">0.86</td>
+            <td class="num">9.47</td>
+            <td class="num">80.0</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">219</td>
+            <td class="num">-273.87</td>
+            <td class="num">82.2</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">52441850</td>
+            <td>demo</td>
+            <td>EA Fx RSI MOL</td>
+            <td class="dim">VPS92</td>
+            <td class="dim">07/19/2026 18:40</td>
+            <td class="num">44,652.36</td>
+            <td class="num">1.17</td>
+            <td class="num">22.74</td>
+            <td class="num">90.0</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">1,528</td>
+            <td class="num">7,157.36</td>
+            <td class="num">49.3</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">51726</td>
+            <td>demo</td>
+            <td>T&Dv5 Prop Bots</td>
+            <td class="dim">VPS242</td>
+            <td class="dim">07/23/2026 20:26</td>
+            <td class="num">16,143.13</td>
+            <td class="num">0.81</td>
+            <td class="num">34.80</td>
+            <td class="num">100.0</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">3,596</td>
+            <td class="num">-3,915.22</td>
+            <td class="num">61.0</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">51725</td>
+            <td>demo</td>
+            <td>Aggv3 MOL Bots</td>
+            <td class="dim">VPS242</td>
+            <td class="dim">07/23/2026 21:27</td>
+            <td class="num">16,082.42</td>
+            <td class="num">0.58</td>
+            <td class="num">20.92</td>
             <td class="num">47.5</td>
-            <td class="num">0.36</td>
-            <td class="num">3.07</td>
-            <td class="num">2,700</td>
-            <td class="num">-1,598.78</td>
-            <td class="num">60.8</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">532</td>
+            <td class="num">-3,827.48</td>
+            <td class="num">37.2</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">51720</td>
+            <td>demo</td>
+            <td>Hive V3 Forex HTF MOL</td>
+            <td class="dim">VPS242</td>
+            <td class="dim">07/21/2026 14:47</td>
+            <td class="num">16,728.79</td>
+            <td class="num">0.77</td>
+            <td class="num">26.73</td>
+            <td class="num">60.0</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">457</td>
+            <td class="num">-2,940.16</td>
+            <td class="num">39.6</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">41651</td>
+            <td>demo</td>
+            <td>T&D60</td>
+            <td class="dim">VPS92</td>
+            <td class="dim">07/23/2026 09:13</td>
+            <td class="num">17,401.71</td>
+            <td class="num">0.55</td>
+            <td class="num">60.59</td>
+            <td class="num">77.5</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">477</td>
+            <td class="num">-3,430.57</td>
+            <td class="num">83.4</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">51721</td>
+            <td>demo</td>
+            <td>Hive V3 Forex</td>
+            <td class="dim">VPS242</td>
+            <td class="dim">07/23/2026 20:09</td>
+            <td class="num">15,090.66</td>
+            <td class="num">0.68</td>
+            <td class="num">37.21</td>
+            <td class="num">40.0</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">171</td>
+            <td class="num">-4,909.34</td>
+            <td class="num">42.7</td>
             <td>RECONCILE</td>
           </tr>
           <tr class="audit-ok">
@@ -737,101 +873,67 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>demo</td>
             <td>T&D4L Prop Firm</td>
             <td class="dim">VPS242</td>
-            <td class="dim">05/17/2026 22:18</td>
-            <td class="num">19,610.22</td>
-            <td class="num">0.94</td>
-            <td class="num">12.08</td>
-            <td class="num">70.0</td>
-            <td class="num">1.49</td>
-            <td class="num">1.81</td>
-            <td class="num">879</td>
-            <td class="num">-1,254.64</td>
-            <td class="num">65.1</td>
+            <td class="dim">07/23/2026 09:32</td>
+            <td class="num">13,856.18</td>
+            <td class="num">0.72</td>
+            <td class="num">40.77</td>
+            <td class="num">82.5</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">2,248</td>
+            <td class="num">-3,026.81</td>
+            <td class="num">62.2</td>
             <td>RECONCILE</td>
           </tr>
           <tr class="audit-ok">
-            <td class="strat-name">52361</td>
+            <td class="strat-name">54829</td>
             <td>demo</td>
-            <td>Hive 7 LTF MOL</td>
-            <td class="dim">VPS242</td>
-            <td class="dim">05/16/2026 23:36</td>
-            <td class="num">19,817.84</td>
-            <td class="num">0.49</td>
-            <td class="num">1.74</td>
-            <td class="num">45.0</td>
-            <td class="num">0.24</td>
-            <td class="num">3.48</td>
-            <td class="num">120</td>
-            <td class="num">774.42</td>
-            <td class="num">71.7</td>
+            <td>T&D19L10 Agg (54829)</td>
+            <td class="dim">VPS204</td>
+            <td class="dim">07/23/2026 21:30</td>
+            <td class="num">17,261.58</td>
+            <td class="num">0.66</td>
+            <td class="num">13.75</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">2,990</td>
+            <td class="num">-2,731.28</td>
+            <td class="num">41.7</td>
             <td>RECONCILE</td>
           </tr>
           <tr class="audit-ok">
-            <td class="strat-name">41658</td>
+            <td class="strat-name">54831</td>
             <td>demo</td>
-            <td>Agg Univ</td>
-            <td class="dim">VPS92</td>
-            <td class="dim">05/18/2026 22:32</td>
-            <td class="num">18,678.13</td>
-            <td class="num">0.69</td>
-            <td class="num">7.93</td>
-            <td class="num">30.0</td>
-            <td class="num">0.42</td>
-            <td class="num">12.87</td>
-            <td class="num">4</td>
-            <td class="num">-31.60</td>
-            <td class="num">25.0</td>
-            <td>OK (small account, full sample)</td>
-          </tr>
-          <tr class="audit-ok">
-            <td class="strat-name">41657</td>
-            <td>demo</td>
-            <td>Axis Rotation V1</td>
-            <td class="dim">VPS242</td>
-            <td class="dim">05/19/2026 00:17</td>
-            <td class="num">20,376.02</td>
-            <td class="num">1.03</td>
-            <td class="num">9.18</td>
-            <td class="num">37.5</td>
-            <td class="num">0.82</td>
-            <td class="num">13.82</td>
-            <td class="num">179</td>
-            <td class="num">376.02</td>
-            <td class="num">46.9</td>
+            <td>T&D19L9 Agg</td>
+            <td class="dim">VPS204</td>
+            <td class="dim">07/23/2026 21:32</td>
+            <td class="num">17,754.33</td>
+            <td class="num">0.84</td>
+            <td class="num">18.47</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">4,724</td>
+            <td class="num">-2,232.87</td>
+            <td class="num">45.2</td>
             <td>RECONCILE</td>
           </tr>
           <tr class="audit-ok">
-            <td class="strat-name">38766</td>
+            <td class="strat-name">53904</td>
             <td>demo</td>
-            <td>Aggressive cV2</td>
-            <td class="dim">VPS92</td>
-            <td class="dim">05/18/2026 22:08</td>
-            <td class="num">20,934.73</td>
-            <td class="num">1.10</td>
-            <td class="num">5.78</td>
-            <td class="num">67.5</td>
-            <td class="num">1.06</td>
-            <td class="num">11.42</td>
-            <td class="num">111</td>
-            <td class="num">934.73</td>
-            <td class="num">64.0</td>
-            <td>RECONCILE</td>
-          </tr>
-          <tr class="audit-ok">
-            <td class="strat-name">41654</td>
-            <td>demo</td>
-            <td>T&D1 Prop Firm</td>
-            <td class="dim">VPS92</td>
-            <td class="dim">05/17/2026 20:16</td>
-            <td class="num">19,896.33</td>
-            <td class="num">0.97</td>
-            <td class="num">7.64</td>
-            <td class="num">97.5</td>
-            <td class="num">4.33</td>
-            <td class="num">1.49</td>
-            <td class="num">275</td>
-            <td class="num">-93.30</td>
-            <td class="num">90.2</td>
+            <td>T&D19L5 v5.03 MOL</td>
+            <td class="dim">VPS204</td>
+            <td class="dim">07/23/2026 21:19</td>
+            <td class="num">18,016.52</td>
+            <td class="num">0.66</td>
+            <td class="num">10.59</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">3,081</td>
+            <td class="num">-1,983.48</td>
+            <td class="num">42.9</td>
             <td>RECONCILE</td>
           </tr>
           <tr class="audit-ok">
@@ -839,33 +941,118 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>demo</td>
             <td>Breakout Engine</td>
             <td class="dim">VPS242</td>
-            <td class="dim">05/18/2026 22:08</td>
-            <td class="num">18,239.14</td>
-            <td class="num">0.77</td>
-            <td class="num">10.47</td>
-            <td class="num">37.5</td>
-            <td class="num">0.67</td>
-            <td class="num">18.86</td>
-            <td class="num">79</td>
-            <td class="num">-1,760.86</td>
-            <td class="num">43.0</td>
+            <td class="dim">07/23/2026 19:39</td>
+            <td class="num">17,985.75</td>
+            <td class="num">0.85</td>
+            <td class="num">17.06</td>
+            <td class="num">42.5</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">154</td>
+            <td class="num">-2,014.25</td>
+            <td class="num">44.2</td>
             <td>RECONCILE</td>
           </tr>
           <tr class="audit-ok">
-            <td class="strat-name">42818</td>
-            <td>live</td>
-            <td>T&D V2 Live</td>
-            <td class="dim">VPS149</td>
-            <td class="dim">05/18/2026 22:59</td>
-            <td class="num">4,878.64</td>
-            <td class="num">0.93</td>
-            <td class="num">9.47</td>
-            <td class="num">87.5</td>
-            <td class="num">1.69</td>
-            <td class="num">0.68</td>
+            <td class="strat-name">41655</td>
+            <td>demo</td>
+            <td>Axis Rotation V2</td>
+            <td class="dim">VPS242</td>
+            <td class="dim">07/22/2026 21:16</td>
+            <td class="num">18,415.42</td>
+            <td class="num">0.96</td>
+            <td class="num">23.63</td>
+            <td class="num">45.0</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">447</td>
+            <td class="num">-1,584.58</td>
+            <td class="num">45.6</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">54193</td>
+            <td>demo</td>
+            <td>T&D19L7 Super Scalps Aggressive</td>
+            <td class="dim">VPS204</td>
+            <td class="dim">07/23/2026 21:26</td>
+            <td class="num">22,301.77</td>
+            <td class="num">1.15</td>
+            <td class="num">16.33</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">1,467</td>
+            <td class="num">1,537.86</td>
+            <td class="num">50.0</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">55169</td>
+            <td>demo</td>
+            <td>Nasdaq Orb</td>
+            <td class="dim">VPS204</td>
+            <td class="dim">07/23/2026 21:42</td>
+            <td class="num">18,694.06</td>
+            <td class="num">0.07</td>
+            <td class="num">6.54</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">22</td>
+            <td class="num">-1,305.94</td>
+            <td class="num">4.5</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">51727</td>
+            <td>demo</td>
+            <td>FourPlay MOL Bots</td>
+            <td class="dim">VPS242</td>
+            <td class="dim">07/23/2026 21:27</td>
+            <td class="num">20,107.15</td>
+            <td class="num">0.81</td>
+            <td class="num">7.39</td>
+            <td class="num">45.0</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">88</td>
+            <td class="num">114.69</td>
+            <td class="num">44.3</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">54194</td>
+            <td>demo</td>
+            <td>Gold Talon V1.3</td>
+            <td class="dim">VPS204</td>
+            <td class="dim">07/23/2026 21:14</td>
+            <td class="num">18,782.57</td>
+            <td class="num">0.50</td>
+            <td class="num">6.66</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">29</td>
+            <td class="num">-1,217.43</td>
+            <td class="num">27.6</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">38766</td>
+            <td>demo</td>
+            <td>Aggressive cV2</td>
+            <td class="dim">VPS92</td>
+            <td class="dim">07/23/2026 23:04</td>
+            <td class="num">21,325.03</td>
+            <td class="num">1.13</td>
+            <td class="num">5.78</td>
+            <td class="num">67.5</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
             <td class="num">120</td>
-            <td class="num">-269.68</td>
-            <td class="num">83.3</td>
+            <td class="num">1,325.03</td>
+            <td class="num">65.8</td>
             <td>RECONCILE</td>
           </tr>
           <tr class="audit-ok">
@@ -873,33 +1060,611 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>demo</td>
             <td>Hive 7 HTF MOL</td>
             <td class="dim">VPS242</td>
-            <td class="dim">05/18/2026 17:27</td>
+            <td class="dim">07/22/2026 19:08</td>
             <td class="num">19,325.73</td>
             <td class="num">0.83</td>
             <td class="num">8.62</td>
             <td class="num">42.5</td>
-            <td class="num">0.84</td>
-            <td class="num">14.43</td>
-            <td class="num">108</td>
-            <td class="num">-674.27</td>
-            <td class="num">45.4</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">1,823</td>
+            <td class="num">-1,377.26</td>
+            <td class="num">61.7</td>
             <td>RECONCILE</td>
           </tr>
           <tr class="audit-ok">
-            <td class="strat-name">45215</td>
+            <td class="strat-name">54184</td>
+            <td>demo</td>
+            <td>News Scalp FOMC Ichimoku USDJPY</td>
+            <td class="dim">VPS204</td>
+            <td class="dim">07/23/2026 21:23</td>
+            <td class="num">18,942.62</td>
+            <td class="num">0.46</td>
+            <td class="num">7.43</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">44</td>
+            <td class="num">-1,057.38</td>
+            <td class="num">36.4</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">41658</td>
+            <td>demo</td>
+            <td>Agg Univ</td>
+            <td class="dim">VPS92</td>
+            <td class="dim">07/22/2026 21:15</td>
+            <td class="num">18,678.13</td>
+            <td class="num">0.69</td>
+            <td class="num">7.93</td>
+            <td class="num">30.0</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">4</td>
+            <td class="num">-31.60</td>
+            <td class="num">25.0</td>
+            <td>OK (small account, full sample)</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">54832</td>
+            <td>demo</td>
+            <td>T&D19L9 MOL</td>
+            <td class="dim">VPS204</td>
+            <td class="dim">07/23/2026 21:30</td>
+            <td class="num">18,968.15</td>
+            <td class="num">0.88</td>
+            <td class="num">9.82</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">2,728</td>
+            <td class="num">-1,027.09</td>
+            <td class="num">44.3</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">54192</td>
+            <td>demo</td>
+            <td>T&D19L7 Super Scalps MOL</td>
+            <td class="dim">VPS204</td>
+            <td class="dim">07/23/2026 21:28</td>
+            <td class="num">21,293.62</td>
+            <td class="num">1.17</td>
+            <td class="num">6.79</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">867</td>
+            <td class="num">993.73</td>
+            <td class="num">51.1</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">55171</td>
+            <td>demo</td>
+            <td>T&D19L9 Prop</td>
+            <td class="dim">VPS204</td>
+            <td class="dim">07/23/2026 21:34</td>
+            <td class="num">19,103.90</td>
+            <td class="num">0.86</td>
+            <td class="num">9.89</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">2,199</td>
+            <td class="num">-897.53</td>
+            <td class="num">41.5</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">53902</td>
+            <td>demo</td>
+            <td>T&D19L5 v5.03 Aggressive Max</td>
+            <td class="dim">VPS204</td>
+            <td class="dim">07/23/2026 18:02</td>
+            <td class="num">19,082.30</td>
+            <td class="num">0.73</td>
+            <td class="num">4.83</td>
+            <td class="num">25.0</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">1,541</td>
+            <td class="num">-922.28</td>
+            <td class="num">44.6</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">41657</td>
+            <td>demo</td>
+            <td>Axis Rotation V1</td>
+            <td class="dim">VPS242</td>
+            <td class="dim">05/24/2026 19:35</td>
+            <td class="num">20,376.02</td>
+            <td class="num">1.03</td>
+            <td class="num">9.18</td>
+            <td class="num">37.5</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">183</td>
+            <td class="num">299.43</td>
+            <td class="num">47.0</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">53897</td>
+            <td>demo</td>
+            <td>Claude Code Sweep Suite Portfolio</td>
+            <td class="dim">VPS242t2</td>
+            <td class="dim">07/23/2026 21:59</td>
+            <td class="num">19,801.69</td>
+            <td class="num">0.96</td>
+            <td class="num">8.56</td>
+            <td class="num">42.5</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">47</td>
+            <td class="num">-93.11</td>
+            <td class="num">42.6</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">54177</td>
+            <td>demo</td>
+            <td>T&D19L5 v5.03 MOL Singles</td>
+            <td class="dim">VPS204</td>
+            <td class="dim">07/23/2026 21:19</td>
+            <td class="num">19,469.35</td>
+            <td class="num">0.71</td>
+            <td class="num">4.94</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">47</td>
+            <td class="num">-530.65</td>
+            <td class="num">44.7</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">54191</td>
+            <td>demo</td>
+            <td>T&D19L7 Super Scalps Prop</td>
+            <td class="dim">VPS204</td>
+            <td class="dim">07/23/2026 21:31</td>
+            <td class="num">19,515.54</td>
+            <td class="num">0.80</td>
+            <td class="num">4.20</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">300</td>
+            <td class="num">-506.16</td>
+            <td class="num">43.0</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">54189</td>
+            <td>demo</td>
+            <td>T&D19L7 MOL</td>
+            <td class="dim">VPS204</td>
+            <td class="dim">07/23/2026 21:22</td>
+            <td class="num">19,504.59</td>
+            <td class="num">0.60</td>
+            <td class="num">2.79</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">145</td>
+            <td class="num">-495.41</td>
+            <td class="num">44.1</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">55172</td>
+            <td>demo</td>
+            <td>T&D19L9 RClock</td>
+            <td class="dim">VPS204</td>
+            <td class="dim">07/23/2026 21:36</td>
+            <td class="num">19,546.02</td>
+            <td class="num">0.47</td>
+            <td class="num">2.84</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">114</td>
+            <td class="num">-454.20</td>
+            <td class="num">35.1</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">41654</td>
+            <td>demo</td>
+            <td>T&D1 Prop Firm</td>
+            <td class="dim">VPS92</td>
+            <td class="dim">07/22/2026 20:00</td>
+            <td class="num">19,826.86</td>
+            <td class="num">0.95</td>
+            <td class="num">7.64</td>
+            <td class="num">87.5</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">294</td>
+            <td class="num">-173.14</td>
+            <td class="num">89.5</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">54826</td>
+            <td>demo</td>
+            <td>T&D19L10 Prop (54826)</td>
+            <td class="dim">VPS204</td>
+            <td class="dim">07/23/2026 21:35</td>
+            <td class="num">19,633.66</td>
+            <td class="num">0.83</td>
+            <td class="num">1.95</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">821</td>
+            <td class="num">-367.83</td>
+            <td class="num">44.3</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">54823</td>
+            <td>demo</td>
+            <td>Orb 3 Prop</td>
+            <td class="dim">VPS204</td>
+            <td class="dim">07/23/2026 21:31</td>
+            <td class="num">19,640.80</td>
+            <td class="num">0.35</td>
+            <td class="num">1.89</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">148</td>
+            <td class="num">-359.20</td>
+            <td class="num">37.8</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">54825</td>
+            <td>demo</td>
+            <td>T&D19L10 Prop</td>
+            <td class="dim">VPS204</td>
+            <td class="dim">07/23/2026 21:30</td>
+            <td class="num">19,651.73</td>
+            <td class="num">0.84</td>
+            <td class="num">2.43</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">978</td>
+            <td class="num">-349.76</td>
+            <td class="num">45.3</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">52368</td>
+            <td>demo</td>
+            <td>T&D19L5 Second Scalps - Prop</td>
+            <td class="dim">VPS242</td>
+            <td class="dim">07/23/2026 21:37</td>
+            <td class="num">19,549.72</td>
+            <td class="num">0.64</td>
+            <td class="num">2.09</td>
+            <td class="num">40.0</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">901</td>
+            <td class="num">-358.51</td>
+            <td class="num">44.4</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">55170</td>
+            <td>demo</td>
+            <td>PropMaster MOL</td>
+            <td class="dim">VPS204</td>
+            <td class="dim">07/23/2026 18:28</td>
+            <td class="num">19,744.96</td>
+            <td class="num">0.70</td>
+            <td class="num">1.68</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">115</td>
+            <td class="num">-257.68</td>
+            <td class="num">51.3</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">54824</td>
+            <td>demo</td>
+            <td>T&D All Scalps Prop</td>
+            <td class="dim">VPS204</td>
+            <td class="dim">07/23/2026 21:37</td>
+            <td class="num">19,748.08</td>
+            <td class="num">0.86</td>
+            <td class="num">4.63</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">155</td>
+            <td class="num">-251.92</td>
+            <td class="num">38.7</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">52369</td>
+            <td>demo</td>
+            <td>Codex NYKZ_CombinedPortfolio_v0_4_Demo</td>
+            <td class="dim">VPS242t2</td>
+            <td class="dim">07/23/2026 19:40</td>
+            <td class="num">20,302.14</td>
+            <td class="num">1.17</td>
+            <td class="num">2.87</td>
+            <td class="num">42.5</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">76</td>
+            <td class="num">302.14</td>
+            <td class="num">44.7</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">54827</td>
+            <td>demo</td>
+            <td>T&D19L8 Micro Scalps Prop Firm</td>
+            <td class="dim">VPS204</td>
+            <td class="dim">07/23/2026 21:21</td>
+            <td class="num">19,762.90</td>
+            <td class="num">0.78</td>
+            <td class="num">1.95</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">512</td>
+            <td class="num">-237.10</td>
+            <td class="num">42.4</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">53901</td>
+            <td>demo</td>
+            <td>Demo Codex Axis Rotation 4.2</td>
+            <td class="dim">VPS242t2</td>
+            <td class="dim">07/23/2026 20:44</td>
+            <td class="num">19,694.80</td>
+            <td class="num">0.84</td>
+            <td class="num">3.82</td>
+            <td class="num">30.0</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">77</td>
+            <td class="num">-388.71</td>
+            <td class="num">26.0</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">54182</td>
+            <td>demo</td>
+            <td>Round Numbers MOL</td>
+            <td class="dim">VPS204</td>
+            <td class="dim">07/23/2026 21:19</td>
+            <td class="num">19,834.66</td>
+            <td class="num">0.79</td>
+            <td class="num">1.60</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">188</td>
+            <td class="num">-165.34</td>
+            <td class="num">50.5</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">53895</td>
+            <td>demo</td>
+            <td>Codex Agg V1 Pro XAUUSD Filter60</td>
+            <td class="dim">VPS242t2</td>
+            <td class="dim">07/23/2026 21:42</td>
+            <td class="num">20,245.58</td>
+            <td class="num">1.09</td>
+            <td class="num">6.12</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">55</td>
+            <td class="num">147.78</td>
+            <td class="num">50.9</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">52362</td>
+            <td>demo</td>
+            <td>BB Fade Prop</td>
+            <td class="dim">VPS242</td>
+            <td class="dim">07/23/2026 21:33</td>
+            <td class="num">19,960.43</td>
+            <td class="num">0.98</td>
+            <td class="num">7.56</td>
+            <td class="num">40.0</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">93</td>
+            <td class="num">-47.15</td>
+            <td class="num">50.5</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">55168</td>
+            <td>demo</td>
+            <td>T&D All Scalps FTMO PropMaster</td>
+            <td class="dim">VPS204</td>
+            <td class="dim">07/23/2026 21:40</td>
+            <td class="num">19,884.03</td>
+            <td class="num">0.80</td>
+            <td class="num">1.12</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">116</td>
+            <td class="num">-138.71</td>
+            <td class="num">51.7</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">51723</td>
+            <td>demo</td>
+            <td>FourPlay v15 MOL Bots</td>
+            <td class="dim">VPS242</td>
+            <td class="dim">07/23/2026 21:16</td>
+            <td class="num">19,457.00</td>
+            <td class="num">0.86</td>
+            <td class="num">6.10</td>
+            <td class="num">45.0</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">68</td>
+            <td class="num">-413.24</td>
+            <td class="num">50.0</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">39479</td>
             <td>live</td>
-            <td>Axis Rotation (multi-symbol)</td>
+            <td>T&D19 V2 USDJPY PROP</td>
             <td class="dim">VPS153</td>
-            <td class="dim">05/18/2026 19:24</td>
-            <td class="num">14,096.86</td>
-            <td class="num">0.82</td>
-            <td class="num">9.75</td>
-            <td class="num">62.5</td>
-            <td class="num">1.13</td>
-            <td class="num">3.92</td>
-            <td class="num">124</td>
-            <td class="num">33.98</td>
-            <td class="num">56.5</td>
+            <td class="dim">10/03/2025 00:48</td>
+            <td class="num">34,219.50</td>
+            <td class="num">0.89</td>
+            <td class="num">12.87</td>
+            <td class="num">77.5</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">5</td>
+            <td class="num">-40.19</td>
+            <td class="num">80.0</td>
+            <td>OK (small account, full sample)</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">55207</td>
+            <td>demo</td>
+            <td>PropMaster Agg</td>
+            <td class="dim">VPS204</td>
+            <td class="dim">07/23/2026 21:42</td>
+            <td class="num">19,914.38</td>
+            <td class="num">0.93</td>
+            <td class="num">2.52</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">104</td>
+            <td class="num">-91.34</td>
+            <td class="num">53.8</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">52364</td>
+            <td>demo</td>
+            <td>LVF-ZFade MOL</td>
+            <td class="dim">VPS242</td>
+            <td class="dim">07/23/2026 21:34</td>
+            <td class="num">20,704.09</td>
+            <td class="num">2.11</td>
+            <td class="num">1.09</td>
+            <td class="num">35.0</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">61</td>
+            <td class="num">704.09</td>
+            <td class="num">26.2</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">55212</td>
+            <td>demo</td>
+            <td>T&D19L11</td>
+            <td class="dim">VPS242t3</td>
+            <td class="dim">07/23/2026 21:43</td>
+            <td class="num">19,950.40</td>
+            <td class="num">0.27</td>
+            <td class="num">0.32</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">7</td>
+            <td class="num">-49.60</td>
+            <td class="num">42.9</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">54830</td>
+            <td>demo</td>
+            <td>T&D19L10 RClock</td>
+            <td class="dim">VPS204</td>
+            <td class="dim">07/23/2026 21:37</td>
+            <td class="num">19,953.05</td>
+            <td class="num">0.83</td>
+            <td class="num">0.55</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">134</td>
+            <td class="num">-48.44</td>
+            <td class="num">38.1</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">55211</td>
+            <td>demo</td>
+            <td>T&D19L8 V2 RClock</td>
+            <td class="dim">VPS242t3</td>
+            <td class="dim">07/23/2026 21:42</td>
+            <td class="num">19,975.90</td>
+            <td class="num">0.94</td>
+            <td class="num">0.69</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">271</td>
+            <td class="num">-24.10</td>
+            <td class="num">42.1</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">55210</td>
+            <td>demo</td>
+            <td>T&D19L8 V2 Prop</td>
+            <td class="dim">VPS242t3</td>
+            <td class="dim">07/23/2026 21:44</td>
+            <td class="num">19,978.19</td>
+            <td class="num">0.77</td>
+            <td class="num">0.20</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">55</td>
+            <td class="num">-21.81</td>
+            <td class="num">41.8</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">54183</td>
+            <td>demo</td>
+            <td>Tokyo Fade Prop</td>
+            <td class="dim">VPS204</td>
+            <td class="dim">07/23/2026 21:18</td>
+            <td class="num">19,991.49</td>
+            <td class="num">0.80</td>
+            <td class="num">0.17</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">24</td>
+            <td class="num">-8.51</td>
+            <td class="num">29.2</td>
             <td>RECONCILE</td>
           </tr></tbody>
     </table>
@@ -907,7 +1672,7 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
 </div>
 
 <details open>
-  <summary>Data gap — 16 active accounts in MFB + config but with ZERO Bach trades</summary>
+  <summary>Data gap — 18 active accounts in MFB + config but with ZERO Bach trades</summary>
   <div class="section-desc">Likely upstream pipeline breakage on these logins: VPS pull failure, missing entry in the VPS-side <code>accounts.json</code>, strategy-label mismatch, or deal/position rollup dropping rows. The fix is on the Bachelier side, not the MFB side.</div>
   <table>
     <thead><tr><th>Login</th><th>Type</th><th>Strategy</th><th>Broker</th><th>VPS</th><th>MFB upd</th><th class="num">MFB Bal $</th><th class="num">MFB gain %</th></tr></thead>
@@ -918,7 +1683,7 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>Swing Trade MOL</td>
             <td>TradeSmart</td>
             <td class="dim">VPS92</td>
-            <td class="dim">05/13/2026 00:17</td>
+            <td class="dim">07/22/2026 18:43</td>
             <td class="num">28,127.10</td>
             <td class="num">12.33</td>
           </tr>
@@ -928,7 +1693,7 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>Donchain Gold</td>
             <td>TradeSmart</td>
             <td class="dim">VPS92</td>
-            <td class="dim">05/17/2026 08:45</td>
+            <td class="dim">07/23/2026 19:48</td>
             <td class="num">20,207.71</td>
             <td class="num">1.04</td>
           </tr>
@@ -938,7 +1703,7 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>Aggressive CV2 Prop Firm</td>
             <td>TradeSmart</td>
             <td class="dim">VPS92</td>
-            <td class="dim">05/14/2026 15:32</td>
+            <td class="dim">07/22/2026 12:45</td>
             <td class="num">19,560.47</td>
             <td class="num">-2.35</td>
           </tr>
@@ -948,19 +1713,9 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>EA Forex RSI V2 +DD</td>
             <td>TradeSmart</td>
             <td class="dim">VPS92</td>
-            <td class="dim">05/16/2026 19:21</td>
+            <td class="dim">07/23/2026 09:20</td>
             <td class="num">18,825.91</td>
             <td class="num">-5.87</td>
-          </tr>
-          <tr>
-            <td class="strat-name">39479</td>
-            <td>live</td>
-            <td>T&D19 V2 USDJPY PROP</td>
-            <td>TradeSmart</td>
-            <td class="dim">VPS153</td>
-            <td class="dim">10/03/2025 00:48</td>
-            <td class="num">34,219.50</td>
-            <td class="num">0.03</td>
           </tr>
           <tr>
             <td class="strat-name">41660</td>
@@ -968,19 +1723,9 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>EA Fx RSI V2 TDS</td>
             <td>TradeSmart</td>
             <td class="dim">VPS92</td>
-            <td class="dim">05/16/2026 13:51</td>
+            <td class="dim">07/23/2026 00:32</td>
             <td class="num">17,132.50</td>
             <td class="num">-14.35</td>
-          </tr>
-          <tr>
-            <td class="strat-name">47779</td>
-            <td>demo</td>
-            <td>Aggressive V3 + V4</td>
-            <td>TradeSmart</td>
-            <td class="dim">VPS92</td>
-            <td class="dim">05/18/2026 22:58</td>
-            <td class="num">3,695.20</td>
-            <td class="num">-81.94</td>
           </tr>
           <tr>
             <td class="strat-name">51719</td>
@@ -988,49 +1733,99 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>Hive V5 LTF (prop)</td>
             <td>TradeSmart</td>
             <td class="dim">VPS242</td>
-            <td class="dim">05/18/2026 17:19</td>
+            <td class="dim">07/22/2026 19:36</td>
             <td class="num">18,511.35</td>
             <td class="num">-7.44</td>
           </tr>
           <tr>
-            <td class="strat-name">51720</td>
+            <td class="strat-name">52361</td>
             <td>demo</td>
-            <td>Hive V3 Forex HTF MOL</td>
+            <td>Hive 7 LTF MOL</td>
             <td>TradeSmart</td>
             <td class="dim">VPS242</td>
-            <td class="dim">05/18/2026 17:24</td>
-            <td class="num">17,896.95</td>
-            <td class="num">-10.52</td>
+            <td class="dim">07/23/2026 21:30</td>
+            <td class="num">19,334.33</td>
+            <td class="num">-3.32</td>
           </tr>
           <tr>
-            <td class="strat-name">51721</td>
+            <td class="strat-name">52366</td>
             <td>demo</td>
-            <td>Hive V3 Forex</td>
+            <td>Claude Asian Sweep + NY Killzone</td>
             <td>TradeSmart</td>
-            <td class="dim">VPS242</td>
-            <td class="dim">05/18/2026 17:28</td>
-            <td class="num">15,078.92</td>
-            <td class="num">-24.61</td>
+            <td class="dim">VPS242t2</td>
+            <td class="dim">07/22/2026 15:42</td>
+            <td class="num">19,452.07</td>
+            <td class="num">-2.74</td>
           </tr>
           <tr>
-            <td class="strat-name">51726</td>
+            <td class="strat-name">52367</td>
             <td>demo</td>
-            <td>T&Dv5 Prop Bots</td>
+            <td>TBD</td>
             <td>TradeSmart</td>
             <td class="dim">VPS242</td>
-            <td class="dim">05/18/2026 17:26</td>
-            <td class="num">19,920.50</td>
-            <td class="num">-0.40</td>
+            <td class="dim">07/20/2026 10:12</td>
+            <td class="num">19,711.43</td>
+            <td class="num">-1.45</td>
           </tr>
           <tr>
-            <td class="strat-name">52365</td>
+            <td class="strat-name">53903</td>
             <td>demo</td>
-            <td>Hive 9 Demo Prop</td>
+            <td>T&D19L5 v5.03 Aggressive SuperMax</td>
             <td>TradeSmart</td>
-            <td class="dim">VPS242</td>
-            <td class="dim">05/18/2026 08:31</td>
-            <td class="num">19,951.91</td>
-            <td class="num">-0.24</td>
+            <td class="dim">VPS204</td>
+            <td class="dim">07/23/2026 21:26</td>
+            <td class="num">18,241.97</td>
+            <td class="num">-8.79</td>
+          </tr>
+          <tr>
+            <td class="strat-name">54185</td>
+            <td>demo</td>
+            <td>Ensemble PropBots</td>
+            <td>TradeSmart</td>
+            <td class="dim">VPS204</td>
+            <td class="dim">07/23/2026 14:47</td>
+            <td class="num">19,973.55</td>
+            <td class="num">-0.14</td>
+          </tr>
+          <tr>
+            <td class="strat-name">54188</td>
+            <td>demo</td>
+            <td>T&D19L7 Aggressive Super Scalps</td>
+            <td>TradeSmart</td>
+            <td class="dim">VPS204</td>
+            <td class="dim">07/23/2026 21:21</td>
+            <td class="num">19,346.20</td>
+            <td class="num">-3.25</td>
+          </tr>
+          <tr>
+            <td class="strat-name">54190</td>
+            <td>demo</td>
+            <td>T&D19L5 Max Hi Freq</td>
+            <td>TradeSmart</td>
+            <td class="dim">VPS204</td>
+            <td class="dim">07/23/2026 21:18</td>
+            <td class="num">18,823.96</td>
+            <td class="num">-5.87</td>
+          </tr>
+          <tr>
+            <td class="strat-name">55208</td>
+            <td>demo</td>
+            <td>T&D19L8 V2 Agg</td>
+            <td>TradeSmart</td>
+            <td class="dim">VPS242t3</td>
+            <td class="dim">07/23/2026 21:42</td>
+            <td class="num">19,968.65</td>
+            <td class="num">-0.16</td>
+          </tr>
+          <tr>
+            <td class="strat-name">639884</td>
+            <td>live</td>
+            <td>Manual Trading (Diego)</td>
+            <td>OX Securities</td>
+            <td class="dim">VPS149</td>
+            <td class="dim">07/22/2026 16:52</td>
+            <td class="num">5,027.65</td>
+            <td class="num">42.67</td>
           </tr>
           <tr>
             <td class="strat-name">647832</td>
@@ -1038,7 +1833,7 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>Axis Rotation AUDUSD</td>
             <td>OX Securities</td>
             <td class="dim">VPS242</td>
-            <td class="dim">05/18/2026 15:09</td>
+            <td class="dim">07/22/2026 16:21</td>
             <td class="num">4,879.61</td>
             <td class="num">-27.80</td>
           </tr>
@@ -1053,22 +1848,12 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td class="num">-0.19</td>
           </tr>
           <tr>
-            <td class="strat-name">662437</td>
-            <td>live</td>
-            <td>Gold Talon</td>
-            <td>OX Securities</td>
-            <td class="dim">VPS149</td>
-            <td class="dim">05/18/2026 23:16</td>
-            <td class="num">9,851.87</td>
-            <td class="num">-1.49</td>
-          </tr>
-          <tr>
             <td class="strat-name">52428953</td>
             <td>demo</td>
             <td>BTC Dual Breakout Scalper</td>
             <td>IC Markets</td>
             <td class="dim">VPS92</td>
-            <td class="dim">05/16/2026 11:26</td>
+            <td class="dim">07/22/2026 21:50</td>
             <td class="num">28,300.62</td>
             <td class="num">13.20</td>
           </tr></tbody>
@@ -1076,7 +1861,7 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
 </details>
 
 <details>
-  <summary>Coverage gap — 23 Bachelier accounts not tracked in MFB</summary>
+  <summary>Coverage gap — 32 Bachelier accounts not tracked in MFB</summary>
   <div class="section-desc">Add these to the MFB portfolio if you want the audit loop closed for them. Inactive ones can stay un-added.</div>
   <table>
     <thead><tr><th>Login</th><th>Type</th><th>Strategy</th><th>Active</th><th>VPS</th></tr></thead>
@@ -1201,39 +1986,102 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td class="dim">VPS242</td>
           </tr>
           <tr>
-            <td class="strat-name">52366</td>
+            <td class="strat-name">53896</td>
             <td>demo</td>
-            <td>TBD</td>
+            <td>Codex AggressiveV2_DemoScout</td>
             <td class="dim">True</td>
-            <td class="dim">VPS242</td>
+            <td class="dim">VPS242t2</td>
           </tr>
           <tr>
-            <td class="strat-name">52367</td>
-            <td>demo</td>
-            <td>TBD</td>
+            <td class="strat-name">54284</td>
+            <td>live</td>
+            <td>Sweep suite</td>
             <td class="dim">True</td>
-            <td class="dim">VPS242</td>
+            <td class="dim">VPS92t2</td>
           </tr>
           <tr>
-            <td class="strat-name">52368</td>
-            <td>demo</td>
-            <td>TBD</td>
+            <td class="strat-name">54285</td>
+            <td>live</td>
+            <td>NY Killzone</td>
             <td class="dim">True</td>
-            <td class="dim">VPS242</td>
+            <td class="dim">VPS92t2</td>
           </tr>
           <tr>
-            <td class="strat-name">52369</td>
+            <td class="strat-name">55123</td>
             <td>demo</td>
-            <td>TBD</td>
+            <td>T&D19L9 MOL</td>
             <td class="dim">True</td>
-            <td class="dim">VPS242</td>
+            <td class="dim">VPS242t3</td>
           </tr>
           <tr>
-            <td class="strat-name">52370</td>
+            <td class="strat-name">55209</td>
             <td>demo</td>
-            <td>TBD</td>
+            <td>T&D19L8 V2 MOL</td>
             <td class="dim">True</td>
-            <td class="dim">VPS242</td>
+            <td class="dim">VPS242t3</td>
+          </tr>
+          <tr>
+            <td class="strat-name">55384</td>
+            <td>demo</td>
+            <td>T&D19L10 V2 MOL</td>
+            <td class="dim">True</td>
+            <td class="dim">VPS242t3</td>
+          </tr>
+          <tr>
+            <td class="strat-name">55388</td>
+            <td>demo</td>
+            <td>T&D19L10 V2 Agg</td>
+            <td class="dim">True</td>
+            <td class="dim">VPS242t3</td>
+          </tr>
+          <tr>
+            <td class="strat-name">55389</td>
+            <td>demo</td>
+            <td>T&D19L10 V2 Prop</td>
+            <td class="dim">True</td>
+            <td class="dim">VPS242t3</td>
+          </tr>
+          <tr>
+            <td class="strat-name">55390</td>
+            <td>demo</td>
+            <td>T&D19L10 V2 RClock</td>
+            <td class="dim">True</td>
+            <td class="dim">VPS242t3</td>
+          </tr>
+          <tr>
+            <td class="strat-name">55391</td>
+            <td>demo</td>
+            <td>T&D19L9 V2 Agg</td>
+            <td class="dim">True</td>
+            <td class="dim">VPS242t3</td>
+          </tr>
+          <tr>
+            <td class="strat-name">55392</td>
+            <td>demo</td>
+            <td>T&D19L9 V2 Prop</td>
+            <td class="dim">True</td>
+            <td class="dim">VPS242t3</td>
+          </tr>
+          <tr>
+            <td class="strat-name">55393</td>
+            <td>demo</td>
+            <td>T&D19L9 V2 RClock</td>
+            <td class="dim">True</td>
+            <td class="dim">VPS242t3</td>
+          </tr>
+          <tr>
+            <td class="strat-name">662434</td>
+            <td>live</td>
+            <td>EA FX RSI AUDUSD</td>
+            <td class="dim">True</td>
+            <td class="dim">VPS92t2</td>
+          </tr>
+          <tr>
+            <td class="strat-name">662435</td>
+            <td>live</td>
+            <td>Aggv1 Pro Filter 60</td>
+            <td class="dim"></td>
+            <td class="dim">VPS92t2</td>
           </tr>
           <tr>
             <td class="strat-name">600025868</td>
@@ -1246,7 +2094,7 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
 </details>
 
 <details>
-  <summary>MFB legacy — 23 MFB accounts not in vps_config (do NOT import)</summary>
+  <summary>MFB legacy — 51 MFB accounts not in vps_config (do NOT import)</summary>
   <div class="section-desc">These exist in your MFB portfolio but aren't in <code>vps_config.yaml</code>. Per Cree's rule, these stay flagged but do NOT get pulled into Bachelier. Some are stale legacy accounts (Revenge / King Robot / pre-2026 Demo); others are recently-active MOL demo accounts (Hive, Demo Bots) intentionally kept off the pipeline.</div>
   <table>
     <thead><tr><th>Login</th><th>MFB name</th><th>Demo</th><th>Last update</th><th class="num">Balance</th></tr></thead>
@@ -1255,91 +2103,84 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td class="strat-name">19923</td>
             <td>A MOL Revenge MT5 Conservative</td>
             <td class="dim"></td>
-            <td class="dim">05/18/2026 20:40</td>
+            <td class="dim">07/22/2026 18:01</td>
             <td class="num">0.00</td>
           </tr>
           <tr>
             <td class="strat-name">20312</td>
             <td>EA Breakout Scalper</td>
             <td class="dim">True</td>
-            <td class="dim">05/16/2026 20:01</td>
+            <td class="dim">07/23/2026 09:38</td>
             <td class="num">27,700.66</td>
           </tr>
           <tr>
             <td class="strat-name">20313</td>
             <td>A MOL Revenge MT5 Medium</td>
             <td class="dim"></td>
-            <td class="dim">05/18/2026 20:40</td>
+            <td class="dim">07/22/2026 18:03</td>
             <td class="num">0.00</td>
           </tr>
           <tr>
             <td class="strat-name">22118</td>
             <td>A MOL Revenge Aggressive</td>
             <td class="dim"></td>
-            <td class="dim">05/14/2026 18:27</td>
+            <td class="dim">07/22/2026 13:56</td>
             <td class="num">0.00</td>
           </tr>
           <tr>
             <td class="strat-name">22419</td>
             <td>EA Breakout Scalper Both Ways</td>
             <td class="dim">True</td>
-            <td class="dim">05/17/2026 11:49</td>
+            <td class="dim">07/21/2026 04:48</td>
             <td class="num">3,667.47</td>
           </tr>
           <tr>
             <td class="strat-name">22662</td>
             <td>Test King Robot EA</td>
             <td class="dim">True</td>
-            <td class="dim">05/13/2026 17:17</td>
+            <td class="dim">07/23/2026 04:12</td>
             <td class="num">29,039.81</td>
           </tr>
           <tr>
             <td class="strat-name">22836</td>
             <td>A-MOL King Robot </td>
             <td class="dim"></td>
-            <td class="dim">05/17/2026 16:31</td>
+            <td class="dim">07/22/2026 13:11</td>
             <td class="num">0.36</td>
-          </tr>
-          <tr>
-            <td class="strat-name">22837</td>
-            <td>A MOL 22837 Fx RSI USDCHF USDJPY (non prop)</td>
-            <td class="dim"></td>
-            <td class="dim">05/17/2026 20:04</td>
-            <td class="num">0.00</td>
           </tr>
           <tr>
             <td class="strat-name">23073</td>
             <td>EA Trigger Happy Momentum 15m</td>
             <td class="dim">True</td>
-            <td class="dim">05/16/2026 17:27</td>
+            <td class="dim">07/23/2026 05:06</td>
             <td class="num">28,686.24</td>
           </tr>
           <tr>
             <td class="strat-name">23074</td>
             <td>EA Fx RSI Prop Firm</td>
             <td class="dim">True</td>
-            <td class="dim">05/17/2026 01:37</td>
+            <td class="dim">07/23/2026 12:38</td>
             <td class="num">24,740.06</td>
           </tr>
           <tr>
             <td class="strat-name">27747</td>
             <td>EASwingTrade Prop 12/10/2025</td>
             <td class="dim">True</td>
-            <td class="dim">05/16/2026 02:25</td>
+            <td class="dim">07/22/2026 18:59</td>
             <td class="num">19,079.15</td>
           </tr>
           <tr>
             <td class="strat-name">27748</td>
             <td>EA Newton Logic 10/13/2025</td>
             <td class="dim">True</td>
-            <td class="dim">05/14/2026 04:47</td>
+            <td class="dim">07/20/2026 10:44</td>
             <td class="num">21,592.04</td>
           </tr>
           <tr>
             <td class="strat-name">32985</td>
             <td>A MOL EA Breakout Scalper Buys</td>
             <td class="dim"></td>
-            <td class="dim">05/18/2026 20:43</td>
+            <td class="dim">07/22/2026 18:03</td>
             <td class="num">0.39</td>
           </tr>
           <tr>
@@ -1353,29 +2194,225 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td class="strat-name">37852</td>
             <td>MOL ETH BreakoutScalper</td>
             <td class="dim"></td>
-            <td class="dim">05/14/2026 11:44</td>
+            <td class="dim">07/21/2026 05:03</td>
             <td class="num">0.00</td>
           </tr>
           <tr>
             <td class="strat-name">38119</td>
             <td>MOL SOL Breakout Scalper</td>
             <td class="dim"></td>
-            <td class="dim">05/11/2026 11:04</td>
+            <td class="dim">07/21/2026 03:06</td>
             <td class="num">0.00</td>
           </tr>
           <tr>
             <td class="strat-name">41650</td>
             <td>EA T&D Low DD</td>
             <td class="dim">True</td>
-            <td class="dim">05/18/2026 10:53</td>
+            <td class="dim">07/22/2026 20:08</td>
             <td class="num">16,573.02</td>
           </tr>
           <tr>
             <td class="strat-name">42150</td>
             <td>A MOL Newton Logic</td>
             <td class="dim"></td>
-            <td class="dim">05/17/2026 18:06</td>
+            <td class="dim">07/22/2026 13:52</td>
             <td class="num">0.37</td>
+          </tr>
+          <tr>
+            <td class="strat-name">54186</td>
+            <td>Codex FXRSI_V3_2_Filter60</td>
+            <td class="dim">True</td>
+            <td class="dim">07/23/2026 19:36</td>
+            <td class="num">20,005.61</td>
+          </tr>
+          <tr>
+            <td class="strat-name">54187</td>
+            <td>Demo Claude XAU EU SweepReclaim</td>
+            <td class="dim">True</td>
+            <td class="dim">07/22/2026 19:19</td>
+            <td class="num">20,000.00</td>
+          </tr>
+          <tr>
+            <td class="strat-name">54195</td>
+            <td>Demo Claude Axis Rotation V6 Portfolio 11pair</td>
+            <td class="dim">True</td>
+            <td class="dim">07/23/2026 18:11</td>
+            <td class="num">20,310.11</td>
+          </tr>
+          <tr>
+            <td class="strat-name">54828</td>
+            <td>Demo T&D19L10 RCLOCK Settings</td>
+            <td class="dim">True</td>
+            <td class="dim">06/23/2026 16:37</td>
+            <td class="num">0.00</td>
+          </tr>
+          <tr>
+            <td class="strat-name">55205</td>
+            <td>55205 Claude Failed Acceptance Liq</td>
+            <td class="dim">True</td>
+            <td class="dim">07/23/2026 21:41</td>
+            <td class="num">19,809.69</td>
+          </tr>
+          <tr>
+            <td class="strat-name">55206</td>
+            <td>55206 Talon Volatility 15%</td>
+            <td class="dim">True</td>
+            <td class="dim">07/23/2026 21:44</td>
+            <td class="num">19,851.61</td>
+          </tr>
+          <tr>
+            <td class="strat-name">55213</td>
+            <td>MT5_55213_T&D19L9_V2_MOL</td>
+            <td class="dim">True</td>
+            <td class="dim">07/23/2026 21:46</td>
+            <td class="num">17,881.67</td>
+          </tr>
+          <tr>
+            <td class="strat-name">55214</td>
+            <td>Fund 1 Proven Core (Gold Talon + NYKZ)</td>
+            <td class="dim">True</td>
+            <td class="dim">07/23/2026 23:05</td>
+            <td class="num">19,491.14</td>
+          </tr>
+          <tr>
+            <td class="strat-name">55215</td>
+            <td>Fund 2 Talon  + Axis Diversifiers</td>
+            <td class="dim">True</td>
+            <td class="dim">07/23/2026 23:06</td>
+            <td class="num">19,030.55</td>
+          </tr>
+          <tr>
+            <td class="strat-name">55385</td>
+            <td>Fund 3 Max Diversification (Axis+Talon+NYKZ)</td>
+            <td class="dim">True</td>
+            <td class="dim">07/23/2026 23:07</td>
+            <td class="num">19,330.95</td>
+          </tr>
+          <tr>
+            <td class="strat-name">55386</td>
+            <td>Fund 4 Best of Each Strat (All EAs)</td>
+            <td class="dim">True</td>
+            <td class="dim">07/23/2026 23:06</td>
+            <td class="num">19,906.56</td>
+          </tr>
+          <tr>
+            <td class="strat-name">55387</td>
+            <td>Fund 5 All Survivors Aggressive</td>
+            <td class="dim">True</td>
+            <td class="dim">07/23/2026 23:06</td>
+            <td class="num">19,502.56</td>
+          </tr>
+          <tr>
+            <td class="strat-name">55894</td>
+            <td>55894 T&D19 Meta3 Prop</td>
+            <td class="dim">True</td>
+            <td class="dim">07/23/2026 21:49</td>
+            <td class="num">19,847.03</td>
+          </tr>
+          <tr>
+            <td class="strat-name">55895</td>
+            <td>55895 T&D19 Meta3 MOL</td>
+            <td class="dim">True</td>
+            <td class="dim">07/23/2026 21:46</td>
+            <td class="num">19,736.81</td>
+          </tr>
+          <tr>
+            <td class="strat-name">55896</td>
+            <td>55896 T&D19 Meta3 AGG</td>
+            <td class="dim">True</td>
+            <td class="dim">07/23/2026 21:43</td>
+            <td class="num">19,545.23</td>
+          </tr>
+          <tr>
+            <td class="strat-name">55897</td>
+            <td>55897 T&D19 Meta3 RCLOCK</td>
+            <td class="dim">True</td>
+            <td class="dim">07/23/2026 21:44</td>
+            <td class="num">20,303.97</td>
+          </tr>
+          <tr>
+            <td class="strat-name">55898</td>
+            <td>55898 T&D19L8 Prop</td>
+            <td class="dim">True</td>
+            <td class="dim">07/23/2026 21:43</td>
+            <td class="num">20,474.93</td>
+          </tr>
+          <tr>
+            <td class="strat-name">55899</td>
+            <td>55899 T&D19L9 Prop</td>
+            <td class="dim">True</td>
+            <td class="dim">07/23/2026 21:44</td>
+            <td class="num">20,804.94</td>
+          </tr>
+          <tr>
+            <td class="strat-name">55900</td>
+            <td>55900 T&D19L10 Prop</td>
+            <td class="dim">True</td>
+            <td class="dim">07/23/2026 21:43</td>
+            <td class="num">19,427.73</td>
+          </tr>
+          <tr>
+            <td class="strat-name">55901</td>
+            <td>55901 T&D19L11 Prop</td>
+            <td class="dim">True</td>
+            <td class="dim">07/23/2026 21:49</td>
+            <td class="num">19,226.18</td>
+          </tr>
+          <tr>
+            <td class="strat-name">55902</td>
+            <td>55902 T&D19L8 Agg</td>
+            <td class="dim">True</td>
+            <td class="dim">07/23/2026 21:49</td>
+            <td class="num">21,807.47</td>
+          </tr>
+          <tr>
+            <td class="strat-name">55903</td>
+            <td>55903 T&D19L9 Agg</td>
+            <td class="dim">True</td>
+            <td class="dim">07/23/2026 21:48</td>
+            <td class="num">19,281.17</td>
+          </tr>
+          <tr>
+            <td class="strat-name">55904</td>
+            <td>55904 T&D19L10 Agg</td>
+            <td class="dim">True</td>
+            <td class="dim">07/23/2026 21:49</td>
+            <td class="num">18,404.29</td>
+          </tr>
+          <tr>
+            <td class="strat-name">55905</td>
+            <td>55905 T&D19L11 RCLOCK</td>
+            <td class="dim">True</td>
+            <td class="dim">07/23/2026 21:47</td>
+            <td class="num">19,137.19</td>
+          </tr>
+          <tr>
+            <td class="strat-name">55906</td>
+            <td>55906 Demo Sweep V5</td>
+            <td class="dim">True</td>
+            <td class="dim">07/23/2026 22:03</td>
+            <td class="num">17,010.83</td>
+          </tr>
+          <tr>
+            <td class="strat-name">55907</td>
+            <td>55907 NYKZ V2 Natural</td>
+            <td class="dim">True</td>
+            <td class="dim">07/23/2026 21:37</td>
+            <td class="num">20,042.78</td>
+          </tr>
+          <tr>
+            <td class="strat-name">55908</td>
+            <td>55908 LDKZ London Open</td>
+            <td class="dim">True</td>
+            <td class="dim">07/23/2026 21:38</td>
+            <td class="num">19,950.20</td>
+          </tr>
+          <tr>
+            <td class="strat-name">55965</td>
+            <td>55965 TimeDay_FX_Scalp</td>
+            <td class="dim">True</td>
+            <td class="dim">07/23/2026 18:25</td>
+            <td class="num">19,568.48</td>
           </tr>
           <tr>
             <td class="strat-name">647831</td>
@@ -1385,24 +2422,31 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td class="num">0.00</td>
           </tr>
           <tr>
+            <td class="strat-name">648289</td>
+            <td>A-MOL Medallion </td>
+            <td class="dim"></td>
+            <td class="dim">07/22/2026 18:02</td>
+            <td class="num">0.00</td>
+          </tr>
+          <tr>
             <td class="strat-name">3038308</td>
             <td>A-MOL inactive Maven</td>
             <td class="dim"></td>
-            <td class="dim">05/18/2026 20:44</td>
+            <td class="dim">07/22/2026 18:04</td>
             <td class="num">0.00</td>
           </tr>
           <tr>
             <td class="strat-name">52428846</td>
             <td>EA The5ers Low DD Dual Breakout</td>
             <td class="dim">True</td>
-            <td class="dim">05/13/2026 11:15</td>
+            <td class="dim">07/19/2026 20:23</td>
             <td class="num">41,224.86</td>
           </tr>
           <tr>
             <td class="strat-name">80059994</td>
             <td>A-MOL Denali Plus</td>
             <td class="dim"></td>
-            <td class="dim">05/18/2026 03:46</td>
+            <td class="dim">07/21/2026 04:09</td>
             <td class="num">0.43</td>
           </tr>
           <tr>
@@ -1415,6 +2459,6 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
   </table>
 </details>
 
-<div class="footer">Generated 2026-07-23 17:47 • Source: <code>MFB_Bachelier_Reconciliation_2026-05-18.xlsx</code></div>
+<div class="footer">Generated 2026-07-23 19:09 • Source: <code>MFB_Bachelier_Reconciliation_2026-07-23.xlsx</code></div>
 
 </body></html>
