@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Bachelier Live Execution Quality</title>
+<style>
+:root { --bg:#0d1117; --surface:#161b22; --border:#30363d; --border2:#21262d;
+  --text:#e6edf3; --dim:#8b949e; --dim2:#484f58;
+  --green:#3fb950; --green-bg:#196c2e; --red:#f85149; --red-bg:#b62324;
+  --blue:#58a6ff; --orange:#f0883e; --yellow:#d29922; --purple:#d2a8ff; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'SF Mono','Cascadia Code','JetBrains Mono',monospace; background:var(--bg); color:var(--text); padding:20px; font-size:13px; }
+.header { display:flex; align-items:center; justify-content:space-between; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+.header h1 { font-size:1.4rem; letter-spacing:-0.5px; }
+.header .meta { color:var(--dim); font-size:0.75rem; text-align:right; }
+.kpi-grid { display:grid; gap:12px; margin-bottom:24px; }
+.kpi-grid-6 { grid-template-columns:repeat(6,1fr); }
+.kpi-grid-5 { grid-template-columns:repeat(5,1fr); }
+.kpi-grid-4 { grid-template-columns:repeat(4,1fr); }
+.kpi { background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:14px 16px; }
+.kpi .label { font-size:0.65rem; text-transform:uppercase; letter-spacing:1px; color:var(--dim); margin-bottom:4px; }
+.kpi .value { font-size:1.5rem; font-weight:700; }
+.kpi .sub { font-size:0.7rem; color:var(--dim); margin-top:2px; }
+.pos { color:var(--green); } .neg { color:var(--red); }
+.section { margin-bottom:28px; }
+.section-title { font-size:1rem; font-weight:600; margin-bottom:4px; display:flex; align-items:center; gap:8px; }
+.badge { font-size:0.65rem; padding:2px 8px; border-radius:4px; font-weight:500; }
+.badge-green { background:var(--green-bg); color:var(--green); }
+.badge-orange { background:#3d2200; color:var(--orange); }
+.badge-blue { background:#0d2240; color:var(--blue); }
+.section-desc { font-size:0.75rem; color:var(--dim); margin-bottom:10px; }
+.chart-box { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:16px; }
+.row2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:24px; }
+table { width:100%; border-collapse:collapse; font-size:0.78rem; }
+th { text-align:left; color:var(--dim); padding:6px 8px; border-bottom:1px solid var(--border); font-weight:500; font-size:0.65rem; text-transform:uppercase; letter-spacing:0.5px; }
+td { padding:5px 8px; border-bottom:1px solid var(--border2); }
+.num { text-align:right; font-variant-numeric:tabular-nums; }
+.dim { color:var(--dim); } .warn { color:var(--yellow); }
+.dot { width:10px; height:10px; border-radius:2px; display:inline-block; }
+.strat-name { font-weight:500; white-space:nowrap; }
+.heatmap-scroll { overflow-x:auto; }
+.heatmap { border-collapse:collapse; font-size:0.7rem; }
+.heatmap th, .heatmap td { padding:4px 6px; text-align:center; min-width:50px; border:1px solid var(--bg); }
+.hm-sym { font-size:0.6rem; color:var(--dim); writing-mode:vertical-lr; transform:rotate(180deg); height:60px; }
+.hm-strat { text-align:right !important; font-weight:500; white-space:nowrap; padding-right:10px !important; font-size:0.7rem; }
+.hm-empty { background:var(--surface); }
+.footer { text-align:center; font-size:0.7rem; color:var(--dim2); margin-top:32px; padding-top:16px; border-top:1px solid var(--border2); }
+.nav { display:flex; gap:12px; margin-bottom:20px; align-items:center; }
+.nav a { color:var(--blue); font-size:0.8rem; padding:6px 14px; border:1px solid var(--border); border-radius:6px; text-decoration:none; }
+.nav a.active { background:var(--blue); color:var(--bg); border-color:var(--blue); }
+.nav .logout-btn { margin-left:auto; color:var(--dim); font-size:0.7rem; padding:4px 10px; border:1px solid var(--border2); border-radius:4px; text-decoration:none; cursor:pointer; background:none; }
+.nav .logout-btn:hover { color:var(--red); border-color:var(--red); }
+
+/* Date filter */
+.date-filter { display:flex; align-items:center; gap:8px; margin-left:auto; }
+.date-filter label { font-size:0.7rem; color:var(--dim); text-transform:uppercase; letter-spacing:0.5px; }
+.date-filter input[type="date"] { background:var(--surface); border:1px solid var(--border); color:var(--text); padding:4px 8px; border-radius:4px; font-family:inherit; font-size:0.75rem; cursor:pointer; }
+.date-filter input[type="date"]::-webkit-calendar-picker-indicator { filter:invert(0.7); cursor:pointer; }
+.date-filter .preset-btn { background:none; border:1px solid var(--border2); color:var(--dim); padding:3px 8px; border-radius:4px; font-family:inherit; font-size:0.65rem; cursor:pointer; }
+.date-filter .preset-btn:hover, .date-filter .preset-btn.active { background:var(--blue); color:var(--bg); border-color:var(--blue); }
+.filter-banner { background:var(--surface); border:1px solid var(--blue); border-radius:6px; padding:8px 16px; margin-bottom:16px; display:none; font-size:0.8rem; color:var(--blue); }
+
+@media(max-width:900px) { .row2{grid-template-columns:1fr;} .kpi-grid{grid-template-columns:repeat(2,1fr);} .date-filter{flex-wrap:wrap;} }
+</style></head><body>
+
+<script>
+(function(){
+  const auth = sessionStorage.getItem('bachelier_auth');
+  if(!auth || auth !== 'authenticated'){
+    window.location.href = 'index.html';
+  }
+})();
+</script>
+<div class="nav">
+  <a href="demo_dashboard.html">Demo Bots</a>
+  <a href="licensed_dashboard.html">Licensed</a>
+  <a href="live_dashboard.html">Live Trading</a>
+  <a class="active" href="execution_dashboard.html">Execution</a>
+  <a href="explorer.html">Explorer</a>
+  <a href="audit_dashboard.html">MFB Audit</a>
+  <button class="logout-btn" onclick="sessionStorage.clear();location.href='index.html'">Sign Out</button>
+</div>
+<div class="header"><h1 style="color:var(--blue)">LIVE EXECUTION QUALITY</h1></div>
+
+<div class="kpi-grid kpi-grid-4">
+  <div class="kpi"><div class="label">Live fills analysed</div>
+    <div class="value">150</div><div class="sub">4 accounts · 5 symbols</div></div>
+  <div class="kpi"><div class="label">Median slippage — market</div>
+    <div class="value" style="color:var(--orange)">+3.0<span style="font-size:0.9rem"> pips</span></div>
+    <div class="sub">79 market fills</div></div>
+  <div class="kpi"><div class="label">Adverse fills — market</div>
+    <div class="value" style="color:var(--purple)">61%</div>
+    <div class="sub">filled worse than requested</div></div>
+  <div class="kpi"><div class="label">Total execution cost</div>
+    <div class="value neg">$+384</div>
+    <div class="sub">all live fills, + = cost</div></div>
+</div>
+<div class="section">
+  <div class="section-title" style="color:var(--orange)">How to read this</div>
+  <div class="section-desc" style="line-height:1.6">
+    <b>Slippage</b> = filled price &minus; requested price (the order's <code>price_open</code>),
+    signed so that <b>positive is worse for us</b>. <b>$</b> values use a per-symbol
+    value-per-price-unit fitted from real closed round trips on these accounts.<br>
+    <b>Market vs Stop/Limit is split deliberately.</b> Stop orders gap through their level in
+    fast markets, so their slippage measures market conditions, not the broker. Only the
+    <b>Market</b> rows say much about execution quality.<br>
+    <b>There is no spread column, because the pipeline never records bid/ask.</b> A market
+    order's slippage already absorbs the spread &mdash; that is why market fills skew adverse
+    instead of scattering around zero &mdash; but spread cannot be separated out from what is
+    captured today. Doing so would need EA-side spread logging or a tick-data join.
+  </div>
+</div>
+<div class="section">
+  <div class="section-title" style="color:var(--green)">Gold (XAUUSD) &mdash; live accounts</div>
+  <table><thead><tr><th>Account</th><th>Pair</th><th>Order kind</th><th>Fills</th><th>Lots</th>
+    <th>Median pips</th><th>Mean pips</th><th>Median $</th><th>Total $</th><th>Adverse</th></tr></thead>
+    <tbody><tr><td>LIVE Portfolio: Midnight Raven + Gold Reaper + AuRange (57825)</td><td>XAUUSD</td><td>Market</td><td class='num'>28</td><td class='num'>3.76</td><td class='num neg'>+4.5</td><td class='num'>+7.7</td><td class='num'>$+0.78</td><td class='num'>$+26.69</td><td class='num'>71%</td></tr>
+<tr><td>LIVE Portfolio: Midnight Raven + Gold Reaper + AuRange (57825)</td><td>XAUUSD</td><td>Stop / Limit</td><td class='num'>26</td><td class='num'>2.75</td><td class='num neg'>+81.0</td><td class='num'>+79.4</td><td class='num'>$+5.63</td><td class='num'>$+220.60</td><td class='num'>100%</td></tr>
+<tr><td>LIVE Dream Catcher Gold (55955)</td><td>XAUUSD</td><td>Market</td><td class='num'>22</td><td class='num'>1.09</td><td class='num neg'>+10.5</td><td class='num'>+24.3</td><td class='num'>$+0.27</td><td class='num'>$+23.48</td><td class='num'>82%</td></tr>
+<tr><td>LIVE Dream Catcher Gold (55955)</td><td>XAUUSD</td><td>Stop / Limit</td><td class='num'>22</td><td class='num'>1.09</td><td class='num neg'>+39.5</td><td class='num'>+55.7</td><td class='num'>$+1.14</td><td class='num'>$+36.56</td><td class='num'>100%</td></tr>
+<tr><td>LIVE Gold Reaper Conservative (662434)</td><td>XAUUSD.PRO</td><td>Stop / Limit</td><td class='num'>9</td><td class='num'>0.34</td><td class='num neg'>+144.0</td><td class='num'>+152.9</td><td class='num'>$+4.32</td><td class='num'>$+55.82</td><td class='num'>100%</td></tr>
+<tr><td>LIVE Gold Reaper Conservative (662434)</td><td>XAUUSD.PRO</td><td>Market</td><td class='num'>7</td><td class='num'>0.28</td><td class='num neg'>+14.0</td><td class='num'>+18.3</td><td class='num'>$+0.63</td><td class='num'>$+5.16</td><td class='num'>71%</td></tr></tbody></table>
+</div>
+<div class="section">
+  <div class="section-title" style="color:var(--blue)">All live pairs</div>
+  <div class="section-desc">Groups with at least 3 fills.</div>
+  <table><thead><tr><th>Account</th><th>Pair</th><th>Order kind</th><th>Fills</th><th>Lots</th>
+    <th>Median pips</th><th>Mean pips</th><th>Median $</th><th>Total $</th><th>Adverse</th></tr></thead>
+    <tbody><tr><td>LIVE Portfolio: Midnight Raven + Gold Reaper + AuRange (57825)</td><td>XAUUSD</td><td>Market</td><td class='num'>28</td><td class='num'>3.76</td><td class='num neg'>+4.5</td><td class='num'>+7.7</td><td class='num'>$+0.78</td><td class='num'>$+26.69</td><td class='num'>71%</td></tr>
+<tr><td>LIVE Portfolio: Midnight Raven + Gold Reaper + AuRange (57825)</td><td>XAUUSD</td><td>Stop / Limit</td><td class='num'>26</td><td class='num'>2.75</td><td class='num neg'>+81.0</td><td class='num'>+79.4</td><td class='num'>$+5.63</td><td class='num'>$+220.60</td><td class='num'>100%</td></tr>
+<tr><td>LIVE Dream Catcher Gold (55955)</td><td>XAUUSD</td><td>Market</td><td class='num'>22</td><td class='num'>1.09</td><td class='num neg'>+10.5</td><td class='num'>+24.3</td><td class='num'>$+0.27</td><td class='num'>$+23.48</td><td class='num'>82%</td></tr>
+<tr><td>LIVE Dream Catcher Gold (55955)</td><td>XAUUSD</td><td>Stop / Limit</td><td class='num'>22</td><td class='num'>1.09</td><td class='num neg'>+39.5</td><td class='num'>+55.7</td><td class='num'>$+1.14</td><td class='num'>$+36.56</td><td class='num'>100%</td></tr>
+<tr><td>LIVE Dream Catcher Gold (55955)</td><td>USTECH</td><td>Market</td><td class='num'>11</td><td class='num'>2.65</td><td class='num pos'>+0.0</td><td class='num'>+0.1</td><td class='num'>$+0.00</td><td class='num'>$+6.04</td><td class='num'>27%</td></tr>
+<tr><td>LIVE Dream Catcher Gold (55955)</td><td>USTECH</td><td>Stop / Limit</td><td class='num'>11</td><td class='num'>2.65</td><td class='num neg'>+0.2</td><td class='num'>+0.1</td><td class='num'>$+0.95</td><td class='num'>$+13.41</td><td class='num'>64%</td></tr>
+<tr><td>LIVE Gold Reaper Conservative (662434)</td><td>XAUUSD.PRO</td><td>Stop / Limit</td><td class='num'>9</td><td class='num'>0.34</td><td class='num neg'>+144.0</td><td class='num'>+152.9</td><td class='num'>$+4.32</td><td class='num'>$+55.82</td><td class='num'>100%</td></tr>
+<tr><td>LIVE Talon v2 GBPJPY + XAUUSD (662436)</td><td>GBPJPY.PRO</td><td>Market</td><td class='num'>8</td><td class='num'>0.97</td><td class='num pos'>-0.6</td><td class='num'>-1.3</td><td class='num'>$-0.46</td><td class='num'>$-7.80</td><td class='num'>12%</td></tr>
+<tr><td>LIVE Gold Reaper Conservative (662434)</td><td>XAUUSD.PRO</td><td>Market</td><td class='num'>7</td><td class='num'>0.28</td><td class='num neg'>+14.0</td><td class='num'>+18.3</td><td class='num'>$+0.63</td><td class='num'>$+5.16</td><td class='num'>71%</td></tr>
+<tr><td>LIVE Dream Catcher Gold (55955)</td><td>US30</td><td>Market</td><td class='num'>3</td><td class='num'>3.89</td><td class='num pos'>+0.0</td><td class='num'>+0.0</td><td class='num'>$+0.00</td><td class='num'>$+0.32</td><td class='num'>33%</td></tr>
+<tr><td>LIVE Dream Catcher Gold (55955)</td><td>US30</td><td>Stop / Limit</td><td class='num'>3</td><td class='num'>3.89</td><td class='num neg'>+0.5</td><td class='num'>+0.1</td><td class='num'>$+2.63</td><td class='num'>$+4.00</td><td class='num'>67%</td></tr></tbody></table>
+</div>
+
+<div class="meta" style="margin-top:20px">Updated 2026-09-05 17:24 &middot; live accounts only</div>
+</body></html>

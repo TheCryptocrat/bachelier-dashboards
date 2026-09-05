@@ -77,6 +77,7 @@ td { padding:5px 8px; border-bottom:1px solid var(--border2); }
   <a class="" href="demo_dashboard.html">Demo Bots</a>
   <a class="active" href="licensed_dashboard.html">Licensed</a>
   <a href="live_dashboard.html">Live Trading</a>
+  <a href="execution_dashboard.html">Execution</a>
   <a href="explorer.html">Explorer</a>
   <a href="audit_dashboard.html">MFB Audit</a>
   <button class="logout-btn" onclick="sessionStorage.clear();location.href='index.html'">Sign Out</button>
@@ -116,7 +117,7 @@ td { padding:5px 8px; border-bottom:1px solid var(--border2); }
 </div>
 
 <div class="row2">
-  <div class="section">
+  <div class="section" hidden>
     <div class="section-title" style="color:var(--green)">PROP Bots <span class="badge badge-green">0 combos</span></div>
     <div class="section-desc">Low-drawdown / prop-firm eligible strategies</div>
     <div style="margin-bottom:8px"><select id="propSelect" onchange="filterChart('prop')" style="background:var(--surface);border:1px solid var(--border);color:var(--text);padding:4px 10px;border-radius:4px;font-family:inherit;font-size:0.75rem;cursor:pointer"><option value="all">Show All Lines</option></select></div>
@@ -126,7 +127,7 @@ td { padding:5px 8px; border-bottom:1px solid var(--border2); }
       <tbody></tbody>
     </table>
   </div>
-  <div class="section">
+  <div class="section" hidden>
     <div class="section-title" style="color:var(--orange)">MOL Bots <span class="badge badge-orange">0 combos</span></div>
     <div class="section-desc">Higher-return / MOL portfolio strategies</div>
     <div style="margin-bottom:8px"><select id="molSelect" onchange="filterChart('mol')" style="background:var(--surface);border:1px solid var(--border);color:var(--text);padding:4px 10px;border-radius:4px;font-family:inherit;font-size:0.75rem;cursor:pointer"><option value="all">Show All Lines</option></select></div>
@@ -424,7 +425,7 @@ td { padding:5px 8px; border-bottom:1px solid var(--border2); }
   </table></div>
 </div>
 
-<div class="footer">Bachelier Demo Mission Control &middot; 2026-09-05 16:49 &middot; <span id="footerDates">2026-08-04 &rarr; 2026-09-04</span></div>
+<div class="footer">Bachelier Demo Mission Control &middot; 2026-09-05 17:24 &middot; <span id="footerDates">2026-08-04 &rarr; 2026-09-04</span></div>
 
 <script>
 const DAILY_DATA = [{"strategy": "AuRange Hunter", "symbol": "XAUUSD", "login": 56911, "daily": [{"d": "2026-08-04", "p": 41.8, "t": 5, "w": 4}, {"d": "2026-08-05", "p": 40.1, "t": 3, "w": 3}, {"d": "2026-08-06", "p": -18.2, "t": 5, "w": 4}, {"d": "2026-08-07", "p": 26.6, "t": 2, "w": 2}, {"d": "2026-08-10", "p": 92.9, "t": 4, "w": 4}, {"d": "2026-08-11", "p": 8.9, "t": 1, "w": 1}, {"d": "2026-08-12", "p": 33.9, "t": 3, "w": 3}, {"d": "2026-08-13", "p": 166.52, "t": 5, "w": 5}, {"d": "2026-08-14", "p": 34.8, "t": 2, "w": 2}, {"d": "2026-08-17", "p": 49.1, "t": 3, "w": 3}, {"d": "2026-08-18", "p": 28.24, "t": 3, "w": 3}, {"d": "2026-08-19", "p": 37.0, "t": 3, "w": 3}, {"d": "2026-08-20", "p": 17.6, "t": 2, "w": 2}, {"d": "2026-08-21", "p": 16.9, "t": 1, "w": 1}, {"d": "2026-08-24", "p": 24.3, "t": 2, "w": 2}, {"d": "2026-08-25", "p": 102.56, "t": 3, "w": 3}, {"d": "2026-08-26", "p": -0.7, "t": 4, "w": 3}, {"d": "2026-08-27", "p": -182.54, "t": 4, "w": 2}, {"d": "2026-08-28", "p": -139.3, "t": 5, "w": 3}, {"d": "2026-08-31", "p": -203.1, "t": 2, "w": 0}, {"d": "2026-09-01", "p": 41.8, "t": 4, "w": 4}, {"d": "2026-09-02", "p": 54.0, "t": 4, "w": 4}, {"d": "2026-09-03", "p": -72.1, "t": 5, "w": 3}, {"d": "2026-09-04", "p": -20.4, "t": 4, "w": 3}]}, {"strategy": "Demo AuRange Gold Reaper + DC + TALON", "symbol": "GBPJPY.pro", "login": 57681, "daily": [{"d": "2026-09-02", "p": -171.93, "t": 2, "w": 1}, {"d": "2026-09-03", "p": 3118.07, "t": 3, "w": 3}, {"d": "2026-09-04", "p": -2517.76, "t": 3, "w": 0}]}, {"strategy": "Demo AuRange Gold Reaper + DC + TALON", "symbol": "US30", "login": 57681, "daily": [{"d": "2026-08-28", "p": 209.0, "t": 1, "w": 1}, {"d": "2026-08-31", "p": 186.6, "t": 1, "w": 1}, {"d": "2026-09-01", "p": -204.2, "t": 1, "w": 0}, {"d": "2026-09-02", "p": -209.4, "t": 1, "w": 0}]}, {"strategy": "Demo AuRange Gold Reaper + DC + TALON", "symbol": "XAGUSD", "login": 57681, "daily": [{"d": "2026-09-03", "p": -600.0, "t": 1, "w": 0}]}, {"strategy": "Demo AuRange Gold Reaper + DC + TALON", "symbol": "XAUUSD", "login": 57681, "daily": [{"d": "2026-08-28", "p": 409.14, "t": 3, "w": 2}, {"d": "2026-09-01", "p": -1281.21, "t": 7, "w": 3}, {"d": "2026-09-02", "p": 205.8, "t": 2, "w": 1}]}, {"strategy": "Demo Full Throttle", "symbol": "AUDNZD.pro", "login": 57704, "daily": [{"d": "2026-09-02", "p": -174.98, "t": 3, "w": 2}, {"d": "2026-09-03", "p": 26.83, "t": 2, "w": 1}]}, {"strategy": "Demo Full Throttle", "symbol": "AUDUSD.pro", "login": 57704, "daily": [{"d": "2026-08-21", "p": -5.6, "t": 2, "w": 0}, {"d": "2026-08-25", "p": -5.25, "t": 1, "w": 0}, {"d": "2026-08-26", "p": 14.0, "t": 1, "w": 1}, {"d": "2026-08-28", "p": 52.85, "t": 2, "w": 2}, {"d": "2026-09-02", "p": 84.35, "t": 3, "w": 2}, {"d": "2026-09-03", "p": -6.3, "t": 1, "w": 0}]}, {"strategy": "Demo Full Throttle", "symbol": "EURGBP.pro", "login": 57704, "daily": [{"d": "2026-08-20", "p": -0.95, "t": 1, "w": 0}, {"d": "2026-08-24", "p": -4.77, "t": 2, "w": 0}, {"d": "2026-08-26", "p": -4.78, "t": 1, "w": 0}, {"d": "2026-09-02", "p": -4.25, "t": 1, "w": 0}]}, {"strategy": "Demo Full Throttle", "symbol": "EURUSD.pro", "login": 57704, "daily": [{"d": "2026-08-20", "p": -13.3, "t": 1, "w": 0}, {"d": "2026-08-27", "p": -1.4, "t": 1, "w": 0}, {"d": "2026-08-28", "p": 103.95, "t": 2, "w": 2}, {"d": "2026-09-04", "p": -2.45, "t": 1, "w": 0}]}, {"strategy": "Demo Full Throttle", "symbol": "NZDUSD.pro", "login": 57704, "daily": [{"d": "2026-09-02", "p": -50.4, "t": 1, "w": 0}, {"d": "2026-09-03", "p": 45.5, "t": 1, "w": 1}]}, {"strategy": "Demo Gold Snap", "symbol": "XAUUSD", "login": 57699, "daily": [{"d": "2026-08-26", "p": -199.1, "t": 1, "w": 0}, {"d": "2026-08-27", "p": 290.4, "t": 2, "w": 2}, {"d": "2026-08-28", "p": 347.38, "t": 1, "w": 1}, {"d": "2026-09-01", "p": -159.6, "t": 2, "w": 1}, {"d": "2026-09-02", "p": -207.84, "t": 1, "w": 0}]}, {"strategy": "LunaAI Pro", "symbol": "AUDCAD.pro", "login": 58314, "daily": [{"d": "2026-09-04", "p": 14.5, "t": 1, "w": 1}]}, {"strategy": "LunaAI Pro", "symbol": "AUDUSD.pro", "login": 58314, "daily": [{"d": "2026-09-03", "p": 12.75, "t": 1, "w": 1}]}, {"strategy": "LunaAI Pro", "symbol": "EURAUD.pro", "login": 58314, "daily": [{"d": "2026-09-03", "p": 4.9, "t": 1, "w": 1}]}, {"strategy": "LunaAI Pro", "symbol": "EURCAD.pro", "login": 58314, "daily": [{"d": "2026-08-31", "p": 0.35, "t": 1, "w": 1}, {"d": "2026-09-02", "p": 0.32, "t": 1, "w": 1}]}, {"strategy": "LunaAI Pro", "symbol": "EURUSD.pro", "login": 58314, "daily": [{"d": "2026-09-02", "p": 0.35, "t": 1, "w": 1}]}, {"strategy": "Midnight Raven GBPUSD 30m", "symbol": "GBPUSD", "login": 55967, "daily": [{"d": "2026-08-04", "p": 40.8, "t": 1, "w": 1}, {"d": "2026-08-05", "p": 81.9, "t": 2, "w": 2}, {"d": "2026-08-06", "p": 40.2, "t": 2, "w": 1}, {"d": "2026-08-07", "p": 38.4, "t": 3, "w": 2}, {"d": "2026-08-10", "p": 40.8, "t": 1, "w": 1}, {"d": "2026-08-12", "p": 41.7, "t": 1, "w": 1}, {"d": "2026-08-13", "p": 82.2, "t": 3, "w": 2}, {"d": "2026-08-14", "p": 124.8, "t": 4, "w": 4}]}, {"strategy": "Smart Gold Hunter", "symbol": "XAUUSD.PRO", "login": 1115445, "daily": [{"d": "2026-08-17", "p": -1.46, "t": 2, "w": 1}, {"d": "2026-08-18", "p": -10.16, "t": 5, "w": 1}, {"d": "2026-08-20", "p": 1.14, "t": 1, "w": 1}, {"d": "2026-08-21", "p": 0.88, "t": 2, "w": 1}, {"d": "2026-08-24", "p": 3.78, "t": 5, "w": 3}, {"d": "2026-08-25", "p": 12.04, "t": 3, "w": 3}, {"d": "2026-08-26", "p": 1.32, "t": 1, "w": 1}, {"d": "2026-08-27", "p": 3.32, "t": 1, "w": 1}, {"d": "2026-08-28", "p": 161.04, "t": 2, "w": 2}, {"d": "2026-08-31", "p": 104.61, "t": 1, "w": 1}, {"d": "2026-09-01", "p": 151.98, "t": 1, "w": 1}, {"d": "2026-09-02", "p": 80.58, "t": 1, "w": 1}, {"d": "2026-09-04", "p": 573.31, "t": 3, "w": 3}]}, {"strategy": "Smart Owl FX", "symbol": "EURCHF.pro", "login": 56912, "daily": [{"d": "2026-08-13", "p": 175.53, "t": 1, "w": 1}]}, {"strategy": "Smart Owl FX", "symbol": "USDCAD.pro", "login": 56912, "daily": [{"d": "2026-08-19", "p": 26.52, "t": 1, "w": 1}]}, {"strategy": "Smart Owl FX", "symbol": "USDCHF.pro", "login": 56912, "daily": [{"d": "2026-08-05", "p": -34.6, "t": 1, "w": 0}]}];
@@ -608,12 +609,25 @@ function populateSelect(selectId, items, colors) {
 }
 
 const TOP5_MIN_TRADES = 10;
+// Top 5 only surfaces bots that traded within this many days (Cree, 2026-09-05):
+// a long-dead bot with a great historical PF shouldn't occupy a Top 5 slot.
+const TOP5_RECENT_DAYS = 30;
 function getTop5Indices(items) {
   // Only consider combos with a meaningful sample (>= TOP5_MIN_TRADES trades),
   // so the Top 5 isn't dominated by 1-trade-wonders with sky-high PF.
+  // Per Cree: Top 5 should only surface bots that are actually still trading,
+  // so drop anything with no trade in the last TOP5_RECENT_DAYS. The cutoff is
+  // measured from the most recent trade date in the current view rather than
+  // from the wall clock, so the filter still behaves when a historical date
+  // range is selected (otherwise every combo would fall outside the window).
+  const allDates = items.map(it => it.last_date).filter(Boolean).sort();
+  const refDate = allDates.length ? new Date(allDates[allDates.length - 1]) : new Date();
+  const cutoff = new Date(refDate.getTime() - TOP5_RECENT_DAYS * 86400000);
   const indexed = items
-    .map((it, i) => ({ idx: i, pf: it.profit_factor || 0, pnl: it.total_pnl || 0, trades: it.trades || 0 }))
-    .filter(x => x.trades >= TOP5_MIN_TRADES);
+    .map((it, i) => ({ idx: i, pf: it.profit_factor || 0, pnl: it.total_pnl || 0,
+                        trades: it.trades || 0, last: it.last_date }))
+    .filter(x => x.trades >= TOP5_MIN_TRADES)
+    .filter(x => x.last && new Date(x.last) >= cutoff);
   // Filter to profitable (pnl > 0), sort by PF desc
   const profitable = indexed.filter(x => x.pnl > 0).sort((a, b) => b.pf - a.pf);
   // If fewer than 5 profitable, fill with best of the rest by PF
@@ -708,8 +722,17 @@ function updateKPIs() {
   } else {
     // Multiple selected — show aggregate across the priority group
     // Priority: gen > mol > prop (whichever is the active dropdown)
-    const which = lastActiveDropdown;
-    const items = which === 'prop' ? currentPropItems : which === 'mol' ? currentMolItems : currentGenItems;
+    const groupItems = w => w === 'prop' ? currentPropItems : w === 'mol' ? currentMolItems : currentGenItems;
+    // Fall back to a group that actually has combos. A pool whose strategy
+    // names match neither the Prop nor the MOL rule -- the licensed pool is
+    // entirely General -- leaves those groups empty, and reading KPIs off an
+    // empty group renders every tile as $0 / 0% / 0 trades, which looks like
+    // the page failed to load rather than like an empty category.
+    let which = lastActiveDropdown;
+    if (groupItems(which).length === 0) {
+      which = ['gen', 'mol', 'prop'].find(w => groupItems(w).length > 0) || which;
+    }
+    const items = groupItems(which);
     const sel = document.getElementById(which + 'Select');
     const val = sel.value;
 
