@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Bachelier Licensed Mission Control</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root { --bg:#0d1117; --surface:#161b22; --border:#30363d; --border2:#21262d;
+  --text:#e6edf3; --dim:#8b949e; --dim2:#484f58;
+  --green:#3fb950; --green-bg:#196c2e; --red:#f85149; --red-bg:#b62324;
+  --blue:#58a6ff; --orange:#f0883e; --yellow:#d29922; --purple:#d2a8ff; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'SF Mono','Cascadia Code','JetBrains Mono',monospace; background:var(--bg); color:var(--text); padding:20px; font-size:13px; }
+.header { display:flex; align-items:center; justify-content:space-between; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+.header h1 { font-size:1.4rem; letter-spacing:-0.5px; }
+.header .meta { color:var(--dim); font-size:0.75rem; text-align:right; }
+.kpi-grid { display:grid; gap:12px; margin-bottom:24px; }
+.kpi-grid-6 { grid-template-columns:repeat(6,1fr); }
+.kpi-grid-5 { grid-template-columns:repeat(5,1fr); }
+.kpi-grid-4 { grid-template-columns:repeat(4,1fr); }
+.kpi { background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:14px 16px; }
+.kpi .label { font-size:0.65rem; text-transform:uppercase; letter-spacing:1px; color:var(--dim); margin-bottom:4px; }
+.kpi .value { font-size:1.5rem; font-weight:700; }
+.kpi .sub { font-size:0.7rem; color:var(--dim); margin-top:2px; }
+.pos { color:var(--green); } .neg { color:var(--red); }
+.section { margin-bottom:28px; }
+.section-title { font-size:1rem; font-weight:600; margin-bottom:4px; display:flex; align-items:center; gap:8px; }
+.badge { font-size:0.65rem; padding:2px 8px; border-radius:4px; font-weight:500; }
+.badge-green { background:var(--green-bg); color:var(--green); }
+.badge-orange { background:#3d2200; color:var(--orange); }
+.badge-blue { background:#0d2240; color:var(--blue); }
+.section-desc { font-size:0.75rem; color:var(--dim); margin-bottom:10px; }
+.chart-box { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:16px; }
+.row2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:24px; }
+table { width:100%; border-collapse:collapse; font-size:0.78rem; }
+th { text-align:left; color:var(--dim); padding:6px 8px; border-bottom:1px solid var(--border); font-weight:500; font-size:0.65rem; text-transform:uppercase; letter-spacing:0.5px; }
+td { padding:5px 8px; border-bottom:1px solid var(--border2); }
+.num { text-align:right; font-variant-numeric:tabular-nums; }
+.dim { color:var(--dim); } .warn { color:var(--yellow); }
+.dot { width:10px; height:10px; border-radius:2px; display:inline-block; }
+.strat-name { font-weight:500; white-space:nowrap; }
+.heatmap-scroll { overflow-x:auto; }
+.heatmap { border-collapse:collapse; font-size:0.7rem; }
+.heatmap th, .heatmap td { padding:4px 6px; text-align:center; min-width:50px; border:1px solid var(--bg); }
+.hm-sym { font-size:0.6rem; color:var(--dim); writing-mode:vertical-lr; transform:rotate(180deg); height:60px; }
+.hm-strat { text-align:right !important; font-weight:500; white-space:nowrap; padding-right:10px !important; font-size:0.7rem; }
+.hm-empty { background:var(--surface); }
+.footer { text-align:center; font-size:0.7rem; color:var(--dim2); margin-top:32px; padding-top:16px; border-top:1px solid var(--border2); }
+.nav { display:flex; gap:12px; margin-bottom:20px; align-items:center; }
+.nav a { color:var(--blue); font-size:0.8rem; padding:6px 14px; border:1px solid var(--border); border-radius:6px; text-decoration:none; }
+.nav a.active { background:var(--blue); color:var(--bg); border-color:var(--blue); }
+.nav .logout-btn { margin-left:auto; color:var(--dim); font-size:0.7rem; padding:4px 10px; border:1px solid var(--border2); border-radius:4px; text-decoration:none; cursor:pointer; background:none; }
+.nav .logout-btn:hover { color:var(--red); border-color:var(--red); }
+
+/* Date filter */
+.date-filter { display:flex; align-items:center; gap:8px; margin-left:auto; }
+.date-filter label { font-size:0.7rem; color:var(--dim); text-transform:uppercase; letter-spacing:0.5px; }
+.date-filter input[type="date"] { background:var(--surface); border:1px solid var(--border); color:var(--text); padding:4px 8px; border-radius:4px; font-family:inherit; font-size:0.75rem; cursor:pointer; }
+.date-filter input[type="date"]::-webkit-calendar-picker-indicator { filter:invert(0.7); cursor:pointer; }
+.date-filter .preset-btn { background:none; border:1px solid var(--border2); color:var(--dim); padding:3px 8px; border-radius:4px; font-family:inherit; font-size:0.65rem; cursor:pointer; }
+.date-filter .preset-btn:hover, .date-filter .preset-btn.active { background:var(--blue); color:var(--bg); border-color:var(--blue); }
+.filter-banner { background:var(--surface); border:1px solid var(--blue); border-radius:6px; padding:8px 16px; margin-bottom:16px; display:none; font-size:0.8rem; color:var(--blue); }
+
+@media(max-width:900px) { .row2{grid-template-columns:1fr;} .kpi-grid{grid-template-columns:repeat(2,1fr);} .date-filter{flex-wrap:wrap;} }
+</style></head><body>
+
+<script>
+(function(){
+  const auth = sessionStorage.getItem('bachelier_auth');
+  if(!auth || auth !== 'authenticated'){
+    window.location.href = 'index.html';
+  }
+})();
+</script>
+
+
+
+<div class="nav">
+  <a class="" href="demo_dashboard.html">Demo Bots</a>
+  <a class="active" href="licensed_dashboard.html">Licensed</a>
+  <a href="live_dashboard.html">Live Trading</a>
+  <a href="explorer.html">Explorer</a>
+  <a href="audit_dashboard.html">MFB Audit</a>
+  <button class="logout-btn" onclick="sessionStorage.clear();location.href='index.html'">Sign Out</button>
+</div>
+
+<div class="header">
+  <h1 style="color:var(--blue)">LICENSED MISSION CONTROL</h1>
+  <div class="date-filter">
+    <button class="preset-btn" onclick="setPreset(7)">7D</button>
+    <button class="preset-btn" onclick="setPreset(30)">30D</button>
+    <button class="preset-btn" onclick="setPreset(90)">90D</button>
+    <button class="preset-btn active" onclick="setPreset('ytd')">YTD</button>
+    <button class="preset-btn" onclick="setPreset('all')">ALL</button>
+    <label>From</label><input type="date" id="dateStart" value="2026-08-04" onchange="applyFilter()">
+    <label>To</label><input type="date" id="dateEnd" value="2026-09-04" onchange="applyFilter()">
+  </div>
+</div>
+
+<div class="filter-banner" id="filterBanner"></div>
+
+<div class="kpi-grid kpi-grid-5" id="kpiGrid">
+  <div class="kpi"><div class="label" id="kpiLabel1">Total P&L</div>
+    <div class="value pos" id="kpiVal1">$+1,645</div>
+    <div class="sub" id="kpiSub1">21 combos</div></div>
+  <div class="kpi"><div class="label" id="kpiLabel2">Return</div>
+    <div class="value" style="color:var(--blue)" id="kpiVal2">—</div>
+    <div class="sub" id="kpiSub2">8 strategies</div></div>
+  <div class="kpi"><div class="label" id="kpiLabel3">Max Drawdown</div>
+    <div class="value" style="color:var(--orange)" id="kpiVal3">—</div>
+    <div class="sub" id="kpiSub3">across all combos</div></div>
+  <div class="kpi"><div class="label" id="kpiLabel4">Win Rate</div>
+    <div class="value" style="color:var(--purple)" id="kpiVal4">70.8%</div>
+    <div class="sub" id="kpiSub4">192 trades over 24 days</div></div>
+  <div class="kpi"><div class="label" id="kpiLabel5">Profit Factor</div>
+    <div class="value" style="color:var(--green)" id="kpiVal5">—</div>
+    <div class="sub" id="kpiSub5">Best / Worst Day</div></div>
+</div>
+
+<div class="row2">
+  <div class="section">
+    <div class="section-title" style="color:var(--green)">PROP Bots <span class="badge badge-green">0 combos</span></div>
+    <div class="section-desc">Low-drawdown / prop-firm eligible strategies</div>
+    <div style="margin-bottom:8px"><select id="propSelect" onchange="filterChart('prop')" style="background:var(--surface);border:1px solid var(--border);color:var(--text);padding:4px 10px;border-radius:4px;font-family:inherit;font-size:0.75rem;cursor:pointer"><option value="all">Show All Lines</option></select></div>
+    <div class="chart-box"><canvas id="propChart" height="260"></canvas></div>
+    <table style="margin-top:8px" id="propTable">
+      <thead><tr><th></th><th>Strategy</th><th>Pair</th><th>Login</th><th>Return</th><th>P&L</th><th>Max DD</th><th>Win%</th><th>PF</th><th>Sharpe</th><th>Trades</th><th>Since</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <div class="section">
+    <div class="section-title" style="color:var(--orange)">MOL Bots <span class="badge badge-orange">0 combos</span></div>
+    <div class="section-desc">Higher-return / MOL portfolio strategies</div>
+    <div style="margin-bottom:8px"><select id="molSelect" onchange="filterChart('mol')" style="background:var(--surface);border:1px solid var(--border);color:var(--text);padding:4px 10px;border-radius:4px;font-family:inherit;font-size:0.75rem;cursor:pointer"><option value="all">Show All Lines</option></select></div>
+    <div class="chart-box"><canvas id="molChart" height="260"></canvas></div>
+    <table style="margin-top:8px" id="molTable">
+      <thead><tr><th></th><th>Strategy</th><th>Pair</th><th>Login</th><th>Return</th><th>P&L</th><th>Max DD</th><th>Win%</th><th>PF</th><th>Sharpe</th><th>Trades</th><th>Since</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title" style="color:var(--purple)">General Bots <span class="badge" style="background:var(--purple);color:#fff">10 combos</span></div>
+  <div class="section-desc">Strategies not classified as Prop or MOL</div>
+  <div style="margin-bottom:8px"><select id="genSelect" onchange="filterChart('gen')" style="background:var(--surface);border:1px solid var(--border);color:var(--text);padding:4px 10px;border-radius:4px;font-family:inherit;font-size:0.75rem;cursor:pointer"><option value="all">Show All Lines</option></select></div>
+  <div class="chart-box"><canvas id="genChart" height="260"></canvas></div>
+  <table style="margin-top:8px" id="genTable">
+    <thead><tr><th></th><th>Strategy</th><th>Pair</th><th>Login</th><th>Return</th><th>P&L</th><th>Max DD</th><th>Win%</th><th>PF</th><th>Sharpe</th><th>Trades</th><th>Since</th></tr></thead>
+    <tbody><tr>
+          <td><span class="dot" style="background:#d2a8ff"></span></td>
+          <td class="strat-name">Midnight Raven GBPUSD 30m</td>
+          <td>GBPUSD</td>
+          <td class="num">55967</td>
+          <td class="num pos">+2.45%</td>
+          <td class="num pos">$+491</td>
+          <td class="num">0.3%</td>
+          <td class="num">82%</td>
+          <td class="num">5.7</td>
+          <td class="num">12.7</td>
+          <td class="num">17</td>
+          <td class="num dim">08-04</td>
+        </tr><tr>
+          <td><span class="dot" style="background:#79c0ff"></span></td>
+          <td class="strat-name">Smart Gold Hunter</td>
+          <td>XAUUSD.PRO</td>
+          <td class="num">1115445</td>
+          <td class="num pos">+1.08%</td>
+          <td class="num pos">$+1,082</td>
+          <td class="num">0.0%</td>
+          <td class="num">71%</td>
+          <td class="num">45.1</td>
+          <td class="num">6.0</td>
+          <td class="num">28</td>
+          <td class="num dim">08-17</td>
+        </tr><tr>
+          <td><span class="dot" style="background:#7ee787"></span></td>
+          <td class="strat-name">AuRange Hunter</td>
+          <td>XAUUSD</td>
+          <td class="num">56911</td>
+          <td class="num pos">+0.90%</td>
+          <td class="num pos">$+181</td>
+          <td class="num">3.0%</td>
+          <td class="num">85%</td>
+          <td class="num">1.1</td>
+          <td class="num">0.8</td>
+          <td class="num">79</td>
+          <td class="num dim">08-04</td>
+        </tr><tr>
+          <td><span class="dot" style="background:#e3b341"></span></td>
+          <td class="strat-name">Demo Full Throttle</td>
+          <td>AUDUSD</td>
+          <td class="num">57704</td>
+          <td class="num pos">+0.67%</td>
+          <td class="num pos">$+134</td>
+          <td class="num">0.0%</td>
+          <td class="num">50%</td>
+          <td class="num">6.6</td>
+          <td class="num">9.2</td>
+          <td class="num">10</td>
+          <td class="num dim">08-21</td>
+        </tr><tr>
+          <td><span class="dot" style="background:#ff7b72"></span></td>
+          <td class="strat-name">Demo AuRange Gold Reaper + DC + TALON</td>
+          <td>GBPJPY</td>
+          <td class="num">57681</td>
+          <td class="num pos">+0.43%</td>
+          <td class="num pos">$+428</td>
+          <td class="num">2.5%</td>
+          <td class="num">50%</td>
+          <td class="num">1.1</td>
+          <td class="num">0.8</td>
+          <td class="num">8</td>
+          <td class="num dim">09-02</td>
+        </tr><tr>
+          <td><span class="dot" style="background:#58a6ff"></span></td>
+          <td class="strat-name">Demo Full Throttle</td>
+          <td>EURUSD</td>
+          <td class="num">57704</td>
+          <td class="num pos">+0.43%</td>
+          <td class="num pos">$+87</td>
+          <td class="num">0.0%</td>
+          <td class="num">40%</td>
+          <td class="num">6.1</td>
+          <td class="num">8.6</td>
+          <td class="num">5</td>
+          <td class="num dim">08-20</td>
+        </tr><tr>
+          <td><span class="dot" style="background:#3fb950"></span></td>
+          <td class="strat-name">Demo Gold Snap</td>
+          <td>XAUUSD</td>
+          <td class="num">57699</td>
+          <td class="num pos">+0.36%</td>
+          <td class="num pos">$+71</td>
+          <td class="num">2.0%</td>
+          <td class="num">57%</td>
+          <td class="num">1.1</td>
+          <td class="num">0.7</td>
+          <td class="num">7</td>
+          <td class="num dim">08-26</td>
+        </tr><tr>
+          <td><span class="dot" style="background:#f0883e"></span></td>
+          <td class="strat-name">Demo Full Throttle</td>
+          <td>EURGBP</td>
+          <td class="num">57704</td>
+          <td class="num neg">-0.07%</td>
+          <td class="num neg">$-15</td>
+          <td class="num">0.1%</td>
+          <td class="num">0%</td>
+          <td class="num">0.0</td>
+          <td class="num">-27.6</td>
+          <td class="num">5</td>
+          <td class="num dim">08-20</td>
+        </tr><tr>
+          <td><span class="dot" style="background:#da3633"></span></td>
+          <td class="strat-name">Demo AuRange Gold Reaper + DC + TALON</td>
+          <td>XAUUSD</td>
+          <td class="num">57681</td>
+          <td class="num neg">-0.67%</td>
+          <td class="num neg">$-666</td>
+          <td class="num">1.4%</td>
+          <td class="num">50%</td>
+          <td class="num">0.5</td>
+          <td class="num">-2.8</td>
+          <td class="num">12</td>
+          <td class="num dim">08-28</td>
+        </tr><tr>
+          <td><span class="dot" style="background:#56d364"></span></td>
+          <td class="strat-name">Demo Full Throttle</td>
+          <td>AUDNZD</td>
+          <td class="num">57704</td>
+          <td class="num neg">-0.74%</td>
+          <td class="num neg">$-148</td>
+          <td class="num">0.0%</td>
+          <td class="num">60%</td>
+          <td class="num">0.3</td>
+          <td class="num">-4.2</td>
+          <td class="num">5</td>
+          <td class="num dim">09-02</td>
+        </tr></tbody>
+  </table>
+</div>
+
+<div class="row2">
+  <div class="section">
+    <div class="section-title" style="color:var(--blue)">Weekly P&L (All Demo Bots)</div>
+    <div class="chart-box"><canvas id="weeklyChart" height="220"></canvas></div>
+  </div>
+  <div class="section">
+    <div class="section-title" style="color:var(--blue)">Strategy P&L Leaderboard</div>
+    <div class="chart-box"><canvas id="stratChart" height="220"></canvas></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title" style="color:var(--blue)">Strategy &times; Pair Return Heatmap (%)</div>
+  <div class="section-desc">Cumulative return % per combo (min 5 trades). Hover for details.</div>
+  <div class="chart-box" id="heatmapBox"><div class="heatmap-scroll"><table class="heatmap"><tr><th></th><th class="hm-sym">AUDNZD</th><th class="hm-sym">AUDUSD</th><th class="hm-sym">EURGBP</th><th class="hm-sym">EURUSD</th><th class="hm-sym">GBPJPY</th><th class="hm-sym">GBPUSD</th><th class="hm-sym">XAUUSD</th><th class="hm-sym">XAUUSD.PRO</th></tr><tr><td class="hm-strat">AuRange Hunter</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#3fb950;color:#fff" title="AuRange Hunter | XAUUSD: +0.9% (79 trades)">+0.9</td><td class="hm-empty"></td></tr><tr><td class="hm-strat">Demo AuRange Gold Reaper + DC + TALON</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#3fb950;color:#fff" title="Demo AuRange Gold Reaper + DC + TALON | GBPJPY.pro: +0.4% (8 trades)">+0.4</td><td class="hm-empty"></td><td style="background:#f85149;color:#fff" title="Demo AuRange Gold Reaper + DC + TALON | XAUUSD: -0.7% (12 trades)">-0.7</td><td class="hm-empty"></td></tr><tr><td class="hm-strat">Demo Full Throttle</td><td style="background:#f85149;color:#fff" title="Demo Full Throttle | AUDNZD.pro: -0.7% (5 trades)">-0.7</td><td style="background:#3fb950;color:#fff" title="Demo Full Throttle | AUDUSD.pro: +0.7% (10 trades)">+0.7</td><td style="background:#f85149;color:#fff" title="Demo Full Throttle | EURGBP.pro: -0.1% (5 trades)">-0.1</td><td style="background:#3fb950;color:#fff" title="Demo Full Throttle | EURUSD.pro: +0.4% (5 trades)">+0.4</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td></tr><tr><td class="hm-strat">Demo Gold Snap</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#3fb950;color:#fff" title="Demo Gold Snap | XAUUSD: +0.4% (7 trades)">+0.4</td><td class="hm-empty"></td></tr><tr><td class="hm-strat">Midnight Raven GBPUSD 30m</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#2ea043;color:#fff" title="Midnight Raven GBPUSD 30m | GBPUSD: +2.5% (17 trades)">+2.5</td><td class="hm-empty"></td><td class="hm-empty"></td></tr><tr><td class="hm-strat">Smart Gold Hunter</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#3fb950;color:#fff" title="Smart Gold Hunter | XAUUSD.PRO: +1.1% (28 trades)">+1.1</td></tr></table></div></div>
+</div>
+
+<div class="section">
+  <div class="section-title" style="color:var(--blue)">Full Combo Leaderboard</div>
+  <div class="chart-box" id="leaderboardBox"><table id="leaderboardTable">
+    <thead><tr><th>#</th><th>Strategy</th><th>Pair</th><th>Login</th><th>Return</th><th>P&L</th><th>Max DD</th><th>Win%</th><th>PF</th><th>Sharpe</th><th>Trades</th></tr></thead>
+    <tbody><tr>
+          <td class="num dim">1</td>
+          <td class="strat-name">Midnight Raven GBPUSD 30m</td>
+          <td>GBPUSD</td>
+          <td class="num">55967</td>
+          <td class="num pos">+2.45%</td>
+          <td class="num pos">$+491</td>
+          <td class="num">0.3%</td>
+          <td class="num">82%</td>
+          <td class="num">5.7</td>
+          <td class="num">12.7</td>
+          <td class="num">17</td>
+        </tr><tr>
+          <td class="num dim">2</td>
+          <td class="strat-name">Smart Gold Hunter</td>
+          <td>XAUUSD.PRO</td>
+          <td class="num">1115445</td>
+          <td class="num pos">+1.08%</td>
+          <td class="num pos">$+1,082</td>
+          <td class="num">0.0%</td>
+          <td class="num">71%</td>
+          <td class="num">45.1</td>
+          <td class="num">6.0</td>
+          <td class="num">28</td>
+        </tr><tr>
+          <td class="num dim">3</td>
+          <td class="strat-name">AuRange Hunter</td>
+          <td>XAUUSD</td>
+          <td class="num">56911</td>
+          <td class="num pos">+0.90%</td>
+          <td class="num pos">$+181</td>
+          <td class="num">3.0%</td>
+          <td class="num">85%</td>
+          <td class="num">1.1</td>
+          <td class="num">0.8</td>
+          <td class="num">79</td>
+        </tr><tr>
+          <td class="num dim">4</td>
+          <td class="strat-name">Demo Full Throttle</td>
+          <td>AUDUSD</td>
+          <td class="num">57704</td>
+          <td class="num pos">+0.67%</td>
+          <td class="num pos">$+134</td>
+          <td class="num">0.0%</td>
+          <td class="num">50%</td>
+          <td class="num">6.6</td>
+          <td class="num">9.2</td>
+          <td class="num">10</td>
+        </tr><tr>
+          <td class="num dim">5</td>
+          <td class="strat-name">Demo AuRange Gold Reaper + DC + TALON</td>
+          <td>GBPJPY</td>
+          <td class="num">57681</td>
+          <td class="num pos">+0.43%</td>
+          <td class="num pos">$+428</td>
+          <td class="num">2.5%</td>
+          <td class="num">50%</td>
+          <td class="num">1.1</td>
+          <td class="num">0.8</td>
+          <td class="num">8</td>
+        </tr><tr>
+          <td class="num dim">6</td>
+          <td class="strat-name">Demo Full Throttle</td>
+          <td>EURUSD</td>
+          <td class="num">57704</td>
+          <td class="num pos">+0.43%</td>
+          <td class="num pos">$+87</td>
+          <td class="num">0.0%</td>
+          <td class="num">40%</td>
+          <td class="num">6.1</td>
+          <td class="num">8.6</td>
+          <td class="num">5</td>
+        </tr><tr>
+          <td class="num dim">7</td>
+          <td class="strat-name">Demo Gold Snap</td>
+          <td>XAUUSD</td>
+          <td class="num">57699</td>
+          <td class="num pos">+0.36%</td>
+          <td class="num pos">$+71</td>
+          <td class="num">2.0%</td>
+          <td class="num">57%</td>
+          <td class="num">1.1</td>
+          <td class="num">0.7</td>
+          <td class="num">7</td>
+        </tr><tr>
+          <td class="num dim">8</td>
+          <td class="strat-name">Demo Full Throttle</td>
+          <td>EURGBP</td>
+          <td class="num">57704</td>
+          <td class="num neg">-0.07%</td>
+          <td class="num neg">$-15</td>
+          <td class="num">0.1%</td>
+          <td class="num">0%</td>
+          <td class="num">0.0</td>
+          <td class="num">-27.6</td>
+          <td class="num">5</td>
+        </tr><tr>
+          <td class="num dim">9</td>
+          <td class="strat-name">Demo AuRange Gold Reaper + DC + TALON</td>
+          <td>XAUUSD</td>
+          <td class="num">57681</td>
+          <td class="num neg">-0.67%</td>
+          <td class="num neg">$-666</td>
+          <td class="num">1.4%</td>
+          <td class="num">50%</td>
+          <td class="num">0.5</td>
+          <td class="num">-2.8</td>
+          <td class="num">12</td>
+        </tr><tr>
+          <td class="num dim">10</td>
+          <td class="strat-name">Demo Full Throttle</td>
+          <td>AUDNZD</td>
+          <td class="num">57704</td>
+          <td class="num neg">-0.74%</td>
+          <td class="num neg">$-148</td>
+          <td class="num">0.0%</td>
+          <td class="num">60%</td>
+          <td class="num">0.3</td>
+          <td class="num">-4.2</td>
+          <td class="num">5</td>
+        </tr></tbody>
+  </table></div>
+</div>
+
+<div class="footer">Bachelier Demo Mission Control &middot; 2026-09-05 16:05 &middot; <span id="footerDates">2026-08-04 &rarr; 2026-09-04</span></div>
+
+<script>
+const DAILY_DATA = [{"strategy": "AuRange Hunter", "symbol": "XAUUSD", "login": 56911, "daily": [{"d": "2026-08-04", "p": 41.8, "t": 5, "w": 4}, {"d": "2026-08-05", "p": 40.1, "t": 3, "w": 3}, {"d": "2026-08-06", "p": -18.2, "t": 5, "w": 4}, {"d": "2026-08-07", "p": 26.6, "t": 2, "w": 2}, {"d": "2026-08-10", "p": 92.9, "t": 4, "w": 4}, {"d": "2026-08-11", "p": 8.9, "t": 1, "w": 1}, {"d": "2026-08-12", "p": 33.9, "t": 3, "w": 3}, {"d": "2026-08-13", "p": 166.52, "t": 5, "w": 5}, {"d": "2026-08-14", "p": 34.8, "t": 2, "w": 2}, {"d": "2026-08-17", "p": 49.1, "t": 3, "w": 3}, {"d": "2026-08-18", "p": 28.24, "t": 3, "w": 3}, {"d": "2026-08-19", "p": 37.0, "t": 3, "w": 3}, {"d": "2026-08-20", "p": 17.6, "t": 2, "w": 2}, {"d": "2026-08-21", "p": 16.9, "t": 1, "w": 1}, {"d": "2026-08-24", "p": 24.3, "t": 2, "w": 2}, {"d": "2026-08-25", "p": 102.56, "t": 3, "w": 3}, {"d": "2026-08-26", "p": -0.7, "t": 4, "w": 3}, {"d": "2026-08-27", "p": -182.54, "t": 4, "w": 2}, {"d": "2026-08-28", "p": -139.3, "t": 5, "w": 3}, {"d": "2026-08-31", "p": -203.1, "t": 2, "w": 0}, {"d": "2026-09-01", "p": 41.8, "t": 4, "w": 4}, {"d": "2026-09-02", "p": 54.0, "t": 4, "w": 4}, {"d": "2026-09-03", "p": -72.1, "t": 5, "w": 3}, {"d": "2026-09-04", "p": -20.4, "t": 4, "w": 3}]}, {"strategy": "Demo AuRange Gold Reaper + DC + TALON", "symbol": "GBPJPY.pro", "login": 57681, "daily": [{"d": "2026-09-02", "p": -171.93, "t": 2, "w": 1}, {"d": "2026-09-03", "p": 3118.07, "t": 3, "w": 3}, {"d": "2026-09-04", "p": -2517.76, "t": 3, "w": 0}]}, {"strategy": "Demo AuRange Gold Reaper + DC + TALON", "symbol": "US30", "login": 57681, "daily": [{"d": "2026-08-28", "p": 209.0, "t": 1, "w": 1}, {"d": "2026-08-31", "p": 186.6, "t": 1, "w": 1}, {"d": "2026-09-01", "p": -204.2, "t": 1, "w": 0}, {"d": "2026-09-02", "p": -209.4, "t": 1, "w": 0}]}, {"strategy": "Demo AuRange Gold Reaper + DC + TALON", "symbol": "XAGUSD", "login": 57681, "daily": [{"d": "2026-09-03", "p": -600.0, "t": 1, "w": 0}]}, {"strategy": "Demo AuRange Gold Reaper + DC + TALON", "symbol": "XAUUSD", "login": 57681, "daily": [{"d": "2026-08-28", "p": 409.14, "t": 3, "w": 2}, {"d": "2026-09-01", "p": -1281.21, "t": 7, "w": 3}, {"d": "2026-09-02", "p": 205.8, "t": 2, "w": 1}]}, {"strategy": "Demo Full Throttle", "symbol": "AUDNZD.pro", "login": 57704, "daily": [{"d": "2026-09-02", "p": -174.98, "t": 3, "w": 2}, {"d": "2026-09-03", "p": 26.83, "t": 2, "w": 1}]}, {"strategy": "Demo Full Throttle", "symbol": "AUDUSD.pro", "login": 57704, "daily": [{"d": "2026-08-21", "p": -5.6, "t": 2, "w": 0}, {"d": "2026-08-25", "p": -5.25, "t": 1, "w": 0}, {"d": "2026-08-26", "p": 14.0, "t": 1, "w": 1}, {"d": "2026-08-28", "p": 52.85, "t": 2, "w": 2}, {"d": "2026-09-02", "p": 84.35, "t": 3, "w": 2}, {"d": "2026-09-03", "p": -6.3, "t": 1, "w": 0}]}, {"strategy": "Demo Full Throttle", "symbol": "EURGBP.pro", "login": 57704, "daily": [{"d": "2026-08-20", "p": -0.95, "t": 1, "w": 0}, {"d": "2026-08-24", "p": -4.77, "t": 2, "w": 0}, {"d": "2026-08-26", "p": -4.78, "t": 1, "w": 0}, {"d": "2026-09-02", "p": -4.25, "t": 1, "w": 0}]}, {"strategy": "Demo Full Throttle", "symbol": "EURUSD.pro", "login": 57704, "daily": [{"d": "2026-08-20", "p": -13.3, "t": 1, "w": 0}, {"d": "2026-08-27", "p": -1.4, "t": 1, "w": 0}, {"d": "2026-08-28", "p": 103.95, "t": 2, "w": 2}, {"d": "2026-09-04", "p": -2.45, "t": 1, "w": 0}]}, {"strategy": "Demo Full Throttle", "symbol": "NZDUSD.pro", "login": 57704, "daily": [{"d": "2026-09-02", "p": -50.4, "t": 1, "w": 0}, {"d": "2026-09-03", "p": 45.5, "t": 1, "w": 1}]}, {"strategy": "Demo Gold Snap", "symbol": "XAUUSD", "login": 57699, "daily": [{"d": "2026-08-26", "p": -199.1, "t": 1, "w": 0}, {"d": "2026-08-27", "p": 290.4, "t": 2, "w": 2}, {"d": "2026-08-28", "p": 347.38, "t": 1, "w": 1}, {"d": "2026-09-01", "p": -159.6, "t": 2, "w": 1}, {"d": "2026-09-02", "p": -207.84, "t": 1, "w": 0}]}, {"strategy": "LunaAI Pro", "symbol": "AUDCAD.pro", "login": 58314, "daily": [{"d": "2026-09-04", "p": 14.5, "t": 1, "w": 1}]}, {"strategy": "LunaAI Pro", "symbol": "AUDUSD.pro", "login": 58314, "daily": [{"d": "2026-09-03", "p": 12.75, "t": 1, "w": 1}]}, {"strategy": "LunaAI Pro", "symbol": "EURAUD.pro", "login": 58314, "daily": [{"d": "2026-09-03", "p": 4.9, "t": 1, "w": 1}]}, {"strategy": "LunaAI Pro", "symbol": "EURCAD.pro", "login": 58314, "daily": [{"d": "2026-08-31", "p": 0.35, "t": 1, "w": 1}, {"d": "2026-09-02", "p": 0.32, "t": 1, "w": 1}]}, {"strategy": "LunaAI Pro", "symbol": "EURUSD.pro", "login": 58314, "daily": [{"d": "2026-09-02", "p": 0.35, "t": 1, "w": 1}]}, {"strategy": "Midnight Raven GBPUSD 30m", "symbol": "GBPUSD", "login": 55967, "daily": [{"d": "2026-08-04", "p": 40.8, "t": 1, "w": 1}, {"d": "2026-08-05", "p": 81.9, "t": 2, "w": 2}, {"d": "2026-08-06", "p": 40.2, "t": 2, "w": 1}, {"d": "2026-08-07", "p": 38.4, "t": 3, "w": 2}, {"d": "2026-08-10", "p": 40.8, "t": 1, "w": 1}, {"d": "2026-08-12", "p": 41.7, "t": 1, "w": 1}, {"d": "2026-08-13", "p": 82.2, "t": 3, "w": 2}, {"d": "2026-08-14", "p": 124.8, "t": 4, "w": 4}]}, {"strategy": "Smart Gold Hunter", "symbol": "XAUUSD.PRO", "login": 1115445, "daily": [{"d": "2026-08-17", "p": -1.46, "t": 2, "w": 1}, {"d": "2026-08-18", "p": -10.16, "t": 5, "w": 1}, {"d": "2026-08-20", "p": 1.14, "t": 1, "w": 1}, {"d": "2026-08-21", "p": 0.88, "t": 2, "w": 1}, {"d": "2026-08-24", "p": 3.78, "t": 5, "w": 3}, {"d": "2026-08-25", "p": 12.04, "t": 3, "w": 3}, {"d": "2026-08-26", "p": 1.32, "t": 1, "w": 1}, {"d": "2026-08-27", "p": 3.32, "t": 1, "w": 1}, {"d": "2026-08-28", "p": 161.04, "t": 2, "w": 2}, {"d": "2026-08-31", "p": 104.61, "t": 1, "w": 1}, {"d": "2026-09-01", "p": 151.98, "t": 1, "w": 1}, {"d": "2026-09-02", "p": 80.58, "t": 1, "w": 1}, {"d": "2026-09-04", "p": 573.31, "t": 3, "w": 3}]}, {"strategy": "Smart Owl FX", "symbol": "EURCHF.pro", "login": 56912, "daily": [{"d": "2026-08-13", "p": 175.53, "t": 1, "w": 1}]}, {"strategy": "Smart Owl FX", "symbol": "USDCAD.pro", "login": 56912, "daily": [{"d": "2026-08-19", "p": 26.52, "t": 1, "w": 1}]}, {"strategy": "Smart Owl FX", "symbol": "USDCHF.pro", "login": 56912, "daily": [{"d": "2026-08-05", "p": -34.6, "t": 1, "w": 0}]}];
+const PROP_COLORS = ["#3fb950", "#58a6ff", "#a5d6ff", "#7ee787", "#56d364", "#2ea043", "#388bfd", "#79c0ff", "#9ecbff", "#aff5b4"];
+const MOL_COLORS = ["#f0883e", "#d29922", "#e3b341", "#f85149", "#ff7b72", "#ffa657", "#db6d28", "#f78166", "#da3633", "#d2a8ff"];
+const GEN_COLORS = ["#d2a8ff", "#79c0ff", "#7ee787", "#e3b341", "#ff7b72", "#58a6ff", "#3fb950", "#f0883e", "#da3633", "#56d364"];
+const chartOpts = (ylabel) => ({
+  responsive:true, interaction:{mode:'index',intersect:false},
+  plugins:{legend:{display:false},
+    tooltip:{backgroundColor:'#161b22',borderColor:'#30363d',borderWidth:1,titleColor:'#e6edf3',bodyColor:'#e6edf3',
+      callbacks:{label:ctx=>ctx.dataset.label+': '+(ctx.parsed.y!==null?ctx.parsed.y.toFixed(2)+'%':'N/A')}
+    }},
+  scales:{
+    x:{ticks:{color:'#8b949e',maxTicksLimit:10,font:{size:9}},grid:{color:'#21262d'}},
+    y:{title:{display:true,text:ylabel,color:'#8b949e',font:{size:10}},ticks:{color:'#8b949e',callback:v=>v.toFixed(1)+'%'},grid:{color:'#21262d'}}
+  }
+});
+
+
+// ── Date Filter Engine ──
+const STARTING_EQ = 10000.0;
+const MIN_TR = 5;
+const PROP_DD = 5.0;
+const MOL_DD = 15.0;
+const TOP = 10;
+
+function getDateRange(){
+  const s = document.getElementById('dateStart').value;
+  const e = document.getElementById('dateEnd').value;
+  return { start: s || null, end: e || null };
+}
+
+function filterDaily(combos, start, end){
+  return combos.map(c => {
+    const fd = c.daily.filter(d => {
+      if(start && d.d < start) return false;
+      if(end && d.d > end) return false;
+      return true;
+    });
+    return {...c, daily: fd};
+  }).filter(c => c.daily.length > 0);
+}
+
+function computeMetrics(combos){
+  return combos.map(c => {
+    const pnls = c.daily.map(d => d.p);
+    const n = c.daily.reduce((s,d) => s + d.t, 0);
+    const wins = c.daily.reduce((s,d) => s + d.w, 0);
+    const total = pnls.reduce((s,v) => s+v, 0);
+    // Real per-account starting balance (denominator for DD%/return%).
+    const eqBase = (metaByLogin[c.login] && metaByLogin[c.login].start_bal) || STARTING_EQ;
+    const retPct = total / eqBase * 100;
+
+    // Max DD
+    let peak = eqBase, maxDd = 0;
+    let eq = eqBase;
+    for(const p of pnls){ eq += p; if(eq > peak) peak = eq; const dd = (peak-eq)/peak*100; if(dd > maxDd) maxDd = dd; }
+
+    // Profit factor
+    const gp = pnls.filter(p=>p>0).reduce((s,v)=>s+v,0);
+    const gl = Math.abs(pnls.filter(p=>p<=0).reduce((s,v)=>s+v,0));
+    const pf = gl > 0 ? gp/gl : 99.0;
+
+    // Sharpe
+    const dr = pnls.map(p => p/eqBase);
+    const mean = dr.reduce((s,v)=>s+v,0)/dr.length;
+    const std = Math.sqrt(dr.reduce((s,v)=>s+(v-mean)**2,0)/(dr.length-1||1));
+    const sharpe = std > 0 ? (mean/std)*Math.sqrt(252) : 0;
+
+    // Cumulative curve
+    let cum = 0;
+    const dates = [], cumPct = [];
+    for(const d of c.daily){
+      cum += d.p;
+      dates.push(d.d);
+      cumPct.push(Math.round(((eqBase+cum)/eqBase-1)*10000)/100);
+    }
+
+    return {
+      strategy: c.strategy, symbol: c.symbol, login: c.login,
+      label: c.strategy + ' | ' + c.symbol,
+      total_pnl: Math.round(total*100)/100,
+      return_pct: Math.round(retPct*100)/100,
+      max_dd: Math.round(maxDd*100)/100,
+      sharpe: Math.round(sharpe*100)/100,
+      profit_factor: Math.round(pf*100)/100,
+      trades: n, wins: wins, losses: n-wins,
+      win_rate: n > 0 ? Math.round(wins/n*1000)/10 : 0,
+      first_date: c.daily[0].d,
+      last_date: c.daily[c.daily.length-1].d,
+      dates: dates, cum_pct: cumPct,
+    };
+  });
+}
+
+function buildDatasets(items, colors){
+  const allDates = [...new Set(items.flatMap(it=>it.dates))].sort();
+  const ds = items.map((it,i) => {
+    const dm = Object.fromEntries(it.dates.map((d,j)=>[d,it.cum_pct[j]]));
+    return {
+      label: it.label,
+      data: allDates.map(d => dm[d] ?? null),
+      borderColor: colors[i % colors.length],
+      borderWidth: 2, pointRadius: 0, pointHoverRadius: 4,
+      tension: 0.3, spanGaps: true,
+    };
+  });
+  return { labels: allDates, datasets: ds };
+}
+
+function setPreset(days){
+  document.querySelectorAll('.preset-btn').forEach(b=>b.classList.remove('active'));
+  if(days === 'ytd'){
+    const yr = new Date().getFullYear();
+    document.getElementById('dateStart').value = yr+'-01-01';
+    document.getElementById('dateEnd').value = '';
+    event.target.classList.add('active');
+  } else if(days === 'all'){
+    document.getElementById('dateStart').value = '';
+    document.getElementById('dateEnd').value = '';
+    event.target.classList.add('active');
+  } else {
+    const end = new Date();
+    const start = new Date(end - days*86400000);
+    document.getElementById('dateStart').value = start.toISOString().slice(0,10);
+    document.getElementById('dateEnd').value = '';
+    event.target.classList.add('active');
+  }
+  applyFilter();
+}
+
+
+// ── Strategy classification (mirrors Python) ──
+const PROP_KW = ["prop", "low d"];
+const PROP_EXACT = ["T&D Low Drawdown"];
+const MOL_KW = ["mol", "high return"];
+const MOL_EXACT = ["Aggressive V1 Pro"];
+function isPropStrategy(name) {
+  const n = name.toLowerCase();
+  if (PROP_KW.some(kw => n.includes(kw))) return true;
+  if (PROP_EXACT.includes(name)) return true;
+  return false;
+}
+function isMolStrategy(name) {
+  const n = name.toLowerCase();
+  if (MOL_KW.some(kw => n.includes(kw))) return true;
+  if (MOL_EXACT.includes(name)) return true;
+  return false;
+}
+
+// ── Chart line selector dropdown ──
+// Track current items for Top 5 logic
+let currentPropItems = [];
+let currentMolItems = [];
+let currentGenItems = [];
+
+function populateSelect(selectId, items, colors) {
+  const sel = document.getElementById(selectId);
+  // Clear all options
+  sel.innerHTML = '';
+  // Add Top 5, Show All, then individual items
+  const optTop5 = document.createElement('option');
+  optTop5.value = 'top5';
+  optTop5.textContent = 'Top 5 by Profit Factor';
+  sel.appendChild(optTop5);
+  const optAll = document.createElement('option');
+  optAll.value = 'all';
+  optAll.textContent = 'Show All Lines';
+  sel.appendChild(optAll);
+  items.forEach((it, i) => {
+    const opt = document.createElement('option');
+    opt.value = i;
+    const pfLabel = it.profit_factor !== undefined ? ' PF ' + it.profit_factor.toFixed(1) : '';
+    opt.textContent = it.strategy + ' | ' + it.symbol.replace('.pro','') + ' (' + it.login + ')' + pfLabel;
+    sel.appendChild(opt);
+  });
+  // Store items for top5 computation
+  if (selectId === 'propSelect') currentPropItems = items;
+  if (selectId === 'molSelect') currentMolItems = items;
+  if (selectId === 'genSelect') currentGenItems = items;
+}
+
+const TOP5_MIN_TRADES = 10;
+function getTop5Indices(items) {
+  // Only consider combos with a meaningful sample (>= TOP5_MIN_TRADES trades),
+  // so the Top 5 isn't dominated by 1-trade-wonders with sky-high PF.
+  const indexed = items
+    .map((it, i) => ({ idx: i, pf: it.profit_factor || 0, pnl: it.total_pnl || 0, trades: it.trades || 0 }))
+    .filter(x => x.trades >= TOP5_MIN_TRADES);
+  // Filter to profitable (pnl > 0), sort by PF desc
+  const profitable = indexed.filter(x => x.pnl > 0).sort((a, b) => b.pf - a.pf);
+  // If fewer than 5 profitable, fill with best of the rest by PF
+  let top = profitable.slice(0, 5);
+  if (top.length < 5) {
+    const remaining = indexed.filter(x => x.pnl <= 0).sort((a, b) => b.pf - a.pf);
+    top = top.concat(remaining.slice(0, 5 - top.length));
+  }
+  return new Set(top.map(x => x.idx));
+}
+
+// Track which dropdown last changed for KPI priority
+let lastActiveDropdown = 'gen';
+
+function filterChart(which) {
+  const chart = which === 'prop' ? propChart : which === 'mol' ? molChart : genChart;
+  const items = which === 'prop' ? currentPropItems : which === 'mol' ? currentMolItems : currentGenItems;
+  const sel = document.getElementById(which + 'Select');
+  const val = sel.value;
+  if (val === 'all') {
+    chart.data.datasets.forEach(ds => { ds.hidden = false; });
+  } else if (val === 'top5') {
+    const top5 = getTop5Indices(items);
+    chart.data.datasets.forEach((ds, i) => { ds.hidden = !top5.has(i); });
+  } else {
+    const idx = parseInt(val);
+    chart.data.datasets.forEach((ds, i) => { ds.hidden = i !== idx; });
+  }
+  chart.update();
+  lastActiveDropdown = which;
+  updateKPIs();
+}
+
+function updateKPIs() {
+  // Determine which dropdown to source KPIs from
+  // Priority: check if any dropdown has a single item selected
+  // If the active dropdown has a single selection, use that
+  // Otherwise fall back to: gen > mol > prop for aggregate
+  const dropdowns = ['gen', 'mol', 'prop'];
+  // Start with the last active one
+  const ordered = [lastActiveDropdown, ...dropdowns.filter(d => d !== lastActiveDropdown)];
+
+  let singleItem = null;
+  let sourceItems = null;
+  let sourceWhich = null;
+
+  for (const which of ordered) {
+    const sel = document.getElementById(which + 'Select');
+    const val = sel.value;
+    const items = which === 'prop' ? currentPropItems : which === 'mol' ? currentMolItems : currentGenItems;
+    if (val !== 'all' && val !== 'top5' && items.length > 0) {
+      const idx = parseInt(val);
+      if (idx >= 0 && idx < items.length) {
+        singleItem = items[idx];
+        sourceWhich = which;
+        break;
+      }
+    }
+  }
+
+  if (singleItem) {
+    // Single combo selected — show its stats
+    const label = singleItem.strategy + ' | ' + (singleItem.symbol || '').replace('.pro','');
+    document.getElementById('kpiLabel1').textContent = 'P&L';
+    const pnl = singleItem.total_pnl || 0;
+    document.getElementById('kpiVal1').textContent = '$' + (pnl>=0?'+':'') + Math.round(pnl).toLocaleString();
+    document.getElementById('kpiVal1').className = 'value ' + (pnl>=0?'pos':'neg');
+    document.getElementById('kpiSub1').textContent = label;
+
+    document.getElementById('kpiLabel2').textContent = 'Return';
+    const ret = singleItem.return_pct || 0;
+    document.getElementById('kpiVal2').textContent = (ret>=0?'+':'') + ret.toFixed(1) + '%';
+    document.getElementById('kpiVal2').style.color = ret >= 0 ? 'var(--green)' : 'var(--red, #f85149)';
+    document.getElementById('kpiSub2').textContent = (singleItem.trades||0).toLocaleString() + ' trades';
+
+    document.getElementById('kpiLabel3').textContent = 'Max Drawdown';
+    const dd = singleItem.max_dd || 0;
+    document.getElementById('kpiVal3').textContent = dd.toFixed(1) + '%';
+    document.getElementById('kpiVal3').style.color = dd > 10 ? 'var(--red, #f85149)' : 'var(--orange)';
+    document.getElementById('kpiSub3').textContent = 'Login: ' + (singleItem.login || '');
+
+    document.getElementById('kpiLabel4').textContent = 'Win Rate';
+    document.getElementById('kpiVal4').textContent = (singleItem.win_rate || 0).toFixed(1) + '%';
+    document.getElementById('kpiVal4').style.color = 'var(--purple)';
+    document.getElementById('kpiSub4').textContent = (singleItem.wins||0) + 'W / ' + (singleItem.losses||0) + 'L';
+
+    document.getElementById('kpiLabel5').textContent = 'Profit Factor';
+    const pf = singleItem.profit_factor || 0;
+    document.getElementById('kpiVal5').textContent = pf >= 99 ? '∞' : pf.toFixed(2);
+    document.getElementById('kpiVal5').style.color = pf >= 1.5 ? 'var(--green)' : pf >= 1.0 ? 'var(--blue)' : 'var(--red, #f85149)';
+    document.getElementById('kpiSub5').textContent = 'Sharpe: ' + (singleItem.sharpe || 0).toFixed(2);
+  } else {
+    // Multiple selected — show aggregate across the priority group
+    // Priority: gen > mol > prop (whichever is the active dropdown)
+    const which = lastActiveDropdown;
+    const items = which === 'prop' ? currentPropItems : which === 'mol' ? currentMolItems : currentGenItems;
+    const sel = document.getElementById(which + 'Select');
+    const val = sel.value;
+
+    // Get visible items
+    let visibleItems = items;
+    if (val === 'top5') {
+      const top5 = getTop5Indices(items);
+      visibleItems = items.filter((_, i) => top5.has(i));
+    }
+
+    const groupLabel = which === 'prop' ? 'Prop Bots' : which === 'mol' ? 'MOL Bots' : 'General Bots';
+    const totalPnl = visibleItems.reduce((s, c) => s + (c.total_pnl||0), 0);
+    const totalTrades = visibleItems.reduce((s, c) => s + (c.trades||0), 0);
+    const totalWins = visibleItems.reduce((s, c) => s + (c.wins||0), 0);
+    const avgRet = visibleItems.length > 0 ? visibleItems.reduce((s,c) => s + (c.return_pct||0), 0) / visibleItems.length : 0;
+    const maxDD = visibleItems.length > 0 ? Math.max(...visibleItems.map(c => c.max_dd||0)) : 0;
+    const winRate = totalTrades > 0 ? (totalWins/totalTrades*100) : 0;
+    const gp = visibleItems.reduce((s,c) => { const p = c.total_pnl||0; return s + (p>0?p:0); }, 0);
+    const gl = visibleItems.reduce((s,c) => { const p = c.total_pnl||0; return s + (p<0?Math.abs(p):0); }, 0);
+    const pf = gl > 0 ? gp/gl : 99.0;
+
+    document.getElementById('kpiLabel1').textContent = groupLabel + ' P&L';
+    document.getElementById('kpiVal1').textContent = '$' + (totalPnl>=0?'+':'') + Math.round(totalPnl).toLocaleString();
+    document.getElementById('kpiVal1').className = 'value ' + (totalPnl>=0?'pos':'neg');
+    document.getElementById('kpiSub1').textContent = visibleItems.length + ' combos shown';
+
+    document.getElementById('kpiLabel2').textContent = 'Avg Return';
+    document.getElementById('kpiVal2').textContent = (avgRet>=0?'+':'') + avgRet.toFixed(1) + '%';
+    document.getElementById('kpiVal2').style.color = avgRet >= 0 ? 'var(--green)' : 'var(--red, #f85149)';
+    document.getElementById('kpiSub2').textContent = visibleItems.length + ' strategies';
+
+    document.getElementById('kpiLabel3').textContent = 'Worst Drawdown';
+    document.getElementById('kpiVal3').textContent = maxDD.toFixed(1) + '%';
+    document.getElementById('kpiVal3').style.color = maxDD > 10 ? 'var(--red, #f85149)' : 'var(--orange)';
+    document.getElementById('kpiSub3').textContent = 'worst among visible';
+
+    document.getElementById('kpiLabel4').textContent = 'Win Rate';
+    document.getElementById('kpiVal4').textContent = winRate.toFixed(1) + '%';
+    document.getElementById('kpiVal4').style.color = 'var(--purple)';
+    document.getElementById('kpiSub4').textContent = totalTrades.toLocaleString() + ' trades';
+
+    document.getElementById('kpiLabel5').textContent = 'Profit Factor';
+    document.getElementById('kpiVal5').textContent = pf >= 99 ? '∞' : pf.toFixed(2);
+    document.getElementById('kpiVal5').style.color = pf >= 1.5 ? 'var(--green)' : pf >= 1.0 ? 'var(--blue)' : 'var(--red, #f85149)';
+    document.getElementById('kpiSub5').textContent = groupLabel;
+  }
+}
+
+// ── Charts (initial) ──
+let propChart = new Chart(document.getElementById('propChart'),{type:'line',data:{labels:[],datasets:[]},options:chartOpts('Cumulative Return (%)')});
+let molChart = new Chart(document.getElementById('molChart'),{type:'line',data:{labels:[],datasets:[]},options:chartOpts('Cumulative Return (%)')});
+let genChart = new Chart(document.getElementById('genChart'),{type:'line',data:{labels:["2026-08-04", "2026-08-05", "2026-08-06", "2026-08-07", "2026-08-10", "2026-08-11", "2026-08-12", "2026-08-13", "2026-08-14", "2026-08-17", "2026-08-18", "2026-08-19", "2026-08-20", "2026-08-21", "2026-08-24", "2026-08-25", "2026-08-26", "2026-08-27", "2026-08-28", "2026-08-31", "2026-09-01", "2026-09-02", "2026-09-03", "2026-09-04"],datasets:[{"label": "Midnight Raven GBPUSD 30m | GBPUSD", "data": [0.2, 0.61, 0.81, 1.01, 1.21, null, 1.42, 1.83, 2.45, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], "borderColor": "#d2a8ff", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "Smart Gold Hunter | XAUUSD.PRO", "data": [null, null, null, null, null, null, null, null, null, -0.0, -0.01, null, -0.01, -0.01, -0.01, 0.01, 0.01, 0.01, 0.17, 0.28, 0.43, 0.51, null, 1.08], "borderColor": "#79c0ff", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "AuRange Hunter | XAUUSD", "data": [0.21, 0.41, 0.32, 0.45, 0.92, 0.96, 1.13, 1.96, 2.14, 2.38, 2.52, 2.71, 2.8, 2.88, 3.0, 3.52, 3.51, 2.6, 1.9, 0.89, 1.1, 1.37, 1.01, 0.9], "borderColor": "#7ee787", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "Demo Full Throttle | AUDUSD.pro", "data": [null, null, null, null, null, null, null, null, null, null, null, null, null, -0.03, null, -0.05, 0.02, null, 0.28, null, null, 0.7, 0.67, null], "borderColor": "#e3b341", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "Demo AuRange Gold Reaper + DC + TALON | GBPJPY.pro", "data": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.17, 2.95, 0.43], "borderColor": "#ff7b72", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "Demo Full Throttle | EURUSD.pro", "data": [null, null, null, null, null, null, null, null, null, null, null, null, -0.07, null, null, null, null, -0.07, 0.45, null, null, null, null, 0.43], "borderColor": "#58a6ff", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "Demo Gold Snap | XAUUSD", "data": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -1.0, 0.46, 2.19, null, 1.4, 0.36, null, null], "borderColor": "#3fb950", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "Demo Full Throttle | EURGBP.pro", "data": [null, null, null, null, null, null, null, null, null, null, null, null, -0.0, null, -0.03, null, -0.05, null, null, null, null, -0.07, null, null], "borderColor": "#f0883e", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "Demo AuRange Gold Reaper + DC + TALON | XAUUSD", "data": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.41, null, -0.87, -0.67, null, null], "borderColor": "#da3633", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "Demo Full Throttle | AUDNZD.pro", "data": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.87, -0.74, null], "borderColor": "#56d364", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}]},options:chartOpts('Cumulative Return (%)')});
+
+// Populate initial dropdowns with PF data, default to Top 5
+(function() {
+  const initProp = [];
+  const initMol = [];
+  const initGen = [{"strategy": "Midnight Raven GBPUSD 30m", "symbol": "GBPUSD", "login": 55967, "profit_factor": 5.71, "total_pnl": 490.8, "return_pct": 2.45, "max_dd": 0.33, "win_rate": 82.4, "wins": 14, "losses": 3, "sharpe": 12.66, "trades": 17}, {"strategy": "Smart Gold Hunter", "symbol": "XAUUSD.PRO", "login": 1115445, "profit_factor": 45.07, "total_pnl": 1082.38, "return_pct": 1.08, "max_dd": 0.01, "win_rate": 71.4, "wins": 20, "losses": 8, "sharpe": 5.95, "trades": 28}, {"strategy": "AuRange Hunter", "symbol": "XAUUSD", "login": 56911, "profit_factor": 1.14, "total_pnl": 180.68, "return_pct": 0.9, "max_dd": 3.0, "win_rate": 84.8, "wins": 67, "losses": 12, "sharpe": 0.75, "trades": 79}, {"strategy": "Demo Full Throttle", "symbol": "AUDUSD.pro", "login": 57704, "profit_factor": 6.63, "total_pnl": 134.05, "return_pct": 0.67, "max_dd": 0.04, "win_rate": 50.0, "wins": 5, "losses": 5, "sharpe": 9.2, "trades": 10}, {"strategy": "Demo AuRange Gold Reaper + DC + TALON", "symbol": "GBPJPY.pro", "login": 57681, "profit_factor": 1.12, "total_pnl": 428.38, "return_pct": 0.43, "max_dd": 2.45, "win_rate": 50.0, "wins": 4, "losses": 4, "sharpe": 0.8, "trades": 8}, {"strategy": "Demo Full Throttle", "symbol": "EURUSD.pro", "login": 57704, "profit_factor": 6.06, "total_pnl": 86.8, "return_pct": 0.43, "max_dd": 0.01, "win_rate": 40.0, "wins": 2, "losses": 3, "sharpe": 8.63, "trades": 5}, {"strategy": "Demo Gold Snap", "symbol": "XAUUSD", "login": 57699, "profit_factor": 1.12, "total_pnl": 71.24, "return_pct": 0.36, "max_dd": 2.0, "win_rate": 57.1, "wins": 4, "losses": 3, "sharpe": 0.7, "trades": 7}, {"strategy": "Demo Full Throttle", "symbol": "EURGBP.pro", "login": 57704, "profit_factor": 0.0, "total_pnl": -14.75, "return_pct": -0.07, "max_dd": 0.07, "win_rate": 0.0, "wins": 0, "losses": 5, "sharpe": -27.62, "trades": 5}, {"strategy": "Demo AuRange Gold Reaper + DC + TALON", "symbol": "XAUUSD", "login": 57681, "profit_factor": 0.51, "total_pnl": -666.27, "return_pct": -0.67, "max_dd": 1.36, "win_rate": 50.0, "wins": 6, "losses": 6, "sharpe": -2.84, "trades": 12}, {"strategy": "Demo Full Throttle", "symbol": "AUDNZD.pro", "login": 57704, "profit_factor": 0.35, "total_pnl": -148.15, "return_pct": -0.74, "max_dd": 0.0, "win_rate": 60.0, "wins": 3, "losses": 2, "sharpe": -4.2, "trades": 5}];
+  populateSelect('propSelect', initProp, PROP_COLORS);
+  populateSelect('molSelect', initMol, MOL_COLORS);
+  populateSelect('genSelect', initGen, GEN_COLORS);
+  // Apply Top 5 as default
+  document.getElementById('propSelect').value = 'top5';
+  filterChart('prop');
+  document.getElementById('molSelect').value = 'top5';
+  filterChart('mol');
+  document.getElementById('genSelect').value = 'top5';
+  filterChart('gen');
+})()
+let weeklyChart = new Chart(document.getElementById('weeklyChart'),{type:'bar',data:{labels:["2026-W31", "2026-W32", "2026-W33", "2026-W34", "2026-W35"],datasets:[{data:[257.0, 802.05, 145.91, 1197.24, -1179.32],backgroundColor:["#3fb950", "#3fb950", "#3fb950", "#3fb950", "#f85149"],borderRadius:4}]},options:{responsive:true,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>'$'+ctx.parsed.y.toLocaleString()}}},scales:{x:{ticks:{color:'#8b949e',font:{size:9}},grid:{display:false}},y:{ticks:{color:'#8b949e',callback:v=>'$'+v.toLocaleString()},grid:{color:'#21262d'}}}}});
+let stratChart = new Chart(document.getElementById('stratChart'),{type:'bar',data:{labels:["Smart Gold Hunter", "Midnight Raven GBPUS", "AuRange Hunter", "Smart Owl FX", "Demo Gold Snap", "Demo Full Throttle", "LunaAI Pro", "Demo AuRange Gold Re"],datasets:[{data:[1082.38, 490.8, 180.68, 167.45, 71.24, 53.05, 33.17, -855.89],backgroundColor:["#3fb950", "#3fb950", "#3fb950", "#3fb950", "#3fb950", "#3fb950", "#3fb950", "#f85149"],borderRadius:3}]},options:{indexAxis:'y',responsive:true,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>'$'+ctx.parsed.x.toLocaleString()}}},scales:{y:{ticks:{color:'#8b949e',font:{size:8}},grid:{display:false}},x:{ticks:{color:'#8b949e',callback:v=>'$'+v.toLocaleString()},grid:{color:'#21262d'}}}}});
+
+// ── Apply date filter ──
+function applyFilter(){
+  const {start, end} = getDateRange();
+  const filtered = filterDaily(DAILY_DATA, start, end);
+  const metrics = computeMetrics(filtered);
+  const qualified = metrics.filter(m => m.trades >= MIN_TR).sort((a,b) => b.return_pct - a.return_pct);
+
+  const propItems = qualified.filter(m => isPropStrategy(m.strategy)).sort((a,b) => b.return_pct - a.return_pct);
+  const molItems = qualified.filter(m => isMolStrategy(m.strategy)).sort((a,b) => b.return_pct - a.return_pct);
+  const genItems = qualified.filter(m => !isPropStrategy(m.strategy) && !isMolStrategy(m.strategy)).sort((a,b) => b.return_pct - a.return_pct);
+
+  // Flatten daily data for weekly/strategy charts
+  const allPnls = filtered.flatMap(c => c.daily);
+  const allDates = [...new Set(allPnls.map(d => d.d))];
+
+  // Update PROP chart
+  const propData = buildDatasets(propItems, PROP_COLORS);
+  propChart.data = propData;
+  propChart.update();
+  populateSelect('propSelect', propItems, PROP_COLORS);
+  document.getElementById('propSelect').value = 'top5';
+  filterChart('prop');
+
+  // Update MOL chart
+  const molData = buildDatasets(molItems, MOL_COLORS);
+  molChart.data = molData;
+  molChart.update();
+  populateSelect('molSelect', molItems, MOL_COLORS);
+  document.getElementById('molSelect').value = 'top5';
+  filterChart('mol');
+
+  // Update GEN chart
+  const genData = buildDatasets(genItems, GEN_COLORS);
+  genChart.data = genData;
+  genChart.update();
+  populateSelect('genSelect', genItems, GEN_COLORS);
+  document.getElementById('genSelect').value = 'top5';
+  filterChart('gen');
+
+  // Rebuild tables
+  document.querySelector('#propTable tbody').innerHTML = buildComboTableRows(propItems, PROP_COLORS);
+  document.querySelector('#molTable tbody').innerHTML = buildComboTableRows(molItems, MOL_COLORS);
+  document.querySelector('#genTable tbody').innerHTML = buildComboTableRows(genItems, GEN_COLORS);
+
+  // Rebuild weekly chart
+  const weekMap = {};
+  allPnls.forEach(d => {
+    const dt = new Date(d.d);
+    const wk = dt.getFullYear()+'-W'+String(Math.ceil(((dt - new Date(dt.getFullYear(),0,1))/86400000+1)/7)).padStart(2,'0');
+    weekMap[wk] = (weekMap[wk]||0) + d.p;
+  });
+  const wkLabels = Object.keys(weekMap).sort();
+  const wkPnls = wkLabels.map(w => Math.round(weekMap[w]*100)/100);
+  const wkColors = wkPnls.map(p => p >= 0 ? '#3fb950' : '#f85149');
+  weeklyChart.data = {labels:wkLabels,datasets:[{data:wkPnls,backgroundColor:wkColors,borderRadius:4}]};
+  weeklyChart.update();
+
+  // Rebuild strategy chart
+  const stratMap = {};
+  filtered.forEach(c => {
+    const pnl = c.daily.reduce((s,d)=>s+d.p,0);
+    stratMap[c.strategy] = (stratMap[c.strategy]||0) + pnl;
+  });
+  const stratEntries = Object.entries(stratMap).sort((a,b)=>b[1]-a[1]);
+  const sNames = stratEntries.map(e => e[0].substring(0,20));
+  const sPnls = stratEntries.map(e => Math.round(e[1]*100)/100);
+  const sColors = sPnls.map(p => p >= 0 ? '#3fb950' : '#f85149');
+  stratChart.data = {labels:sNames,datasets:[{data:sPnls,backgroundColor:sColors,borderRadius:3}]};
+  stratChart.update();
+
+  // Rebuild leaderboard
+  document.querySelector('#leaderboardTable tbody').innerHTML = buildLeaderboardRows(qualified);
+
+  // Rebuild heatmap
+  document.getElementById('heatmapBox').innerHTML = buildHeatmap(qualified);
+
+  // Footer dates
+  if(allDates.length > 0){
+    const sorted = allDates.sort();
+    document.getElementById('footerDates').innerHTML = sorted[0]+' &rarr; '+sorted[sorted.length-1];
+  }
+
+  // Filter banner
+  const banner = document.getElementById('filterBanner');
+  if(start || end){
+    banner.style.display = 'block';
+    banner.textContent = 'Filtered: ' + (start||'start') + ' → ' + (end||'now') + ' · ' + totalTrades.toLocaleString() + ' trades';
+  } else {
+    banner.style.display = 'none';
+  }
+}
+
+function buildComboTableRows(items, colors){
+  return items.map((it,i) => `<tr>
+    <td><span class="dot" style="background:${colors[i%colors.length]}"></span></td>
+    <td class="strat-name">${it.strategy}</td>
+    <td>${it.symbol.replace('.pro','')}</td>
+    <td class="num">${it.login}</td>
+    <td class="num ${it.return_pct>=0?'pos':'neg'}">${it.return_pct>=0?'+':''}${it.return_pct.toFixed(2)}%</td>
+    <td class="num ${it.total_pnl>=0?'pos':'neg'}">$${it.total_pnl>=0?'+':''}${Math.round(it.total_pnl).toLocaleString()}</td>
+    <td class="num">${it.max_dd.toFixed(1)}%</td>
+    <td class="num">${it.win_rate.toFixed(0)}%</td>
+    <td class="num">${it.profit_factor.toFixed(1)}</td>
+    <td class="num">${it.sharpe.toFixed(1)}</td>
+    <td class="num">${it.trades}</td>
+    <td class="num dim">${it.first_date.substring(5)}</td>
+  </tr>`).join('');
+}
+
+function buildLeaderboardRows(items){
+  return items.slice(0,30).map((it,i) => `<tr>
+    <td class="num dim">${i+1}</td>
+    <td class="strat-name">${it.strategy}</td>
+    <td>${it.symbol.replace('.pro','')}</td>
+    <td class="num">${it.login}</td>
+    <td class="num ${it.return_pct>=0?'pos':'neg'}">${it.return_pct>=0?'+':''}${it.return_pct.toFixed(2)}%</td>
+    <td class="num ${it.total_pnl>=0?'pos':'neg'}">$${it.total_pnl>=0?'+':''}${Math.round(it.total_pnl).toLocaleString()}</td>
+    <td class="num${it.max_dd>10?' warn':''}">${it.max_dd.toFixed(1)}%</td>
+    <td class="num">${it.win_rate.toFixed(0)}%</td>
+    <td class="num">${it.profit_factor.toFixed(1)}</td>
+    <td class="num">${it.sharpe.toFixed(1)}</td>
+    <td class="num">${it.trades}</td>
+  </tr>`).join('');
+}
+
+function buildHeatmap(combos){
+  const strategies = [...new Set(combos.map(c=>c.strategy))].sort();
+  const symbols = [...new Set(combos.map(c=>c.symbol))].sort();
+  const lookup = {};
+  combos.forEach(c => { lookup[c.strategy+'|'+c.symbol] = c; });
+
+  function bg(v){
+    if(v>10)return'#196c2e';if(v>5)return'#238636';if(v>2)return'#2ea043';if(v>0)return'#3fb950';
+    if(v>-2)return'#f85149';if(v>-5)return'#da3633';return'#b62324';
+  }
+
+  let h='<div class="heatmap-scroll"><table class="heatmap"><tr><th></th>';
+  symbols.forEach(s=>{ h+='<th class="hm-sym">'+s.replace('.pro','')+'</th>'; });
+  h+='</tr>';
+  strategies.forEach(st=>{
+    h+='<tr><td class="hm-strat">'+st+'</td>';
+    symbols.forEach(sy=>{
+      const c = lookup[st+'|'+sy];
+      if(c){
+        const v = c.return_pct;
+        h+='<td style="background:'+bg(v)+';color:#fff" title="'+st+' | '+sy+': '+(v>=0?'+':'')+v.toFixed(1)+'% ('+c.trades+' trades)">'+(v>=0?'+':'')+v.toFixed(1)+'</td>';
+      } else {
+        h+='<td class="hm-empty"></td>';
+      }
+    });
+    h+='</tr>';
+  });
+  h+='</table></div>';
+  return h;
+}
+
+</script></body></html>
