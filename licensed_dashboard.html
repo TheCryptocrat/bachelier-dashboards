@@ -92,7 +92,7 @@ td { padding:5px 8px; border-bottom:1px solid var(--border2); }
     <button class="preset-btn active" onclick="setPreset('ytd')">YTD</button>
     <button class="preset-btn" onclick="setPreset('all')">ALL</button>
     <label>From</label><input type="date" id="dateStart" value="2026-08-04" onchange="applyFilter()">
-    <label>To</label><input type="date" id="dateEnd" value="2026-09-04" onchange="applyFilter()">
+    <label>To</label><input type="date" id="dateEnd" value="2026-09-07" onchange="applyFilter()">
   </div>
 </div>
 
@@ -100,7 +100,7 @@ td { padding:5px 8px; border-bottom:1px solid var(--border2); }
 
 <div class="kpi-grid kpi-grid-5" id="kpiGrid">
   <div class="kpi"><div class="label" id="kpiLabel1">Total P&L</div>
-    <div class="value pos" id="kpiVal1">$+1,645</div>
+    <div class="value pos" id="kpiVal1">$+2,416</div>
     <div class="sub" id="kpiSub1">21 combos</div></div>
   <div class="kpi"><div class="label" id="kpiLabel2">Return</div>
     <div class="value" style="color:var(--blue)" id="kpiVal2">—</div>
@@ -109,8 +109,8 @@ td { padding:5px 8px; border-bottom:1px solid var(--border2); }
     <div class="value" style="color:var(--orange)" id="kpiVal3">—</div>
     <div class="sub" id="kpiSub3">across all combos</div></div>
   <div class="kpi"><div class="label" id="kpiLabel4">Win Rate</div>
-    <div class="value" style="color:var(--purple)" id="kpiVal4">70.8%</div>
-    <div class="sub" id="kpiSub4">192 trades over 24 days</div></div>
+    <div class="value" style="color:var(--purple)" id="kpiVal4">70.1%</div>
+    <div class="sub" id="kpiSub4">197 trades over 25 days</div></div>
   <div class="kpi"><div class="label" id="kpiLabel5">Profit Factor</div>
     <div class="value" style="color:var(--green)" id="kpiVal5">—</div>
     <div class="sub" id="kpiSub5">Best / Worst Day</div></div>
@@ -140,7 +140,7 @@ td { padding:5px 8px; border-bottom:1px solid var(--border2); }
 </div>
 
 <div class="section">
-  <div class="section-title" style="color:var(--purple)">General Bots <span class="badge" style="background:var(--purple);color:#fff">10 combos</span></div>
+  <div class="section-title" style="color:var(--purple)">General Bots <span class="badge" style="background:var(--purple);color:#fff">11 combos</span></div>
   <div class="section-desc">Strategies not classified as Prop or MOL</div>
   <div style="margin-bottom:8px"><select id="genSelect" onchange="filterChart('gen')" style="background:var(--surface);border:1px solid var(--border);color:var(--text);padding:4px 10px;border-radius:4px;font-family:inherit;font-size:0.75rem;cursor:pointer"><option value="all">Show All Lines</option></select></div>
   <div class="chart-box"><canvas id="genChart" height="260"></canvas></div>
@@ -174,19 +174,32 @@ td { padding:5px 8px; border-bottom:1px solid var(--border2); }
           <td class="num dim">08-04</td>
         </tr><tr>
           <td><span class="dot" style="background:#7ee787"></span></td>
+          <td class="strat-name">Demo AuRange Gold Reaper + DC + TALON</td>
+          <td>GBPJPY</td>
+          <td class="num">57681</td>
+          <td class="num pos">+1.42%</td>
+          <td class="num pos">$+1,415</td>
+          <td class="num">2.5%</td>
+          <td class="num">50%</td>
+          <td class="num">1.4</td>
+          <td class="num">2.3</td>
+          <td class="num">10</td>
+          <td class="num dim">09-02</td>
+        </tr><tr>
+          <td><span class="dot" style="background:#e3b341"></span></td>
           <td class="strat-name">AuRange Hunter</td>
           <td>XAUUSD</td>
           <td class="num">56911</td>
-          <td class="num pos">+0.90%</td>
-          <td class="num pos">$+181</td>
+          <td class="num pos">+1.01%</td>
+          <td class="num pos">$+203</td>
           <td class="num">3.0%</td>
           <td class="num">85%</td>
-          <td class="num">1.1</td>
+          <td class="num">1.2</td>
           <td class="num">0.8</td>
-          <td class="num">79</td>
+          <td class="num">80</td>
           <td class="num dim">08-04</td>
         </tr><tr>
-          <td><span class="dot" style="background:#e3b341"></span></td>
+          <td><span class="dot" style="background:#ff7b72"></span></td>
           <td class="strat-name">Demo Full Throttle</td>
           <td>AUDUSD</td>
           <td class="num">57704</td>
@@ -198,19 +211,6 @@ td { padding:5px 8px; border-bottom:1px solid var(--border2); }
           <td class="num">9.2</td>
           <td class="num">10</td>
           <td class="num dim">08-21</td>
-        </tr><tr>
-          <td><span class="dot" style="background:#ff7b72"></span></td>
-          <td class="strat-name">Demo AuRange Gold Reaper + DC + TALON</td>
-          <td>GBPJPY</td>
-          <td class="num">57681</td>
-          <td class="num pos">+0.43%</td>
-          <td class="num pos">$+428</td>
-          <td class="num">2.5%</td>
-          <td class="num">50%</td>
-          <td class="num">1.1</td>
-          <td class="num">0.8</td>
-          <td class="num">8</td>
-          <td class="num dim">09-02</td>
         </tr><tr>
           <td><span class="dot" style="background:#58a6ff"></span></td>
           <td class="strat-name">Demo Full Throttle</td>
@@ -253,6 +253,19 @@ td { padding:5px 8px; border-bottom:1px solid var(--border2); }
         </tr><tr>
           <td><span class="dot" style="background:#da3633"></span></td>
           <td class="strat-name">Demo AuRange Gold Reaper + DC + TALON</td>
+          <td>US30</td>
+          <td class="num">57681</td>
+          <td class="num neg">-0.24%</td>
+          <td class="num neg">$-238</td>
+          <td class="num">0.6%</td>
+          <td class="num">40%</td>
+          <td class="num">0.6</td>
+          <td class="num">-3.4</td>
+          <td class="num">5</td>
+          <td class="num dim">08-28</td>
+        </tr><tr>
+          <td><span class="dot" style="background:#56d364"></span></td>
+          <td class="strat-name">Demo AuRange Gold Reaper + DC + TALON</td>
           <td>XAUUSD</td>
           <td class="num">57681</td>
           <td class="num neg">-0.67%</td>
@@ -264,17 +277,17 @@ td { padding:5px 8px; border-bottom:1px solid var(--border2); }
           <td class="num">12</td>
           <td class="num dim">08-28</td>
         </tr><tr>
-          <td><span class="dot" style="background:#56d364"></span></td>
+          <td><span class="dot" style="background:#d2a8ff"></span></td>
           <td class="strat-name">Demo Full Throttle</td>
           <td>AUDNZD</td>
           <td class="num">57704</td>
           <td class="num neg">-0.74%</td>
           <td class="num neg">$-148</td>
           <td class="num">0.0%</td>
-          <td class="num">60%</td>
+          <td class="num">50%</td>
           <td class="num">0.3</td>
-          <td class="num">-4.2</td>
-          <td class="num">5</td>
+          <td class="num">-3.9</td>
+          <td class="num">6</td>
           <td class="num dim">09-02</td>
         </tr></tbody>
   </table>
@@ -294,7 +307,7 @@ td { padding:5px 8px; border-bottom:1px solid var(--border2); }
 <div class="section">
   <div class="section-title" style="color:var(--blue)">Strategy &times; Pair Return Heatmap (%)</div>
   <div class="section-desc">Cumulative return % per combo (min 5 trades). Hover for details.</div>
-  <div class="chart-box" id="heatmapBox"><div class="heatmap-scroll"><table class="heatmap"><tr><th></th><th class="hm-sym">AUDNZD</th><th class="hm-sym">AUDUSD</th><th class="hm-sym">EURGBP</th><th class="hm-sym">EURUSD</th><th class="hm-sym">GBPJPY</th><th class="hm-sym">GBPUSD</th><th class="hm-sym">XAUUSD</th><th class="hm-sym">XAUUSD.PRO</th></tr><tr><td class="hm-strat">AuRange Hunter</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#3fb950;color:#fff" title="AuRange Hunter | XAUUSD: +0.9% (79 trades)">+0.9</td><td class="hm-empty"></td></tr><tr><td class="hm-strat">Demo AuRange Gold Reaper + DC + TALON</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#3fb950;color:#fff" title="Demo AuRange Gold Reaper + DC + TALON | GBPJPY.pro: +0.4% (8 trades)">+0.4</td><td class="hm-empty"></td><td style="background:#f85149;color:#fff" title="Demo AuRange Gold Reaper + DC + TALON | XAUUSD: -0.7% (12 trades)">-0.7</td><td class="hm-empty"></td></tr><tr><td class="hm-strat">Demo Full Throttle</td><td style="background:#f85149;color:#fff" title="Demo Full Throttle | AUDNZD.pro: -0.7% (5 trades)">-0.7</td><td style="background:#3fb950;color:#fff" title="Demo Full Throttle | AUDUSD.pro: +0.7% (10 trades)">+0.7</td><td style="background:#f85149;color:#fff" title="Demo Full Throttle | EURGBP.pro: -0.1% (5 trades)">-0.1</td><td style="background:#3fb950;color:#fff" title="Demo Full Throttle | EURUSD.pro: +0.4% (5 trades)">+0.4</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td></tr><tr><td class="hm-strat">Demo Gold Snap</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#3fb950;color:#fff" title="Demo Gold Snap | XAUUSD: +0.4% (7 trades)">+0.4</td><td class="hm-empty"></td></tr><tr><td class="hm-strat">Midnight Raven GBPUSD 30m</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#2ea043;color:#fff" title="Midnight Raven GBPUSD 30m | GBPUSD: +2.5% (17 trades)">+2.5</td><td class="hm-empty"></td><td class="hm-empty"></td></tr><tr><td class="hm-strat">Smart Gold Hunter</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#196c2e;color:#fff" title="Smart Gold Hunter | XAUUSD.PRO: +10.8% (28 trades)">+10.8</td></tr></table></div></div>
+  <div class="chart-box" id="heatmapBox"><div class="heatmap-scroll"><table class="heatmap"><tr><th></th><th class="hm-sym">AUDNZD</th><th class="hm-sym">AUDUSD</th><th class="hm-sym">EURGBP</th><th class="hm-sym">EURUSD</th><th class="hm-sym">GBPJPY</th><th class="hm-sym">GBPUSD</th><th class="hm-sym">US30</th><th class="hm-sym">XAUUSD</th><th class="hm-sym">XAUUSD.PRO</th></tr><tr><td class="hm-strat">AuRange Hunter</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#3fb950;color:#fff" title="AuRange Hunter | XAUUSD: +1.0% (80 trades)">+1.0</td><td class="hm-empty"></td></tr><tr><td class="hm-strat">Demo AuRange Gold Reaper + DC + TALON</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#3fb950;color:#fff" title="Demo AuRange Gold Reaper + DC + TALON | GBPJPY.pro: +1.4% (10 trades)">+1.4</td><td class="hm-empty"></td><td style="background:#f85149;color:#fff" title="Demo AuRange Gold Reaper + DC + TALON | US30: -0.2% (5 trades)">-0.2</td><td style="background:#f85149;color:#fff" title="Demo AuRange Gold Reaper + DC + TALON | XAUUSD: -0.7% (12 trades)">-0.7</td><td class="hm-empty"></td></tr><tr><td class="hm-strat">Demo Full Throttle</td><td style="background:#f85149;color:#fff" title="Demo Full Throttle | AUDNZD.pro: -0.7% (6 trades)">-0.7</td><td style="background:#3fb950;color:#fff" title="Demo Full Throttle | AUDUSD.pro: +0.7% (10 trades)">+0.7</td><td style="background:#f85149;color:#fff" title="Demo Full Throttle | EURGBP.pro: -0.1% (5 trades)">-0.1</td><td style="background:#3fb950;color:#fff" title="Demo Full Throttle | EURUSD.pro: +0.4% (5 trades)">+0.4</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td></tr><tr><td class="hm-strat">Demo Gold Snap</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#3fb950;color:#fff" title="Demo Gold Snap | XAUUSD: +0.4% (7 trades)">+0.4</td><td class="hm-empty"></td></tr><tr><td class="hm-strat">Midnight Raven GBPUSD 30m</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#2ea043;color:#fff" title="Midnight Raven GBPUSD 30m | GBPUSD: +2.5% (17 trades)">+2.5</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td></tr><tr><td class="hm-strat">Smart Gold Hunter</td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td class="hm-empty"></td><td style="background:#196c2e;color:#fff" title="Smart Gold Hunter | XAUUSD.PRO: +10.8% (28 trades)">+10.8</td></tr></table></div></div>
 </div>
 
 <div class="section">
@@ -327,18 +340,30 @@ td { padding:5px 8px; border-bottom:1px solid var(--border2); }
           <td class="num">17</td>
         </tr><tr>
           <td class="num dim">3</td>
+          <td class="strat-name">Demo AuRange Gold Reaper + DC + TALON</td>
+          <td>GBPJPY</td>
+          <td class="num">57681</td>
+          <td class="num pos">+1.42%</td>
+          <td class="num pos">$+1,415</td>
+          <td class="num">2.5%</td>
+          <td class="num">50%</td>
+          <td class="num">1.4</td>
+          <td class="num">2.3</td>
+          <td class="num">10</td>
+        </tr><tr>
+          <td class="num dim">4</td>
           <td class="strat-name">AuRange Hunter</td>
           <td>XAUUSD</td>
           <td class="num">56911</td>
-          <td class="num pos">+0.90%</td>
-          <td class="num pos">$+181</td>
+          <td class="num pos">+1.01%</td>
+          <td class="num pos">$+203</td>
           <td class="num">3.0%</td>
           <td class="num">85%</td>
-          <td class="num">1.1</td>
+          <td class="num">1.2</td>
           <td class="num">0.8</td>
-          <td class="num">79</td>
+          <td class="num">80</td>
         </tr><tr>
-          <td class="num dim">4</td>
+          <td class="num dim">5</td>
           <td class="strat-name">Demo Full Throttle</td>
           <td>AUDUSD</td>
           <td class="num">57704</td>
@@ -349,18 +374,6 @@ td { padding:5px 8px; border-bottom:1px solid var(--border2); }
           <td class="num">6.6</td>
           <td class="num">9.2</td>
           <td class="num">10</td>
-        </tr><tr>
-          <td class="num dim">5</td>
-          <td class="strat-name">Demo AuRange Gold Reaper + DC + TALON</td>
-          <td>GBPJPY</td>
-          <td class="num">57681</td>
-          <td class="num pos">+0.43%</td>
-          <td class="num pos">$+428</td>
-          <td class="num">2.5%</td>
-          <td class="num">50%</td>
-          <td class="num">1.1</td>
-          <td class="num">0.8</td>
-          <td class="num">8</td>
         </tr><tr>
           <td class="num dim">6</td>
           <td class="strat-name">Demo Full Throttle</td>
@@ -400,6 +413,18 @@ td { padding:5px 8px; border-bottom:1px solid var(--border2); }
         </tr><tr>
           <td class="num dim">9</td>
           <td class="strat-name">Demo AuRange Gold Reaper + DC + TALON</td>
+          <td>US30</td>
+          <td class="num">57681</td>
+          <td class="num neg">-0.24%</td>
+          <td class="num neg">$-238</td>
+          <td class="num">0.6%</td>
+          <td class="num">40%</td>
+          <td class="num">0.6</td>
+          <td class="num">-3.4</td>
+          <td class="num">5</td>
+        </tr><tr>
+          <td class="num dim">10</td>
+          <td class="strat-name">Demo AuRange Gold Reaper + DC + TALON</td>
           <td>XAUUSD</td>
           <td class="num">57681</td>
           <td class="num neg">-0.67%</td>
@@ -410,25 +435,25 @@ td { padding:5px 8px; border-bottom:1px solid var(--border2); }
           <td class="num">-2.8</td>
           <td class="num">12</td>
         </tr><tr>
-          <td class="num dim">10</td>
+          <td class="num dim">11</td>
           <td class="strat-name">Demo Full Throttle</td>
           <td>AUDNZD</td>
           <td class="num">57704</td>
           <td class="num neg">-0.74%</td>
           <td class="num neg">$-148</td>
           <td class="num">0.0%</td>
-          <td class="num">60%</td>
+          <td class="num">50%</td>
           <td class="num">0.3</td>
-          <td class="num">-4.2</td>
-          <td class="num">5</td>
+          <td class="num">-3.9</td>
+          <td class="num">6</td>
         </tr></tbody>
   </table></div>
 </div>
 
-<div class="footer">Bachelier Demo Mission Control &middot; 2026-09-05 17:24 &middot; <span id="footerDates">2026-08-04 &rarr; 2026-09-04</span></div>
+<div class="footer">Bachelier Demo Mission Control &middot; 2026-09-07 19:42 &middot; <span id="footerDates">2026-08-04 &rarr; 2026-09-07</span></div>
 
 <script>
-const DAILY_DATA = [{"strategy": "AuRange Hunter", "symbol": "XAUUSD", "login": 56911, "daily": [{"d": "2026-08-04", "p": 41.8, "t": 5, "w": 4}, {"d": "2026-08-05", "p": 40.1, "t": 3, "w": 3}, {"d": "2026-08-06", "p": -18.2, "t": 5, "w": 4}, {"d": "2026-08-07", "p": 26.6, "t": 2, "w": 2}, {"d": "2026-08-10", "p": 92.9, "t": 4, "w": 4}, {"d": "2026-08-11", "p": 8.9, "t": 1, "w": 1}, {"d": "2026-08-12", "p": 33.9, "t": 3, "w": 3}, {"d": "2026-08-13", "p": 166.52, "t": 5, "w": 5}, {"d": "2026-08-14", "p": 34.8, "t": 2, "w": 2}, {"d": "2026-08-17", "p": 49.1, "t": 3, "w": 3}, {"d": "2026-08-18", "p": 28.24, "t": 3, "w": 3}, {"d": "2026-08-19", "p": 37.0, "t": 3, "w": 3}, {"d": "2026-08-20", "p": 17.6, "t": 2, "w": 2}, {"d": "2026-08-21", "p": 16.9, "t": 1, "w": 1}, {"d": "2026-08-24", "p": 24.3, "t": 2, "w": 2}, {"d": "2026-08-25", "p": 102.56, "t": 3, "w": 3}, {"d": "2026-08-26", "p": -0.7, "t": 4, "w": 3}, {"d": "2026-08-27", "p": -182.54, "t": 4, "w": 2}, {"d": "2026-08-28", "p": -139.3, "t": 5, "w": 3}, {"d": "2026-08-31", "p": -203.1, "t": 2, "w": 0}, {"d": "2026-09-01", "p": 41.8, "t": 4, "w": 4}, {"d": "2026-09-02", "p": 54.0, "t": 4, "w": 4}, {"d": "2026-09-03", "p": -72.1, "t": 5, "w": 3}, {"d": "2026-09-04", "p": -20.4, "t": 4, "w": 3}]}, {"strategy": "Demo AuRange Gold Reaper + DC + TALON", "symbol": "GBPJPY.pro", "login": 57681, "daily": [{"d": "2026-09-02", "p": -171.93, "t": 2, "w": 1}, {"d": "2026-09-03", "p": 3118.07, "t": 3, "w": 3}, {"d": "2026-09-04", "p": -2517.76, "t": 3, "w": 0}]}, {"strategy": "Demo AuRange Gold Reaper + DC + TALON", "symbol": "US30", "login": 57681, "daily": [{"d": "2026-08-28", "p": 209.0, "t": 1, "w": 1}, {"d": "2026-08-31", "p": 186.6, "t": 1, "w": 1}, {"d": "2026-09-01", "p": -204.2, "t": 1, "w": 0}, {"d": "2026-09-02", "p": -209.4, "t": 1, "w": 0}]}, {"strategy": "Demo AuRange Gold Reaper + DC + TALON", "symbol": "XAGUSD", "login": 57681, "daily": [{"d": "2026-09-03", "p": -600.0, "t": 1, "w": 0}]}, {"strategy": "Demo AuRange Gold Reaper + DC + TALON", "symbol": "XAUUSD", "login": 57681, "daily": [{"d": "2026-08-28", "p": 409.14, "t": 3, "w": 2}, {"d": "2026-09-01", "p": -1281.21, "t": 7, "w": 3}, {"d": "2026-09-02", "p": 205.8, "t": 2, "w": 1}]}, {"strategy": "Demo Full Throttle", "symbol": "AUDNZD.pro", "login": 57704, "daily": [{"d": "2026-09-02", "p": -174.98, "t": 3, "w": 2}, {"d": "2026-09-03", "p": 26.83, "t": 2, "w": 1}]}, {"strategy": "Demo Full Throttle", "symbol": "AUDUSD.pro", "login": 57704, "daily": [{"d": "2026-08-21", "p": -5.6, "t": 2, "w": 0}, {"d": "2026-08-25", "p": -5.25, "t": 1, "w": 0}, {"d": "2026-08-26", "p": 14.0, "t": 1, "w": 1}, {"d": "2026-08-28", "p": 52.85, "t": 2, "w": 2}, {"d": "2026-09-02", "p": 84.35, "t": 3, "w": 2}, {"d": "2026-09-03", "p": -6.3, "t": 1, "w": 0}]}, {"strategy": "Demo Full Throttle", "symbol": "EURGBP.pro", "login": 57704, "daily": [{"d": "2026-08-20", "p": -0.95, "t": 1, "w": 0}, {"d": "2026-08-24", "p": -4.77, "t": 2, "w": 0}, {"d": "2026-08-26", "p": -4.78, "t": 1, "w": 0}, {"d": "2026-09-02", "p": -4.25, "t": 1, "w": 0}]}, {"strategy": "Demo Full Throttle", "symbol": "EURUSD.pro", "login": 57704, "daily": [{"d": "2026-08-20", "p": -13.3, "t": 1, "w": 0}, {"d": "2026-08-27", "p": -1.4, "t": 1, "w": 0}, {"d": "2026-08-28", "p": 103.95, "t": 2, "w": 2}, {"d": "2026-09-04", "p": -2.45, "t": 1, "w": 0}]}, {"strategy": "Demo Full Throttle", "symbol": "NZDUSD.pro", "login": 57704, "daily": [{"d": "2026-09-02", "p": -50.4, "t": 1, "w": 0}, {"d": "2026-09-03", "p": 45.5, "t": 1, "w": 1}]}, {"strategy": "Demo Gold Snap", "symbol": "XAUUSD", "login": 57699, "daily": [{"d": "2026-08-26", "p": -199.1, "t": 1, "w": 0}, {"d": "2026-08-27", "p": 290.4, "t": 2, "w": 2}, {"d": "2026-08-28", "p": 347.38, "t": 1, "w": 1}, {"d": "2026-09-01", "p": -159.6, "t": 2, "w": 1}, {"d": "2026-09-02", "p": -207.84, "t": 1, "w": 0}]}, {"strategy": "LunaAI Pro", "symbol": "AUDCAD.pro", "login": 58314, "daily": [{"d": "2026-09-04", "p": 14.5, "t": 1, "w": 1}]}, {"strategy": "LunaAI Pro", "symbol": "AUDUSD.pro", "login": 58314, "daily": [{"d": "2026-09-03", "p": 12.75, "t": 1, "w": 1}]}, {"strategy": "LunaAI Pro", "symbol": "EURAUD.pro", "login": 58314, "daily": [{"d": "2026-09-03", "p": 4.9, "t": 1, "w": 1}]}, {"strategy": "LunaAI Pro", "symbol": "EURCAD.pro", "login": 58314, "daily": [{"d": "2026-08-31", "p": 0.35, "t": 1, "w": 1}, {"d": "2026-09-02", "p": 0.32, "t": 1, "w": 1}]}, {"strategy": "LunaAI Pro", "symbol": "EURUSD.pro", "login": 58314, "daily": [{"d": "2026-09-02", "p": 0.35, "t": 1, "w": 1}]}, {"strategy": "Midnight Raven GBPUSD 30m", "symbol": "GBPUSD", "login": 55967, "daily": [{"d": "2026-08-04", "p": 40.8, "t": 1, "w": 1}, {"d": "2026-08-05", "p": 81.9, "t": 2, "w": 2}, {"d": "2026-08-06", "p": 40.2, "t": 2, "w": 1}, {"d": "2026-08-07", "p": 38.4, "t": 3, "w": 2}, {"d": "2026-08-10", "p": 40.8, "t": 1, "w": 1}, {"d": "2026-08-12", "p": 41.7, "t": 1, "w": 1}, {"d": "2026-08-13", "p": 82.2, "t": 3, "w": 2}, {"d": "2026-08-14", "p": 124.8, "t": 4, "w": 4}]}, {"strategy": "Smart Gold Hunter", "symbol": "XAUUSD.PRO", "login": 1115445, "daily": [{"d": "2026-08-17", "p": -1.46, "t": 2, "w": 1}, {"d": "2026-08-18", "p": -10.16, "t": 5, "w": 1}, {"d": "2026-08-20", "p": 1.14, "t": 1, "w": 1}, {"d": "2026-08-21", "p": 0.88, "t": 2, "w": 1}, {"d": "2026-08-24", "p": 3.78, "t": 5, "w": 3}, {"d": "2026-08-25", "p": 12.04, "t": 3, "w": 3}, {"d": "2026-08-26", "p": 1.32, "t": 1, "w": 1}, {"d": "2026-08-27", "p": 3.32, "t": 1, "w": 1}, {"d": "2026-08-28", "p": 161.04, "t": 2, "w": 2}, {"d": "2026-08-31", "p": 104.61, "t": 1, "w": 1}, {"d": "2026-09-01", "p": 151.98, "t": 1, "w": 1}, {"d": "2026-09-02", "p": 80.58, "t": 1, "w": 1}, {"d": "2026-09-04", "p": 573.31, "t": 3, "w": 3}]}, {"strategy": "Smart Owl FX", "symbol": "EURCHF.pro", "login": 56912, "daily": [{"d": "2026-08-13", "p": 175.53, "t": 1, "w": 1}]}, {"strategy": "Smart Owl FX", "symbol": "USDCAD.pro", "login": 56912, "daily": [{"d": "2026-08-19", "p": 26.52, "t": 1, "w": 1}]}, {"strategy": "Smart Owl FX", "symbol": "USDCHF.pro", "login": 56912, "daily": [{"d": "2026-08-05", "p": -34.6, "t": 1, "w": 0}]}];
+const DAILY_DATA = [{"strategy": "AuRange Hunter", "symbol": "XAUUSD", "login": 56911, "daily": [{"d": "2026-08-04", "p": 41.8, "t": 5, "w": 4}, {"d": "2026-08-05", "p": 40.1, "t": 3, "w": 3}, {"d": "2026-08-06", "p": -18.2, "t": 5, "w": 4}, {"d": "2026-08-07", "p": 26.6, "t": 2, "w": 2}, {"d": "2026-08-10", "p": 92.9, "t": 4, "w": 4}, {"d": "2026-08-11", "p": 8.9, "t": 1, "w": 1}, {"d": "2026-08-12", "p": 33.9, "t": 3, "w": 3}, {"d": "2026-08-13", "p": 166.52, "t": 5, "w": 5}, {"d": "2026-08-14", "p": 34.8, "t": 2, "w": 2}, {"d": "2026-08-17", "p": 49.1, "t": 3, "w": 3}, {"d": "2026-08-18", "p": 28.24, "t": 3, "w": 3}, {"d": "2026-08-19", "p": 37.0, "t": 3, "w": 3}, {"d": "2026-08-20", "p": 17.6, "t": 2, "w": 2}, {"d": "2026-08-21", "p": 16.9, "t": 1, "w": 1}, {"d": "2026-08-24", "p": 24.3, "t": 2, "w": 2}, {"d": "2026-08-25", "p": 102.56, "t": 3, "w": 3}, {"d": "2026-08-26", "p": -0.7, "t": 4, "w": 3}, {"d": "2026-08-27", "p": -182.54, "t": 4, "w": 2}, {"d": "2026-08-28", "p": -139.3, "t": 5, "w": 3}, {"d": "2026-08-31", "p": -203.1, "t": 2, "w": 0}, {"d": "2026-09-01", "p": 41.8, "t": 4, "w": 4}, {"d": "2026-09-02", "p": 54.0, "t": 4, "w": 4}, {"d": "2026-09-03", "p": -72.1, "t": 5, "w": 3}, {"d": "2026-09-04", "p": -20.4, "t": 4, "w": 3}, {"d": "2026-09-07", "p": 22.3, "t": 1, "w": 1}]}, {"strategy": "Demo AuRange Gold Reaper + DC + TALON", "symbol": "GBPJPY.pro", "login": 57681, "daily": [{"d": "2026-09-02", "p": -171.93, "t": 2, "w": 1}, {"d": "2026-09-03", "p": 3118.07, "t": 3, "w": 3}, {"d": "2026-09-04", "p": -2517.76, "t": 3, "w": 0}, {"d": "2026-09-07", "p": 986.94, "t": 2, "w": 1}]}, {"strategy": "Demo AuRange Gold Reaper + DC + TALON", "symbol": "US30", "login": 57681, "daily": [{"d": "2026-08-28", "p": 209.0, "t": 1, "w": 1}, {"d": "2026-08-31", "p": 186.6, "t": 1, "w": 1}, {"d": "2026-09-01", "p": -204.2, "t": 1, "w": 0}, {"d": "2026-09-02", "p": -209.4, "t": 1, "w": 0}, {"d": "2026-09-07", "p": -220.2, "t": 1, "w": 0}]}, {"strategy": "Demo AuRange Gold Reaper + DC + TALON", "symbol": "XAGUSD", "login": 57681, "daily": [{"d": "2026-09-03", "p": -600.0, "t": 1, "w": 0}]}, {"strategy": "Demo AuRange Gold Reaper + DC + TALON", "symbol": "XAUUSD", "login": 57681, "daily": [{"d": "2026-08-28", "p": 409.14, "t": 3, "w": 2}, {"d": "2026-09-01", "p": -1281.21, "t": 7, "w": 3}, {"d": "2026-09-02", "p": 205.8, "t": 2, "w": 1}]}, {"strategy": "Demo Full Throttle", "symbol": "AUDNZD.pro", "login": 57704, "daily": [{"d": "2026-09-02", "p": -174.98, "t": 3, "w": 2}, {"d": "2026-09-03", "p": 26.83, "t": 2, "w": 1}, {"d": "2026-09-07", "p": 0.0, "t": 1, "w": 0}]}, {"strategy": "Demo Full Throttle", "symbol": "AUDUSD.pro", "login": 57704, "daily": [{"d": "2026-08-21", "p": -5.6, "t": 2, "w": 0}, {"d": "2026-08-25", "p": -5.25, "t": 1, "w": 0}, {"d": "2026-08-26", "p": 14.0, "t": 1, "w": 1}, {"d": "2026-08-28", "p": 52.85, "t": 2, "w": 2}, {"d": "2026-09-02", "p": 84.35, "t": 3, "w": 2}, {"d": "2026-09-03", "p": -6.3, "t": 1, "w": 0}]}, {"strategy": "Demo Full Throttle", "symbol": "EURGBP.pro", "login": 57704, "daily": [{"d": "2026-08-20", "p": -0.95, "t": 1, "w": 0}, {"d": "2026-08-24", "p": -4.77, "t": 2, "w": 0}, {"d": "2026-08-26", "p": -4.78, "t": 1, "w": 0}, {"d": "2026-09-02", "p": -4.25, "t": 1, "w": 0}]}, {"strategy": "Demo Full Throttle", "symbol": "EURUSD.pro", "login": 57704, "daily": [{"d": "2026-08-20", "p": -13.3, "t": 1, "w": 0}, {"d": "2026-08-27", "p": -1.4, "t": 1, "w": 0}, {"d": "2026-08-28", "p": 103.95, "t": 2, "w": 2}, {"d": "2026-09-04", "p": -2.45, "t": 1, "w": 0}]}, {"strategy": "Demo Full Throttle", "symbol": "NZDUSD.pro", "login": 57704, "daily": [{"d": "2026-09-02", "p": -50.4, "t": 1, "w": 0}, {"d": "2026-09-03", "p": 45.5, "t": 1, "w": 1}]}, {"strategy": "Demo Gold Snap", "symbol": "XAUUSD", "login": 57699, "daily": [{"d": "2026-08-26", "p": -199.1, "t": 1, "w": 0}, {"d": "2026-08-27", "p": 290.4, "t": 2, "w": 2}, {"d": "2026-08-28", "p": 347.38, "t": 1, "w": 1}, {"d": "2026-09-01", "p": -159.6, "t": 2, "w": 1}, {"d": "2026-09-02", "p": -207.84, "t": 1, "w": 0}]}, {"strategy": "LunaAI Pro", "symbol": "AUDCAD.pro", "login": 58314, "daily": [{"d": "2026-09-04", "p": 14.5, "t": 1, "w": 1}]}, {"strategy": "LunaAI Pro", "symbol": "AUDUSD.pro", "login": 58314, "daily": [{"d": "2026-09-03", "p": 12.75, "t": 1, "w": 1}]}, {"strategy": "LunaAI Pro", "symbol": "EURAUD.pro", "login": 58314, "daily": [{"d": "2026-09-03", "p": 4.9, "t": 1, "w": 1}]}, {"strategy": "LunaAI Pro", "symbol": "EURCAD.pro", "login": 58314, "daily": [{"d": "2026-08-31", "p": 0.35, "t": 1, "w": 1}, {"d": "2026-09-02", "p": 0.32, "t": 1, "w": 1}]}, {"strategy": "LunaAI Pro", "symbol": "EURUSD.pro", "login": 58314, "daily": [{"d": "2026-09-02", "p": 0.35, "t": 1, "w": 1}]}, {"strategy": "Midnight Raven GBPUSD 30m", "symbol": "GBPUSD", "login": 55967, "daily": [{"d": "2026-08-04", "p": 40.8, "t": 1, "w": 1}, {"d": "2026-08-05", "p": 81.9, "t": 2, "w": 2}, {"d": "2026-08-06", "p": 40.2, "t": 2, "w": 1}, {"d": "2026-08-07", "p": 38.4, "t": 3, "w": 2}, {"d": "2026-08-10", "p": 40.8, "t": 1, "w": 1}, {"d": "2026-08-12", "p": 41.7, "t": 1, "w": 1}, {"d": "2026-08-13", "p": 82.2, "t": 3, "w": 2}, {"d": "2026-08-14", "p": 124.8, "t": 4, "w": 4}]}, {"strategy": "Smart Gold Hunter", "symbol": "XAUUSD.PRO", "login": 1115445, "daily": [{"d": "2026-08-17", "p": -1.46, "t": 2, "w": 1}, {"d": "2026-08-18", "p": -10.16, "t": 5, "w": 1}, {"d": "2026-08-20", "p": 1.14, "t": 1, "w": 1}, {"d": "2026-08-21", "p": 0.88, "t": 2, "w": 1}, {"d": "2026-08-24", "p": 3.78, "t": 5, "w": 3}, {"d": "2026-08-25", "p": 12.04, "t": 3, "w": 3}, {"d": "2026-08-26", "p": 1.32, "t": 1, "w": 1}, {"d": "2026-08-27", "p": 3.32, "t": 1, "w": 1}, {"d": "2026-08-28", "p": 161.04, "t": 2, "w": 2}, {"d": "2026-08-31", "p": 104.61, "t": 1, "w": 1}, {"d": "2026-09-01", "p": 151.98, "t": 1, "w": 1}, {"d": "2026-09-02", "p": 80.58, "t": 1, "w": 1}, {"d": "2026-09-04", "p": 573.31, "t": 3, "w": 3}]}, {"strategy": "Smart Owl FX", "symbol": "EURCHF.pro", "login": 56912, "daily": [{"d": "2026-08-13", "p": 175.53, "t": 1, "w": 1}]}, {"strategy": "Smart Owl FX", "symbol": "USDCAD.pro", "login": 56912, "daily": [{"d": "2026-08-19", "p": 26.52, "t": 1, "w": 1}]}, {"strategy": "Smart Owl FX", "symbol": "USDCHF.pro", "login": 56912, "daily": [{"d": "2026-08-05", "p": -34.6, "t": 1, "w": 0}]}];
 const PROP_COLORS = ["#3fb950", "#58a6ff", "#a5d6ff", "#7ee787", "#56d364", "#2ea043", "#388bfd", "#79c0ff", "#9ecbff", "#aff5b4"];
 const MOL_COLORS = ["#f0883e", "#d29922", "#e3b341", "#f85149", "#ff7b72", "#ffa657", "#db6d28", "#f78166", "#da3633", "#d2a8ff"];
 const GEN_COLORS = ["#d2a8ff", "#79c0ff", "#7ee787", "#e3b341", "#ff7b72", "#58a6ff", "#3fb950", "#f0883e", "#da3633", "#56d364"];
@@ -784,13 +809,13 @@ function updateKPIs() {
 // ── Charts (initial) ──
 let propChart = new Chart(document.getElementById('propChart'),{type:'line',data:{labels:[],datasets:[]},options:chartOpts('Cumulative Return (%)')});
 let molChart = new Chart(document.getElementById('molChart'),{type:'line',data:{labels:[],datasets:[]},options:chartOpts('Cumulative Return (%)')});
-let genChart = new Chart(document.getElementById('genChart'),{type:'line',data:{labels:["2026-08-04", "2026-08-05", "2026-08-06", "2026-08-07", "2026-08-10", "2026-08-11", "2026-08-12", "2026-08-13", "2026-08-14", "2026-08-17", "2026-08-18", "2026-08-19", "2026-08-20", "2026-08-21", "2026-08-24", "2026-08-25", "2026-08-26", "2026-08-27", "2026-08-28", "2026-08-31", "2026-09-01", "2026-09-02", "2026-09-03", "2026-09-04"],datasets:[{"label": "Smart Gold Hunter | XAUUSD.PRO", "data": [null, null, null, null, null, null, null, null, null, -0.01, -0.12, null, -0.1, -0.1, -0.06, 0.06, 0.08, 0.11, 1.72, 2.77, 4.28, 5.09, null, 10.82], "borderColor": "#d2a8ff", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "Midnight Raven GBPUSD 30m | GBPUSD", "data": [0.2, 0.61, 0.81, 1.01, 1.21, null, 1.42, 1.83, 2.45, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], "borderColor": "#79c0ff", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "AuRange Hunter | XAUUSD", "data": [0.21, 0.41, 0.32, 0.45, 0.92, 0.96, 1.13, 1.96, 2.14, 2.38, 2.52, 2.71, 2.8, 2.88, 3.0, 3.52, 3.51, 2.6, 1.9, 0.89, 1.1, 1.37, 1.01, 0.9], "borderColor": "#7ee787", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "Demo Full Throttle | AUDUSD.pro", "data": [null, null, null, null, null, null, null, null, null, null, null, null, null, -0.03, null, -0.05, 0.02, null, 0.28, null, null, 0.7, 0.67, null], "borderColor": "#e3b341", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "Demo AuRange Gold Reaper + DC + TALON | GBPJPY.pro", "data": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.17, 2.95, 0.43], "borderColor": "#ff7b72", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "Demo Full Throttle | EURUSD.pro", "data": [null, null, null, null, null, null, null, null, null, null, null, null, -0.07, null, null, null, null, -0.07, 0.45, null, null, null, null, 0.43], "borderColor": "#58a6ff", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "Demo Gold Snap | XAUUSD", "data": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -1.0, 0.46, 2.19, null, 1.4, 0.36, null, null], "borderColor": "#3fb950", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "Demo Full Throttle | EURGBP.pro", "data": [null, null, null, null, null, null, null, null, null, null, null, null, -0.0, null, -0.03, null, -0.05, null, null, null, null, -0.07, null, null], "borderColor": "#f0883e", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "Demo AuRange Gold Reaper + DC + TALON | XAUUSD", "data": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.41, null, -0.87, -0.67, null, null], "borderColor": "#da3633", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "Demo Full Throttle | AUDNZD.pro", "data": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.87, -0.74, null], "borderColor": "#56d364", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}]},options:chartOpts('Cumulative Return (%)')});
+let genChart = new Chart(document.getElementById('genChart'),{type:'line',data:{labels:["2026-08-04", "2026-08-05", "2026-08-06", "2026-08-07", "2026-08-10", "2026-08-11", "2026-08-12", "2026-08-13", "2026-08-14", "2026-08-17", "2026-08-18", "2026-08-19", "2026-08-20", "2026-08-21", "2026-08-24", "2026-08-25", "2026-08-26", "2026-08-27", "2026-08-28", "2026-08-31", "2026-09-01", "2026-09-02", "2026-09-03", "2026-09-04", "2026-09-07"],datasets:[{"label": "Smart Gold Hunter | XAUUSD.PRO", "data": [null, null, null, null, null, null, null, null, null, -0.01, -0.12, null, -0.1, -0.1, -0.06, 0.06, 0.08, 0.11, 1.72, 2.77, 4.28, 5.09, null, 10.82, null], "borderColor": "#d2a8ff", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "Midnight Raven GBPUSD 30m | GBPUSD", "data": [0.2, 0.61, 0.81, 1.01, 1.21, null, 1.42, 1.83, 2.45, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], "borderColor": "#79c0ff", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "Demo AuRange Gold Reaper + DC + TALON | GBPJPY.pro", "data": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.17, 2.95, 0.43, 1.42], "borderColor": "#7ee787", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "AuRange Hunter | XAUUSD", "data": [0.21, 0.41, 0.32, 0.45, 0.92, 0.96, 1.13, 1.96, 2.14, 2.38, 2.52, 2.71, 2.8, 2.88, 3.0, 3.52, 3.51, 2.6, 1.9, 0.89, 1.1, 1.37, 1.01, 0.9, 1.01], "borderColor": "#e3b341", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "Demo Full Throttle | AUDUSD.pro", "data": [null, null, null, null, null, null, null, null, null, null, null, null, null, -0.03, null, -0.05, 0.02, null, 0.28, null, null, 0.7, 0.67, null, null], "borderColor": "#ff7b72", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "Demo Full Throttle | EURUSD.pro", "data": [null, null, null, null, null, null, null, null, null, null, null, null, -0.07, null, null, null, null, -0.07, 0.45, null, null, null, null, 0.43, null], "borderColor": "#58a6ff", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "Demo Gold Snap | XAUUSD", "data": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -1.0, 0.46, 2.19, null, 1.4, 0.36, null, null, null], "borderColor": "#3fb950", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "Demo Full Throttle | EURGBP.pro", "data": [null, null, null, null, null, null, null, null, null, null, null, null, -0.0, null, -0.03, null, -0.05, null, null, null, null, -0.07, null, null, null], "borderColor": "#f0883e", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "Demo AuRange Gold Reaper + DC + TALON | US30", "data": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.21, 0.4, 0.19, -0.02, null, null, -0.24], "borderColor": "#da3633", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "Demo AuRange Gold Reaper + DC + TALON | XAUUSD", "data": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 0.41, null, -0.87, -0.67, null, null, null], "borderColor": "#56d364", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "Demo Full Throttle | AUDNZD.pro", "data": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.87, -0.74, null, -0.74], "borderColor": "#d2a8ff", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}]},options:chartOpts('Cumulative Return (%)')});
 
 // Populate initial dropdowns with PF data, default to Top 5
 (function() {
   const initProp = [];
   const initMol = [];
-  const initGen = [{"strategy": "Smart Gold Hunter", "symbol": "XAUUSD.PRO", "login": 1115445, "profit_factor": 45.07, "total_pnl": 1082.38, "return_pct": 10.82, "max_dd": 0.13, "win_rate": 71.4, "wins": 20, "losses": 8, "sharpe": 5.95, "trades": 28}, {"strategy": "Midnight Raven GBPUSD 30m", "symbol": "GBPUSD", "login": 55967, "profit_factor": 5.71, "total_pnl": 490.8, "return_pct": 2.45, "max_dd": 0.33, "win_rate": 82.4, "wins": 14, "losses": 3, "sharpe": 12.66, "trades": 17}, {"strategy": "AuRange Hunter", "symbol": "XAUUSD", "login": 56911, "profit_factor": 1.14, "total_pnl": 180.68, "return_pct": 0.9, "max_dd": 3.0, "win_rate": 84.8, "wins": 67, "losses": 12, "sharpe": 0.75, "trades": 79}, {"strategy": "Demo Full Throttle", "symbol": "AUDUSD.pro", "login": 57704, "profit_factor": 6.63, "total_pnl": 134.05, "return_pct": 0.67, "max_dd": 0.04, "win_rate": 50.0, "wins": 5, "losses": 5, "sharpe": 9.2, "trades": 10}, {"strategy": "Demo AuRange Gold Reaper + DC + TALON", "symbol": "GBPJPY.pro", "login": 57681, "profit_factor": 1.12, "total_pnl": 428.38, "return_pct": 0.43, "max_dd": 2.45, "win_rate": 50.0, "wins": 4, "losses": 4, "sharpe": 0.8, "trades": 8}, {"strategy": "Demo Full Throttle", "symbol": "EURUSD.pro", "login": 57704, "profit_factor": 6.06, "total_pnl": 86.8, "return_pct": 0.43, "max_dd": 0.01, "win_rate": 40.0, "wins": 2, "losses": 3, "sharpe": 8.63, "trades": 5}, {"strategy": "Demo Gold Snap", "symbol": "XAUUSD", "login": 57699, "profit_factor": 1.12, "total_pnl": 71.24, "return_pct": 0.36, "max_dd": 2.0, "win_rate": 57.1, "wins": 4, "losses": 3, "sharpe": 0.7, "trades": 7}, {"strategy": "Demo Full Throttle", "symbol": "EURGBP.pro", "login": 57704, "profit_factor": 0.0, "total_pnl": -14.75, "return_pct": -0.07, "max_dd": 0.07, "win_rate": 0.0, "wins": 0, "losses": 5, "sharpe": -27.62, "trades": 5}, {"strategy": "Demo AuRange Gold Reaper + DC + TALON", "symbol": "XAUUSD", "login": 57681, "profit_factor": 0.51, "total_pnl": -666.27, "return_pct": -0.67, "max_dd": 1.36, "win_rate": 50.0, "wins": 6, "losses": 6, "sharpe": -2.84, "trades": 12}, {"strategy": "Demo Full Throttle", "symbol": "AUDNZD.pro", "login": 57704, "profit_factor": 0.35, "total_pnl": -148.15, "return_pct": -0.74, "max_dd": 0.0, "win_rate": 60.0, "wins": 3, "losses": 2, "sharpe": -4.2, "trades": 5}];
+  const initGen = [{"strategy": "Smart Gold Hunter", "symbol": "XAUUSD.PRO", "login": 1115445, "profit_factor": 45.07, "total_pnl": 1082.38, "return_pct": 10.82, "max_dd": 0.13, "win_rate": 71.4, "wins": 20, "losses": 8, "sharpe": 5.95, "trades": 28}, {"strategy": "Midnight Raven GBPUSD 30m", "symbol": "GBPUSD", "login": 55967, "profit_factor": 5.71, "total_pnl": 490.8, "return_pct": 2.45, "max_dd": 0.33, "win_rate": 82.4, "wins": 14, "losses": 3, "sharpe": 12.66, "trades": 17}, {"strategy": "Demo AuRange Gold Reaper + DC + TALON", "symbol": "GBPJPY.pro", "login": 57681, "profit_factor": 1.38, "total_pnl": 1415.32, "return_pct": 1.42, "max_dd": 2.45, "win_rate": 50.0, "wins": 5, "losses": 5, "sharpe": 2.27, "trades": 10}, {"strategy": "AuRange Hunter", "symbol": "XAUUSD", "login": 56911, "profit_factor": 1.16, "total_pnl": 202.98, "return_pct": 1.01, "max_dd": 3.0, "win_rate": 85.0, "wins": 68, "losses": 12, "sharpe": 0.84, "trades": 80}, {"strategy": "Demo Full Throttle", "symbol": "AUDUSD.pro", "login": 57704, "profit_factor": 6.63, "total_pnl": 134.05, "return_pct": 0.67, "max_dd": 0.04, "win_rate": 50.0, "wins": 5, "losses": 5, "sharpe": 9.2, "trades": 10}, {"strategy": "Demo Full Throttle", "symbol": "EURUSD.pro", "login": 57704, "profit_factor": 6.06, "total_pnl": 86.8, "return_pct": 0.43, "max_dd": 0.01, "win_rate": 40.0, "wins": 2, "losses": 3, "sharpe": 8.63, "trades": 5}, {"strategy": "Demo Gold Snap", "symbol": "XAUUSD", "login": 57699, "profit_factor": 1.12, "total_pnl": 71.24, "return_pct": 0.36, "max_dd": 2.0, "win_rate": 57.1, "wins": 4, "losses": 3, "sharpe": 0.7, "trades": 7}, {"strategy": "Demo Full Throttle", "symbol": "EURGBP.pro", "login": 57704, "profit_factor": 0.0, "total_pnl": -14.75, "return_pct": -0.07, "max_dd": 0.07, "win_rate": 0.0, "wins": 0, "losses": 5, "sharpe": -27.62, "trades": 5}, {"strategy": "Demo AuRange Gold Reaper + DC + TALON", "symbol": "US30", "login": 57681, "profit_factor": 0.62, "total_pnl": -238.2, "return_pct": -0.24, "max_dd": 0.63, "win_rate": 40.0, "wins": 2, "losses": 3, "sharpe": -3.37, "trades": 5}, {"strategy": "Demo AuRange Gold Reaper + DC + TALON", "symbol": "XAUUSD", "login": 57681, "profit_factor": 0.51, "total_pnl": -666.27, "return_pct": -0.67, "max_dd": 1.36, "win_rate": 50.0, "wins": 6, "losses": 6, "sharpe": -2.84, "trades": 12}, {"strategy": "Demo Full Throttle", "symbol": "AUDNZD.pro", "login": 57704, "profit_factor": 0.35, "total_pnl": -148.15, "return_pct": -0.74, "max_dd": 0.0, "win_rate": 50.0, "wins": 3, "losses": 3, "sharpe": -3.89, "trades": 6}];
   populateSelect('propSelect', initProp, PROP_COLORS);
   populateSelect('molSelect', initMol, MOL_COLORS);
   populateSelect('genSelect', initGen, GEN_COLORS);
@@ -802,8 +827,8 @@ let genChart = new Chart(document.getElementById('genChart'),{type:'line',data:{
   document.getElementById('genSelect').value = 'top5';
   filterChart('gen');
 })()
-let weeklyChart = new Chart(document.getElementById('weeklyChart'),{type:'bar',data:{labels:["2026-W31", "2026-W32", "2026-W33", "2026-W34", "2026-W35"],datasets:[{data:[257.0, 802.05, 145.91, 1197.24, -1179.32],backgroundColor:["#3fb950", "#3fb950", "#3fb950", "#3fb950", "#f85149"],borderRadius:4}]},options:{responsive:true,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>'$'+ctx.parsed.y.toLocaleString()}}},scales:{x:{ticks:{color:'#8b949e',font:{size:9}},grid:{display:false}},y:{ticks:{color:'#8b949e',callback:v=>'$'+v.toLocaleString()},grid:{color:'#21262d'}}}}});
-let stratChart = new Chart(document.getElementById('stratChart'),{type:'bar',data:{labels:["Smart Gold Hunter", "Midnight Raven GBPUS", "AuRange Hunter", "Smart Owl FX", "Demo Gold Snap", "Demo Full Throttle", "LunaAI Pro", "Demo AuRange Gold Re"],datasets:[{data:[1082.38, 490.8, 180.68, 167.45, 71.24, 53.05, 33.17, -855.89],backgroundColor:["#3fb950", "#3fb950", "#3fb950", "#3fb950", "#3fb950", "#3fb950", "#3fb950", "#f85149"],borderRadius:3}]},options:{indexAxis:'y',responsive:true,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>'$'+ctx.parsed.x.toLocaleString()}}},scales:{y:{ticks:{color:'#8b949e',font:{size:8}},grid:{display:false}},x:{ticks:{color:'#8b949e',callback:v=>'$'+v.toLocaleString()},grid:{color:'#21262d'}}}}});
+let weeklyChart = new Chart(document.getElementById('weeklyChart'),{type:'bar',data:{labels:["2026-W31", "2026-W32", "2026-W33", "2026-W34", "2026-W35", "2026-W36"],datasets:[{data:[257.0, 802.05, 145.91, 1197.24, -1179.32, 789.04],backgroundColor:["#3fb950", "#3fb950", "#3fb950", "#3fb950", "#f85149", "#3fb950"],borderRadius:4}]},options:{responsive:true,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>'$'+ctx.parsed.y.toLocaleString()}}},scales:{x:{ticks:{color:'#8b949e',font:{size:9}},grid:{display:false}},y:{ticks:{color:'#8b949e',callback:v=>'$'+v.toLocaleString()},grid:{color:'#21262d'}}}}});
+let stratChart = new Chart(document.getElementById('stratChart'),{type:'bar',data:{labels:["Smart Gold Hunter", "Midnight Raven GBPUS", "AuRange Hunter", "Smart Owl FX", "Demo Gold Snap", "Demo Full Throttle", "LunaAI Pro", "Demo AuRange Gold Re"],datasets:[{data:[1082.38, 490.8, 202.98, 167.45, 71.24, 53.05, 33.17, -89.15],backgroundColor:["#3fb950", "#3fb950", "#3fb950", "#3fb950", "#3fb950", "#3fb950", "#3fb950", "#f85149"],borderRadius:3}]},options:{indexAxis:'y',responsive:true,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>'$'+ctx.parsed.x.toLocaleString()}}},scales:{y:{ticks:{color:'#8b949e',font:{size:8}},grid:{display:false}},x:{ticks:{color:'#8b949e',callback:v=>'$'+v.toLocaleString()},grid:{color:'#21262d'}}}}});
 
 // ── Apply date filter ──
 function applyFilter(){
