@@ -82,15 +82,15 @@ td { padding:5px 8px; border-bottom:1px solid var(--border2); }
 
 <div class="kpi-grid kpi-grid-4">
   <div class="kpi"><div class="label">Live fills analysed</div>
-    <div class="value">200</div><div class="sub">5 accounts · 8 symbols</div></div>
+    <div class="value">369</div><div class="sub">5 accounts · 9 symbols</div></div>
   <div class="kpi"><div class="label">Median slippage — market</div>
-    <div class="value" style="color:var(--orange)">+0.3<span style="font-size:0.9rem"> pips</span></div>
-    <div class="sub">117 market fills</div></div>
+    <div class="value" style="color:var(--orange)">+nan<span style="font-size:0.9rem"> pips</span></div>
+    <div class="sub">0 market fills</div></div>
   <div class="kpi"><div class="label">Adverse fills — market</div>
-    <div class="value" style="color:var(--purple)">56%</div>
+    <div class="value" style="color:var(--purple)">nan%</div>
     <div class="sub">filled worse than requested</div></div>
   <div class="kpi"><div class="label">Total execution cost</div>
-    <div class="value neg">$+400</div>
+    <div class="value neg">$+806</div>
     <div class="sub">all live fills, + = cost</div></div>
 </div>
 <div class="section">
@@ -112,32 +112,46 @@ td { padding:5px 8px; border-bottom:1px solid var(--border2); }
   <div class="section-title" style="color:var(--green)">Gold (XAUUSD) &mdash; live accounts</div>
   <table><thead><tr><th>Account</th><th>Pair</th><th>Order kind</th><th>Fills</th><th>Lots</th>
     <th>Median pips</th><th>Mean pips</th><th>Median $</th><th>Total $</th><th>Adverse</th></tr></thead>
-    <tbody><tr><td>LIVE Portfolio: Midnight Raven + Gold Reaper + AuRange (57825)</td><td>XAUUSD</td><td>Market</td><td class='num'>33</td><td class='num'>4.38</td><td class='num neg'>+4.0</td><td class='num'>+8.6</td><td class='num'>$+0.75</td><td class='num'>$+34.37</td><td class='num'>76%</td></tr>
-<tr><td>LIVE Portfolio: Midnight Raven + Gold Reaper + AuRange (57825)</td><td>XAUUSD</td><td>Stop / Limit</td><td class='num'>30</td><td class='num'>3.13</td><td class='num neg'>+31.0</td><td class='num'>+71.0</td><td class='num'>$+3.56</td><td class='num'>$+227.59</td><td class='num'>100%</td></tr>
-<tr><td>LIVE Dream Catcher Gold (55955)</td><td>XAUUSD</td><td>Market</td><td class='num'>22</td><td class='num'>1.09</td><td class='num neg'>+10.5</td><td class='num'>+24.3</td><td class='num'>$+0.27</td><td class='num'>$+23.48</td><td class='num'>82%</td></tr>
-<tr><td>LIVE Dream Catcher Gold (55955)</td><td>XAUUSD</td><td>Stop / Limit</td><td class='num'>22</td><td class='num'>1.09</td><td class='num neg'>+39.5</td><td class='num'>+55.7</td><td class='num'>$+1.14</td><td class='num'>$+36.56</td><td class='num'>100%</td></tr>
-<tr><td>LIVE Gold Reaper Conservative (662434)</td><td>XAUUSD.PRO</td><td>Stop / Limit</td><td class='num'>13</td><td class='num'>0.49</td><td class='num neg'>+51.0</td><td class='num'>+107.3</td><td class='num'>$+1.85</td><td class='num'>$+57.78</td><td class='num'>85%</td></tr>
-<tr><td>LIVE Gold Reaper Conservative (662434)</td><td>XAUUSD.PRO</td><td>Market</td><td class='num'>11</td><td class='num'>0.43</td><td class='num neg'>+14.0</td><td class='num'>+20.7</td><td class='num'>$+0.63</td><td class='num'>$+8.87</td><td class='num'>82%</td></tr></tbody></table>
+    <tbody><tr><td>LIVE Portfolio: Midnight Raven + Gold Reaper + AuRange (57825)</td><td>XAUUSD</td><td>Market entry</td><td class='num'>121</td><td class='num'>23.23</td><td class='num pos'>+0.0</td><td class='num'>+19.2</td><td class='num'>$+0.00</td><td class='num'>$+381.36</td><td class='num'>45%</td></tr>
+<tr><td>LIVE Portfolio: Midnight Raven + Gold Reaper + AuRange (57825)</td><td>XAUUSD</td><td>Pending (stop/limit)</td><td class='num'>30</td><td class='num'>3.13</td><td class='num neg'>+31.0</td><td class='num'>+71.0</td><td class='num'>$+3.56</td><td class='num'>$+227.59</td><td class='num'>100%</td></tr>
+<tr><td>LIVE Portfolio: Midnight Raven + Gold Reaper + AuRange (57825)</td><td>XAUUSD</td><td>Stop-loss exit</td><td class='num'>26</td><td class='num'>3.84</td><td class='num neg'>+8.0</td><td class='num'>+11.0</td><td class='num'>$+1.00</td><td class='num'>$+34.37</td><td class='num'>96%</td></tr>
+<tr><td>LIVE Dream Catcher Gold (55955)</td><td>XAUUSD</td><td>Pending (stop/limit)</td><td class='num'>22</td><td class='num'>1.09</td><td class='num neg'>+39.5</td><td class='num'>+55.7</td><td class='num'>$+1.14</td><td class='num'>$+36.56</td><td class='num'>100%</td></tr>
+<tr><td>LIVE Dream Catcher Gold (55955)</td><td>XAUUSD</td><td>Stop-loss exit</td><td class='num'>21</td><td class='num'>0.91</td><td class='num neg'>+12.0</td><td class='num'>+25.5</td><td class='num'>$+0.30</td><td class='num'>$+23.48</td><td class='num'>86%</td></tr>
+<tr><td>LIVE Gold Reaper Conservative (662434)</td><td>XAUUSD.PRO</td><td>Pending (stop/limit)</td><td class='num'>13</td><td class='num'>0.49</td><td class='num neg'>+51.0</td><td class='num'>+107.3</td><td class='num'>$+1.85</td><td class='num'>$+57.78</td><td class='num'>85%</td></tr>
+<tr><td>LIVE Gold Reaper Conservative (662434)</td><td>XAUUSD.PRO</td><td>Stop-loss exit</td><td class='num'>10</td><td class='num'>0.38</td><td class='num neg'>+13.0</td><td class='num'>+21.2</td><td class='num'>$+0.54</td><td class='num'>$+8.07</td><td class='num'>80%</td></tr>
+<tr><td>LIVE Portfolio: Midnight Raven + Gold Reaper + AuRange (57825)</td><td>XAUUSD</td><td>Take-profit exit</td><td class='num'>7</td><td class='num'>0.54</td><td class='num pos'>+0.0</td><td class='num'>+0.0</td><td class='num'>$+0.00</td><td class='num'>$+0.00</td><td class='num'>0%</td></tr>
+<tr><td>LIVE Gold Reaper Conservative (662434)</td><td>XAUUSD.PRO</td><td>Market entry</td><td class='num'>2</td><td class='num'>0.06</td><td class='num pos'>-23.0</td><td class='num'>-23.0</td><td class='num'>$-0.69</td><td class='num'>$-1.38</td><td class='num'>0%</td></tr>
+<tr><td>LIVE Dream Catcher Gold (55955)</td><td>XAUUSD</td><td>Take-profit exit</td><td class='num'>1</td><td class='num'>0.18</td><td class='num pos'>+0.0</td><td class='num'>+0.0</td><td class='num'>$+0.00</td><td class='num'>$+0.00</td><td class='num'>0%</td></tr>
+<tr><td>LIVE Gold Reaper Conservative (662434)</td><td>XAUUSD.PRO</td><td>Take-profit exit</td><td class='num'>1</td><td class='num'>0.05</td><td class='num neg'>+16.0</td><td class='num'>+16.0</td><td class='num'>$+0.80</td><td class='num'>$+0.80</td><td class='num'>100%</td></tr>
+<tr><td>LIVE Talon v2 GBPJPY + XAUUSD (662436)</td><td>XAUUSD.PRO</td><td>Market entry</td><td class='num'>1</td><td class='num'>0.02</td><td class='num pos'>+0.0</td><td class='num'>+0.0</td><td class='num'>$+0.00</td><td class='num'>$+0.00</td><td class='num'>0%</td></tr>
+<tr><td>LIVE Talon v2 GBPJPY + XAUUSD (662436)</td><td>XAUUSD.PRO</td><td>Stop-loss exit</td><td class='num'>1</td><td class='num'>0.02</td><td class='num neg'>+1010.0</td><td class='num'>+1010.0</td><td class='num'>$+20.20</td><td class='num'>$+20.20</td><td class='num'>100%</td></tr></tbody></table>
 </div>
 <div class="section">
   <div class="section-title" style="color:var(--blue)">All live pairs</div>
   <div class="section-desc">Groups with at least 3 fills.</div>
   <table><thead><tr><th>Account</th><th>Pair</th><th>Order kind</th><th>Fills</th><th>Lots</th>
     <th>Median pips</th><th>Mean pips</th><th>Median $</th><th>Total $</th><th>Adverse</th></tr></thead>
-    <tbody><tr><td>LIVE Portfolio: Midnight Raven + Gold Reaper + AuRange (57825)</td><td>XAUUSD</td><td>Market</td><td class='num'>33</td><td class='num'>4.38</td><td class='num neg'>+4.0</td><td class='num'>+8.6</td><td class='num'>$+0.75</td><td class='num'>$+34.37</td><td class='num'>76%</td></tr>
-<tr><td>LIVE Portfolio: Midnight Raven + Gold Reaper + AuRange (57825)</td><td>XAUUSD</td><td>Stop / Limit</td><td class='num'>30</td><td class='num'>3.13</td><td class='num neg'>+31.0</td><td class='num'>+71.0</td><td class='num'>$+3.56</td><td class='num'>$+227.59</td><td class='num'>100%</td></tr>
-<tr><td>LIVE Dream Catcher Gold (55955)</td><td>XAUUSD</td><td>Market</td><td class='num'>22</td><td class='num'>1.09</td><td class='num neg'>+10.5</td><td class='num'>+24.3</td><td class='num'>$+0.27</td><td class='num'>$+23.48</td><td class='num'>82%</td></tr>
-<tr><td>LIVE Dream Catcher Gold (55955)</td><td>XAUUSD</td><td>Stop / Limit</td><td class='num'>22</td><td class='num'>1.09</td><td class='num neg'>+39.5</td><td class='num'>+55.7</td><td class='num'>$+1.14</td><td class='num'>$+36.56</td><td class='num'>100%</td></tr>
-<tr><td>LIVE Gold Talon V2 USDJPY, GBPJPY + XAGUSD (663097)</td><td>EURJPY.PRO</td><td>Market</td><td class='num'>18</td><td class='num'>2.76</td><td class='num pos'>+0.0</td><td class='num'>-0.7</td><td class='num'>$+0.00</td><td class='num'>$-11.61</td><td class='num'>39%</td></tr>
-<tr><td>LIVE Dream Catcher Gold (55955)</td><td>USTECH</td><td>Market</td><td class='num'>14</td><td class='num'>4.01</td><td class='num pos'>+0.0</td><td class='num'>+0.1</td><td class='num'>$+0.00</td><td class='num'>$+6.04</td><td class='num'>21%</td></tr>
-<tr><td>LIVE Dream Catcher Gold (55955)</td><td>USTECH</td><td>Stop / Limit</td><td class='num'>14</td><td class='num'>4.01</td><td class='num neg'>+0.3</td><td class='num'>+0.1</td><td class='num'>$+1.59</td><td class='num'>$+16.73</td><td class='num'>64%</td></tr>
-<tr><td>LIVE Gold Reaper Conservative (662434)</td><td>XAUUSD.PRO</td><td>Stop / Limit</td><td class='num'>13</td><td class='num'>0.49</td><td class='num neg'>+51.0</td><td class='num'>+107.3</td><td class='num'>$+1.85</td><td class='num'>$+57.78</td><td class='num'>85%</td></tr>
-<tr><td>LIVE Gold Reaper Conservative (662434)</td><td>XAUUSD.PRO</td><td>Market</td><td class='num'>11</td><td class='num'>0.43</td><td class='num neg'>+14.0</td><td class='num'>+20.7</td><td class='num'>$+0.63</td><td class='num'>$+8.87</td><td class='num'>82%</td></tr>
-<tr><td>LIVE Talon v2 GBPJPY + XAUUSD (662436)</td><td>GBPJPY.PRO</td><td>Market</td><td class='num'>11</td><td class='num'>1.32</td><td class='num pos'>-1.2</td><td class='num'>-1.4</td><td class='num'>$-0.92</td><td class='num'>$-11.98</td><td class='num'>9%</td></tr>
-<tr><td>LIVE Dream Catcher Gold (55955)</td><td>US30</td><td>Market</td><td class='num'>4</td><td class='num'>5.67</td><td class='num pos'>+0.0</td><td class='num'>+0.0</td><td class='num'>$+0.00</td><td class='num'>$+0.32</td><td class='num'>25%</td></tr>
-<tr><td>LIVE Dream Catcher Gold (55955)</td><td>US30</td><td>Stop / Limit</td><td class='num'>4</td><td class='num'>5.67</td><td class='num neg'>+0.6</td><td class='num'>+0.3</td><td class='num'>$+4.53</td><td class='num'>$+12.81</td><td class='num'>75%</td></tr>
-<tr><td>LIVE Gold Talon V2 USDJPY, GBPJPY + XAGUSD (663097)</td><td>USDJPY.PRO</td><td>Market</td><td class='num'>3</td><td class='num'>0.87</td><td class='num pos'>-0.1</td><td class='num'>-0.1</td><td class='num'>$-0.19</td><td class='num'>$-0.53</td><td class='num'>33%</td></tr></tbody></table>
+    <tbody><tr><td>LIVE Portfolio: Midnight Raven + Gold Reaper + AuRange (57825)</td><td>XAUUSD</td><td>Market entry</td><td class='num'>121</td><td class='num'>23.23</td><td class='num pos'>+0.0</td><td class='num'>+19.2</td><td class='num'>$+0.00</td><td class='num'>$+381.36</td><td class='num'>45%</td></tr>
+<tr><td>LIVE Portfolio: Midnight Raven + Gold Reaper + AuRange (57825)</td><td>XAUUSD</td><td>Pending (stop/limit)</td><td class='num'>30</td><td class='num'>3.13</td><td class='num neg'>+31.0</td><td class='num'>+71.0</td><td class='num'>$+3.56</td><td class='num'>$+227.59</td><td class='num'>100%</td></tr>
+<tr><td>LIVE Portfolio: Midnight Raven + Gold Reaper + AuRange (57825)</td><td>XAUUSD</td><td>Stop-loss exit</td><td class='num'>26</td><td class='num'>3.84</td><td class='num neg'>+8.0</td><td class='num'>+11.0</td><td class='num'>$+1.00</td><td class='num'>$+34.37</td><td class='num'>96%</td></tr>
+<tr><td>LIVE Dream Catcher Gold (55955)</td><td>XAUUSD</td><td>Pending (stop/limit)</td><td class='num'>22</td><td class='num'>1.09</td><td class='num neg'>+39.5</td><td class='num'>+55.7</td><td class='num'>$+1.14</td><td class='num'>$+36.56</td><td class='num'>100%</td></tr>
+<tr><td>LIVE Dream Catcher Gold (55955)</td><td>XAUUSD</td><td>Stop-loss exit</td><td class='num'>21</td><td class='num'>0.91</td><td class='num neg'>+12.0</td><td class='num'>+25.5</td><td class='num'>$+0.30</td><td class='num'>$+23.48</td><td class='num'>86%</td></tr>
+<tr><td>LIVE Gold Talon V2 USDJPY, GBPJPY + XAGUSD (663097)</td><td>EURJPY.PRO</td><td>Market entry</td><td class='num'>20</td><td class='num'>3.08</td><td class='num pos'>+0.0</td><td class='num'>+0.1</td><td class='num'>$+0.00</td><td class='num'>$+2.08</td><td class='num'>20%</td></tr>
+<tr><td>LIVE Dream Catcher Gold (55955)</td><td>USTECH</td><td>Pending (stop/limit)</td><td class='num'>14</td><td class='num'>4.01</td><td class='num neg'>+0.3</td><td class='num'>+0.1</td><td class='num'>$+1.59</td><td class='num'>$+16.73</td><td class='num'>64%</td></tr>
+<tr><td>LIVE Gold Talon V2 USDJPY, GBPJPY + XAGUSD (663097)</td><td>EURJPY.PRO</td><td>Take-profit exit</td><td class='num'>14</td><td class='num'>2.12</td><td class='num pos'>-0.2</td><td class='num'>-1.1</td><td class='num'>$-0.19</td><td class='num'>$-13.97</td><td class='num'>21%</td></tr>
+<tr><td>LIVE Talon v2 GBPJPY + XAUUSD (662436)</td><td>GBPJPY.PRO</td><td>Market entry</td><td class='num'>14</td><td class='num'>1.67</td><td class='num pos'>+0.0</td><td class='num'>+0.1</td><td class='num'>$+0.00</td><td class='num'>$+0.92</td><td class='num'>21%</td></tr>
+<tr><td>LIVE Gold Reaper Conservative (662434)</td><td>XAUUSD.PRO</td><td>Pending (stop/limit)</td><td class='num'>13</td><td class='num'>0.49</td><td class='num neg'>+51.0</td><td class='num'>+107.3</td><td class='num'>$+1.85</td><td class='num'>$+57.78</td><td class='num'>85%</td></tr>
+<tr><td>LIVE Dream Catcher Gold (55955)</td><td>USTECH</td><td>Take-profit exit</td><td class='num'>11</td><td class='num'>3.23</td><td class='num pos'>+0.0</td><td class='num'>+0.0</td><td class='num'>$+0.00</td><td class='num'>$+0.00</td><td class='num'>0%</td></tr>
+<tr><td>LIVE Gold Reaper Conservative (662434)</td><td>XAUUSD.PRO</td><td>Stop-loss exit</td><td class='num'>10</td><td class='num'>0.38</td><td class='num neg'>+13.0</td><td class='num'>+21.2</td><td class='num'>$+0.54</td><td class='num'>$+8.07</td><td class='num'>80%</td></tr>
+<tr><td>LIVE Portfolio: Midnight Raven + Gold Reaper + AuRange (57825)</td><td>XAUUSD</td><td>Take-profit exit</td><td class='num'>7</td><td class='num'>0.54</td><td class='num pos'>+0.0</td><td class='num'>+0.0</td><td class='num'>$+0.00</td><td class='num'>$+0.00</td><td class='num'>0%</td></tr>
+<tr><td>LIVE Portfolio: Midnight Raven + Gold Reaper + AuRange (57825)</td><td>GBPUSD</td><td>Market entry</td><td class='num'>6</td><td class='num'>3.00</td><td class='num neg'>+0.1</td><td class='num'>+0.1</td><td class='num'>$+0.50</td><td class='num'>$+2.50</td><td class='num'>67%</td></tr>
+<tr><td>LIVE Talon v2 GBPJPY + XAUUSD (662436)</td><td>GBPJPY.PRO</td><td>Take-profit exit</td><td class='num'>6</td><td class='num'>0.72</td><td class='num pos'>-2.4</td><td class='num'>-2.0</td><td class='num'>$-1.84</td><td class='num'>$-9.14</td><td class='num'>0%</td></tr>
+<tr><td>LIVE Talon v2 GBPJPY + XAUUSD (662436)</td><td>GBPJPY.PRO</td><td>Stop-loss exit</td><td class='num'>5</td><td class='num'>0.60</td><td class='num pos'>+0.0</td><td class='num'>-0.7</td><td class='num'>$+0.00</td><td class='num'>$-2.84</td><td class='num'>20%</td></tr>
+<tr><td>LIVE Dream Catcher Gold (55955)</td><td>US30</td><td>Pending (stop/limit)</td><td class='num'>4</td><td class='num'>5.67</td><td class='num neg'>+0.6</td><td class='num'>+0.3</td><td class='num'>$+4.53</td><td class='num'>$+12.81</td><td class='num'>75%</td></tr>
+<tr><td>LIVE Gold Talon V2 USDJPY, GBPJPY + XAGUSD (663097)</td><td>EURJPY.PRO</td><td>Stop-loss exit</td><td class='num'>4</td><td class='num'>0.64</td><td class='num neg'>+0.5</td><td class='num'>+0.6</td><td class='num'>$+0.46</td><td class='num'>$+2.36</td><td class='num'>100%</td></tr>
+<tr><td>LIVE Dream Catcher Gold (55955)</td><td>USTECH</td><td>Stop-loss exit</td><td class='num'>3</td><td class='num'>0.78</td><td class='num neg'>+0.3</td><td class='num'>+0.3</td><td class='num'>$+1.56</td><td class='num'>$+6.04</td><td class='num'>100%</td></tr>
+<tr><td>LIVE Gold Talon V2 USDJPY, GBPJPY + XAGUSD (663097)</td><td>USDJPY.PRO</td><td>Market entry</td><td class='num'>3</td><td class='num'>0.87</td><td class='num pos'>+0.0</td><td class='num'>+0.0</td><td class='num'>$+0.00</td><td class='num'>$+0.00</td><td class='num'>0%</td></tr></tbody></table>
 </div>
 
-<div class="meta" style="margin-top:20px">Updated 2026-09-09 16:46 &middot; live accounts only</div>
+<div class="meta" style="margin-top:20px">Updated 2026-09-09 19:09 &middot; live accounts only</div>
 </body></html>
