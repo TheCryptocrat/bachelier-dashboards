@@ -96,7 +96,7 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
 <div class="header">
   <div>
     <h1 style="color:var(--blue)">MFB ↔ BACHELIER AUDIT</h1>
-    <div class="dim" style="margin-top:4px;font-size:0.75rem">Snapshot: 2026-10-20 • 22 MFB accounts, 237 config logins</div>
+    <div class="dim" style="margin-top:4px;font-size:0.75rem">Snapshot: 2026-10-20 • 23 MFB accounts, 237 config logins</div>
   </div>
   <div>
     <a class="download-btn" href="MFB_Bachelier_Reconciliation_latest.xlsx" download>⬇ Download full xlsx</a>
@@ -104,14 +104,14 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
 </div>
 
 <div class="kpi-grid kpi-grid-4">
-  <div class="kpi"><div class="label">In scope</div><div class="value pos">19</div><div class="sub">MFB ∩ Bachelier with trades on both sides</div></div>
+  <div class="kpi"><div class="label">In scope</div><div class="value pos">20</div><div class="sub">MFB ∩ Bachelier with trades on both sides</div></div>
   <div class="kpi"><div class="label">Data gap (Bach)</div><div class="value neg">3</div><div class="sub">In MFB + config but zero Bach trades</div></div>
-  <div class="kpi"><div class="label">Coverage gap (MFB)</div><div class="value warn">215</div><div class="sub">In config but not in MFB</div></div>
+  <div class="kpi"><div class="label">Coverage gap (MFB)</div><div class="value warn">214</div><div class="sub">In config but not in MFB</div></div>
   <div class="kpi"><div class="label">MFB legacy</div><div class="value dim">0</div><div class="sub">In MFB but not in config (do not import)</div></div>
 </div>
 
 <div class="section">
-  <div class="section-title">Reconciliation <span class="badge badge-blue">22 rows</span></div>
+  <div class="section-title">Reconciliation <span class="badge badge-blue">23 rows</span></div>
   <div class="section-desc">Data-gap rows highlighted in red and sorted to the top. "Bach formula on MFB sample" applies Bachelier's existing PF/DD formulas to MFB's last-40-trade sample so the divergence is apples-to-apples instead of confounded by different trade sets.</div>
   <div class="scroll-wrap">
     <table>
@@ -162,7 +162,7 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>demo</td>
             <td>Squeeze Breakout Indices</td>
             <td class="dim">VPS242t2</td>
-            <td class="dim">10/20/2026 23:50</td>
+            <td class="dim">10/20/2026 23:51</td>
             <td class="num">21,847.99</td>
             <td class="num">1.87</td>
             <td class="num">3.16</td>
@@ -357,7 +357,7 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td class="num"><span class="dim">—</span></td>
             <td class="num"><span class="dim">—</span></td>
             <td class="num">16</td>
-            <td class="num">131.92</td>
+            <td class="num">117.76</td>
             <td class="num">50.0</td>
             <td>RECONCILE</td>
           </tr>
@@ -408,7 +408,7 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td class="num"><span class="dim">—</span></td>
             <td class="num"><span class="dim">—</span></td>
             <td class="num">3,505</td>
-            <td class="num">9,398.34</td>
+            <td class="num">11,021.57</td>
             <td class="num">63.7</td>
             <td>RECONCILE</td>
           </tr>
@@ -424,9 +424,9 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td class="num">57.5</td>
             <td class="num"><span class="dim">—</span></td>
             <td class="num"><span class="dim">—</span></td>
-            <td class="num">195</td>
-            <td class="num">7,525.06</td>
-            <td class="num">66.7</td>
+            <td class="num">196</td>
+            <td class="num">7,529.11</td>
+            <td class="num">66.8</td>
             <td>RECONCILE</td>
           </tr>
           <tr class="audit-ok">
@@ -434,9 +434,9 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>licensed</td>
             <td>Smart Gold Hunter</td>
             <td class="dim">VPS242t2</td>
-            <td class="dim">10/20/2026 08:35</td>
-            <td class="num">12,709.55</td>
-            <td class="num">2.31</td>
+            <td class="dim">10/21/2026 01:41</td>
+            <td class="num">12,544.94</td>
+            <td class="num">2.10</td>
             <td class="num">3.38</td>
             <td class="num">72.5</td>
             <td class="num"><span class="dim">—</span></td>
@@ -444,6 +444,23 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td class="num">92</td>
             <td class="num">2,772.13</td>
             <td class="num">71.7</td>
+            <td>RECONCILE</td>
+          </tr>
+          <tr class="audit-ok">
+            <td class="strat-name">51727</td>
+            <td>demo</td>
+            <td>FourPlay MOL Bots</td>
+            <td class="dim">VPS242</td>
+            <td class="dim">10/20/2026 23:54</td>
+            <td class="num">20,635.27</td>
+            <td class="num">1.10</td>
+            <td class="num">8.99</td>
+            <td class="num">42.5</td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num"><span class="dim">—</span></td>
+            <td class="num">151</td>
+            <td class="num">635.27</td>
+            <td class="num">44.4</td>
             <td>RECONCILE</td>
           </tr>
           <tr class="audit-ok">
@@ -513,7 +530,7 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>Squeeze Breakout Indices</td>
             <td>TradeSmart</td>
             <td class="dim">VPS242t2</td>
-            <td class="dim">10/20/2026 23:50</td>
+            <td class="dim">10/20/2026 23:51</td>
             <td class="num">21,847.99</td>
             <td class="num">9.24</td>
           </tr>
@@ -541,7 +558,7 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
 </details>
 
 <details>
-  <summary>Coverage gap — 215 Bachelier accounts not tracked in MFB</summary>
+  <summary>Coverage gap — 214 Bachelier accounts not tracked in MFB</summary>
   <div class="section-desc">Add these to the MFB portfolio if you want the audit loop closed for them. Inactive ones can stay un-added.</div>
   <table>
     <thead><tr><th>Login</th><th>Type</th><th>Strategy</th><th>Active</th><th>VPS</th></tr></thead>
@@ -873,13 +890,6 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>demo</td>
             <td>T&Dv5 Prop Bots</td>
             <td class="dim"></td>
-            <td class="dim">VPS242</td>
-          </tr>
-          <tr>
-            <td class="strat-name">51727</td>
-            <td>demo</td>
-            <td>FourPlay MOL Bots</td>
-            <td class="dim">True</td>
             <td class="dim">VPS242</td>
           </tr>
           <tr>
@@ -2063,6 +2073,6 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
   </table>
 </details>
 
-<div class="footer">Generated 2026-10-20 19:51 • Source: <code>MFB_Bachelier_Reconciliation_2026-10-20.xlsx</code></div>
+<div class="footer">Generated 2026-10-20 23:10 • Source: <code>MFB_Bachelier_Reconciliation_2026-10-20.xlsx</code></div>
 
 </body></html>
