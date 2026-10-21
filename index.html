@@ -2,7 +2,7 @@
 <html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Bachelier Mission Control — Login</title>
 <style>
-:root { --bg:#0d1117; --surface:#161b22; --border:#30363d; --text:#e6edf3; --dim:#8b949e; --blue:#58a6ff; --red:#f85149; --green:#3fb950; }
+:root { --bg:#f5f4ee; --surface:#fffef9; --border:#d3d8cf; --text:#1b2d36; --dim:#53656a; --blue:#285d52; --red:#b3402a; --green:#2b7a54; }
 * { margin:0; padding:0; box-sizing:border-box; }
 body { font-family:'SF Mono','Cascadia Code','JetBrains Mono',monospace; background:var(--bg); color:var(--text);
   display:flex; align-items:center; justify-content:center; min-height:100vh; }
@@ -19,6 +19,28 @@ body { font-family:'SF Mono','Cascadia Code','JetBrains Mono',monospace; backgro
   font-family:inherit; font-size:0.85rem; font-weight:600; cursor:pointer; letter-spacing:0.3px; }
 .btn:hover { opacity:0.9; }
 .lock { font-size:2rem; margin-bottom:16px; }
+</style><!--prismatic-theme--><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet"><style>
+:root{--serif:Georgia,'Times New Roman',serif;--sans:Geist,Arial,sans-serif;--mono:'Geist Mono',ui-monospace,Menlo,monospace}
+body{font-family:var(--sans)!important;background:#f5f4ee!important;color:#1b2d36!important;-webkit-font-smoothing:antialiased}
+h1,h2,.header h1,.login-box h1,.wrap h1{font-family:var(--serif)!important;font-weight:400!important;letter-spacing:-.01em!important;color:#1b2d36!important}
+.header h1{font-size:1.7rem!important} .section-title{font-family:var(--serif);font-weight:400;font-size:1.15rem;color:#1b2d36}
+.kpi .label,th,.field label,.section-desc.eyebrow,.kpi .sub{font-family:var(--mono)!important;letter-spacing:.08em}
+.kpi .label,th{text-transform:uppercase;font-size:.62rem!important;color:#53656a}
+.kpi,.chart-box,.login-box,.scroll,.card{background:#fffef9!important;border:1px solid #d3d8cf!important;border-radius:6px!important;box-shadow:none!important}
+.kpi .value{font-family:var(--serif);font-weight:400;font-size:1.65rem}
+table td,table th{border-color:#e8ede5!important} tbody tr:hover td{background:#f5f4ee}
+.nav{gap:8px!important;padding-bottom:14px;border-bottom:1px solid #d3d8cf}
+.nav a,.logout-btn{font-family:var(--sans)!important;font-size:.78rem!important;color:#1b2d36!important;background:transparent!important;border:1px solid #d3d8cf!important;border-radius:4px!important;padding:6px 12px!important;text-decoration:none}
+.nav a:hover,.logout-btn:hover{border-color:#285d52!important;color:#285d52!important}
+.nav a.active{background:#285d52!important;border-color:#285d52!important;color:#fffef9!important}
+.btn,.download-btn{background:#285d52!important;color:#fffef9!important;border-radius:4px!important;font-family:var(--sans)!important}
+.btn:hover,.download-btn:hover{background:#1b463e!important;opacity:1!important}
+input,select{font-family:var(--sans)!important;background:#fffef9!important;color:#1b2d36!important;border-color:#d3d8cf!important;border-radius:4px!important}
+.date-filter .preset-btn,.bar button,td button{font-family:var(--sans)!important;border-radius:4px!important}
+.date-filter .preset-btn.active,.preset-btn.active{background:#285d52!important;border-color:#285d52!important;color:#fffef9!important}
+.pill{font-family:var(--mono);font-weight:500}
+th{background:#fffef9!important} .pos{color:#2b7a54} .neg{color:#b3402a}
+.footer{font-family:var(--mono)} a{color:#285d52}
 </style></head><body>
 
 <div class="login-box">

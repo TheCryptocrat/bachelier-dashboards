@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Bachelier Prop Firm Mission Control</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root { --bg:#f5f4ee; --surface:#fffef9; --border:#d3d8cf; --border2:#e8ede5;
+  --text:#1b2d36; --dim:#53656a; --dim2:#9aa69f;
+  --green:#2b7a54; --green-bg:#d7e8dc; --red:#b3402a; --red-bg:#f3dcd6;
+  --blue:#285d52; --orange:#a45d28; --yellow:#9c7a3c; --purple:#8a6a9e; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'SF Mono','Cascadia Code','JetBrains Mono',monospace; background:var(--bg); color:var(--text); padding:20px; font-size:13px; }
+.header { display:flex; align-items:center; justify-content:space-between; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+.header h1 { font-size:1.4rem; letter-spacing:-0.5px; }
+.header .meta { color:var(--dim); font-size:0.75rem; text-align:right; }
+.kpi-grid { display:grid; gap:12px; margin-bottom:24px; }
+.kpi-grid-6 { grid-template-columns:repeat(6,1fr); }
+.kpi-grid-5 { grid-template-columns:repeat(5,1fr); }
+.kpi-grid-4 { grid-template-columns:repeat(4,1fr); }
+.kpi { background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:14px 16px; }
+.kpi .label { font-size:0.65rem; text-transform:uppercase; letter-spacing:1px; color:var(--dim); margin-bottom:4px; }
+.kpi .value { font-size:1.5rem; font-weight:700; }
+.kpi .sub { font-size:0.7rem; color:var(--dim); margin-top:2px; }
+.pos { color:var(--green); } .neg { color:var(--red); }
+.section { margin-bottom:28px; }
+.section-title { font-size:1rem; font-weight:600; margin-bottom:4px; display:flex; align-items:center; gap:8px; }
+.badge { font-size:0.65rem; padding:2px 8px; border-radius:4px; font-weight:500; }
+.badge-green { background:var(--green-bg); color:var(--green); }
+.badge-orange { background:#f3e6d6; color:var(--orange); }
+.badge-blue { background:#dfe9e5; color:var(--blue); }
+.section-desc { font-size:0.75rem; color:var(--dim); margin-bottom:10px; }
+.chart-box { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:16px; }
+.row2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:24px; }
+table { width:100%; border-collapse:collapse; font-size:0.78rem; }
+th { text-align:left; color:var(--dim); padding:6px 8px; border-bottom:1px solid var(--border); font-weight:500; font-size:0.65rem; text-transform:uppercase; letter-spacing:0.5px; }
+td { padding:5px 8px; border-bottom:1px solid var(--border2); }
+.num { text-align:right; font-variant-numeric:tabular-nums; }
+.dim { color:var(--dim); } .warn { color:var(--yellow); }
+.dot { width:10px; height:10px; border-radius:2px; display:inline-block; }
+.strat-name { font-weight:500; white-space:nowrap; }
+.heatmap-scroll { overflow-x:auto; }
+.heatmap { border-collapse:collapse; font-size:0.7rem; }
+.heatmap th, .heatmap td { padding:4px 6px; text-align:center; min-width:50px; border:1px solid var(--bg); }
+.hm-sym { font-size:0.6rem; color:var(--dim); writing-mode:vertical-lr; transform:rotate(180deg); height:60px; }
+.hm-strat { text-align:right !important; font-weight:500; white-space:nowrap; padding-right:10px !important; font-size:0.7rem; }
+.hm-empty { background:var(--surface); }
+.footer { text-align:center; font-size:0.7rem; color:var(--dim2); margin-top:32px; padding-top:16px; border-top:1px solid var(--border2); }
+.nav { display:flex; flex-wrap:wrap; gap:12px; margin-bottom:20px; align-items:center; }
+.nav a { color:var(--blue); font-size:0.8rem; padding:6px 14px; border:1px solid var(--border); border-radius:6px; text-decoration:none; }
+.nav a.active { background:var(--blue); color:var(--bg); border-color:var(--blue); }
+.nav .logout-btn { margin-left:auto; color:var(--dim); font-size:0.7rem; padding:4px 10px; border:1px solid var(--border2); border-radius:4px; text-decoration:none; cursor:pointer; background:none; }
+.nav .logout-btn:hover { color:var(--red); border-color:var(--red); }
+
+/* Date filter */
+.date-filter { display:flex; align-items:center; gap:8px; margin-left:auto; }
+.date-filter label { font-size:0.7rem; color:var(--dim); text-transform:uppercase; letter-spacing:0.5px; }
+.date-filter input[type="date"] { background:var(--surface); border:1px solid var(--border); color:var(--text); padding:4px 8px; border-radius:4px; font-family:inherit; font-size:0.75rem; cursor:pointer; }
+.date-filter input[type="date"]::-webkit-calendar-picker-indicator { filter:invert(0.7); cursor:pointer; }
+.date-filter .preset-btn { background:none; border:1px solid var(--border2); color:var(--dim); padding:3px 8px; border-radius:4px; font-family:inherit; font-size:0.65rem; cursor:pointer; }
+.date-filter .preset-btn:hover, .date-filter .preset-btn.active { background:var(--blue); color:var(--bg); border-color:var(--blue); }
+.filter-banner { background:var(--surface); border:1px solid var(--blue); border-radius:6px; padding:8px 16px; margin-bottom:16px; display:none; font-size:0.8rem; color:var(--blue); }
+
+@media(max-width:900px) { .row2{grid-template-columns:1fr;} .kpi-grid{grid-template-columns:repeat(2,1fr);} .date-filter{flex-wrap:wrap;} }
+</style><!--prismatic-theme--><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet"><style>
+:root{--serif:Georgia,'Times New Roman',serif;--sans:Geist,Arial,sans-serif;--mono:'Geist Mono',ui-monospace,Menlo,monospace}
+body{font-family:var(--sans)!important;background:#f5f4ee!important;color:#1b2d36!important;-webkit-font-smoothing:antialiased}
+h1,h2,.header h1,.login-box h1,.wrap h1{font-family:var(--serif)!important;font-weight:400!important;letter-spacing:-.01em!important;color:#1b2d36!important}
+.header h1{font-size:1.7rem!important} .section-title{font-family:var(--serif);font-weight:400;font-size:1.15rem;color:#1b2d36}
+.kpi .label,th,.field label,.section-desc.eyebrow,.kpi .sub{font-family:var(--mono)!important;letter-spacing:.08em}
+.kpi .label,th{text-transform:uppercase;font-size:.62rem!important;color:#53656a}
+.kpi,.chart-box,.login-box,.scroll,.card{background:#fffef9!important;border:1px solid #d3d8cf!important;border-radius:6px!important;box-shadow:none!important}
+.kpi .value{font-family:var(--serif);font-weight:400;font-size:1.65rem}
+table td,table th{border-color:#e8ede5!important} tbody tr:hover td{background:#f5f4ee}
+.nav{gap:8px!important;padding-bottom:14px;border-bottom:1px solid #d3d8cf}
+.nav a,.logout-btn{font-family:var(--sans)!important;font-size:.78rem!important;color:#1b2d36!important;background:transparent!important;border:1px solid #d3d8cf!important;border-radius:4px!important;padding:6px 12px!important;text-decoration:none}
+.nav a:hover,.logout-btn:hover{border-color:#285d52!important;color:#285d52!important}
+.nav a.active{background:#285d52!important;border-color:#285d52!important;color:#fffef9!important}
+.btn,.download-btn{background:#285d52!important;color:#fffef9!important;border-radius:4px!important;font-family:var(--sans)!important}
+.btn:hover,.download-btn:hover{background:#1b463e!important;opacity:1!important}
+input,select{font-family:var(--sans)!important;background:#fffef9!important;color:#1b2d36!important;border-color:#d3d8cf!important;border-radius:4px!important}
+.date-filter .preset-btn,.bar button,td button{font-family:var(--sans)!important;border-radius:4px!important}
+.date-filter .preset-btn.active,.preset-btn.active{background:#285d52!important;border-color:#285d52!important;color:#fffef9!important}
+.pill{font-family:var(--mono);font-weight:500}
+th{background:#fffef9!important} .pos{color:#2b7a54} .neg{color:#b3402a}
+.footer{font-family:var(--mono)} a{color:#285d52}
+</style></head><body>
+
+<script>
+(function(){
+  const auth = sessionStorage.getItem('bachelier_auth');
+  if(!auth || auth !== 'authenticated'){
+    window.location.href = 'index.html';
+  }
+})();
+</script>
+
+
+
+<div class="nav">
+  <a class="" href="demo_dashboard.html">Demo Bots</a>
+  <a class="" href="licensed_dashboard.html">Licensed</a>
+  <a class="active" href="prop_dashboard.html">Prop Firms</a><a href="prop_dashboard.html">Prop Firms</a>
+  <a href="live_dashboard.html">Live Trading</a>
+  <a href="execution_dashboard.html">Execution</a>
+  <a href="explorer.html">Explorer</a>
+  <a href="audit_dashboard.html">MFB Audit</a><a href="accounts.html">Accounts</a>
+  <a href="https://prismatic-marketing-impact.cree-lawson-1541.chatgpt.site/" target="_blank" rel="noopener noreferrer" title="SEO, AI visibility and website traffic — opens in a new tab">Marketing ↗</a>
+  <button class="logout-btn" onclick="sessionStorage.clear();location.href='index.html'">Sign Out</button>
+</div>
+
+<div class="header">
+  <h1 style="color:var(--blue)">PROP FIRM MISSION CONTROL</h1>
+  <div class="date-filter">
+    <button class="preset-btn" onclick="setPreset(7, event)">7D</button>
+    <button class="preset-btn" onclick="setPreset(30, event)">30D</button>
+    <button class="preset-btn" onclick="setPreset(90, event)">90D</button>
+    <button class="preset-btn active" onclick="setPreset('ytd', event)">YTD</button>
+    <button class="preset-btn" onclick="setPreset('all', event)">ALL</button>
+    <label>From</label><input type="date" id="dateStart" value="2026-01-20" onchange="applyCustomRange()">
+    <label>To</label><input type="date" id="dateEnd" value="2026-10-19" onchange="applyCustomRange()">
+    <button class="preset-btn" id="applyRangeBtn" onclick="applyCustomRange()" title="Apply the dates above (or press Enter in either box)">Apply</button>
+  </div>
+</div>
+
+<div class="filter-banner" id="filterBanner"></div>
+
+<div class="kpi-grid kpi-grid-5" id="kpiGrid">
+  <div class="kpi"><div class="label" id="kpiLabel1">Total P&L</div>
+    <div class="value neg" id="kpiVal1">$-6,487</div>
+    <div class="sub" id="kpiSub1">6 combos</div></div>
+  <div class="kpi"><div class="label" id="kpiLabel2">Return</div>
+    <div class="value" style="color:var(--blue)" id="kpiVal2">—</div>
+    <div class="sub" id="kpiSub2">1 strategies</div></div>
+  <div class="kpi"><div class="label" id="kpiLabel3">Max Drawdown</div>
+    <div class="value" style="color:var(--orange)" id="kpiVal3">—</div>
+    <div class="sub" id="kpiSub3">across all combos</div></div>
+  <div class="kpi"><div class="label" id="kpiLabel4">Win Rate</div>
+    <div class="value" style="color:var(--purple)" id="kpiVal4">38.1%</div>
+    <div class="sub" id="kpiSub4">97 trades over 69 days</div></div>
+  <div class="kpi"><div class="label" id="kpiLabel5">Profit Factor</div>
+    <div class="value" style="color:var(--green)" id="kpiVal5">—</div>
+    <div class="sub" id="kpiSub5">Best / Worst Day</div></div>
+</div>
+
+<div class="row2">
+  <div class="section" hidden>
+    <div class="section-title" style="color:var(--green)">PROP Bots <span class="badge badge-green">0 combos</span></div>
+    <div class="section-desc">Low-drawdown / prop-firm eligible strategies</div>
+    <div style="margin-bottom:8px"><select id="propSelect" onchange="filterChart('prop')" style="background:var(--surface);border:1px solid var(--border);color:var(--text);padding:4px 10px;border-radius:4px;font-family:inherit;font-size:0.75rem;cursor:pointer"><option value="all">Show All Lines</option></select></div>
+    <div class="chart-box"><canvas id="propChart" height="260"></canvas></div>
+    <table style="margin-top:8px" id="propTable">
+      <thead><tr><th></th><th>Strategy</th><th>Pair</th><th>Login</th><th>Return</th><th>P&L</th><th>Max DD</th><th>Win%</th><th>PF</th><th>Sharpe</th><th>Trades</th><th>Since</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <div class="section" hidden>
+    <div class="section-title" style="color:var(--orange)">MOL Bots <span class="badge badge-orange">0 combos</span></div>
+    <div class="section-desc">Higher-return / MOL portfolio strategies</div>
+    <div style="margin-bottom:8px"><select id="molSelect" onchange="filterChart('mol')" style="background:var(--surface);border:1px solid var(--border);color:var(--text);padding:4px 10px;border-radius:4px;font-family:inherit;font-size:0.75rem;cursor:pointer"><option value="all">Show All Lines</option></select></div>
+    <div class="chart-box"><canvas id="molChart" height="260"></canvas></div>
+    <table style="margin-top:8px" id="molTable">
+      <thead><tr><th></th><th>Strategy</th><th>Pair</th><th>Login</th><th>Return</th><th>P&L</th><th>Max DD</th><th>Win%</th><th>PF</th><th>Sharpe</th><th>Trades</th><th>Since</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title" style="color:var(--purple)">General Bots <span class="badge" style="background:var(--purple);color:#fff">3 combos</span></div>
+  <div class="section-desc">Strategies not classified as Prop or MOL</div>
+  <div style="margin-bottom:8px"><select id="genSelect" onchange="filterChart('gen')" style="background:var(--surface);border:1px solid var(--border);color:var(--text);padding:4px 10px;border-radius:4px;font-family:inherit;font-size:0.75rem;cursor:pointer"><option value="all">Show All Lines</option></select></div>
+  <div class="chart-box"><canvas id="genChart" height="260"></canvas></div>
+  <table style="margin-top:8px" id="genTable">
+    <thead><tr><th></th><th>Strategy</th><th>Pair</th><th>Login</th><th>Return</th><th>P&L</th><th>Max DD</th><th>Win%</th><th>PF</th><th>Sharpe</th><th>Trades</th><th>Since</th></tr></thead>
+    <tbody><tr>
+          <td><span class="dot" style="background:#8a6a9e"></span></td>
+          <td class="strat-name">FTMO Manual Trading</td>
+          <td>USDJPY.sim</td>
+          <td class="num">600025868</td>
+          <td class="num neg">-0.50%</td>
+          <td class="num neg">$-99</td>
+          <td class="num">2.4%</td>
+          <td class="num">58%</td>
+          <td class="num">0.9</td>
+          <td class="num">-0.4</td>
+          <td class="num">12</td>
+          <td class="num dim">01-20</td>
+        </tr><tr>
+          <td><span class="dot" style="background:#3b7f72"></span></td>
+          <td class="strat-name">FTMO Manual Trading</td>
+          <td>EURUSD.sim</td>
+          <td class="num">600025868</td>
+          <td class="num neg">-12.28%</td>
+          <td class="num neg">$-2,456</td>
+          <td class="num">12.3%</td>
+          <td class="num">32%</td>
+          <td class="num">0.5</td>
+          <td class="num">-4.0</td>
+          <td class="num">22</td>
+          <td class="num dim">02-12</td>
+        </tr><tr>
+          <td><span class="dot" style="background:#6fb68f"></span></td>
+          <td class="strat-name">FTMO Manual Trading</td>
+          <td>GBPUSD.sim</td>
+          <td class="num">600025868</td>
+          <td class="num neg">-19.66%</td>
+          <td class="num neg">$-3,932</td>
+          <td class="num">26.0%</td>
+          <td class="num">37%</td>
+          <td class="num">0.8</td>
+          <td class="num">-1.5</td>
+          <td class="num">57</td>
+          <td class="num dim">04-03</td>
+        </tr></tbody>
+  </table>
+</div>
+
+<div class="row2">
+  <div class="section">
+    <div class="section-title" style="color:var(--blue)">Weekly P&L (All Demo Bots)</div>
+    <div class="chart-box"><canvas id="weeklyChart" height="220"></canvas></div>
+  </div>
+  <div class="section">
+    <div class="section-title" style="color:var(--blue)">Strategy P&L Leaderboard</div>
+    <div class="chart-box"><canvas id="stratChart" height="220"></canvas></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title" style="color:var(--blue)">Strategy &times; Pair Return Heatmap (%)</div>
+  <div class="section-desc">Cumulative return % per combo (min 5 trades). Hover for details.</div>
+  <div class="chart-box" id="heatmapBox"><div class="heatmap-scroll"><table class="heatmap"><tr><th></th><th class="hm-sym">EURUSD.sim</th><th class="hm-sym">GBPUSD.sim</th><th class="hm-sym">USDJPY.sim</th></tr><tr><td class="hm-strat">FTMO Manual Trading</td><td style="background:#f3dcd6;color:#fff" title="FTMO Manual Trading | EURUSD.sim: -12.3% (22 trades)">-12.3</td><td style="background:#f3dcd6;color:#fff" title="FTMO Manual Trading | GBPUSD.sim: -19.7% (57 trades)">-19.7</td><td style="background:#b3402a;color:#fff" title="FTMO Manual Trading | USDJPY.sim: -0.5% (12 trades)">-0.5</td></tr></table></div></div>
+</div>
+
+<div class="section">
+  <div class="section-title" style="color:var(--blue)">Full Combo Leaderboard</div>
+  <div class="chart-box" id="leaderboardBox"><table id="leaderboardTable">
+    <thead><tr><th>#</th><th>Strategy</th><th>Pair</th><th>Login</th><th>Return</th><th>P&L</th><th>Max DD</th><th>Win%</th><th>PF</th><th>Sharpe</th><th>Trades</th></tr></thead>
+    <tbody><tr>
+          <td class="num dim">1</td>
+          <td class="strat-name">FTMO Manual Trading</td>
+          <td>USDJPY.sim</td>
+          <td class="num">600025868</td>
+          <td class="num neg">-0.50%</td>
+          <td class="num neg">$-99</td>
+          <td class="num">2.4%</td>
+          <td class="num">58%</td>
+          <td class="num">0.9</td>
+          <td class="num">-0.4</td>
+          <td class="num">12</td>
+        </tr><tr>
+          <td class="num dim">2</td>
+          <td class="strat-name">FTMO Manual Trading</td>
+          <td>EURUSD.sim</td>
+          <td class="num">600025868</td>
+          <td class="num neg">-12.28%</td>
+          <td class="num neg">$-2,456</td>
+          <td class="num warn">12.3%</td>
+          <td class="num">32%</td>
+          <td class="num">0.5</td>
+          <td class="num">-4.0</td>
+          <td class="num">22</td>
+        </tr><tr>
+          <td class="num dim">3</td>
+          <td class="strat-name">FTMO Manual Trading</td>
+          <td>GBPUSD.sim</td>
+          <td class="num">600025868</td>
+          <td class="num neg">-19.66%</td>
+          <td class="num neg">$-3,932</td>
+          <td class="num warn">26.0%</td>
+          <td class="num">37%</td>
+          <td class="num">0.8</td>
+          <td class="num">-1.5</td>
+          <td class="num">57</td>
+        </tr></tbody>
+  </table></div>
+</div>
+
+<div class="footer">Bachelier Demo Mission Control &middot; 2026-10-21 11:07 &middot; <span id="footerDates">2026-01-20 &rarr; 2026-10-19</span></div>
+
+<script>
+const DAILY_DATA = [{"strategy": "FTMO Manual Trading", "symbol": "EURUSD.sim", "login": 600025868, "daily": [{"d": "2026-02-12", "p": 6.0, "t": 1, "w": 1}, {"d": "2026-02-16", "p": -1243.32, "t": 3, "w": 0}, {"d": "2026-02-18", "p": 470.4, "t": 1, "w": 1}, {"d": "2026-02-19", "p": -75.2, "t": 2, "w": 1}, {"d": "2026-02-20", "p": 102.07, "t": 3, "w": 1}, {"d": "2026-02-23", "p": -198.72, "t": 3, "w": 1}, {"d": "2026-02-24", "p": 651.54, "t": 2, "w": 2}, {"d": "2026-02-27", "p": -505.63, "t": 1, "w": 0}, {"d": "2026-03-05", "p": -1010.08, "t": 1, "w": 0}, {"d": "2026-03-24", "p": -0.07, "t": 1, "w": 0}, {"d": "2026-05-04", "p": -9.0, "t": 2, "w": 0}, {"d": "2026-05-14", "p": -486.19, "t": 1, "w": 0}, {"d": "2026-06-24", "p": -157.63, "t": 1, "w": 0}]}, {"strategy": "FTMO Manual Trading", "symbol": "GBPUSD.sim", "login": 600025868, "daily": [{"d": "2026-04-03", "p": -280.6, "t": 1, "w": 0}, {"d": "2026-04-07", "p": -327.5, "t": 1, "w": 0}, {"d": "2026-05-13", "p": 897.76, "t": 1, "w": 1}, {"d": "2026-05-15", "p": 91.97, "t": 1, "w": 1}, {"d": "2026-05-18", "p": 905.76, "t": 1, "w": 1}, {"d": "2026-05-19", "p": -569.08, "t": 1, "w": 0}, {"d": "2026-05-22", "p": 565.01, "t": 1, "w": 1}, {"d": "2026-05-25", "p": -225.0, "t": 1, "w": 0}, {"d": "2026-05-26", "p": -288.0, "t": 1, "w": 0}, {"d": "2026-05-27", "p": -282.04, "t": 1, "w": 0}, {"d": "2026-06-01", "p": 1214.1, "t": 1, "w": 1}, {"d": "2026-06-02", "p": -555.11, "t": 1, "w": 0}, {"d": "2026-06-08", "p": -522.0, "t": 1, "w": 0}, {"d": "2026-06-09", "p": 954.8, "t": 1, "w": 1}, {"d": "2026-06-11", "p": -505.68, "t": 1, "w": 0}, {"d": "2026-06-16", "p": -35.71, "t": 1, "w": 0}, {"d": "2026-06-18", "p": -534.64, "t": 1, "w": 0}, {"d": "2026-06-24", "p": -87.7, "t": 2, "w": 1}, {"d": "2026-06-25", "p": -846.1, "t": 1, "w": 0}, {"d": "2026-06-26", "p": -549.46, "t": 1, "w": 0}, {"d": "2026-07-09", "p": -1111.96, "t": 2, "w": 0}, {"d": "2026-07-10", "p": -466.3, "t": 1, "w": 0}, {"d": "2026-07-13", "p": 1574.36, "t": 1, "w": 1}, {"d": "2026-07-14", "p": -47.88, "t": 1, "w": 0}, {"d": "2026-07-16", "p": 89.41, "t": 1, "w": 1}, {"d": "2026-07-20", "p": 184.68, "t": 2, "w": 1}, {"d": "2026-07-21", "p": 54.48, "t": 2, "w": 1}, {"d": "2026-07-22", "p": -854.5, "t": 2, "w": 0}, {"d": "2026-07-23", "p": -344.1, "t": 2, "w": 1}, {"d": "2026-07-24", "p": 152.92, "t": 1, "w": 1}, {"d": "2026-07-27", "p": 1358.94, "t": 1, "w": 1}, {"d": "2026-07-28", "p": 1406.24, "t": 1, "w": 1}, {"d": "2026-08-04", "p": -1599.86, "t": 3, "w": 0}, {"d": "2026-08-05", "p": -1413.1, "t": 3, "w": 1}, {"d": "2026-08-06", "p": 1381.6, "t": 2, "w": 1}, {"d": "2026-08-10", "p": 894.88, "t": 1, "w": 1}, {"d": "2026-08-12", "p": 163.2, "t": 1, "w": 1}, {"d": "2026-08-13", "p": 1038.96, "t": 1, "w": 1}, {"d": "2026-08-17", "p": -1105.8, "t": 2, "w": 0}, {"d": "2026-08-18", "p": -3097.22, "t": 3, "w": 0}, {"d": "2026-08-19", "p": -1215.08, "t": 2, "w": 0}, {"d": "2026-09-22", "p": 2.93, "t": 1, "w": 1}]}, {"strategy": "FTMO Manual Trading", "symbol": "US100.sim", "login": 600025868, "daily": [{"d": "2026-09-24", "p": -41.6, "t": 1, "w": 0}]}, {"strategy": "FTMO Manual Trading", "symbol": "USDCAD.sim", "login": 600025868, "daily": [{"d": "2026-02-06", "p": 170.66, "t": 1, "w": 1}, {"d": "2026-02-26", "p": -446.39, "t": 1, "w": 0}, {"d": "2026-02-27", "p": -151.56, "t": 1, "w": 0}]}, {"strategy": "FTMO Manual Trading", "symbol": "USDJPY.sim", "login": 600025868, "daily": [{"d": "2026-01-20", "p": -537.51, "t": 1, "w": 0}, {"d": "2026-02-26", "p": -466.93, "t": 1, "w": 0}, {"d": "2026-03-04", "p": 606.04, "t": 1, "w": 1}, {"d": "2026-09-24", "p": 228.54, "t": 1, "w": 1}, {"d": "2026-09-25", "p": -94.6, "t": 1, "w": 0}, {"d": "2026-10-01", "p": -266.93, "t": 1, "w": 0}, {"d": "2026-10-02", "p": 133.34, "t": 1, "w": 1}, {"d": "2026-10-05", "p": 268.02, "t": 1, "w": 1}, {"d": "2026-10-08", "p": 10.22, "t": 1, "w": 1}, {"d": "2026-10-09", "p": 200.97, "t": 1, "w": 1}, {"d": "2026-10-15", "p": -333.3, "t": 1, "w": 0}, {"d": "2026-10-19", "p": 153.1, "t": 1, "w": 1}]}, {"strategy": "FTMO Manual Trading", "symbol": "XAUUSD.sim", "login": 600025868, "daily": [{"d": "2026-02-25", "p": 33.32, "t": 1, "w": 1}, {"d": "2026-03-19", "p": -635.88, "t": 1, "w": 0}]}];
+const START_BAL = {"41657": 20000.0, "41655": 20000.0, "47771": 20000.0, "41654": 20000.0, "46539": 20000.0, "52441850": 20000.0, "52441853": 20000.0, "52428953": 20000.0, "47369": 20000.0, "57710": 20000.0, "57706": 20000.0, "46540": 20000.0, "38767": 20000.0, "41653": 20000.0, "41651": 20000.0, "22663": 20000.0, "41652": 20000.0, "49058": 20000.0, "38766": 20000.0, "45596": 20000.0, "38765": 20000.0, "38768": 20000.0, "38769": 20000.0, "41658": 20000.0, "41660": 20000.0, "22660": 20000.0, "47779": 20000.0, "47777": 20000.0, "658071": 20000.0, "58980": 100000.0, "58981": 100000.0, "58982": 100000.0, "58984": 100000.0, "58985": 100000.0, "58986": 100000.0, "58987": 100000.0, "58988": 100000.0, "58989": 100000.0, "60570": 20000.0, "26774273": 200000.0, "58990": 20000.0, "58991": 20000.0, "32983": 20000.0, "45215": 20000.0, "54284": 20000.0, "54285": 20000.0, "55955": 10500.0, "55956": 3000.0, "57825": 47500.0, "662435": 20000.0, "662437": 10000.0, "22837": 20000.0, "55951": 3000.0, "59377": 20000.0, "14189968": 20000.0, "60572": 20000.0, "60569": 20000.0, "53903": 20000.0, "53902": 20000.0, "53904": 20000.0, "54185": 20000.0, "54177": 20000.0, "54182": 20000.0, "54183": 20000.0, "54184": 20000.0, "54188": 20000.0, "54189": 20000.0, "54190": 20000.0, "54191": 20000.0, "54192": 20000.0, "54193": 20000.0, "54194": 20000.0, "54827": 20000.0, "54825": 20000.0, "54823": 20000.0, "54824": 20000.0, "54826": 20000.0, "54829": 20000.0, "54830": 20000.0, "54831": 20000.0, "54832": 20000.0, "55168": 20000.0, "55169": 20000.0, "55170": 20000.0, "55171": 20000.0, "55172": 20000.0, "55207": 20000.0, "57743": 50000.0, "57745": 100000.0, "57744": 100000.0, "57747": 100000.0, "57748": 100000.0, "57746": 100000.0, "56915": 20000.0, "56916": 20000.0, "56917": 20000.0, "56918": 20000.0, "56919": 20000.0, "56920": 20000.0, "1115443": 100000.0, "58310": 20000.0, "58311": 20000.0, "58312": 20000.0, "58313": 20000.0, "55966": 20000.0, "57575": 20000.0, "1115442": 50000.0, "1115444": 10000.0, "42818": 5000.0, "657902": 20000.0, "45216": 20000.0, "47774": 20000.0, "42817": 20000.0, "39479": 20000.0, "58993": 20000.0, "60492": 1000.0, "60490": 20000.0, "60491": 20000.0, "59376": 10000.0, "600025868": 20000.0, "639884": 20000.0, "41088": 20000.0, "662434": 30000.0, "662436": 10000.0, "663097": 10000.0, "49059": 20000.0, "50347": 20000.0, "50348": 20000.0, "49063": 20000.0, "49061": 20000.0, "47370": 20000.0, "49060": 20000.0, "647832": 20000.0, "51718": 20000.0, "51719": 20000.0, "51720": 20000.0, "51721": 20000.0, "51722": 20000.0, "51723": 20000.0, "51724": 20000.0, "51725": 20000.0, "51726": 20000.0, "51727": 20000.0, "52360": 20000.0, "52361": 20000.0, "52362": 20000.0, "52363": 20000.0, "52364": 20000.0, "52365": 20000.0, "52366": 20000.0, "52367": 20000.0, "52368": 20000.0, "52369": 20000.0, "52370": 20000.0, "58315": 20000.0, "58316": 20000.0, "58992": 20000.0, "60575": 50000.0, "53895": 20000.0, "53896": 20000.0, "53897": 20000.0, "53898": 20000.0, "53899": 20000.0, "53900": 20000.0, "53901": 20000.0, "54195": 20000.0, "55206": 20000.0, "55967": 20000.0, "56911": 20000.0, "56912": 20000.0, "55907": 20000.0, "55908": 20000.0, "56913": 20000.0, "55965": 20000.0, "57685": 20000.0, "57703": 20000.0, "1115445": 10000.0, "57681": 100000.0, "57699": 20000.0, "57704": 20000.0, "58314": 20000.0, "58309": 20000.0, "57686": 20000.0, "57687": 20000.0, "57688": 20000.0, "57689": 20000.0, "57691": 20000.0, "57694": 20000.0, "57695": 20000.0, "55208": 20000.0, "55209": 20000.0, "55210": 20000.0, "55211": 20000.0, "55123": 20000.0, "55384": 20000.0, "55388": 20000.0, "55389": 20000.0, "55390": 20000.0, "55391": 20000.0, "55392": 20000.0, "55393": 20000.0, "55212": 20000.0, "55894": 20000.0, "55895": 20000.0, "55896": 20000.0, "55897": 20000.0, "55898": 20000.0, "55899": 20000.0, "55900": 20000.0, "55901": 20000.0, "55902": 20000.0, "55903": 20000.0, "55904": 20000.0, "55905": 20000.0, "57559": 100000.0, "57574": 100000.0, "57676": 100000.0, "57677": 100000.0, "57680": 100000.0, "57679": 100000.0, "58303": 20000.0, "58304": 20000.0, "58305": 20000.0, "58306": 20000.0, "58307": 20000.0, "58308": 20000.0, "58318": 50000.0, "58319": 100000.0, "58320": 100000.0, "58321": 100000.0, "58322": 100000.0, "58323": 100000.0, "58324": 100000.0, "58325": 100000.0, "58326": 100000.0, "58327": 100000.0, "58328": 100000.0, "58329": 100000.0, "58983": 100000.0, "58994": 20000.0, "58995": 20000.0, "60496": 100000.0, "60497": 100000.0, "60498": 1000.0, "58317": 20000.0, "55906": 20000.0};
+const PROP_COLORS = ["#2b7a54", "#285d52", "#9dc2b8", "#6fb68f", "#3f9a6e", "#2a8a5c", "#1b463e", "#3b7f72", "#6aa194", "#c9e3d3"];
+const MOL_COLORS = ["#a45d28", "#9c7a3c", "#b88656", "#b3402a", "#c9644c", "#ffa657", "#db6d28", "#f78166", "#c0492f", "#8a6a9e"];
+const GEN_COLORS = ["#8a6a9e", "#3b7f72", "#6fb68f", "#b88656", "#c9644c", "#285d52", "#2b7a54", "#a45d28", "#c0492f", "#3f9a6e"];
+const chartOpts = (ylabel) => ({
+  responsive:true, interaction:{mode:'index',intersect:false},
+  plugins:{legend:{display:false},
+    tooltip:{backgroundColor:'#fffef9',borderColor:'#d3d8cf',borderWidth:1,titleColor:'#1b2d36',bodyColor:'#1b2d36',
+      callbacks:{label:ctx=>ctx.dataset.label+': '+(ctx.parsed.y!==null?ctx.parsed.y.toFixed(2)+'%':'N/A')}
+    }},
+  scales:{
+    x:{ticks:{color:'#53656a',maxTicksLimit:10,font:{size:9}},grid:{color:'#e8ede5'}},
+    y:{title:{display:true,text:ylabel,color:'#53656a',font:{size:10}},ticks:{color:'#53656a',callback:v=>v.toFixed(1)+'%'},grid:{color:'#e8ede5'}}
+  }
+});
+
+
+// ── Date Filter Engine ──
+const STARTING_EQ = 20000.0;
+const MIN_TR = 5;
+
+// Per-account starting balance, the denominator for return% and DD%.
+//
+// This used to read `metaByLogin` directly, but that map is only emitted by the
+// explorer template while this file is shared by the demo, live and licensed
+// pages too. On those three every filter threw
+//   Uncaught ReferenceError: metaByLogin is not defined
+// from computeMetrics, which is the first thing applyFilter calls — so the date
+// boxes AND all five preset buttons were dead, with no visible error.
+//
+// Resolution order: START_BAL (emitted per page from vps_config), then
+// metaByLogin (explorer), then the shared default. `typeof` on an undeclared
+// identifier is safe and does not throw.
+function startBalFor(login){
+  try {
+    if (typeof START_BAL !== 'undefined' && START_BAL && START_BAL[login]) return START_BAL[login];
+  } catch(e) {}
+  try {
+    if (typeof metaByLogin !== 'undefined' && metaByLogin[login] && metaByLogin[login].start_bal) {
+      return metaByLogin[login].start_bal;
+    }
+  } catch(e) {}
+  return STARTING_EQ;
+}
+const PROP_DD = 5.0;
+const MOL_DD = 15.0;
+const TOP = 10;
+
+function getDateRange(){
+  const s = document.getElementById('dateStart').value;
+  const e = document.getElementById('dateEnd').value;
+  return { start: s || null, end: e || null };
+}
+
+// Typing a date only commits on blur or a complete entry, and there was no
+// button to press, so a hand-typed range looked like it did nothing. This is
+// the explicit path: the Apply button and Enter both call it, and it also
+// de-highlights whichever preset was active so the controls reflect the custom
+// range that is actually in force.
+function applyCustomRange(){
+  const s = document.getElementById('dateStart').value;
+  const e = document.getElementById('dateEnd').value;
+  if(s && e && s > e){
+    const banner = document.getElementById('filterBanner');
+    if(banner){
+      banner.textContent = 'From (' + s + ') is after To (' + e + ') — showing nothing. Swap them.';
+      banner.style.display = 'block';
+    }
+    return;
+  }
+  const banner = document.getElementById('filterBanner');
+  if(banner && banner.textContent.indexOf(' is after ') !== -1){
+    banner.textContent = '';
+    banner.style.display = 'none';
+  }
+  document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+  const btn = document.getElementById('applyRangeBtn');
+  if(btn && (s || e)) btn.classList.add('active');
+  applyFilter();
+}
+
+// Enter inside either date box applies, so the keyboard path works too.
+document.addEventListener('DOMContentLoaded', function(){
+  ['dateStart','dateEnd'].forEach(function(id){
+    const el = document.getElementById(id);
+    if(!el) return;
+    el.addEventListener('keydown', function(ev){
+      if(ev.key === 'Enter'){ ev.preventDefault(); applyCustomRange(); }
+    });
+  });
+});
+
+function filterDaily(combos, start, end){
+  return combos.map(c => {
+    const fd = c.daily.filter(d => {
+      if(start && d.d < start) return false;
+      if(end && d.d > end) return false;
+      return true;
+    });
+    return {...c, daily: fd};
+  }).filter(c => c.daily.length > 0);
+}
+
+function computeMetrics(combos){
+  return combos.map(c => {
+    const pnls = c.daily.map(d => d.p);
+    const n = c.daily.reduce((s,d) => s + d.t, 0);
+    const wins = c.daily.reduce((s,d) => s + d.w, 0);
+    const total = pnls.reduce((s,v) => s+v, 0);
+    // Real per-account starting balance (denominator for DD%/return%).
+    const eqBase = startBalFor(c.login);
+    const retPct = total / eqBase * 100;
+
+    // Max DD
+    let peak = eqBase, maxDd = 0;
+    let eq = eqBase;
+    for(const p of pnls){ eq += p; if(eq > peak) peak = eq; const dd = (peak-eq)/peak*100; if(dd > maxDd) maxDd = dd; }
+
+    // Profit factor
+    const gp = pnls.filter(p=>p>0).reduce((s,v)=>s+v,0);
+    const gl = Math.abs(pnls.filter(p=>p<=0).reduce((s,v)=>s+v,0));
+    const pf = gl > 0 ? gp/gl : 99.0;
+
+    // Sharpe
+    const dr = pnls.map(p => p/eqBase);
+    const mean = dr.reduce((s,v)=>s+v,0)/dr.length;
+    const std = Math.sqrt(dr.reduce((s,v)=>s+(v-mean)**2,0)/(dr.length-1||1));
+    const sharpe = std > 0 ? (mean/std)*Math.sqrt(252) : 0;
+
+    // Cumulative curve
+    let cum = 0;
+    const dates = [], cumPct = [];
+    for(const d of c.daily){
+      cum += d.p;
+      dates.push(d.d);
+      cumPct.push(Math.round(((eqBase+cum)/eqBase-1)*10000)/100);
+    }
+
+    return {
+      strategy: c.strategy, symbol: c.symbol, login: c.login,
+      label: c.strategy + ' | ' + c.symbol,
+      total_pnl: Math.round(total*100)/100,
+      return_pct: Math.round(retPct*100)/100,
+      max_dd: Math.round(maxDd*100)/100,
+      sharpe: Math.round(sharpe*100)/100,
+      profit_factor: Math.round(pf*100)/100,
+      trades: n, wins: wins, losses: n-wins,
+      win_rate: n > 0 ? Math.round(wins/n*1000)/10 : 0,
+      first_date: c.daily[0].d,
+      last_date: c.daily[c.daily.length-1].d,
+      dates: dates, cum_pct: cumPct,
+    };
+  });
+}
+
+function buildDatasets(items, colors){
+  const allDates = [...new Set(items.flatMap(it=>it.dates))].sort();
+  const ds = items.map((it,i) => {
+    const dm = Object.fromEntries(it.dates.map((d,j)=>[d,it.cum_pct[j]]));
+    return {
+      label: it.label,
+      data: allDates.map(d => dm[d] ?? null),
+      borderColor: colors[i % colors.length],
+      borderWidth: 2, pointRadius: 0, pointHoverRadius: 4,
+      tension: 0.3, spanGaps: true,
+    };
+  });
+  return { labels: allDates, datasets: ds };
+}
+
+function setPreset(days, ev){
+  document.querySelectorAll('.preset-btn').forEach(b=>b.classList.remove('active'));
+  const srcBtn = (ev && ev.target) || (typeof event !== 'undefined' && event && event.target) || null;
+  if(days === 'ytd'){
+    const yr = new Date().getFullYear();
+    document.getElementById('dateStart').value = yr+'-01-01';
+    document.getElementById('dateEnd').value = '';
+    if(srcBtn) srcBtn.classList.add('active');
+  } else if(days === 'all'){
+    document.getElementById('dateStart').value = '';
+    document.getElementById('dateEnd').value = '';
+    if(srcBtn) srcBtn.classList.add('active');
+  } else {
+    const end = new Date();
+    const start = new Date(end - days*86400000);
+    document.getElementById('dateStart').value = start.toISOString().slice(0,10);
+    document.getElementById('dateEnd').value = '';
+    if(srcBtn) srcBtn.classList.add('active');
+  }
+  applyFilter();
+}
+
+
+// ── Strategy classification (mirrors Python) ──
+const PROP_KW = ["prop", "low d"];
+const PROP_EXACT = ["T&D Low Drawdown"];
+const MOL_KW = ["mol", "high return"];
+const MOL_EXACT = ["Aggressive V1 Pro"];
+function isPropStrategy(name) {
+  const n = name.toLowerCase();
+  if (PROP_KW.some(kw => n.includes(kw))) return true;
+  if (PROP_EXACT.includes(name)) return true;
+  return false;
+}
+function isMolStrategy(name) {
+  const n = name.toLowerCase();
+  if (MOL_KW.some(kw => n.includes(kw))) return true;
+  if (MOL_EXACT.includes(name)) return true;
+  return false;
+}
+
+// ── Chart line selector dropdown ──
+// Track current items for Top 5 logic
+let currentPropItems = [];
+let currentMolItems = [];
+let currentGenItems = [];
+
+function populateSelect(selectId, items, colors) {
+  const sel = document.getElementById(selectId);
+  // Clear all options
+  sel.innerHTML = '';
+  // Add Top 5, Show All, then individual items
+  const optTop5 = document.createElement('option');
+  optTop5.value = 'top5';
+  optTop5.textContent = 'Top 5 by Profit Factor';
+  sel.appendChild(optTop5);
+  const optAll = document.createElement('option');
+  optAll.value = 'all';
+  optAll.textContent = 'Show All Lines';
+  sel.appendChild(optAll);
+  items.forEach((it, i) => {
+    const opt = document.createElement('option');
+    opt.value = i;
+    const pfLabel = it.profit_factor !== undefined ? ' PF ' + it.profit_factor.toFixed(1) : '';
+    opt.textContent = it.strategy + ' | ' + it.symbol.replace('.pro','') + ' (' + it.login + ')' + pfLabel;
+    sel.appendChild(opt);
+  });
+  // Store items for top5 computation
+  if (selectId === 'propSelect') currentPropItems = items;
+  if (selectId === 'molSelect') currentMolItems = items;
+  if (selectId === 'genSelect') currentGenItems = items;
+}
+
+const TOP5_MIN_TRADES = 10;
+// Top 5 only surfaces bots that traded within this many days (Cree, 2026-09-05):
+// a long-dead bot with a great historical PF shouldn't occupy a Top 5 slot.
+const TOP5_RECENT_DAYS = 30;
+function getTop5Indices(items) {
+  // Only consider combos with a meaningful sample (>= TOP5_MIN_TRADES trades),
+  // so the Top 5 isn't dominated by 1-trade-wonders with sky-high PF.
+  // Per Cree: Top 5 should only surface bots that are actually still trading,
+  // so drop anything with no trade in the last TOP5_RECENT_DAYS. The cutoff is
+  // measured from the most recent trade date in the current view rather than
+  // from the wall clock, so the filter still behaves when a historical date
+  // range is selected (otherwise every combo would fall outside the window).
+  const allDates = items.map(it => it.last_date).filter(Boolean).sort();
+  const refDate = allDates.length ? new Date(allDates[allDates.length - 1]) : new Date();
+  const cutoff = new Date(refDate.getTime() - TOP5_RECENT_DAYS * 86400000);
+  const indexed = items
+    .map((it, i) => ({ idx: i, pf: it.profit_factor || 0, pnl: it.total_pnl || 0,
+                        trades: it.trades || 0, last: it.last_date }))
+    .filter(x => x.trades >= TOP5_MIN_TRADES)
+    .filter(x => x.last && new Date(x.last) >= cutoff);
+  // Filter to profitable (pnl > 0), sort by PF desc
+  const profitable = indexed.filter(x => x.pnl > 0).sort((a, b) => b.pf - a.pf);
+  // If fewer than 5 profitable, fill with best of the rest by PF
+  let top = profitable.slice(0, 5);
+  if (top.length < 5) {
+    const remaining = indexed.filter(x => x.pnl <= 0).sort((a, b) => b.pf - a.pf);
+    top = top.concat(remaining.slice(0, 5 - top.length));
+  }
+  return new Set(top.map(x => x.idx));
+}
+
+// Track which dropdown last changed for KPI priority
+let lastActiveDropdown = 'gen';
+
+function filterChart(which) {
+  const chart = which === 'prop' ? propChart : which === 'mol' ? molChart : genChart;
+  const items = which === 'prop' ? currentPropItems : which === 'mol' ? currentMolItems : currentGenItems;
+  const sel = document.getElementById(which + 'Select');
+  const val = sel.value;
+  if (val === 'all') {
+    chart.data.datasets.forEach(ds => { ds.hidden = false; });
+  } else if (val === 'top5') {
+    const top5 = getTop5Indices(items);
+    chart.data.datasets.forEach((ds, i) => { ds.hidden = !top5.has(i); });
+  } else {
+    const idx = parseInt(val);
+    chart.data.datasets.forEach((ds, i) => { ds.hidden = i !== idx; });
+  }
+  chart.update();
+  lastActiveDropdown = which;
+  updateKPIs();
+}
+
+function updateKPIs() {
+  // Determine which dropdown to source KPIs from
+  // Priority: check if any dropdown has a single item selected
+  // If the active dropdown has a single selection, use that
+  // Otherwise fall back to: gen > mol > prop for aggregate
+  const dropdowns = ['gen', 'mol', 'prop'];
+  // Start with the last active one
+  const ordered = [lastActiveDropdown, ...dropdowns.filter(d => d !== lastActiveDropdown)];
+
+  let singleItem = null;
+  let sourceItems = null;
+  let sourceWhich = null;
+
+  for (const which of ordered) {
+    const sel = document.getElementById(which + 'Select');
+    const val = sel.value;
+    const items = which === 'prop' ? currentPropItems : which === 'mol' ? currentMolItems : currentGenItems;
+    if (val !== 'all' && val !== 'top5' && items.length > 0) {
+      const idx = parseInt(val);
+      if (idx >= 0 && idx < items.length) {
+        singleItem = items[idx];
+        sourceWhich = which;
+        break;
+      }
+    }
+  }
+
+  if (singleItem) {
+    // Single combo selected — show its stats
+    const label = singleItem.strategy + ' | ' + (singleItem.symbol || '').replace('.pro','');
+    document.getElementById('kpiLabel1').textContent = 'P&L';
+    const pnl = singleItem.total_pnl || 0;
+    document.getElementById('kpiVal1').textContent = '$' + (pnl>=0?'+':'') + Math.round(pnl).toLocaleString();
+    document.getElementById('kpiVal1').className = 'value ' + (pnl>=0?'pos':'neg');
+    document.getElementById('kpiSub1').textContent = label;
+
+    document.getElementById('kpiLabel2').textContent = 'Return';
+    const ret = singleItem.return_pct || 0;
+    document.getElementById('kpiVal2').textContent = (ret>=0?'+':'') + ret.toFixed(1) + '%';
+    document.getElementById('kpiVal2').style.color = ret >= 0 ? 'var(--green)' : 'var(--red, #b3402a)';
+    document.getElementById('kpiSub2').textContent = (singleItem.trades||0).toLocaleString() + ' trades';
+
+    document.getElementById('kpiLabel3').textContent = 'Max Drawdown';
+    const dd = singleItem.max_dd || 0;
+    document.getElementById('kpiVal3').textContent = dd.toFixed(1) + '%';
+    document.getElementById('kpiVal3').style.color = dd > 10 ? 'var(--red, #b3402a)' : 'var(--orange)';
+    document.getElementById('kpiSub3').textContent = 'Login: ' + (singleItem.login || '');
+
+    document.getElementById('kpiLabel4').textContent = 'Win Rate';
+    document.getElementById('kpiVal4').textContent = (singleItem.win_rate || 0).toFixed(1) + '%';
+    document.getElementById('kpiVal4').style.color = 'var(--purple)';
+    document.getElementById('kpiSub4').textContent = (singleItem.wins||0) + 'W / ' + (singleItem.losses||0) + 'L';
+
+    document.getElementById('kpiLabel5').textContent = 'Profit Factor';
+    const pf = singleItem.profit_factor || 0;
+    document.getElementById('kpiVal5').textContent = pf >= 99 ? '∞' : pf.toFixed(2);
+    document.getElementById('kpiVal5').style.color = pf >= 1.5 ? 'var(--green)' : pf >= 1.0 ? 'var(--blue)' : 'var(--red, #b3402a)';
+    document.getElementById('kpiSub5').textContent = 'Sharpe: ' + (singleItem.sharpe || 0).toFixed(2);
+  } else {
+    // Multiple selected — show aggregate across the priority group
+    // Priority: gen > mol > prop (whichever is the active dropdown)
+    const groupItems = w => w === 'prop' ? currentPropItems : w === 'mol' ? currentMolItems : currentGenItems;
+    // Fall back to a group that actually has combos. A pool whose strategy
+    // names match neither the Prop nor the MOL rule -- the licensed pool is
+    // entirely General -- leaves those groups empty, and reading KPIs off an
+    // empty group renders every tile as $0 / 0% / 0 trades, which looks like
+    // the page failed to load rather than like an empty category.
+    let which = lastActiveDropdown;
+    if (groupItems(which).length === 0) {
+      which = ['gen', 'mol', 'prop'].find(w => groupItems(w).length > 0) || which;
+    }
+    const items = groupItems(which);
+    const sel = document.getElementById(which + 'Select');
+    const val = sel.value;
+
+    // Get visible items
+    let visibleItems = items;
+    if (val === 'top5') {
+      const top5 = getTop5Indices(items);
+      visibleItems = items.filter((_, i) => top5.has(i));
+    }
+
+    const groupLabel = which === 'prop' ? 'Prop Bots' : which === 'mol' ? 'MOL Bots' : 'General Bots';
+    const totalPnl = visibleItems.reduce((s, c) => s + (c.total_pnl||0), 0);
+    const totalTrades = visibleItems.reduce((s, c) => s + (c.trades||0), 0);
+    const totalWins = visibleItems.reduce((s, c) => s + (c.wins||0), 0);
+    const avgRet = visibleItems.length > 0 ? visibleItems.reduce((s,c) => s + (c.return_pct||0), 0) / visibleItems.length : 0;
+    const maxDD = visibleItems.length > 0 ? Math.max(...visibleItems.map(c => c.max_dd||0)) : 0;
+    const winRate = totalTrades > 0 ? (totalWins/totalTrades*100) : 0;
+    const gp = visibleItems.reduce((s,c) => { const p = c.total_pnl||0; return s + (p>0?p:0); }, 0);
+    const gl = visibleItems.reduce((s,c) => { const p = c.total_pnl||0; return s + (p<0?Math.abs(p):0); }, 0);
+    const pf = gl > 0 ? gp/gl : 99.0;
+
+    document.getElementById('kpiLabel1').textContent = groupLabel + ' P&L';
+    document.getElementById('kpiVal1').textContent = '$' + (totalPnl>=0?'+':'') + Math.round(totalPnl).toLocaleString();
+    document.getElementById('kpiVal1').className = 'value ' + (totalPnl>=0?'pos':'neg');
+    document.getElementById('kpiSub1').textContent = visibleItems.length + ' combos shown';
+
+    document.getElementById('kpiLabel2').textContent = 'Avg Return';
+    document.getElementById('kpiVal2').textContent = (avgRet>=0?'+':'') + avgRet.toFixed(1) + '%';
+    document.getElementById('kpiVal2').style.color = avgRet >= 0 ? 'var(--green)' : 'var(--red, #b3402a)';
+    document.getElementById('kpiSub2').textContent = visibleItems.length + ' strategies';
+
+    document.getElementById('kpiLabel3').textContent = 'Worst Drawdown';
+    document.getElementById('kpiVal3').textContent = maxDD.toFixed(1) + '%';
+    document.getElementById('kpiVal3').style.color = maxDD > 10 ? 'var(--red, #b3402a)' : 'var(--orange)';
+    document.getElementById('kpiSub3').textContent = 'worst among visible';
+
+    document.getElementById('kpiLabel4').textContent = 'Win Rate';
+    document.getElementById('kpiVal4').textContent = winRate.toFixed(1) + '%';
+    document.getElementById('kpiVal4').style.color = 'var(--purple)';
+    document.getElementById('kpiSub4').textContent = totalTrades.toLocaleString() + ' trades';
+
+    document.getElementById('kpiLabel5').textContent = 'Profit Factor';
+    document.getElementById('kpiVal5').textContent = pf >= 99 ? '∞' : pf.toFixed(2);
+    document.getElementById('kpiVal5').style.color = pf >= 1.5 ? 'var(--green)' : pf >= 1.0 ? 'var(--blue)' : 'var(--red, #b3402a)';
+    document.getElementById('kpiSub5').textContent = groupLabel;
+  }
+}
+
+// ── Charts (initial) ──
+let propChart = new Chart(document.getElementById('propChart'),{type:'line',data:{labels:[],datasets:[]},options:chartOpts('Cumulative Return (%)')});
+let molChart = new Chart(document.getElementById('molChart'),{type:'line',data:{labels:[],datasets:[]},options:chartOpts('Cumulative Return (%)')});
+let genChart = new Chart(document.getElementById('genChart'),{type:'line',data:{labels:["2026-01-20", "2026-02-12", "2026-02-16", "2026-02-18", "2026-02-19", "2026-02-20", "2026-02-23", "2026-02-24", "2026-02-26", "2026-02-27", "2026-03-04", "2026-03-05", "2026-03-24", "2026-04-03", "2026-04-07", "2026-05-04", "2026-05-13", "2026-05-14", "2026-05-15", "2026-05-18", "2026-05-19", "2026-05-22", "2026-05-25", "2026-05-26", "2026-05-27", "2026-06-01", "2026-06-02", "2026-06-08", "2026-06-09", "2026-06-11", "2026-06-16", "2026-06-18", "2026-06-24", "2026-06-25", "2026-06-26", "2026-07-09", "2026-07-10", "2026-07-13", "2026-07-14", "2026-07-16", "2026-07-20", "2026-07-21", "2026-07-22", "2026-07-23", "2026-07-24", "2026-07-27", "2026-07-28", "2026-08-04", "2026-08-05", "2026-08-06", "2026-08-10", "2026-08-12", "2026-08-13", "2026-08-17", "2026-08-18", "2026-08-19", "2026-09-22", "2026-09-24", "2026-09-25", "2026-10-01", "2026-10-02", "2026-10-05", "2026-10-08", "2026-10-09", "2026-10-15", "2026-10-19"],datasets:[{"label": "FTMO Manual Trading | USDJPY.sim", "data": [-2.69, null, null, null, null, null, null, null, -5.02, null, -1.99, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -0.85, -1.32, -2.66, -1.99, -0.65, -0.6, 0.41, -1.26, -0.5], "borderColor": "#8a6a9e", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "FTMO Manual Trading | EURUSD.sim", "data": [null, 0.03, -6.19, -3.83, -4.21, -3.7, -4.69, -1.44, null, -3.96, null, -9.01, -9.02, null, null, -9.06, null, -11.49, null, null, null, null, null, null, null, null, null, null, null, null, null, null, -12.28, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], "borderColor": "#3b7f72", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}, {"label": "FTMO Manual Trading | GBPUSD.sim", "data": [null, null, null, null, null, null, null, null, null, null, null, null, null, -1.4, -3.04, null, 1.45, null, 1.91, 6.44, 3.59, 6.42, 5.29, 3.85, 2.44, 8.51, 5.74, 3.13, 7.9, 5.37, 5.19, 2.52, 2.08, -2.15, -4.9, -10.46, -12.79, -4.92, -5.15, -4.71, -3.78, -3.51, -7.78, -9.51, -8.74, -1.95, 5.09, -2.91, -9.98, -3.07, 1.4, 2.22, 7.41, 1.88, -13.6, -19.68, -19.66, null, null, null, null, null, null, null, null, null], "borderColor": "#6fb68f", "borderWidth": 2, "pointRadius": 0, "pointHoverRadius": 4, "tension": 0.3, "spanGaps": true}]},options:chartOpts('Cumulative Return (%)')});
+
+// Populate initial dropdowns with PF data, default to Top 5
+(function() {
+  const initProp = [];
+  const initMol = [];
+  const initGen = [{"strategy": "FTMO Manual Trading", "symbol": "USDJPY.sim", "login": 600025868, "profit_factor": 0.94, "total_pnl": -99.04, "return_pct": -0.5, "max_dd": 2.4, "win_rate": 58.3, "wins": 7, "losses": 5, "sharpe": -0.39, "trades": 12}, {"strategy": "FTMO Manual Trading", "symbol": "EURUSD.sim", "login": 600025868, "profit_factor": 0.51, "total_pnl": -2455.83, "return_pct": -12.28, "max_dd": 12.31, "win_rate": 31.8, "wins": 7, "losses": 15, "sharpe": -4.05, "trades": 22}, {"strategy": "FTMO Manual Trading", "symbol": "GBPUSD.sim", "login": 600025868, "profit_factor": 0.79, "total_pnl": -3932.42, "return_pct": -19.66, "max_dd": 25.98, "win_rate": 36.8, "wins": 21, "losses": 36, "sharpe": -1.49, "trades": 57}];
+  populateSelect('propSelect', initProp, PROP_COLORS);
+  populateSelect('molSelect', initMol, MOL_COLORS);
+  populateSelect('genSelect', initGen, GEN_COLORS);
+  // Apply Top 5 as default
+  document.getElementById('propSelect').value = 'top5';
+  filterChart('prop');
+  document.getElementById('molSelect').value = 'top5';
+  filterChart('mol');
+  document.getElementById('genSelect').value = 'top5';
+  filterChart('gen');
+})()
+let weeklyChart = new Chart(document.getElementById('weeklyChart'),{type:'bar',data:{labels:["2026-W03", "2026-W05", "2026-W06", "2026-W07", "2026-W08", "2026-W09", "2026-W11", "2026-W12", "2026-W13", "2026-W14", "2026-W18", "2026-W19", "2026-W20", "2026-W21", "2026-W22", "2026-W23", "2026-W24", "2026-W25", "2026-W27", "2026-W28", "2026-W29", "2026-W30", "2026-W31", "2026-W32", "2026-W33", "2026-W38", "2026-W39", "2026-W40", "2026-W41", "2026-W42"],datasets:[{data:[-537.51, 170.66, 6.0, -746.05, -1084.37, -404.04, -635.88, -0.07, -280.6, -327.5, -9.0, 503.54, 901.69, -795.04, 658.99, -72.88, -570.35, -1640.89, -1578.26, 1615.89, -806.52, 2765.18, -1631.36, 2097.04, -5418.1, 95.27, -133.59, 479.21, -333.3, 153.1],backgroundColor:["#b3402a", "#2b7a54", "#2b7a54", "#b3402a", "#b3402a", "#b3402a", "#b3402a", "#b3402a", "#b3402a", "#b3402a", "#b3402a", "#2b7a54", "#2b7a54", "#b3402a", "#2b7a54", "#b3402a", "#b3402a", "#b3402a", "#b3402a", "#2b7a54", "#b3402a", "#2b7a54", "#b3402a", "#2b7a54", "#b3402a", "#2b7a54", "#b3402a", "#2b7a54", "#b3402a", "#2b7a54"],borderRadius:4}]},options:{responsive:true,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>'$'+ctx.parsed.y.toLocaleString()}}},scales:{x:{ticks:{color:'#53656a',font:{size:9}},grid:{display:false}},y:{ticks:{color:'#53656a',callback:v=>'$'+v.toLocaleString()},grid:{color:'#e8ede5'}}}}});
+let stratChart = new Chart(document.getElementById('stratChart'),{type:'bar',data:{labels:["FTMO Manual Trading"],datasets:[{data:[-7558.74],backgroundColor:["#b3402a"],borderRadius:3}]},options:{indexAxis:'y',responsive:true,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>'$'+ctx.parsed.x.toLocaleString()}}},scales:{y:{ticks:{color:'#53656a',font:{size:8}},grid:{display:false}},x:{ticks:{color:'#53656a',callback:v=>'$'+v.toLocaleString()},grid:{color:'#e8ede5'}}}}});
+
+// ── Apply date filter ──
+function applyFilter(){
+  const {start, end} = getDateRange();
+  const filtered = filterDaily(DAILY_DATA, start, end);
+  const metrics = computeMetrics(filtered);
+  const qualified = metrics.filter(m => m.trades >= MIN_TR).sort((a,b) => b.return_pct - a.return_pct);
+
+  const propItems = qualified.filter(m => isPropStrategy(m.strategy)).sort((a,b) => b.return_pct - a.return_pct);
+  const molItems = qualified.filter(m => isMolStrategy(m.strategy)).sort((a,b) => b.return_pct - a.return_pct);
+  const genItems = qualified.filter(m => !isPropStrategy(m.strategy) && !isMolStrategy(m.strategy)).sort((a,b) => b.return_pct - a.return_pct);
+
+  // Flatten daily data for weekly/strategy charts
+  const allPnls = filtered.flatMap(c => c.daily);
+  const allDates = [...new Set(allPnls.map(d => d.d))];
+
+  // Update PROP chart
+  const propData = buildDatasets(propItems, PROP_COLORS);
+  propChart.data = propData;
+  propChart.update();
+  populateSelect('propSelect', propItems, PROP_COLORS);
+  document.getElementById('propSelect').value = 'top5';
+  filterChart('prop');
+
+  // Update MOL chart
+  const molData = buildDatasets(molItems, MOL_COLORS);
+  molChart.data = molData;
+  molChart.update();
+  populateSelect('molSelect', molItems, MOL_COLORS);
+  document.getElementById('molSelect').value = 'top5';
+  filterChart('mol');
+
+  // Update GEN chart
+  const genData = buildDatasets(genItems, GEN_COLORS);
+  genChart.data = genData;
+  genChart.update();
+  populateSelect('genSelect', genItems, GEN_COLORS);
+  document.getElementById('genSelect').value = 'top5';
+  filterChart('gen');
+
+  // Rebuild tables
+  document.querySelector('#propTable tbody').innerHTML = buildComboTableRows(propItems, PROP_COLORS);
+  document.querySelector('#molTable tbody').innerHTML = buildComboTableRows(molItems, MOL_COLORS);
+  document.querySelector('#genTable tbody').innerHTML = buildComboTableRows(genItems, GEN_COLORS);
+
+  // Rebuild weekly chart
+  const weekMap = {};
+  allPnls.forEach(d => {
+    const dt = new Date(d.d);
+    const wk = dt.getFullYear()+'-W'+String(Math.ceil(((dt - new Date(dt.getFullYear(),0,1))/86400000+1)/7)).padStart(2,'0');
+    weekMap[wk] = (weekMap[wk]||0) + d.p;
+  });
+  const wkLabels = Object.keys(weekMap).sort();
+  const wkPnls = wkLabels.map(w => Math.round(weekMap[w]*100)/100);
+  const wkColors = wkPnls.map(p => p >= 0 ? '#2b7a54' : '#b3402a');
+  weeklyChart.data = {labels:wkLabels,datasets:[{data:wkPnls,backgroundColor:wkColors,borderRadius:4}]};
+  weeklyChart.update();
+
+  // Rebuild strategy chart
+  const stratMap = {};
+  filtered.forEach(c => {
+    const pnl = c.daily.reduce((s,d)=>s+d.p,0);
+    stratMap[c.strategy] = (stratMap[c.strategy]||0) + pnl;
+  });
+  const stratEntries = Object.entries(stratMap).sort((a,b)=>b[1]-a[1]);
+  const sNames = stratEntries.map(e => e[0].substring(0,20));
+  const sPnls = stratEntries.map(e => Math.round(e[1]*100)/100);
+  const sColors = sPnls.map(p => p >= 0 ? '#2b7a54' : '#b3402a');
+  stratChart.data = {labels:sNames,datasets:[{data:sPnls,backgroundColor:sColors,borderRadius:3}]};
+  stratChart.update();
+
+  // Rebuild leaderboard
+  document.querySelector('#leaderboardTable tbody').innerHTML = buildLeaderboardRows(qualified);
+
+  // Rebuild heatmap
+  document.getElementById('heatmapBox').innerHTML = buildHeatmap(qualified);
+
+  // Footer dates
+  if(allDates.length > 0){
+    const sorted = allDates.sort();
+    document.getElementById('footerDates').innerHTML = sorted[0]+' &rarr; '+sorted[sorted.length-1];
+  }
+
+  // Filter banner. Count the trades from `filtered` here: the old code read a
+  // `totalTrades` that is declared inside the per-chart KPI function, so this
+  // line threw ReferenceError and killed the tail of applyFilter.
+  const banner = document.getElementById('filterBanner');
+  const windowTrades = filtered.reduce((s, c) => s + c.daily.reduce((a, d) => a + (d.t||0), 0), 0);
+  if(start || end){
+    banner.style.display = 'block';
+    banner.textContent = 'Filtered: ' + (start||'start') + ' → ' + (end||'now') + ' · ' + windowTrades.toLocaleString() + ' trades';
+  } else {
+    banner.style.display = 'none';
+  }
+}
+
+function buildComboTableRows(items, colors){
+  return items.map((it,i) => `<tr>
+    <td><span class="dot" style="background:${colors[i%colors.length]}"></span></td>
+    <td class="strat-name">${it.strategy}</td>
+    <td>${it.symbol.replace('.pro','')}</td>
+    <td class="num">${it.login}</td>
+    <td class="num ${it.return_pct>=0?'pos':'neg'}">${it.return_pct>=0?'+':''}${it.return_pct.toFixed(2)}%</td>
+    <td class="num ${it.total_pnl>=0?'pos':'neg'}">$${it.total_pnl>=0?'+':''}${Math.round(it.total_pnl).toLocaleString()}</td>
+    <td class="num">${it.max_dd.toFixed(1)}%</td>
+    <td class="num">${it.win_rate.toFixed(0)}%</td>
+    <td class="num">${it.profit_factor.toFixed(1)}</td>
+    <td class="num">${it.sharpe.toFixed(1)}</td>
+    <td class="num">${it.trades}</td>
+    <td class="num dim">${it.first_date.substring(5)}</td>
+  </tr>`).join('');
+}
+
+function buildLeaderboardRows(items){
+  return items.slice(0,30).map((it,i) => `<tr>
+    <td class="num dim">${i+1}</td>
+    <td class="strat-name">${it.strategy}</td>
+    <td>${it.symbol.replace('.pro','')}</td>
+    <td class="num">${it.login}</td>
+    <td class="num ${it.return_pct>=0?'pos':'neg'}">${it.return_pct>=0?'+':''}${it.return_pct.toFixed(2)}%</td>
+    <td class="num ${it.total_pnl>=0?'pos':'neg'}">$${it.total_pnl>=0?'+':''}${Math.round(it.total_pnl).toLocaleString()}</td>
+    <td class="num${it.max_dd>10?' warn':''}">${it.max_dd.toFixed(1)}%</td>
+    <td class="num">${it.win_rate.toFixed(0)}%</td>
+    <td class="num">${it.profit_factor.toFixed(1)}</td>
+    <td class="num">${it.sharpe.toFixed(1)}</td>
+    <td class="num">${it.trades}</td>
+  </tr>`).join('');
+}
+
+function buildHeatmap(combos){
+  const strategies = [...new Set(combos.map(c=>c.strategy))].sort();
+  const symbols = [...new Set(combos.map(c=>c.symbol))].sort();
+  const lookup = {};
+  combos.forEach(c => { lookup[c.strategy+'|'+c.symbol] = c; });
+
+  function bg(v){
+    if(v>10)return'#d7e8dc';if(v>5)return'#236b49';if(v>2)return'#2a8a5c';if(v>0)return'#2b7a54';
+    if(v>-2)return'#b3402a';if(v>-5)return'#c0492f';return'#f3dcd6';
+  }
+
+  let h='<div class="heatmap-scroll"><table class="heatmap"><tr><th></th>';
+  symbols.forEach(s=>{ h+='<th class="hm-sym">'+s.replace('.pro','')+'</th>'; });
+  h+='</tr>';
+  strategies.forEach(st=>{
+    h+='<tr><td class="hm-strat">'+st+'</td>';
+    symbols.forEach(sy=>{
+      const c = lookup[st+'|'+sy];
+      if(c){
+        const v = c.return_pct;
+        h+='<td style="background:'+bg(v)+';color:#fff" title="'+st+' | '+sy+': '+(v>=0?'+':'')+v.toFixed(1)+'% ('+c.trades+' trades)">'+(v>=0?'+':'')+v.toFixed(1)+'</td>';
+      } else {
+        h+='<td class="hm-empty"></td>';
+      }
+    });
+    h+='</tr>';
+  });
+  h+='</table></div>';
+  return h;
+}
+
+</script></body></html>

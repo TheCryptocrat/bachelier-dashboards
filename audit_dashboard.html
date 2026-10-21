@@ -2,10 +2,10 @@
 <html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Bachelier MFB Audit</title>
 <style>
-:root { --bg:#0d1117; --surface:#161b22; --border:#30363d; --border2:#21262d;
-  --text:#e6edf3; --dim:#8b949e; --dim2:#484f58;
-  --green:#3fb950; --green-bg:#196c2e; --red:#f85149; --red-bg:#b62324;
-  --blue:#58a6ff; --orange:#f0883e; --yellow:#d29922; --purple:#d2a8ff; }
+:root { --bg:#f5f4ee; --surface:#fffef9; --border:#d3d8cf; --border2:#e8ede5;
+  --text:#1b2d36; --dim:#53656a; --dim2:#9aa69f;
+  --green:#2b7a54; --green-bg:#d7e8dc; --red:#b3402a; --red-bg:#f3dcd6;
+  --blue:#285d52; --orange:#a45d28; --yellow:#9c7a3c; --purple:#8a6a9e; }
 * { margin:0; padding:0; box-sizing:border-box; }
 body { font-family:'SF Mono','Cascadia Code','JetBrains Mono',monospace; background:var(--bg); color:var(--text); padding:20px; font-size:13px; }
 .header { display:flex; align-items:center; justify-content:space-between; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--border); }
@@ -24,8 +24,8 @@ body { font-family:'SF Mono','Cascadia Code','JetBrains Mono',monospace; backgro
 .section-title { font-size:1rem; font-weight:600; margin-bottom:4px; display:flex; align-items:center; gap:8px; }
 .badge { font-size:0.65rem; padding:2px 8px; border-radius:4px; font-weight:500; }
 .badge-green { background:var(--green-bg); color:var(--green); }
-.badge-orange { background:#3d2200; color:var(--orange); }
-.badge-blue { background:#0d2240; color:var(--blue); }
+.badge-orange { background:#f3e6d6; color:var(--orange); }
+.badge-blue { background:#dfe9e5; color:var(--blue); }
 .section-desc { font-size:0.75rem; color:var(--dim); margin-bottom:10px; }
 .chart-box { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:16px; }
 .row2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:24px; }
@@ -60,7 +60,7 @@ td { padding:5px 8px; border-bottom:1px solid var(--border2); }
 
 @media(max-width:900px) { .row2{grid-template-columns:1fr;} .kpi-grid{grid-template-columns:repeat(2,1fr);} .date-filter{flex-wrap:wrap;} }
 
-.audit-data-gap td { background:#3d1a1a; }
+.audit-data-gap td { background:#f3dcd6; }
 .audit-data-gap td:first-child { border-left:3px solid var(--red); }
 .audit-ok {}
 details { background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:10px 16px; margin-bottom:16px; }
@@ -68,9 +68,31 @@ details summary { cursor:pointer; font-weight:600; font-size:0.9rem; color:var(-
 details summary::-webkit-details-marker { display:none; }
 details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:10px; margin-bottom:10px; }
 .download-btn { display:inline-block; background:var(--blue); color:var(--bg); padding:8px 16px; border-radius:6px; text-decoration:none; font-weight:600; font-size:0.8rem; }
-.download-btn:hover { background:#79c0ff; }
+.download-btn:hover { background:#3b7f72; }
 .scroll-wrap { max-height:520px; overflow:auto; border:1px solid var(--border); border-radius:8px; }
 .scroll-wrap table th { position:sticky; top:0; background:var(--bg); z-index:1; }
+</style><!--prismatic-theme--><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet"><style>
+:root{--serif:Georgia,'Times New Roman',serif;--sans:Geist,Arial,sans-serif;--mono:'Geist Mono',ui-monospace,Menlo,monospace}
+body{font-family:var(--sans)!important;background:#f5f4ee!important;color:#1b2d36!important;-webkit-font-smoothing:antialiased}
+h1,h2,.header h1,.login-box h1,.wrap h1{font-family:var(--serif)!important;font-weight:400!important;letter-spacing:-.01em!important;color:#1b2d36!important}
+.header h1{font-size:1.7rem!important} .section-title{font-family:var(--serif);font-weight:400;font-size:1.15rem;color:#1b2d36}
+.kpi .label,th,.field label,.section-desc.eyebrow,.kpi .sub{font-family:var(--mono)!important;letter-spacing:.08em}
+.kpi .label,th{text-transform:uppercase;font-size:.62rem!important;color:#53656a}
+.kpi,.chart-box,.login-box,.scroll,.card{background:#fffef9!important;border:1px solid #d3d8cf!important;border-radius:6px!important;box-shadow:none!important}
+.kpi .value{font-family:var(--serif);font-weight:400;font-size:1.65rem}
+table td,table th{border-color:#e8ede5!important} tbody tr:hover td{background:#f5f4ee}
+.nav{gap:8px!important;padding-bottom:14px;border-bottom:1px solid #d3d8cf}
+.nav a,.logout-btn{font-family:var(--sans)!important;font-size:.78rem!important;color:#1b2d36!important;background:transparent!important;border:1px solid #d3d8cf!important;border-radius:4px!important;padding:6px 12px!important;text-decoration:none}
+.nav a:hover,.logout-btn:hover{border-color:#285d52!important;color:#285d52!important}
+.nav a.active{background:#285d52!important;border-color:#285d52!important;color:#fffef9!important}
+.btn,.download-btn{background:#285d52!important;color:#fffef9!important;border-radius:4px!important;font-family:var(--sans)!important}
+.btn:hover,.download-btn:hover{background:#1b463e!important;opacity:1!important}
+input,select{font-family:var(--sans)!important;background:#fffef9!important;color:#1b2d36!important;border-color:#d3d8cf!important;border-radius:4px!important}
+.date-filter .preset-btn,.bar button,td button{font-family:var(--sans)!important;border-radius:4px!important}
+.date-filter .preset-btn.active,.preset-btn.active{background:#285d52!important;border-color:#285d52!important;color:#fffef9!important}
+.pill{font-family:var(--mono);font-weight:500}
+th{background:#fffef9!important} .pos{color:#2b7a54} .neg{color:#b3402a}
+.footer{font-family:var(--mono)} a{color:#285d52}
 </style></head><body>
 
 <script>
@@ -84,7 +106,7 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
 
 <div class="nav">
   <a href="demo_dashboard.html">Demo Bots</a>
-  <a href="licensed_dashboard.html">Licensed</a>
+  <a href="licensed_dashboard.html">Licensed</a><a href="prop_dashboard.html">Prop Firms</a>
   <a href="live_dashboard.html">Live Trading</a>
   <a href="execution_dashboard.html">Execution</a>
   <a href="explorer.html">Explorer</a>
@@ -96,7 +118,7 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
 <div class="header">
   <div>
     <h1 style="color:var(--blue)">MFB ↔ BACHELIER AUDIT</h1>
-    <div class="dim" style="margin-top:4px;font-size:0.75rem">Snapshot: 2026-10-20 • 23 MFB accounts, 237 config logins</div>
+    <div class="dim" style="margin-top:4px;font-size:0.75rem">Snapshot: 2026-10-21 • 23 MFB accounts, 238 config logins</div>
   </div>
   <div>
     <a class="download-btn" href="MFB_Bachelier_Reconciliation_latest.xlsx" download>⬇ Download full xlsx</a>
@@ -106,7 +128,7 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
 <div class="kpi-grid kpi-grid-4">
   <div class="kpi"><div class="label">In scope</div><div class="value pos">20</div><div class="sub">MFB ∩ Bachelier with trades on both sides</div></div>
   <div class="kpi"><div class="label">Data gap (Bach)</div><div class="value neg">3</div><div class="sub">In MFB + config but zero Bach trades</div></div>
-  <div class="kpi"><div class="label">Coverage gap (MFB)</div><div class="value warn">214</div><div class="sub">In config but not in MFB</div></div>
+  <div class="kpi"><div class="label">Coverage gap (MFB)</div><div class="value warn">215</div><div class="sub">In config but not in MFB</div></div>
   <div class="kpi"><div class="label">MFB legacy</div><div class="value dim">0</div><div class="sub">In MFB but not in config (do not import)</div></div>
 </div>
 
@@ -128,7 +150,7 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>demo</td>
             <td>3EMA Core5 (DD ERC)</td>
             <td class="dim">VPS242</td>
-            <td class="dim">10/20/2026 23:49</td>
+            <td class="dim">10/21/2026 13:48</td>
             <td class="num">20,453.67</td>
             <td class="num">1.26</td>
             <td class="num">4.44</td>
@@ -162,7 +184,7 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>demo</td>
             <td>Squeeze Breakout Indices</td>
             <td class="dim">VPS242t2</td>
-            <td class="dim">10/20/2026 23:51</td>
+            <td class="dim">10/21/2026 13:50</td>
             <td class="num">21,847.99</td>
             <td class="num">1.87</td>
             <td class="num">3.16</td>
@@ -196,7 +218,7 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>licensed</td>
             <td>Demo Gold Snap</td>
             <td class="dim">VPS242t2</td>
-            <td class="dim">10/20/2026 23:30</td>
+            <td class="dim">10/21/2026 13:22</td>
             <td class="num">21,499.09</td>
             <td class="num">2.73</td>
             <td class="num">2.00</td>
@@ -213,7 +235,7 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>demo</td>
             <td>Tokio Trigger</td>
             <td class="dim">VPS92</td>
-            <td class="dim">10/20/2026 23:40</td>
+            <td class="dim">10/21/2026 13:39</td>
             <td class="num">19,990.22</td>
             <td class="num">0.76</td>
             <td class="num">0.20</td>
@@ -230,7 +252,7 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>demo</td>
             <td>LinLit EURAUD</td>
             <td class="dim">VPS92</td>
-            <td class="dim">10/20/2026 23:36</td>
+            <td class="dim">10/21/2026 13:31</td>
             <td class="num">19,968.85</td>
             <td class="num">0.00</td>
             <td class="num">0.16</td>
@@ -247,7 +269,7 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>demo</td>
             <td>Session RSI Scalper EURUSD</td>
             <td class="dim">VPS92</td>
-            <td class="dim">10/20/2026 23:36</td>
+            <td class="dim">10/21/2026 13:30</td>
             <td class="num">19,999.74</td>
             <td class="num">0.00</td>
             <td class="num">0.00</td>
@@ -264,7 +286,7 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>demo</td>
             <td>Best Forex 15TF EURUSD</td>
             <td class="dim">VPS92</td>
-            <td class="dim">10/20/2026 23:33</td>
+            <td class="dim">10/21/2026 13:29</td>
             <td class="num">19,918.20</td>
             <td class="num">0.67</td>
             <td class="num">0.84</td>
@@ -281,7 +303,7 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>demo</td>
             <td>Channel Scalper EURUSD</td>
             <td class="dim">VPS92</td>
-            <td class="dim">10/20/2026 23:41</td>
+            <td class="dim">10/21/2026 13:37</td>
             <td class="num">20,014.40</td>
             <td class="num">6.54</td>
             <td class="num">0.02</td>
@@ -298,7 +320,7 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>demo</td>
             <td>AiriumBot EURUSD H1</td>
             <td class="dim">VPS92</td>
-            <td class="dim">10/20/2026 23:30</td>
+            <td class="dim">10/21/2026 13:30</td>
             <td class="num">19,951.20</td>
             <td class="num">0.00</td>
             <td class="num">0.24</td>
@@ -315,7 +337,7 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>demo</td>
             <td>Forex Diamond EURUSD M1</td>
             <td class="dim">VPS92</td>
-            <td class="dim">10/20/2026 23:38</td>
+            <td class="dim">10/21/2026 13:33</td>
             <td class="num">19,841.60</td>
             <td class="num">0.69</td>
             <td class="num">2.41</td>
@@ -332,10 +354,10 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>demo</td>
             <td>Long Haul</td>
             <td class="dim">VPS92</td>
-            <td class="dim">10/20/2026 23:43</td>
+            <td class="dim">10/21/2026 13:43</td>
             <td class="num">20,009.11</td>
             <td class="num">0.00</td>
-            <td class="num">0.06</td>
+            <td class="num">0.11</td>
             <td class="num">100.0</td>
             <td class="num"><span class="dim">—</span></td>
             <td class="num"><span class="dim">—</span></td>
@@ -349,17 +371,17 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>demo</td>
             <td>EURO Overnight</td>
             <td class="dim">VPS92</td>
-            <td class="dim">10/20/2026 23:43</td>
-            <td class="num">20,131.92</td>
-            <td class="num">3.49</td>
+            <td class="dim">10/21/2026 13:40</td>
+            <td class="num">20,117.76</td>
+            <td class="num">2.72</td>
             <td class="num">0.28</td>
-            <td class="num">56.2</td>
+            <td class="num">52.9</td>
             <td class="num"><span class="dim">—</span></td>
             <td class="num"><span class="dim">—</span></td>
             <td class="num">16</td>
             <td class="num">117.76</td>
             <td class="num">50.0</td>
-            <td>RECONCILE</td>
+            <td>OK (small account, full sample)</td>
           </tr>
           <tr class="audit-ok">
             <td class="strat-name">55967</td>
@@ -383,7 +405,7 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>demo</td>
             <td>Donchian H2 Portfolio (VPS92)</td>
             <td class="dim">VPS92</td>
-            <td class="dim">10/20/2026 23:29</td>
+            <td class="dim">10/21/2026 13:20</td>
             <td class="num">19,812.07</td>
             <td class="num">0.72</td>
             <td class="num">1.26</td>
@@ -400,15 +422,15 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>demo</td>
             <td>Aggressive All Symbols</td>
             <td class="dim">VPS92</td>
-            <td class="dim">10/20/2026 23:26</td>
-            <td class="num">34,398.34</td>
-            <td class="num">1.01</td>
+            <td class="dim">10/21/2026 13:17</td>
+            <td class="num">36,894.79</td>
+            <td class="num">1.02</td>
             <td class="num">80.69</td>
             <td class="num">75.0</td>
             <td class="num"><span class="dim">—</span></td>
             <td class="num"><span class="dim">—</span></td>
-            <td class="num">3,505</td>
-            <td class="num">11,021.57</td>
+            <td class="num">3,507</td>
+            <td class="num">11,894.79</td>
             <td class="num">63.7</td>
             <td>RECONCILE</td>
           </tr>
@@ -417,16 +439,16 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>demo</td>
             <td>MOL XAUUSD M15 Pass16</td>
             <td class="dim">VPS242t2</td>
-            <td class="dim">10/20/2026 22:39</td>
-            <td class="num">27,525.06</td>
-            <td class="num">1.63</td>
+            <td class="dim">10/21/2026 12:07</td>
+            <td class="num">27,256.68</td>
+            <td class="num">1.60</td>
             <td class="num">5.24</td>
             <td class="num">57.5</td>
             <td class="num"><span class="dim">—</span></td>
             <td class="num"><span class="dim">—</span></td>
-            <td class="num">196</td>
-            <td class="num">7,529.11</td>
-            <td class="num">66.8</td>
+            <td class="num">198</td>
+            <td class="num">7,465.48</td>
+            <td class="num">66.7</td>
             <td>RECONCILE</td>
           </tr>
           <tr class="audit-ok">
@@ -434,16 +456,16 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>licensed</td>
             <td>Smart Gold Hunter</td>
             <td class="dim">VPS242t2</td>
-            <td class="dim">10/21/2026 01:41</td>
+            <td class="dim">10/21/2026 08:01</td>
             <td class="num">12,544.94</td>
             <td class="num">2.10</td>
             <td class="num">3.38</td>
             <td class="num">72.5</td>
             <td class="num"><span class="dim">—</span></td>
             <td class="num"><span class="dim">—</span></td>
-            <td class="num">92</td>
-            <td class="num">2,772.13</td>
-            <td class="num">71.7</td>
+            <td class="num">93</td>
+            <td class="num">2,500.14</td>
+            <td class="num">71.0</td>
             <td>RECONCILE</td>
           </tr>
           <tr class="audit-ok">
@@ -451,16 +473,16 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>demo</td>
             <td>FourPlay MOL Bots</td>
             <td class="dim">VPS242</td>
-            <td class="dim">10/20/2026 23:54</td>
+            <td class="dim">10/21/2026 13:55</td>
             <td class="num">20,635.27</td>
             <td class="num">1.10</td>
             <td class="num">8.99</td>
             <td class="num">42.5</td>
             <td class="num"><span class="dim">—</span></td>
             <td class="num"><span class="dim">—</span></td>
-            <td class="num">151</td>
+            <td class="num">152</td>
             <td class="num">635.27</td>
-            <td class="num">44.4</td>
+            <td class="num">44.1</td>
             <td>RECONCILE</td>
           </tr>
           <tr class="audit-ok">
@@ -468,16 +490,16 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>demo</td>
             <td>LVF-ZFade MOL</td>
             <td class="dim">VPS242</td>
-            <td class="dim">10/20/2026 21:55</td>
-            <td class="num">20,563.85</td>
-            <td class="num">1.53</td>
+            <td class="dim">10/21/2026 11:01</td>
+            <td class="num">20,569.40</td>
+            <td class="num">1.54</td>
             <td class="num">1.80</td>
             <td class="num">35.0</td>
             <td class="num"><span class="dim">—</span></td>
             <td class="num"><span class="dim">—</span></td>
-            <td class="num">124</td>
-            <td class="num">563.85</td>
-            <td class="num">28.2</td>
+            <td class="num">125</td>
+            <td class="num">569.40</td>
+            <td class="num">28.8</td>
             <td>RECONCILE</td>
           </tr>
           <tr class="audit-ok">
@@ -485,16 +507,16 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>licensed</td>
             <td>AuRange Hunter</td>
             <td class="dim">VPS242t2</td>
-            <td class="dim">10/20/2026 22:54</td>
-            <td class="num">20,016.47</td>
-            <td class="num">1.01</td>
-            <td class="num">4.27</td>
-            <td class="num">80.0</td>
+            <td class="dim">10/21/2026 12:28</td>
+            <td class="num">19,806.57</td>
+            <td class="num">0.94</td>
+            <td class="num">4.48</td>
+            <td class="num">75.0</td>
             <td class="num"><span class="dim">—</span></td>
             <td class="num"><span class="dim">—</span></td>
-            <td class="num">179</td>
-            <td class="num">16.47</td>
-            <td class="num">83.2</td>
+            <td class="num">181</td>
+            <td class="num">-193.43</td>
+            <td class="num">82.3</td>
             <td>RECONCILE</td>
           </tr>
           <tr class="audit-ok">
@@ -502,7 +524,7 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>demo</td>
             <td>Gold Talon Vt 15</td>
             <td class="dim">VPS242t2</td>
-            <td class="dim">10/20/2026 22:51</td>
+            <td class="dim">10/21/2026 12:24</td>
             <td class="num">20,165.01</td>
             <td class="num">1.02</td>
             <td class="num">11.37</td>
@@ -530,7 +552,7 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>Squeeze Breakout Indices</td>
             <td>TradeSmart</td>
             <td class="dim">VPS242t2</td>
-            <td class="dim">10/20/2026 23:51</td>
+            <td class="dim">10/21/2026 13:50</td>
             <td class="num">21,847.99</td>
             <td class="num">9.24</td>
           </tr>
@@ -540,7 +562,7 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td>3EMA Core5 (DD ERC)</td>
             <td>Tradesmart</td>
             <td class="dim">VPS242</td>
-            <td class="dim">10/20/2026 23:49</td>
+            <td class="dim">10/21/2026 13:48</td>
             <td class="num">20,453.67</td>
             <td class="num">2.27</td>
           </tr>
@@ -558,7 +580,7 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
 </details>
 
 <details>
-  <summary>Coverage gap — 214 Bachelier accounts not tracked in MFB</summary>
+  <summary>Coverage gap — 215 Bachelier accounts not tracked in MFB</summary>
   <div class="section-desc">Add these to the MFB portfolio if you want the audit loop closed for them. Inactive ones can stay un-added.</div>
   <table>
     <thead><tr><th>Login</th><th>Type</th><th>Strategy</th><th>Active</th><th>VPS</th></tr></thead>
@@ -658,7 +680,7 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td class="strat-name">41654</td>
             <td>demo</td>
             <td>T&D1 Prop Firm</td>
-            <td class="dim">True</td>
+            <td class="dim"></td>
             <td class="dim">VPS92</td>
           </tr>
           <tr>
@@ -1441,7 +1463,7 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
           <tr>
             <td class="strat-name">55955</td>
             <td>live</td>
-            <td>LIVE Dream Catcher multi-market (indices + FX + gold)</td>
+            <td>LIVE Dream Catcher</td>
             <td class="dim">True</td>
             <td class="dim">VPS92t2</td>
           </tr>
@@ -1679,7 +1701,7 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
           <tr>
             <td class="strat-name">57825</td>
             <td>live</td>
-            <td>LIVE Portfolio v4 ph1: Gold Reaper + Gold Snap + Golden Fractal + Range Snap + Dream Catcher x2</td>
+            <td>LIVE Prismatic Spectrum</td>
             <td class="dim">True</td>
             <td class="dim">VPS92t2</td>
           </tr>
@@ -1889,7 +1911,7 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
           <tr>
             <td class="strat-name">59376</td>
             <td>live</td>
-            <td>LIVE XAUUSD: YuHeng Gift EA + fundedtoday copy feed</td>
+            <td>LIVE YuHeng and Smart Gold Hunter</td>
             <td class="dim">True</td>
             <td class="dim">VPS153t2</td>
           </tr>
@@ -1904,21 +1926,21 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td class="strat-name">60490</td>
             <td>demo</td>
             <td>KC_A52_DEMO_T1_20k</td>
-            <td class="dim">True</td>
+            <td class="dim"></td>
             <td class="dim">VPS153</td>
           </tr>
           <tr>
             <td class="strat-name">60491</td>
             <td>demo</td>
             <td>KC_A52_DEMO_T2_20k</td>
-            <td class="dim">True</td>
+            <td class="dim"></td>
             <td class="dim">VPS153</td>
           </tr>
           <tr>
             <td class="strat-name">60492</td>
             <td>demo</td>
             <td>KC_A52_DEMO_T2_1k</td>
-            <td class="dim">True</td>
+            <td class="dim"></td>
             <td class="dim">VPS153</td>
           </tr>
           <tr>
@@ -2034,6 +2056,13 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
             <td class="dim">VPS92t2</td>
           </tr>
           <tr>
+            <td class="strat-name">26774273</td>
+            <td>prop</td>
+            <td>The5ers $200k Challenge</td>
+            <td class="dim">True</td>
+            <td class="dim">VPS92t2</td>
+          </tr>
+          <tr>
             <td class="strat-name">52428953</td>
             <td>demo</td>
             <td>BTC Dual Breakout Scalper</td>
@@ -2056,7 +2085,7 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
           </tr>
           <tr>
             <td class="strat-name">600025868</td>
-            <td>demo</td>
+            <td>prop</td>
             <td>FTMO Manual Trading</td>
             <td class="dim">True</td>
             <td class="dim">VPS149</td>
@@ -2073,6 +2102,6 @@ details[open] summary { border-bottom:1px solid var(--border2); padding-bottom:1
   </table>
 </details>
 
-<div class="footer">Generated 2026-10-20 23:10 • Source: <code>MFB_Bachelier_Reconciliation_2026-10-20.xlsx</code></div>
+<div class="footer">Generated 2026-10-21 11:08 • Source: <code>MFB_Bachelier_Reconciliation_2026-10-21.xlsx</code></div>
 
 </body></html>
