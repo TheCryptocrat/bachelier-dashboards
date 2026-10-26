@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Bachelier Mission Control — Algo Consistency Index</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f5f4ee;--surface:#fffef9;--border:#d3d8cf;--text:#1b2d36;--dim:#53656a;--green:#285d52;--red:#b3402a;--serif:Georgia,'Times New Roman',serif;--sans:Geist,Arial,sans-serif;--mono:'Geist Mono',ui-monospace,Menlo,monospace}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
+.wrap{max-width:1280px;margin:0 auto;padding:20px 24px 40px}
+.nav{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding-bottom:14px;border-bottom:1px solid var(--border)}
+.nav a,.logout-btn{font-family:var(--sans);font-size:.78rem;color:var(--text);background:transparent;border:1px solid var(--border);border-radius:4px;padding:6px 12px;text-decoration:none;cursor:pointer}
+.nav a:hover,.logout-btn:hover{border-color:var(--green);color:var(--green)}
+.nav a.active{background:var(--green);border-color:var(--green);color:var(--surface)}
+.logout-btn{margin-left:auto}
+.header{display:flex;justify-content:space-between;align-items:baseline;margin:18px 0 6px}
+h1{font-family:var(--serif);font-weight:400;font-size:1.7rem;letter-spacing:-.01em;color:var(--text)}
+.meta{font-family:var(--mono);font-size:.7rem;color:var(--dim)}
+.lead{color:var(--dim);font-size:.92rem;max-width:900px;margin:4px 0 16px;line-height:1.5}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:14px 0 18px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:14px 16px}
+.card .label{font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin-bottom:6px}
+.card .value{font-family:var(--serif);font-size:1.65rem;line-height:1.1}
+.card .sub{font-family:var(--mono);font-size:.68rem;color:var(--dim);margin-top:6px}
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 18px}
+.btn{display:inline-block;font-size:.8rem;padding:8px 14px;border-radius:4px;text-decoration:none;border:1px solid var(--green);color:var(--green);background:var(--surface)}
+.btn.primary{background:var(--green);color:var(--surface)}
+.frame{background:var(--surface);border:1px solid var(--border);border-radius:6px;overflow:hidden}
+iframe{width:100%;height:1500px;border:0;display:block;background:#fbfaf7}
+.note{font-family:var(--mono);font-size:.68rem;color:var(--dim);margin-top:10px;line-height:1.5}
+a{color:var(--green)}
+</style>
+<script>
+(function(){
+  const auth = sessionStorage.getItem('bachelier_auth');
+  if(!auth || auth !== 'authenticated'){ window.location.href = 'index.html'; }
+})();
+</script>
+</head><body><div class="wrap">
+<div class="nav"><a href="demo_dashboard.html">Demo Bots</a><a href="licensed_dashboard.html">Licensed</a><a href="prop_dashboard.html">Prop Firms</a><a href="live_dashboard.html">Live Trading</a><a href="execution_dashboard.html">Execution</a><a class="active" href="aci.html">ACI</a><button class="logout-btn" onclick="sessionStorage.clear();location.href='index.html'">Sign Out</button></div>
+<div class="header"><h1>ALGO CONSISTENCY INDEX</h1><div class="meta" id="meta">loading…</div></div>
+<p class="lead">A daily, pre-registered reading of whether the market is paying the patterns our algos trade, by family: trend/breakout (TB), mean-reversion (MR), session-clock (SC). It replays a frozen basket of textbook recipes on real ticks with published costs and reports each family against its own two-year history and against random entries. Every validation test and its verdict is on the page, failures included. Probe results are hypothetical; this is context for the fleet, not a performance claim.</p>
+<div class="cards" id="cards"></div>
+<div class="btns">
+  <a class="btn primary" href="https://thecryptocrat.github.io/algo-consistency-index/" target="_blank" rel="noopener">Open the live index ↗</a>
+  <a class="btn" href="aci/ACI_writeup_2026-10-26.pdf" target="_blank" rel="noopener">Write-up (PDF): what it does, how it works, benefits</a>
+  <a class="btn" href="https://thecryptocrat.github.io/algo-consistency-index/methodology.html" target="_blank" rel="noopener">Methodology</a>
+  <a class="btn" href="https://thecryptocrat.github.io/algo-consistency-index/data/aci_latest.json" target="_blank" rel="noopener">JSON feed</a>
+</div>
+<div class="frame"><iframe src="https://thecryptocrat.github.io/algo-consistency-index/" title="Algo Consistency Index live page" loading="lazy"></iframe></div>
+<p class="note">Cards and the embedded page read the public feed at thecryptocrat.github.io/algo-consistency-index (updated by the research Mac's daily run). Probe and Layer 2 readings move when the tick data is refreshed; the Scoreboard moves daily. Not investment advice.</p>
+</div>
+<script>
+(async()=>{
+  try{
+    const j=await (await fetch('https://thecryptocrat.github.io/algo-consistency-index/data/aci_latest.json',{cache:'no-store'})).json();
+    document.getElementById('meta').textContent=(j.status==='live'?'live since '+j.live_since:'backfill')+' · readings through '+(j.readings_through||j.probe_index.date)+' · published '+j.as_of;
+    const names={TB:'Trend / breakout',MR:'Mean-reversion',SC:'Session-clock'};
+    const c=document.getElementById('cards');
+    for(const f of ['TB','MR','SC']){const p=j.probe_index.families[f];
+      c.insertAdjacentHTML('beforeend',`<div class="card"><div class="label">${names[f]} (${f})</div><div class="value">${p.percentile_2y.toFixed(0)}<span style="font-size:.8rem;color:var(--dim)"> pct of 2y</span></div><div class="sub">z ${p.reading_z.toFixed(2)} · ${p.legs} legs · ${p.trades_20d} trades/20d</div></div>`);}
+    const v=j.validation||{};
+    c.insertAdjacentHTML('beforeend',`<div class="card"><div class="label">Validation</div><div class="value" style="font-size:1rem;line-height:1.35">T1 ${v.T1||'—'}</div><div class="sub">T2 ${v.T2||'—'} · T3 ${v.T3||'—'}</div></div>`);
+  }catch(e){document.getElementById('meta').textContent='feed unavailable: '+e;}
+})();
+</script>
+</body></html>
