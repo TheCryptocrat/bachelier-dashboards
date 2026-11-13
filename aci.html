@@ -37,7 +37,8 @@ a{color:var(--green)}
 })();
 </script>
 </head><body><div class="wrap">
-<div class="nav"><a href="demo_dashboard.html">Demo Bots</a><a href="licensed_dashboard.html">Licensed</a><a href="prop_dashboard.html">Prop Firms</a><a href="live_dashboard.html">Live Trading</a><a href="execution_dashboard.html">Execution</a><a class="active" href="aci.html">ACI</a><button class="logout-btn" onclick="sessionStorage.clear();location.href='index.html'">Sign Out</button></div>
+<div class="nav">
+  <a href="marketing.html">Marketing</a><a href="demo_dashboard.html">Demo Bots</a><a href="licensed_dashboard.html">Licensed</a><a href="prop_dashboard.html">Prop Firms</a><a href="live_dashboard.html">Live Trading</a><a href="execution_dashboard.html">Execution</a><a class="active" href="aci.html">ACI</a><button class="logout-btn" onclick="sessionStorage.clear();location.href='index.html'">Sign Out</button></div>
 <div class="header"><h1>ALGO CONSISTENCY INDEX</h1><div class="meta" id="meta">loading…</div></div>
 <p class="lead">A daily, pre-registered reading of whether the market is paying the patterns our algos trade, by family: trend/breakout (TB), mean-reversion (MR), session-clock (SC). It replays a frozen basket of textbook recipes on real ticks with published costs and reports each family against its own two-year history and against random entries. Every validation test and its verdict is on the page, failures included. Probe results are hypothetical; this is context for the fleet, not a performance claim.</p>
 <div class="cards" id="cards"></div>
